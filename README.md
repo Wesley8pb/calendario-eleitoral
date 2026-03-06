@@ -29,8 +29,8 @@ Site single-page de caráter informativo que apresenta todos os ~296 eventos do 
 
 ```bash
 # Clonar o repositório
-git clone <url-do-repositorio>
-cd calendario-eleitoral-2026
+git clone https://github.com/Wesley8pb/calendario-eleitoral.git
+cd calendario-eleitoral
 
 # Instalar dependências
 npm install

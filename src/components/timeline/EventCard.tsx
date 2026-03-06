@@ -62,6 +62,7 @@ function TurnoBadge({ turno }: { turno: string }) {
     "1T": "1º Turno",
     "2T": "2º Turno",
     AMBOS: "1º e 2º Turnos",
+    POS: "Pós-eleição",
   };
   return (
     <span className="inline-flex items-center rounded-full bg-primary-100 text-primary-700 px-2 py-0.5 text-xs font-medium">

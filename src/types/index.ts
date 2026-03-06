@@ -34,7 +34,7 @@ export interface EventoCalendario {
   categorias: CategoriaID[];
   perfis: Perfil[]; // [] = relevante para todos (visão geral)
   marcos: string | null; // Ex: "1 ano antes do 1º turno"
-  turno: "1T" | "2T" | "AMBOS" | null;
+  turno: "1T" | "2T" | "AMBOS" | "POS" | null;
   fundamentacao: Fundamentacao[];
   observacoes?: string;
   destaque?: boolean;

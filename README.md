@@ -1,6 +1,9 @@
 # Calendário Eleitoral 2026 — Timeline Interativa
 
-> Calendário interativo com todos os prazos e eventos eleitorais das Eleições Gerais 2026, baseado na **Resolução TSE nº 23.760/2026** (DJE/TSE de 04/03/2026).
+> [!TIP]
+> **Orientação para IA:** Sempre inicie o gerenciamento de contexto lendo primeiro os arquivos `CLAUDE.md` (para diretrizes técnicas e stack) e `Documentations/CHANGELOG.md` (para histórico de alterações e estado atual).
+
+Este projeto é uma ferramenta institucional e interativa para consulta dos eventos, prazos e marcos do calendário eleitoral das Eleições Gerais 2026, baseado na **Resolução TSE nº 23.760/2026** (DJE/TSE de 04/03/2026).
 
 **Desenvolvido por:** Wesley Wagner de Brito Silva — servidor da 56ª Zona Eleitoral/PB
 

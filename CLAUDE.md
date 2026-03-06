@@ -1,8 +1,11 @@
-# CLAUDE.md
+# Calendário Eleitoral 2026 — Guia do Desenvolvedor
+
+> [!IMPORTANT]
+> O projeto já foi totalmente desenvolvido conforme o planejamento inicial. **Não é mais necessário atualizar os arquivos `Documentations/ROADMAP.md` e `Documentations/PRD.md`**, a menos que haja uma mudança estrutural solicitada explicitamente. O foco agora deve ser em manutenção, correções e novas melhorias registradas diretamente no `CHANGELOG.md`.
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Visão do Projeto
+## Visão Geral
 
 Site single-page institucional que transforma o Calendário Eleitoral das Eleições Gerais 2026 (Resolução TSE nº 23.760/2026, 296 eventos) em uma timeline interativa, com filtros, busca textual e painel de próximos prazos por perfil de usuário.
 

@@ -11,7 +11,7 @@
 Site single-page de caráter informativo que apresenta todos os ~296 eventos do calendário eleitoral em uma **timeline vertical interativa**, com:
 
 - 🔍 **Filtros avançados**: categorias, ocultar passados, turno, busca textual, mês.
-- 👤 **Painel "Próximos Prazos"** com tabs de perfil (Eleitor, Candidato, Partido, Advogado, Atos Preparatórios)
+- 👤 **Painel "Próximos Eventos"** com tabs de perfil (Eleitor, Candidato, Partido, Advogado, Atos Preparatórios)
 - 📅 **Navegação por meses** com Intersection Observer
 - ⏱️ **Contagem regressiva** até os turnos eleitorais
 - 🔗 **URL compartilhável** com filtros sincronizados como query params
@@ -71,7 +71,7 @@ src/
 │   ├── countdown/       # Contagem regressiva
 │   ├── filters/         # FilterPanel, FilterSummary
 │   ├── layout/          # Header, Footer
-│   ├── proximos-prazos/ # ProximosPrazos, PrazoCard
+│   ├── proximos-eventos/ # ProximosEventos, EventoProximoCard
 │   └── timeline/        # Timeline, MonthSection, MonthNav, EventCard, EventDetail, DateMarker
 ├── data/
 │   ├── eventos.ts       # ⭐ Array completo dos ~296 eventos
@@ -81,7 +81,7 @@ src/
 │   ├── useCountdown.ts
 │   ├── useFilteredEvents.ts
 │   ├── useLazyRender.ts
-│   ├── useProximosPrazos.ts
+│   ├── useProximosEventos.ts
 │   └── useUrlFilters.ts
 ├── lib/
 │   ├── utils.ts         # Funções utilitárias de data e CSS

@@ -56,9 +56,9 @@ src/
 │   │   └── FilterSummary.tsx   # Barra "Exibindo X de Y" + botão limpar filtros, aria-live
 │   ├── countdown/
 │   │   └── Countdown.tsx       # 4 blocos glassmorphism (dias/horas/min/seg), fade-in
-│   ├── proximos-prazos/
-│   │   ├── ProximosPrazos.tsx  # Grid CSS (1/2/3 cols), tabs de perfil + Destaques + Atos Prep.
-│   │   └── PrazoCard.tsx       # Data, título, badge categoria, badge urgência
+│   ├── proximos-eventos/
+│   │   ├── ProximosEventos.tsx # Grid CSS (1/2/3 cols), tabs de perfil + Destaques + Atos Prep.
+│   │   └── EventoProximoCard.tsx # Data, título, badge categoria, badge urgência
 │   └── ui/                     # Componentes shadcn/ui customizados
 ├── data/
 │   ├── eventos.ts              # Array de 296 EventoCalendario[] (Out/2025–Abr/2028)
@@ -67,7 +67,7 @@ src/
 ├── hooks/
 │   ├── useFilteredEvents.ts    # Filtragem combinada AND: passados + categorias + turno + busca
 │   ├── useCountdown.ts         # Timer regressivo: 1T (04/10/2026) → 2T (25/10/2026) → null
-│   ├── useProximosPrazos.ts    # Próximos N eventos futuros filtrados por perfil
+│   ├── useProximosEventos.ts   # Próximos N eventos futuros filtrados por perfil
 │   ├── useUrlFilters.ts        # Sincronização filtros ↔ query params da URL
 │   └── useLazyRender.ts        # IntersectionObserver para lazy rendering por mês
 ├── lib/
@@ -98,7 +98,7 @@ public/
 ```typescript
 type Perfil = "eleitor" | "candidato" | "partido" | "advogado" | "atos-preparatorios";
 // NUNCA usar 'servidor' — servidores veem todos os eventos sem filtro
-// 'atos-preparatorios' é usado apenas como filtro em ProximosPrazos (filtra ADM), não é atribuído a eventos
+// 'atos-preparatorios' é usado apenas como filtro em ProximosEventos (filtra ADM), não é atribuído a eventos
 
 type CategoriaID =
   | "ELE"
@@ -179,7 +179,7 @@ Todos os eventos vêm **exclusivamente** do `RESOLUÇÃO.md` (Resolução TSE n�
 - Barra "Exibindo X de Y eventos" + "Limpar filtros"
 - FilterPanel com expand/collapse
 
-### Próximos Prazos
+### Próximos Eventos
 - Grid CSS responsivo (1/2/3 cols)
 - Tabs: Destaques (padrão) | Todos | Eleitor | Candidato | Partido | Advogado | Atos Preparatórios
 - Badge de urgência: "Hoje" / "Esta semana" / "Em X dias"
@@ -227,9 +227,9 @@ Todos os eventos vêm **exclusivamente** do `RESOLUÇÃO.md` (Resolução TSE n�
 
 ## Referências
 
-- `PRD.md` — Requisitos completos do produto
-- `ROADMAP.md` — Sprints de desenvolvimento com checkpoints
-- `RESOLUÇÃO.md` — Fonte primária dos 296 eventos do calendário eleitoral
-- `CHANGELOG.md` — Histórico detalhado de cada sprint concluída
+- `Documentations/PRD.md` — Requisitos completos do produto
+- `Documentations/ROADMAP.md` — Sprints de desenvolvimento com checkpoints
+- `Documentations/RESOLUÇÃO.md` — Fonte primária dos 296 eventos do calendário eleitoral
+- `Documentations/CHANGELOG.md` — Histórico detalhado de cada sprint concluída
 - `README.md` — Documentação do projeto (setup, stack, estrutura, guia de edição)
 - `documentations/deploy_guide.md` — Guia de deploy Netlify vs Vercel

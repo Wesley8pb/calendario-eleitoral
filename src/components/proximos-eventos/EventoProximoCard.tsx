@@ -36,12 +36,12 @@ const iconeMap: Record<string, LucideIcon> = {
   Calendar,
 };
 
-interface PrazoCardProps {
+interface EventoProximoCardProps {
   evento: EventoCalendario;
   onClick?: () => void;
 }
 
-export function PrazoCard({ evento, onClick }: PrazoCardProps) {
+export function EventoProximoCard({ evento, onClick }: EventoProximoCardProps) {
   const cat = categoriaMap[evento.categorias[0]];
   const Icon = cat ? (iconeMap[cat.icone] ?? Calendar) : Calendar;
   const diasAte = getDiasAte(evento.data);

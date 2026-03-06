@@ -6,7 +6,7 @@ import { isEventoPassado, isEventoHoje } from "../lib/utils";
  * Retorna os próximos N eventos futuros (incluindo hoje) filtrados pelo perfil.
  * Quando perfil = 'todos', retorna eventos independente do perfil.
  */
-export function useProximosPrazos(
+export function useProximosEventos(
   eventos: EventoCalendario[],
   perfil: Perfil | "todos" | "destaques",
   quantidade = 5,

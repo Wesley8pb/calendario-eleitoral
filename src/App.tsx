@@ -3,7 +3,7 @@ import { Header } from "./components/layout/Header";
 import { CalendarDays, ChevronDown, ChevronUp } from "lucide-react";
 import { Tooltip } from "./components/ui/Tooltip";
 import { Footer } from "./components/layout/Footer";
-import { ProximosPrazos } from "./components/proximos-prazos/ProximosPrazos";
+import { ProximosEventos } from "./components/proximos-eventos/ProximosEventos";
 import { MonthNav } from "./components/timeline/MonthNav";
 import { Timeline } from "./components/timeline/Timeline";
 import { FilterPanel } from "./components/filters/FilterPanel";
@@ -39,7 +39,7 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col bg-neutral-50 overflow-x-hidden">
       <Header />
-      <ProximosPrazos />
+      <ProximosEventos />
       <MonthNav eventos={eventosFiltrados} />
       <FilterSummary
         totalEventos={eventos.length}

@@ -9,8 +9,8 @@ import {
 } from "lucide-react";
 import type { Perfil } from "../../types";
 import { eventos } from "../../data/eventos";
-import { useProximosPrazos } from "../../hooks/useProximosPrazos";
-import { PrazoCard } from "./PrazoCard";
+import { useProximosEventos } from "../../hooks/useProximosEventos";
+import { EventoProximoCard } from "./EventoProximoCard";
 import { cn } from "../../lib/utils";
 import { Tooltip } from "../ui/Tooltip";
 
@@ -48,10 +48,10 @@ function getPerfilSalvo(): TabValue {
   return "destaques"; // Destaques como default inicial!
 }
 
-export function ProximosPrazos() {
+export function ProximosEventos() {
   const [isExpanded, setIsExpanded] = useState(true);
   const [perfilAtivo, setPerfilAtivo] = useState<TabValue>(getPerfilSalvo);
-  const proximosPrazos = useProximosPrazos(eventos, perfilAtivo, 6);
+  const proximosEventos = useProximosEventos(eventos, perfilAtivo, 6);
   const tabRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
 
   // Navegação por teclado entre tabs (6B.6): setas ←→
@@ -107,14 +107,14 @@ export function ProximosPrazos() {
           <div className="flex items-center gap-2">
             <CalendarClock size={18} className="text-primary-700" />
             <h2 className="text-base sm:text-lg font-bold text-neutral-800">
-              Próximos Prazos
+              Próximos Eventos
             </h2>
             <div className="relative group cursor-help ml-1 flex items-center">
               <Info size={16} className="text-neutral-400 hover:text-primary-600 transition-colors" />
               <div className="absolute left-1/2 sm:left-auto sm:right-1/2 sm:translate-x-1/2 -translate-x-1/2 -bottom-2 translate-y-full sm:bottom-full sm:-translate-y-2 mb-2 w-64 bg-neutral-800 text-white text-[11px] sm:text-xs p-3 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 pointer-events-none border border-neutral-700">
                 <p className="font-semibold mb-1.5 text-neutral-100">Filtrar por perfil:</p>
                 <ul className="space-y-1 text-neutral-300">
-                  <li><span className="font-semibold text-amber-400">Destaques:</span> Prazos mais relevantes e urgentes.</li>
+                  <li><span className="font-semibold text-amber-400">Destaques:</span> Eventos mais relevantes e urgentes.</li>
                   <li><span className="font-semibold text-white">Todos:</span> Exibe todos os eventos cadastrados.</li>
                   <li><span className="font-semibold text-white">Eleitor:</span> Título, votação e justificativa.</li>
                   <li><span className="font-semibold text-white">Candidato:</span> Registros, campanhas e contas.</li>
@@ -127,12 +127,12 @@ export function ProximosPrazos() {
               </div>
             </div>
           </div>
-          <Tooltip content={isExpanded ? "Ocultar área de próximos prazos" : "Mostrar área de próximos prazos"}>
+          <Tooltip content={isExpanded ? "Ocultar área de próximos eventos" : "Mostrar área de próximos eventos"}>
             <button
               onClick={() => setIsExpanded(!isExpanded)}
               className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg text-primary-700 bg-primary-50 hover:bg-primary-100 border border-primary-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
               aria-label={
-                isExpanded ? "Ocultar próximos prazos" : "Mostrar próximos prazos"
+                isExpanded ? "Ocultar próximos eventos" : "Mostrar próximos eventos"
               }
               aria-expanded={isExpanded}
             >
@@ -150,7 +150,7 @@ export function ProximosPrazos() {
             <div
               className="flex gap-1.5 overflow-x-auto scrollbar-hide mb-4 pb-1"
               role="tablist"
-              aria-label="Filtrar próximos prazos por perfil"
+              aria-label="Filtrar próximos eventos por perfil"
             >
               {PERFIS_TABS.map((tab, index) => (
                 <button
@@ -181,13 +181,13 @@ export function ProximosPrazos() {
             </div>
 
             {/* Cards - Grid layout */}
-            {proximosPrazos.length > 0 ? (
+            {proximosEventos.length > 0 ? (
               <div
                 key={perfilAtivo}
                 className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-2 animate-tab-fade"
               >
-                {proximosPrazos.map((ev) => (
-                  <PrazoCard
+                {proximosEventos.map((ev) => (
+                  <EventoProximoCard
                     key={ev.id}
                     evento={ev}
                     onClick={() => scrollToEvento(ev.id)}
@@ -202,8 +202,8 @@ export function ProximosPrazos() {
                 <Clock size={16} />
                 <p className="text-sm">
                   {perfilAtivo === "todos"
-                    ? "Não há prazos próximos."
-                    : `Nenhum prazo próximo para o perfil "${PERFIS_TABS.find((t) => t.value === perfilAtivo)?.label}".`}
+                    ? "Não há eventos próximos."
+                    : `Nenhum evento próximo para o perfil "${PERFIS_TABS.find((t) => t.value === perfilAtivo)?.label}".`}
                 </p>
               </div>
             )}

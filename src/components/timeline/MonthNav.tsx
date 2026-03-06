@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useMemo, useCallback } from "react";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, CalendarDays } from "lucide-react";
 import type { EventoCalendario } from "../../types";
 import { agruparPorMes, cn } from "../../lib/utils";
 
@@ -91,38 +91,49 @@ export function MonthNav({
         className="sticky top-0 z-30 bg-white/95 backdrop-blur-sm border-t-[3px] border-t-primary-700 border-b border-b-neutral-200 shadow-md"
         aria-label="Navegação por meses"
       >
-        <div
-          ref={scrollRef}
-          className="flex gap-1.5 overflow-x-auto px-4 py-3 scroll-snap-x max-w-5xl mx-auto pb-3.5"
-        >
-          {meses.map((m) => {
-            const isActive = m.chave === activeMonth;
-            const isCurrent = m.chave === mesAtualChave;
+        <div className="max-w-5xl mx-auto flex items-center px-4">
+          {/* Título instrutivo à esquerda */}
+          <div className="flex flex-shrink-0 items-center gap-2 mr-4 pr-4 border-r border-neutral-100 py-4 sm:py-5">
+            <CalendarDays size={18} className="text-primary-700 max-[360px]:hidden" />
+            <div className="flex flex-col leading-none">
+              <span className="text-[9px] sm:text-[10px] font-black text-neutral-400 uppercase tracking-widest">Acesso</span>
+              <span className="text-[11px] sm:text-xs font-bold text-primary-900 uppercase">Mensal</span>
+            </div>
+          </div>
 
-            return (
-              <button
-                key={m.chave}
-                ref={(el) => {
-                  if (el) chipRefs.current.set(m.chave, el);
-                }}
-                onClick={() => scrollToMonth(m.chave)}
-                className={cn(
-                  "flex-shrink-0 scroll-snap-start rounded-full px-4 py-2 text-sm font-medium",
-                  "transition-all duration-200 whitespace-nowrap active:scale-95",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1",
-                  flashedMonth === m.chave && "scale-95 brightness-110",
-                  isActive
-                    ? "bg-primary-700 text-white shadow-sm"
-                    : isCurrent
-                      ? "bg-primary-100 text-primary-700 ring-1 ring-primary-300"
-                      : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200",
-                )}
-                aria-current={isActive ? "true" : undefined}
-              >
-                {m.labelAbrev}
-              </button>
-            );
-          })}
+          <div
+            ref={scrollRef}
+            className="flex-1 flex gap-1.5 overflow-x-auto py-4 sm:py-5 scroll-snap-x scrollbar-hide"
+          >
+            {meses.map((m) => {
+              const isActive = m.chave === activeMonth;
+              const isCurrent = m.chave === mesAtualChave;
+
+              return (
+                <button
+                  key={m.chave}
+                  ref={(el) => {
+                    if (el) chipRefs.current.set(m.chave, el);
+                  }}
+                  onClick={() => scrollToMonth(m.chave)}
+                  className={cn(
+                    "flex-shrink-0 scroll-snap-start rounded-full px-4 py-2 text-sm font-medium",
+                    "transition-all duration-200 whitespace-nowrap active:scale-95",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1",
+                    flashedMonth === m.chave && "scale-95 brightness-110",
+                    isActive
+                      ? "bg-primary-700 text-white shadow-sm"
+                      : isCurrent
+                        ? "bg-primary-100 text-primary-700 ring-1 ring-primary-300"
+                        : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200",
+                  )}
+                  aria-current={isActive ? "true" : undefined}
+                >
+                  {m.labelAbrev}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </nav>
 

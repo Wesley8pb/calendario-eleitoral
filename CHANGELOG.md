@@ -119,6 +119,7 @@
 - Botão de colapsar/expandir da seção "Próximos Prazos" redesenhado (mais visível, cor primária + texto)
 - Botão flutuante "Início" adicionado ao `MonthNav` para retorno ao topo
 - Rodapé atualizado: "Desenvolvido por Wesley Brito — servidor da 56ª Zona Eleitoral/PB"
+- **MonthNav:** Adicionado título "Acesso Mensal" com ícone à esquerda e altura aumentada para melhor visibilidade e instrução.
 
 #### Sprint 6A — Responsividade ✅
 - **`index.css`:** Adicionadas utilidades `.touch-target` (44px mínimo), `.pb-safe` (env safe-area-inset), animações `slide-up` e `slide-down` consolidadas em CSS puro

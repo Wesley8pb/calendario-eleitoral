@@ -106,7 +106,7 @@ interface EventoCalendario {
   categorias: CategoriaID[];  // Ex: ["REG", "PAR"]
   perfis: Perfil[];    // Ex: ["candidato", "partido"]
   marcos: string | null;
-  turno: "1T" | "2T" | "AMBOS" | null;
+  turno: "1T" | "2T" | "AMBOS" | "POS" | null;
   fundamentacao: Fundamentacao[];
   observacoes?: string;
   destaque?: boolean;
@@ -121,6 +121,8 @@ interface EventoCalendario {
 | `"candidato"` | Prazos de registro, propaganda, contas do candidato |
 | `"partido"` | Convenções, filiações, FEFC, atos partidários |
 | `"advogado"` | Prazos processuais, recursos, representações |
+| `"atos-preparatorios"` | Eventos de organização interna da Justiça Eleitoral (Categoria ADM) |
+| `"destaques"` | *(Filtro)* Eventos marcados com `destaque: true` |
 | `[]` (vazio) | Atos administrativos sem destinatário identificável |
 
 ---

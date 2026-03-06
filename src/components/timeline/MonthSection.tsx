@@ -1,12 +1,15 @@
-import { Calendar } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Calendar, ChevronDown, ChevronUp } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { useLazyRender } from "../../hooks/useLazyRender";
+import { Tooltip } from "../ui/Tooltip";
 
 interface MonthSectionProps {
   id: string; // para scroll-to / Intersection Observer
   label: string; // "Outubro / 2026"
   eventCount: number;
   isCurrentMonth?: boolean;
+  allExpanded?: boolean;
   children: React.ReactNode;
 }
 
@@ -15,8 +18,18 @@ export function MonthSection({
   label,
   eventCount,
   isCurrentMonth,
+  allExpanded,
   children,
 }: MonthSectionProps) {
+  const [isExpanded, setIsExpanded] = useState(true);
+
+  // Sincronizar com o estado global quando ele mudar
+  useEffect(() => {
+    if (allExpanded !== undefined) {
+      setIsExpanded(allExpanded);
+    }
+  }, [allExpanded]);
+
   const { ref, isVisible } = useLazyRender("500px");
 
   return (
@@ -51,27 +64,50 @@ export function MonthSection({
         >
           {label}
         </h2>
-        <span
-          className={cn(
-            "ml-auto text-xs font-medium rounded-full px-2.5 py-0.5",
-            isCurrentMonth
-              ? "bg-primary-700 text-white"
-              : "bg-neutral-100 text-neutral-500",
-          )}
-        >
-          {eventCount} {eventCount === 1 ? "evento" : "eventos"}
-        </span>
+
+        <div className="ml-auto flex items-center gap-3">
+          <span
+            className={cn(
+              "text-xs font-medium rounded-full px-2.5 py-0.5",
+              isCurrentMonth
+                ? "bg-primary-700 text-white"
+                : "bg-neutral-100 text-neutral-500",
+            )}
+          >
+            {eventCount} {eventCount === 1 ? "evento" : "eventos"}
+          </span>
+
+          <Tooltip content={isExpanded ? "Recolher eventos deste mês" : "Expandir eventos deste mês"}>
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className={cn(
+                "flex items-center justify-center p-1.5 rounded-lg transition-colors border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500",
+                isCurrentMonth
+                  ? "text-primary-700 bg-primary-100 hover:bg-primary-200 border-primary-200"
+                  : "text-neutral-500 bg-neutral-100 hover:bg-neutral-200 border-neutral-200"
+              )}
+              aria-label={isExpanded ? "Recolher eventos" : "Expandir eventos"}
+              aria-expanded={isExpanded}
+            >
+              {isExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+            </button>
+          </Tooltip>
+        </div>
       </div>
 
-      {/* Conteúdo renderizado apenas quando próximo da viewport (7A.7) */}
-      {isVisible ? (
-        <div className="space-y-6 animate-section-fade">{children}</div>
-      ) : (
-        // Placeholder com altura mínima estimada para preservar o layout do scroll
-        <div
-          style={{ minHeight: `${eventCount * 72}px` }}
-          aria-hidden="true"
-        />
+      {/* Conteúdo renderizado apenas quando próximo da viewport (7A.7) e se estiver expandido */}
+      {isExpanded && (
+        <>
+          {isVisible ? (
+            <div className="space-y-6 animate-section-fade">{children}</div>
+          ) : (
+            // Placeholder com altura mínima estimada para preservar o layout do scroll
+            <div
+              style={{ minHeight: `${eventCount * 72}px` }}
+              aria-hidden="true"
+            />
+          )}
+        </>
       )}
     </section>
   );

@@ -1,5 +1,6 @@
 import { X } from "lucide-react";
 import { cn } from "../../lib/utils";
+import { Tooltip } from "../ui/Tooltip";
 
 interface FilterSummaryProps {
   totalEventos: number;
@@ -28,18 +29,20 @@ export function FilterSummary({
           Exibindo <span className="font-bold">{totalFiltrados}</span> de{" "}
           <span className="font-bold">{totalEventos}</span> eventos
         </p>
-        <button
-          onClick={onLimpar}
-          aria-label={`Limpar filtros — exibindo ${totalFiltrados} de ${totalEventos} eventos`}
-          className={cn(
-            "inline-flex items-center gap-1 text-xs font-medium text-primary-700",
-            "hover:text-primary-900 transition-colors rounded-full px-2 py-1.5",
-            "hover:bg-primary-200/50 min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500",
-          )}
-        >
-          <X size={12} />
-          Limpar filtros
-        </button>
+        <Tooltip content="Remover todos os filtros aplicados">
+          <button
+            onClick={onLimpar}
+            aria-label={`Limpar filtros — exibindo ${totalFiltrados} de ${totalEventos} eventos`}
+            className={cn(
+              "inline-flex items-center gap-1 text-xs font-medium text-primary-700",
+              "hover:text-primary-900 transition-colors rounded-full px-2 py-1.5",
+              "hover:bg-primary-200/50 min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500",
+            )}
+          >
+            <X size={12} />
+            Limpar filtros
+          </button>
+        </Tooltip>
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import { ArrowUp, CalendarDays } from "lucide-react";
 import type { EventoCalendario } from "../../types";
 import { agruparPorMes, cn } from "../../lib/utils";
+import { Tooltip } from "../ui/Tooltip";
 
 interface MonthNavProps {
   eventos: EventoCalendario[];
@@ -15,6 +16,10 @@ export function MonthNav({
   const meses = useMemo(() => agruparPorMes(eventos), [eventos]);
   const scrollRef = useRef<HTMLDivElement>(null);
   const chipRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const [hasMoved, setHasMoved] = useState(false);
 
   // Mês atual
   const hoje = new Date();
@@ -85,6 +90,43 @@ export function MonthNav({
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  // Handlers para Drag-to-Scroll (Desktop)
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!scrollRef.current) return;
+    setIsDragging(true);
+    setHasMoved(false);
+    setStartX(e.pageX - scrollRef.current.offsetLeft);
+    setScrollLeft(scrollRef.current.scrollLeft);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !scrollRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX) * 2; // multiplicador de velocidade
+    if (Math.abs(walk) > 5) {
+      setHasMoved(true);
+    }
+    scrollRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleMonthClick = (chave: string, e: React.MouseEvent) => {
+    // Se houve movimento significativo (drag), não dispara o scroll suave para o mês
+    if (hasMoved) {
+      e.preventDefault();
+      return;
+    }
+    scrollToMonth(chave);
+  };
+
   return (
     <>
       <nav
@@ -103,7 +145,14 @@ export function MonthNav({
 
           <div
             ref={scrollRef}
-            className="flex-1 flex gap-1.5 overflow-x-auto py-4 sm:py-5 scroll-snap-x scrollbar-hide"
+            onMouseDown={handleMouseDown}
+            onMouseLeave={handleMouseLeave}
+            onMouseUp={handleMouseUp}
+            onMouseMove={handleMouseMove}
+            className={cn(
+              "flex-1 flex gap-1.5 overflow-x-auto py-4 sm:py-5 scrollbar-hide select-none",
+              !isDragging && "scroll-snap-x"
+            )}
           >
             {meses.map((m) => {
               const isActive = m.chave === activeMonth;
@@ -115,11 +164,13 @@ export function MonthNav({
                   ref={(el) => {
                     if (el) chipRefs.current.set(m.chave, el);
                   }}
-                  onClick={() => scrollToMonth(m.chave)}
+                  onClick={(e) => handleMonthClick(m.chave, e)}
+                  onDragStart={(e) => e.preventDefault()}
                   className={cn(
                     "flex-shrink-0 scroll-snap-start rounded-full px-4 py-2 text-sm font-medium",
                     "transition-all duration-200 whitespace-nowrap active:scale-95",
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1",
+                    "cursor-grab active:cursor-grabbing",
                     flashedMonth === m.chave && "scale-95 brightness-110",
                     isActive
                       ? "bg-primary-700 text-white shadow-sm"
@@ -129,7 +180,9 @@ export function MonthNav({
                   )}
                   aria-current={isActive ? "true" : undefined}
                 >
-                  {m.labelAbrev}
+                  <Tooltip content="Clique e arraste para navegar horizontalmente">
+                    <span>{m.labelAbrev}</span>
+                  </Tooltip>
                 </button>
               );
             })}

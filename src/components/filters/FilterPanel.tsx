@@ -11,6 +11,7 @@ import type { CategoriaID } from "../../types";
 import { categorias } from "../../data/categorias";
 import type { FilterState } from "../../hooks/useFilteredEvents";
 import { cn } from "../../lib/utils";
+import { Tooltip } from "../ui/Tooltip";
 
 interface FilterPanelProps {
   filtros: FilterState;
@@ -130,13 +131,15 @@ export function FilterPanel({
             className="w-full pl-8 pr-8 py-2 text-sm rounded-lg border border-neutral-200 bg-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors"
           />
           {buscaLocal && (
-            <button
-              onClick={() => setBuscaLocal("")}
-              className="absolute right-2 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600"
-              aria-label="Limpar busca"
-            >
-              <X size={14} />
-            </button>
+            <Tooltip content="Limpar busca">
+              <button
+                onClick={() => setBuscaLocal("")}
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600"
+                aria-label="Limpar busca"
+              >
+                <X size={14} />
+              </button>
+            </Tooltip>
           )}
         </div>
       </div>
@@ -291,24 +294,25 @@ export function FilterPanel({
                 {totalFiltrados}/{totalEventos}
               </span>
             )}
-            <button
-              onClick={() => setIsDesktopExpanded(!isDesktopExpanded)}
-              className={cn(
-                "p-1.5 rounded-full hover:bg-neutral-100 text-neutral-500 transition-colors",
-                (!hasActiveFilters || !isDesktopExpanded) && "ml-auto",
-              )}
-              title={isDesktopExpanded ? "Ocultar filtros" : "Mostrar filtros"}
-              aria-label={
-                isDesktopExpanded ? "Ocultar filtros" : "Mostrar filtros"
-              }
-              aria-expanded={isDesktopExpanded}
-            >
-              {isDesktopExpanded ? (
-                <ChevronUp size={20} />
-              ) : (
-                <ChevronDown size={20} />
-              )}
-            </button>
+            <Tooltip content={isDesktopExpanded ? "Recolher painel de filtros" : "Expandir painel de filtros"} position="bottom">
+              <button
+                onClick={() => setIsDesktopExpanded(!isDesktopExpanded)}
+                className={cn(
+                  "p-1.5 rounded-full hover:bg-neutral-100 text-neutral-500 transition-colors",
+                  (!hasActiveFilters || !isDesktopExpanded) && "ml-auto",
+                )}
+                aria-label={
+                  isDesktopExpanded ? "Ocultar filtros" : "Mostrar filtros"
+                }
+                aria-expanded={isDesktopExpanded}
+              >
+                {isDesktopExpanded ? (
+                  <ChevronUp size={20} />
+                ) : (
+                  <ChevronDown size={20} />
+                )}
+              </button>
+            </Tooltip>
           </div>
           {isDesktopExpanded && (
             <div className="animate-in fade-in slide-in-from-top-2 duration-300">
@@ -321,24 +325,26 @@ export function FilterPanel({
       {/* Mobile: bottom sheet */}
       <div className="lg:hidden">
         {/* FAB — posicionado à esquerda para não sobrepor o botão "Início" (direita) */}
-        <button
-          onClick={() => setIsOpen(true)}
-          className={cn(
-            "fixed bottom-6 left-6 z-40 flex items-center gap-2 rounded-full px-4 py-3 shadow-lg",
-            "bg-primary-700 text-white hover:bg-primary-900 transition-colors",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2",
-            "min-h-[44px]",
-          )}
-          aria-label="Abrir filtros"
-        >
-          <Filter size={18} />
-          <span className="text-sm font-medium">Filtros</span>
-          {hasActiveFilters && (
-            <span className="bg-white text-primary-700 text-xs font-bold rounded-full px-1.5 py-0.5 min-w-[20px] text-center">
-              {totalFiltrados}
-            </span>
-          )}
-        </button>
+        <Tooltip content="Ver filtros avançados" className="fixed bottom-6 left-6 z-40">
+          <button
+            onClick={() => setIsOpen(true)}
+            className={cn(
+              "flex items-center gap-2 rounded-full px-4 py-3 shadow-lg",
+              "bg-primary-700 text-white hover:bg-primary-900 transition-colors",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2",
+              "min-h-[44px]",
+            )}
+            aria-label="Abrir filtros"
+          >
+            <Filter size={18} />
+            <span className="text-sm font-medium">Filtros</span>
+            {hasActiveFilters && (
+              <span className="bg-white text-primary-700 text-xs font-bold rounded-full px-1.5 py-0.5 min-w-[20px] text-center">
+                {totalFiltrados}
+              </span>
+            )}
+          </button>
+        </Tooltip>
 
         {/* Backdrop + Sheet */}
         {isOpen && (

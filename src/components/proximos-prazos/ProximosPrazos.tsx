@@ -12,6 +12,7 @@ import { eventos } from "../../data/eventos";
 import { useProximosPrazos } from "../../hooks/useProximosPrazos";
 import { PrazoCard } from "./PrazoCard";
 import { cn } from "../../lib/utils";
+import { Tooltip } from "../ui/Tooltip";
 
 type TabValue = Perfil | "todos" | "destaques";
 
@@ -126,22 +127,21 @@ export function ProximosPrazos() {
               </div>
             </div>
           </div>
-          <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg text-primary-700 bg-primary-50 hover:bg-primary-100 border border-primary-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
-            title={
-              isExpanded ? "Ocultar próximos prazos" : "Mostrar próximos prazos"
-            }
-            aria-label={
-              isExpanded ? "Ocultar próximos prazos" : "Mostrar próximos prazos"
-            }
-            aria-expanded={isExpanded}
-          >
-            <span className="hidden sm:inline">
-              {isExpanded ? "Ocultar" : "Mostrar"}
-            </span>
-            {isExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-          </button>
+          <Tooltip content={isExpanded ? "Ocultar área de próximos prazos" : "Mostrar área de próximos prazos"}>
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg text-primary-700 bg-primary-50 hover:bg-primary-100 border border-primary-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+              aria-label={
+                isExpanded ? "Ocultar próximos prazos" : "Mostrar próximos prazos"
+              }
+              aria-expanded={isExpanded}
+            >
+              <span className="hidden sm:inline">
+                {isExpanded ? "Ocultar" : "Mostrar"}
+              </span>
+              {isExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+            </button>
+          </Tooltip>
         </div>
 
         {isExpanded && (

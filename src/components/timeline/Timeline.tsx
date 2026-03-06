@@ -7,9 +7,10 @@ import { EventCard } from "./EventCard";
 
 interface TimelineProps {
   eventos: EventoCalendario[];
+  allExpanded: boolean;
 }
 
-export function Timeline({ eventos }: TimelineProps) {
+export function Timeline({ eventos, allExpanded }: TimelineProps) {
   const meses = useMemo(() => agruparPorMes(eventos), [eventos]);
 
   // Mês atual para destaque
@@ -35,6 +36,7 @@ export function Timeline({ eventos }: TimelineProps) {
               label={grupoMes.label}
               eventCount={grupoMes.eventos.length}
               isCurrentMonth={grupoMes.chave === mesAtualChave}
+              allExpanded={allExpanded}
             >
               {gruposDatas.map((grupoData) => (
                 <div key={grupoData.data} className="relative">

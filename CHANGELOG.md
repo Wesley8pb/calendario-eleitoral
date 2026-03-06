@@ -8,7 +8,36 @@
 
 ## [Unreleased] — Em desenvolvimento
 
-> **Nota:** Sprint 7D concluída em 06/03/2026. **v1.0 pronta para deploy no Netlify.**
+### Ajustes de UI — Botões de Colapsar e Tooltips ✅ (06/03/2026)
+
+- **Funcionalidade de Colapsar nos Meses:**
+  - Adicionado botão de recolher/expandir em cada seção mensal (`MonthSection.tsx`).
+  - Padrão: meses iniciam expandidos.
+  - Estilo visual alinhado com o componente "Próximos Prazos" (cores primárias para o mês atual, neutras para os demais).
+  - Lógica integrada com o lazy rendering para preservar a performance.
+- **Tooltips Explicativos:**
+  - Criado componente `ui/Tooltip.tsx` reutilizável.
+  - Adicionado tooltips em todos os botões de ação do sistema.
+- **Controle Global de Expansão:**
+  - Adicionado botão "Expandir/Recolher Tudo" no topo da timeline.
+  - Sincronização automática entre o estado global e os meses individuais.
+  - Tooltip dinâmico no botão global refletindo o estado atual.
+- **Navegação Horizontal (Drag-to-Scroll):**
+  - Implementada funcionalidade de "clicar e arrastar" na barra de meses (`MonthNav`) para Desktop.
+  - Adicionado tooltip instrutivo permanente: "Clique e arraste para navegar horizontalmente".
+  - Diferenciação inteligente entre clique (navegação) e arrasto (scroll).
+  - Cursor visual dinâmico (`grab`/`grabbing`) para indicar interatividade.
+  - Adicionado tooltips em:
+    - Botão de colapsar dos meses.
+    - Botão de colapsar da área "Próximos Prazos".
+    - Botão de colapsar lateral (Desktop) no Painel de Filtros.
+    - Botão flutuante de filtros (Mobile).
+    - Botão de limpar busca no Painel de Filtros.
+    - Botão de limpar filtros no Resumo de Filtros.
+
+---
+
+> **Nota:** Sprint concluída em 06/03/2026. **Melhorias de UX implementadas.**
 
 ### Sprint 7C — Coleta de URLs de Legislação ❌ Descartada
 

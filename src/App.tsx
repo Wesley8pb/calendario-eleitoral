@@ -1,6 +1,7 @@
-import { useMemo } from "react";
+import { useState, useMemo } from "react";
 import { Header } from "./components/layout/Header";
-import { CalendarDays } from "lucide-react";
+import { CalendarDays, ChevronDown, ChevronUp } from "lucide-react";
+import { Tooltip } from "./components/ui/Tooltip";
 import { Footer } from "./components/layout/Footer";
 import { ProximosPrazos } from "./components/proximos-prazos/ProximosPrazos";
 import { MonthNav } from "./components/timeline/MonthNav";
@@ -14,6 +15,7 @@ import { isEventoPassado, agruparPorMes } from "./lib/utils";
 
 function App() {
   const { filtros, setFiltros, limparFiltros } = useUrlFilters();
+  const [allExpanded, setAllExpanded] = useState(true);
   const eventosFiltrados = useFilteredEvents(eventos, filtros);
 
   // Contagem de eventos passados
@@ -56,22 +58,46 @@ function App() {
           mesesDisponiveis={mesesDisponiveis}
         />
         <main className="flex-1 min-w-0">
-          <div className="mb-8 flex items-center gap-3 pb-4 border-b border-neutral-100">
-            <div className="p-2.5 bg-primary-50 rounded-xl text-primary-600">
-              <CalendarDays size={24} strokeWidth={2} />
+          <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-neutral-100">
+            <div className="flex items-center gap-3">
+              <div className="p-2.5 bg-primary-50 rounded-xl text-primary-600">
+                <CalendarDays size={24} strokeWidth={2} />
+              </div>
+              <div>
+                <h1 className="text-2xl font-black text-neutral-800 tracking-tight">
+                  Calendário Interativo
+                </h1>
+                <p className="text-sm text-neutral-500 mt-0.5">
+                  Acompanhe todos os prazos e eventos do ciclo eleitoral
+                </p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-2xl font-black text-neutral-800 tracking-tight">
-                Calendário Interativo
-              </h1>
-              <p className="text-sm text-neutral-500 mt-0.5">
-                Acompanhe todos os prazos e eventos do ciclo eleitoral
-              </p>
+
+            <div className="flex items-center gap-2">
+              <Tooltip content={allExpanded ? "Recolher todos os meses" : "Expandir todos os meses"}>
+                <button
+                  onClick={() => setAllExpanded(!allExpanded)}
+                  className="flex items-center gap-2 px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-lg border transition-all duration-200 border-primary-200 bg-primary-50 text-primary-700 hover:bg-primary-100 active:scale-95"
+                  aria-label={allExpanded ? "Recolher todos os meses" : "Expandir todos os meses"}
+                >
+                  {allExpanded ? (
+                    <>
+                      <ChevronUp size={16} />
+                      <span className="hidden xs:inline">Recolher Tudo</span>
+                    </>
+                  ) : (
+                    <>
+                      <ChevronDown size={16} />
+                      <span className="hidden xs:inline">Expandir Tudo</span>
+                    </>
+                  )}
+                </button>
+              </Tooltip>
             </div>
           </div>
 
           {eventosFiltrados.length > 0 ? (
-            <Timeline eventos={eventosFiltrados} />
+            <Timeline eventos={eventosFiltrados} allExpanded={allExpanded} />
           ) : (
             <div className="flex flex-col items-center justify-center py-20 text-center">
               <p className="text-lg font-semibold text-neutral-500">

@@ -29,7 +29,8 @@
 | 7B        | SEO e Meta                           | Title, OG, Twitter Cards, sitemap, robots                        | ~30 min     |
 | 7C        | Coleta de URLs de Legislação         | Inventário de normas, inserção dos links fornecidos pelo usuário | ~1h         |
 | 7D        | Segurança, Deploy e Docs             | Headers, HTTPS, Netlify, Lighthouse, README                      | ~45 min     |
-| **Total** |                                      | **18 etapas**                                                    | **~16–18h** |
+| 8         | Ajustes de UI e UX                   | Botão colapsar nos meses e Tooltips em todos os botões           | ~1h         |
+| **Total** |                                      | **19 etapas**                                                    | **~17–19h** |
 
 ---
 

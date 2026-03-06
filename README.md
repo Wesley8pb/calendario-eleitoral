@@ -161,3 +161,4 @@ Este site tem **caráter exclusivamente informativo**. Para fins jurídicos, con
 
 Distribuído livremente para fins de utilidade pública. Os dados são extraídos de documento público (Resolução TSE nº 23.760/2026).
 # calendario-eleitoral
+# calendario-eleitoral

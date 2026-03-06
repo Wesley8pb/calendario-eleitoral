@@ -237,9 +237,15 @@ export function FilterPanel({
           Turno
         </p>
         <div className="flex gap-1.5">
-          {([null, "1T", "2T"] as const).map((t) => {
+          {([null, "1T", "2T", "POS"] as const).map((t) => {
             const label =
-              t === null ? "Todos" : t === "1T" ? "1º Turno" : "2º Turno";
+              t === null
+                ? "Todos"
+                : t === "1T"
+                  ? "1º Turno"
+                  : t === "2T"
+                    ? "2º Turno"
+                    : "Pós-eleição";
             const isActive = filtros.turno === t;
             return (
               <button

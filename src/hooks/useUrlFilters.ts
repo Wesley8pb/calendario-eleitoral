@@ -13,8 +13,9 @@ const VALID_CATS: CategoriaID[] = [
   "VOT",
   "PES",
   "DIP",
+  "PAR",
 ];
-const VALID_TURNOS = ["1T", "2T"] as const;
+const VALID_TURNOS = ["1T", "2T", "POS"] as const;
 
 function parseUrlToFilters(): FilterState {
   const params = new URLSearchParams(window.location.search);
@@ -31,8 +32,8 @@ function parseUrlToFilters(): FilterState {
 
   const turnoParam = params.get("turno");
   const turno =
-    turnoParam && VALID_TURNOS.includes(turnoParam as "1T" | "2T")
-      ? (turnoParam as "1T" | "2T")
+    turnoParam && VALID_TURNOS.includes(turnoParam as "1T" | "2T" | "POS")
+      ? (turnoParam as "1T" | "2T" | "POS")
       : null;
 
   const busca = params.get("q") ?? "";

@@ -4948,7 +4948,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIS"],
     perfis: [],
     marcos: "1 dia após o 2º turno",
-    turno: "2T",
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Resolução nº 23.673/2021/TSE",
@@ -4969,7 +4969,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["ELE", "ADM"],
     perfis: ["eleitor"],
     marcos: "1 dia após o 2º turno",
-    turno: "2T",
+    turno: "POS",
     fundamentacao: [],
   },
 
@@ -4983,7 +4983,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIN"],
     perfis: ["candidato", "partido", "advogado"],
     marcos: "1 dia após o 2º turno",
-    turno: "2T",
+    turno: "POS",
     fundamentacao: [
       { norma: "Lei nº 9.504/1997", dispositivo: "art. 29, III", url: "" },
       {
@@ -5004,7 +5004,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["PES"],
     perfis: [],
     marcos: "1 dia após o 2º turno",
-    turno: "2T",
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Resolução nº 23.600/2019/TSE",
@@ -5025,7 +5025,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["PRO"],
     perfis: ["candidato", "partido", "advogado"],
     marcos: "2 dias após o 2º turno",
-    turno: "2T",
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Resolução nº 23.610/2019/TSE",
@@ -5045,7 +5045,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["ELE", "REG"],
     perfis: ["eleitor", "candidato", "advogado"],
     marcos: "2 dias após o 2º turno",
-    turno: "2T",
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Código Eleitoral",
@@ -5071,7 +5071,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["ADM"],
     perfis: [],
     marcos: "3 dias após o 2º turno",
-    turno: "2T",
+    turno: "POS",
     fundamentacao: [
       { norma: "Código Eleitoral", dispositivo: "art. 124, § 4º", url: "" },
     ],
@@ -5088,7 +5088,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIS"],
     perfis: [],
     marcos: "5 dias após o 2º turno",
-    turno: "2T",
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Resolução nº 23.673/2021/TSE",
@@ -5109,7 +5109,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["ADM"],
     perfis: ["advogado"],
     marcos: "5 dias após o 2º turno",
-    turno: null,
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Lei nº 9.504/1997",
@@ -5139,7 +5139,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIN"],
     perfis: ["candidato", "partido", "advogado"],
     marcos: "30 dias após o 1º turno",
-    turno: "1T",
+    turno: "POS",
     destaque: true,
     fundamentacao: [
       { norma: "Lei nº 9.504/1997", dispositivo: "art. 29, III", url: "" },
@@ -5162,7 +5162,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIN"],
     perfis: ["candidato", "partido", "advogado"],
     marcos: "30 dias após o 1º turno",
-    turno: "1T",
+    turno: "POS",
     fundamentacao: [
       { norma: "Lei nº 9.504/1997", dispositivo: "art. 31, I", url: "" },
       {
@@ -5184,7 +5184,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIN"],
     perfis: ["candidato", "partido"],
     marcos: "30 dias após o 1º turno",
-    turno: "1T",
+    turno: "POS",
     fundamentacao: [
       { norma: "Lei nº 9.504/1997", dispositivo: "art. 16-C, § 11", url: "" },
       {
@@ -5206,7 +5206,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIN"],
     perfis: ["candidato", "partido"],
     marcos: "30 dias após o 1º turno",
-    turno: "1T",
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Resolução nº 23.607/2019/TSE",
@@ -5227,7 +5227,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["PRO"],
     perfis: ["candidato", "partido", "advogado"],
     marcos: "30 dias após o 1º turno",
-    turno: "1T",
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Resolução nº 23.610/2019/TSE",
@@ -5248,7 +5248,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["ADM"],
     perfis: [],
     marcos: "30 dias após o 1º turno",
-    turno: "1T",
+    turno: "POS",
     fundamentacao: [
       { norma: "Código Eleitoral", dispositivo: "art. 124", url: "" },
     ],
@@ -5265,7 +5265,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["ELE", "ADM"],
     perfis: ["eleitor"],
     marcos: "30 dias após o 1º turno",
-    turno: null,
+    turno: "POS",
     fundamentacao: [],
   },
 
@@ -5280,7 +5280,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["ELE", "ADM"],
     perfis: ["eleitor"],
     marcos: "30 dias após o 1º turno",
-    turno: null,
+    turno: "POS",
     fundamentacao: [],
   },
 
@@ -5295,7 +5295,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIN"],
     perfis: [],
     marcos: null,
-    turno: "1T",
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Resolução nº 23.607/2019/TSE",
@@ -5316,7 +5316,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["ADM"],
     perfis: [],
     marcos: "15 dias após o 2º turno",
-    turno: "2T",
+    turno: "POS",
     fundamentacao: [],
   },
 
@@ -5331,7 +5331,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIN", "CON"],
     perfis: [],
     marcos: "15 dias após o 2º turno",
-    turno: "2T",
+    turno: "POS",
     fundamentacao: [
       { norma: "Lei nº 9.504/1997", dispositivo: "art. 76, § 2º", url: "" },
       {
@@ -5353,7 +5353,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIN", "ADM"],
     perfis: [],
     marcos: null,
-    turno: null,
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Resolução nº 23.607/2019/TSE",
@@ -5374,7 +5374,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIN", "ADM"],
     perfis: [],
     marcos: null,
-    turno: null,
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Resolução nº 23.607/2019/TSE",
@@ -5395,7 +5395,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIN"],
     perfis: ["candidato", "partido", "advogado"],
     marcos: "20 dias após o 2º turno",
-    turno: "2T",
+    turno: "POS",
     destaque: true,
     fundamentacao: [
       { norma: "Lei nº 9.504/1997", dispositivo: "art. 29, IV", url: "" },
@@ -5418,7 +5418,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIN"],
     perfis: ["candidato", "partido", "advogado"],
     marcos: "20 dias após o 2º turno",
-    turno: "2T",
+    turno: "POS",
     fundamentacao: [
       { norma: "Lei nº 9.504/1997", dispositivo: "art. 31, I", url: "" },
       {
@@ -5440,7 +5440,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIN"],
     perfis: ["candidato", "partido"],
     marcos: "20 dias após o 2º turno",
-    turno: "2T",
+    turno: "POS",
     fundamentacao: [
       { norma: "Lei nº 9.504/1997", dispositivo: "art. 16-C, § 11", url: "" },
       {
@@ -5467,7 +5467,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIN"],
     perfis: [],
     marcos: null,
-    turno: "2T",
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Resolução nº 23.607/2019/TSE",
@@ -5488,7 +5488,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["PRO"],
     perfis: ["candidato", "partido", "advogado"],
     marcos: "30 dias após o 2º turno",
-    turno: "2T",
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Resolução nº 23.610/2019/TSE",
@@ -5509,7 +5509,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["ADM"],
     perfis: [],
     marcos: "30 dias após o 2º turno",
-    turno: "2T",
+    turno: "POS",
     fundamentacao: [
       { norma: "Código Eleitoral", dispositivo: "art. 124", url: "" },
     ],
@@ -5526,7 +5526,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIS"],
     perfis: [],
     marcos: "30 dias após o 2º turno",
-    turno: "AMBOS",
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Resolução nº 23.673/2021/TSE",
@@ -5551,7 +5551,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["ELE"],
     perfis: ["eleitor"],
     marcos: "60 dias após o 1º turno",
-    turno: "1T",
+    turno: "POS",
     fundamentacao: [
       { norma: "Lei nº 6.091/1974", dispositivo: "art. 16", url: "" },
       {
@@ -5575,7 +5575,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["ADM", "ELE"],
     perfis: [],
     marcos: null,
-    turno: "AMBOS",
+    turno: "POS",
     fundamentacao: [],
   },
 
@@ -5590,7 +5590,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIN", "DIP"],
     perfis: ["candidato", "advogado"],
     marcos: null,
-    turno: null,
+    turno: "POS",
     fundamentacao: [
       { norma: "Lei nº 9.504/1997", dispositivo: "art. 30, § 1º", url: "" },
       {
@@ -5610,7 +5610,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["DIP"],
     perfis: ["candidato"],
     marcos: "Diplomação",
-    turno: null,
+    turno: "POS",
     destaque: true,
     fundamentacao: [],
     observacoes:
@@ -5628,7 +5628,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["ADM"],
     perfis: [],
     marcos: "Diplomação",
-    turno: null,
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Código Eleitoral",
@@ -5654,7 +5654,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["ADM"],
     perfis: [],
     marcos: "Diplomação",
-    turno: null,
+    turno: "POS",
     fundamentacao: [
       { norma: "Lei Complementar nº 64/1990", dispositivo: "art. 16", url: "" },
     ],
@@ -5671,7 +5671,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["ADM"],
     perfis: [],
     marcos: "Diplomação",
-    turno: null,
+    turno: "POS",
     fundamentacao: [
       { norma: "Lei nº 9.504/1997", dispositivo: "art. 96, § 3º", url: "" },
       {
@@ -5693,7 +5693,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["ADM"],
     perfis: ["advogado"],
     marcos: "Diplomação",
-    turno: null,
+    turno: "POS",
     fundamentacao: [
       { norma: "Lei Complementar nº 64/1990", dispositivo: "art. 16", url: "" },
       {
@@ -5720,7 +5720,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIN", "DIP"],
     perfis: ["candidato", "partido"],
     marcos: null,
-    turno: null,
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Resolução nº 23.607/2019/TSE",
@@ -5741,7 +5741,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIN", "DIP"],
     perfis: ["candidato", "partido"],
     marcos: null,
-    turno: null,
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Resolução nº 23.607/2019/TSE",
@@ -5762,7 +5762,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["DIP"],
     perfis: ["candidato"],
     marcos: null,
-    turno: null,
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Instrução Normativa Conjunta-RFB/TSE nº 2001/2020",
@@ -5783,7 +5783,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["CON"],
     perfis: [],
     marcos: null,
-    turno: null,
+    turno: "POS",
     fundamentacao: [
       { norma: "Lei nº 9.504/1997", dispositivo: "art. 73, § 10", url: "" },
       {
@@ -5805,7 +5805,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["CON"],
     perfis: [],
     marcos: null,
-    turno: null,
+    turno: "POS",
     fundamentacao: [
       { norma: "Lei nº 9.504/1997", dispositivo: "art. 73, § 11", url: "" },
       {
@@ -5831,7 +5831,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["ADM"],
     perfis: [],
     marcos: "3 meses após o 1º turno",
-    turno: "1T",
+    turno: "POS",
     fundamentacao: [
       { norma: "Lei nº 9.504/1997", dispositivo: "art. 94-A, II", url: "" },
     ],
@@ -5848,7 +5848,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIS"],
     perfis: [],
     marcos: null,
-    turno: null,
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Resolução nº 23.673/2021/TSE",
@@ -5868,7 +5868,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["ELE"],
     perfis: ["eleitor"],
     marcos: null,
-    turno: "2T",
+    turno: "POS",
     fundamentacao: [
       { norma: "Lei nº 6.091/1974", dispositivo: "art. 16", url: "" },
       {
@@ -5892,7 +5892,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIS", "ADM"],
     perfis: [],
     marcos: "100 dias após o 1º turno",
-    turno: null,
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Resolução nº 23.637/2021/TSE",
@@ -5913,7 +5913,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIS"],
     perfis: [],
     marcos: "100 dias após o 1º turno",
-    turno: null,
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Resolução nº 23.673/2021/TSE",
@@ -5934,7 +5934,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIS"],
     perfis: [],
     marcos: "100 dias após o 1º turno",
-    turno: null,
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Resolução nº 23.673/2021/TSE",
@@ -5955,7 +5955,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["ADM", "FIS"],
     perfis: [],
     marcos: null,
-    turno: null,
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Resolução nº 23.673/2021/TSE",
@@ -5977,7 +5977,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["ADM"],
     perfis: [],
     marcos: "3 meses após o 2º turno",
-    turno: "2T",
+    turno: "POS",
     fundamentacao: [
       { norma: "Lei nº 9.504/1997", dispositivo: "art. 94-A, II", url: "" },
     ],
@@ -5994,7 +5994,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIN", "ADM"],
     perfis: [],
     marcos: null,
-    turno: null,
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Resolução nº 23.607/2019/TSE",
@@ -6019,7 +6019,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["ELE", "ADM"],
     perfis: [],
     marcos: null,
-    turno: null,
+    turno: "POS",
     fundamentacao: [],
   },
 
@@ -6038,7 +6038,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIN", "DIP"],
     perfis: ["candidato", "partido", "advogado"],
     marcos: null,
-    turno: null,
+    turno: "POS",
     fundamentacao: [
       { norma: "Lei nº 9.504/1997", dispositivo: "art. 32", url: "" },
       {
@@ -6064,7 +6064,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIN"],
     perfis: [],
     marcos: null,
-    turno: null,
+    turno: "POS",
     fundamentacao: [
       {
         norma: "Lei nº 9.504/1997",
@@ -6090,7 +6090,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIN"],
     perfis: ["advogado"],
     marcos: null,
-    turno: null,
+    turno: "POS",
     fundamentacao: [
       { norma: "Lei nº 9.504/1997", dispositivo: "art. 24-C, § 3º", url: "" },
       {
@@ -6116,7 +6116,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["FIN"],
     perfis: ["advogado"],
     marcos: null,
-    turno: null,
+    turno: "POS",
     fundamentacao: [
       { norma: "Lei nº 9.504/1997", dispositivo: "art. 24-C, § 3º", url: "" },
     ],
@@ -6137,7 +6137,7 @@ export const eventos: EventoCalendario[] = [
     categorias: ["DIP"],
     perfis: [],
     marcos: "18 meses após o 1º turno",
-    turno: null,
+    turno: "POS",
     fundamentacao: [],
   },
 ];

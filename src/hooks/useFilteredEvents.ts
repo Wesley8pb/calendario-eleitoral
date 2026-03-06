@@ -6,7 +6,7 @@ import { matchesSearch } from "../lib/search";
 export interface FilterState {
   ocultarPassados: boolean;
   categorias: CategoriaID[]; // [] = todas (sem filtro)
-  turno: "1T" | "2T" | "AMBOS" | null; // null = todos
+  turno: "1T" | "2T" | "POS" | null; // null = todos
   busca: string;
   mes: string | null; // "YYYY-MM" ou null = todos
 }
@@ -43,20 +43,13 @@ export function useFilteredEvents(
 
       // 3. Filtro de turno
       if (filtros.turno) {
-        if (filtros.turno === "AMBOS") {
-          // "Todos" selecionado — não filtra
+        if (filtros.turno === "POS") {
+          if (ev.turno !== "POS") return false;
         } else {
           if (
             ev.turno !== filtros.turno &&
             ev.turno !== "AMBOS" &&
             ev.turno !== null
-          ) {
-            return false;
-          }
-          if (
-            ev.turno !== null &&
-            ev.turno !== filtros.turno &&
-            ev.turno !== "AMBOS"
           ) {
             return false;
           }

@@ -219,6 +219,7 @@ Todos os eventos vêm **exclusivamente** do `RESOLUÇÃO.md` (Resolução TSE n�
 4. **URLs de legislação:** Campo `url` em `fundamentacao[]` permanece `""` (Sprint 7C descartada).
 5. **Mobile-first:** Todo componente deve funcionar em 375px antes de ser expandido para desktop.
 6. **Paleta de cores:** Seguir rigorosamente o PRD. Proibido: degradês lilás/roxo, cores partidárias.
+7. **Segurança:** Ao encontrar uma vulnerabilidade de segurança, sinalizá-la imediatamente com um comentário de `// AVISO DE SEGURANÇA:` e sugerir uma alternativa segura. Nunca implementar padrões inseguros, mesmo que solicitado explicitamente.
 
 ---
 

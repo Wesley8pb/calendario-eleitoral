@@ -47,17 +47,8 @@ function App() {
         hasActiveFilters={hasActiveFilters}
         onLimpar={limparFiltros}
       />
-      <div className="flex-1 flex gap-4 lg:gap-6 max-w-6xl w-full mx-auto px-3 sm:px-4 py-6 sm:py-8">
-        <FilterPanel
-          filtros={filtros}
-          onChange={setFiltros}
-          onLimpar={limparFiltros}
-          totalEventos={eventos.length}
-          totalFiltrados={eventosFiltrados.length}
-          totalPassados={totalPassados}
-          mesesDisponiveis={mesesDisponiveis}
-        />
-        <main className="flex-1 min-w-0">
+      <div className="flex-1 max-w-5xl w-full mx-auto px-3 sm:px-4 py-6 sm:py-8">
+        <main>
           <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-neutral-100">
             <div className="flex items-center gap-3">
               <div className="p-2.5 bg-primary-50 rounded-xl text-primary-600">
@@ -116,6 +107,15 @@ function App() {
           )}
         </main>
       </div>
+      <FilterPanel
+        filtros={filtros}
+        onChange={setFiltros}
+        onLimpar={limparFiltros}
+        totalEventos={eventos.length}
+        totalFiltrados={eventosFiltrados.length}
+        totalPassados={totalPassados}
+        mesesDisponiveis={mesesDisponiveis}
+      />
       <Footer />
     </div>
   );

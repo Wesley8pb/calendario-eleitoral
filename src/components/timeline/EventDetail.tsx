@@ -1,5 +1,6 @@
 import { BookOpen, ExternalLink, Info } from "lucide-react";
 import type { EventoCalendario } from "../../types";
+import { CalendarExportPanel } from "../calendar/CalendarExportPanel";
 
 interface EventDetailProps {
   evento: EventoCalendario;
@@ -60,6 +61,8 @@ export function EventDetail({ evento }: EventDetailProps) {
           </p>
         </div>
       )}
+
+      <CalendarExportPanel evento={evento} />
 
       {/* Fundamentação legal */}
       {evento.fundamentacao.length > 0 && (

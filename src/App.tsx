@@ -35,6 +35,11 @@ function App() {
     filtros.turno !== null ||
     filtros.busca.trim() !== "" ||
     filtros.mes !== null;
+  const canExportFilteredEvents =
+    filtros.categorias.length > 0 ||
+    filtros.turno !== null ||
+    filtros.busca.trim() !== "" ||
+    filtros.mes !== null;
 
   return (
     <div className="min-h-screen flex flex-col bg-neutral-50 overflow-x-hidden">
@@ -45,7 +50,9 @@ function App() {
         totalEventos={eventos.length}
         totalFiltrados={eventosFiltrados.length}
         hasActiveFilters={hasActiveFilters}
+        canExportFilteredEvents={canExportFilteredEvents}
         onLimpar={limparFiltros}
+        eventosFiltrados={eventosFiltrados}
       />
       <div className="flex-1 max-w-5xl w-full mx-auto px-3 sm:px-4 py-6 sm:py-8">
         <main>

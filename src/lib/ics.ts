@@ -106,16 +106,20 @@ export function buildEventIcs(
   evento: EventoCalendario,
   reminder: CalendarReminder,
 ): string {
+  return buildEventsIcs([evento], reminder);
+}
+
+function buildVevent(
+  evento: EventoCalendario,
+  reminder: CalendarReminder,
+  dtstamp: string,
+): string[] {
   const valarm = buildValarm(reminder);
-  const lines = [
-    "BEGIN:VCALENDAR",
-    "VERSION:2.0",
-    `PRODID:${PROD_ID}`,
-    "CALSCALE:GREGORIAN",
-    "METHOD:PUBLISH",
+
+  return [
     "BEGIN:VEVENT",
     `UID:${evento.id}@calendario-eleitoral`,
-    `DTSTAMP:${formatUtcTimestamp(new Date())}`,
+    `DTSTAMP:${dtstamp}`,
     `SUMMARY:${escapeIcsText(evento.titulo)}`,
     `DTSTART;VALUE=DATE:${formatDateValue(parseDateOnly(evento.data))}`,
     `DTEND;VALUE=DATE:${getNextDayValue(evento.data)}`,
@@ -124,8 +128,40 @@ export function buildEventIcs(
     "TRANSP:OPAQUE",
     ...(valarm ? valarm.split(CRLF) : []),
     "END:VEVENT",
+  ];
+}
+
+export function buildEventsIcs(
+  eventos: EventoCalendario[],
+  reminder: CalendarReminder,
+): string {
+  const dtstamp = formatUtcTimestamp(new Date());
+  const lines = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    `PRODID:${PROD_ID}`,
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH",
+    ...eventos.flatMap((evento) => buildVevent(evento, reminder, dtstamp)),
     "END:VCALENDAR",
   ];
 
   return `${lines.map(foldIcsLine).join(CRLF)}${CRLF}`;
+}
+
+export function downloadIcsFile(content: string, fileName: string): void {
+  const blob = new Blob([content], {
+    type: "text/calendar;charset=utf-8",
+  });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = fileName;
+  link.style.display = "none";
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
 }

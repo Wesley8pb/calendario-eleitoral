@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Filter, Search, X, CalendarDays } from "lucide-react";
+import { Filter, Search, X, CalendarDays, Star } from "lucide-react";
 import type { CategoriaID } from "../../types";
 import { categorias } from "../../data/categorias";
 import type { FilterState } from "../../hooks/useFilteredEvents";
@@ -13,6 +13,7 @@ interface FilterPanelProps {
   totalEventos: number;
   totalFiltrados: number;
   totalPassados: number;
+  totalFavoritos: number;
   mesesDisponiveis: Array<{ chave: string; label: string }>;
 }
 
@@ -23,6 +24,7 @@ export function FilterPanel({
   totalEventos,
   totalFiltrados,
   totalPassados,
+  totalFavoritos,
   mesesDisponiveis,
 }: FilterPanelProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -88,14 +90,16 @@ export function FilterPanel({
     filtros.categorias.length > 0 ||
     filtros.turno !== null ||
     filtros.busca.trim() !== "" ||
-    filtros.mes !== null;
+    filtros.mes !== null ||
+    filtros.apenasFavoritos;
 
   const activeFilterCount =
     (filtros.ocultarPassados ? 1 : 0) +
     filtros.categorias.length +
     (filtros.turno !== null ? 1 : 0) +
     (filtros.busca.trim() !== "" ? 1 : 0) +
-    (filtros.mes !== null ? 1 : 0);
+    (filtros.mes !== null ? 1 : 0) +
+    (filtros.apenasFavoritos ? 1 : 0);
 
   const closePanel = () => {
     setIsOpen(false);
@@ -220,6 +224,61 @@ export function FilterPanel({
             Ocultar eventos passados
           </span>
         </label>
+      </div>
+
+      {/* Favoritos */}
+      <div>
+        {(() => {
+          const botao = (
+            <button
+              role="switch"
+              aria-checked={filtros.apenasFavoritos}
+              disabled={totalFavoritos === 0}
+              onClick={() =>
+                onChange({
+                  ...filtros,
+                  apenasFavoritos: !filtros.apenasFavoritos,
+                })
+              }
+              className={cn(
+                "inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-150",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400",
+                filtros.apenasFavoritos
+                  ? "bg-amber-400 text-white shadow-sm"
+                  : totalFavoritos === 0
+                    ? "bg-neutral-100 text-neutral-400 cursor-not-allowed"
+                    : "bg-neutral-100 text-neutral-600 hover:bg-amber-50 hover:text-amber-600",
+              )}
+            >
+              <Star
+                size={13}
+                strokeWidth={2}
+                fill={filtros.apenasFavoritos ? "currentColor" : "none"}
+              />
+              Apenas favoritos
+              {totalFavoritos > 0 && (
+                <span
+                  className={cn(
+                    "rounded-full px-1.5 py-0.5 text-xs font-bold",
+                    filtros.apenasFavoritos
+                      ? "bg-white/30 text-white"
+                      : "bg-amber-100 text-amber-700",
+                  )}
+                >
+                  {totalFavoritos}
+                </span>
+              )}
+            </button>
+          );
+
+          return totalFavoritos === 0 ? (
+            <Tooltip content="Nenhum evento favoritado. Clique na ⭐ de um evento para favoritar.">
+              {botao}
+            </Tooltip>
+          ) : (
+            botao
+          );
+        })()}
       </div>
 
       {/* Categorias */}

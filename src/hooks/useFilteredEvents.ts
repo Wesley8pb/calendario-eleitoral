@@ -9,6 +9,7 @@ export interface FilterState {
   turno: "1T" | "2T" | "POS" | null; // null = todos
   busca: string;
   mes: string | null; // "YYYY-MM" ou null = todos
+  apenasFavoritos: boolean; // não serializado na URL — estado pessoal do browser
 }
 
 export const FILTRO_PADRAO: FilterState = {
@@ -17,16 +18,18 @@ export const FILTRO_PADRAO: FilterState = {
   turno: null,
   busca: "",
   mes: null,
+  apenasFavoritos: false,
 };
 
 /**
- * Hook que recebe todos os eventos + estado dos filtros
+ * Hook que recebe todos os eventos + estado dos filtros + IDs de favoritos
  * e retorna o array filtrado.
- * Lógica combinada: passados AND categorias AND turno AND busca AND mes
+ * Lógica combinada: passados AND categorias AND turno AND busca AND mes AND favoritos
  */
 export function useFilteredEvents(
   eventos: EventoCalendario[],
   filtros: FilterState,
+  favoritosIds: Set<string> = new Set(),
 ): EventoCalendario[] {
   return useMemo(() => {
     return eventos.filter((ev) => {
@@ -78,7 +81,12 @@ export function useFilteredEvents(
         }
       }
 
+      // 6. Apenas favoritos
+      if (filtros.apenasFavoritos && !favoritosIds.has(ev.id)) {
+        return false;
+      }
+
       return true;
     });
-  }, [eventos, filtros]);
+  }, [eventos, filtros, favoritosIds]);
 }

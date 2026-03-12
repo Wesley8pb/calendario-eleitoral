@@ -11,12 +11,15 @@ import { FilterSummary } from "./components/filters/FilterSummary";
 import { eventos } from "./data/eventos";
 import { useFilteredEvents } from "./hooks/useFilteredEvents";
 import { useUrlFilters } from "./hooks/useUrlFilters";
+import { useFavoritos } from "./hooks/useFavoritos";
+import { FavoritosContext } from "./contexts/FavoritosContext";
 import { isEventoPassado, agruparPorMes } from "./lib/utils";
 
 function App() {
   const { filtros, setFiltros, limparFiltros } = useUrlFilters();
   const [allExpanded, setAllExpanded] = useState(true);
-  const eventosFiltrados = useFilteredEvents(eventos, filtros);
+  const { favoritos, toggleFavorito, isFavorito, totalFavoritos } = useFavoritos();
+  const eventosFiltrados = useFilteredEvents(eventos, filtros, favoritos);
 
   // Contagem de eventos passados
   const totalPassados = eventos.filter((ev) => isEventoPassado(ev.data)).length;
@@ -34,14 +37,17 @@ function App() {
     filtros.categorias.length > 0 ||
     filtros.turno !== null ||
     filtros.busca.trim() !== "" ||
-    filtros.mes !== null;
+    filtros.mes !== null ||
+    filtros.apenasFavoritos;
   const canExportFilteredEvents =
     filtros.categorias.length > 0 ||
     filtros.turno !== null ||
     filtros.busca.trim() !== "" ||
-    filtros.mes !== null;
+    filtros.mes !== null ||
+    filtros.apenasFavoritos;
 
   return (
+    <FavoritosContext.Provider value={{ isFavorito, toggleFavorito }}>
     <div className="min-h-screen flex flex-col bg-neutral-50 overflow-x-hidden">
       <Header />
       <ProximosEventos />
@@ -121,10 +127,12 @@ function App() {
         totalEventos={eventos.length}
         totalFiltrados={eventosFiltrados.length}
         totalPassados={totalPassados}
+        totalFavoritos={totalFavoritos}
         mesesDisponiveis={mesesDisponiveis}
       />
       <Footer />
     </div>
+    </FavoritosContext.Provider>
   );
 }
 

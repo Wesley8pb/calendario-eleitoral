@@ -46,7 +46,8 @@ function parseUrlToFilters(): FilterState {
   const mesParam = params.get("mes");
   const mes = mesParam && /^\d{4}-\d{2}$/.test(mesParam) ? mesParam : null;
 
-  return { ocultarPassados, categorias, turno, busca, mes };
+  // apenasFavoritos nunca vem da URL (estado pessoal do browser)
+  return { ocultarPassados, categorias, turno, busca, mes, apenasFavoritos: false };
 }
 
 function filtersToUrl(filtros: FilterState): string {

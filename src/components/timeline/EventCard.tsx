@@ -24,6 +24,7 @@ import {
   isEventoHoje,
 } from "../../lib/utils";
 import { EventDetail } from "./EventDetail";
+import { useFavoritosContext } from "../../contexts/FavoritosContext";
 
 // Mapeamento de nomes de ícone → componente Lucide
 const iconeMap: Record<string, LucideIcon> = {
@@ -102,6 +103,8 @@ interface EventCardProps {
 
 export function EventCard({ evento }: EventCardProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const { isFavorito, toggleFavorito } = useFavoritosContext();
+  const favorito = isFavorito(evento.id);
 
   // Fechar com Escape quando expandido (6B.1)
   useEffect(() => {
@@ -120,59 +123,88 @@ export function EventCard({ evento }: EventCardProps) {
         "group relative rounded-xl border bg-white shadow-card transition-all duration-200",
         "hover:shadow-card-hover hover:border-primary-200",
         evento.destaque &&
-        "border-secondary-500 border-l-4 bg-secondary-100/30",
+          "border-secondary-500 border-l-4 bg-secondary-100/30",
         !evento.destaque && "border-neutral-100",
+        favorito && !evento.destaque && "border-amber-300 border-l-4",
         isOpen && "ring-1 ring-primary-200 shadow-card-hover",
       )}
     >
-      {/* Clickable header */}
-      <button
-        type="button"
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-full text-left p-3 sm:p-4 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1 rounded-xl min-h-[44px]"
-        aria-expanded={isOpen}
-        aria-label={`${isOpen ? "Fechar" : "Abrir"} detalhes: ${evento.titulo}`}
-      >
-        <div className="flex items-start gap-2">
-          <div className="flex-1 min-w-0">
-            {/* Top row: categories + status */}
-            <div className="flex flex-wrap items-center gap-1.5 mb-2">
-              {evento.categorias.map((catId) => (
-                <CategoriaBadge key={catId} id={catId} />
-              ))}
-              {evento.turno && <TurnoBadge turno={evento.turno} />}
-              <StatusBadge data={evento.data} />
-              {evento.destaque && (
-                <span className="inline-flex items-center gap-0.5 rounded-full bg-secondary-500 text-white px-2 py-0.5 text-xs font-semibold">
-                  <Star size={11} fill="currentColor" />
-                  Destaque
-                </span>
+      {/* Header do card: botão de expand + botão de favorito (irmãos, não aninhados) */}
+      <div className="flex items-stretch">
+        {/* Botão de expand — ocupa a maior parte do header */}
+        <button
+          type="button"
+          onClick={() => setIsOpen(!isOpen)}
+          className="flex-1 text-left p-3 sm:p-4 pr-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1 rounded-tl-xl rounded-bl-xl min-h-[44px]"
+          aria-expanded={isOpen}
+          aria-label={`${isOpen ? "Fechar" : "Abrir"} detalhes: ${evento.titulo}`}
+        >
+          <div className="flex items-start gap-2">
+            <div className="flex-1 min-w-0">
+              {/* Top row: categories + status */}
+              <div className="flex flex-wrap items-center gap-1.5 mb-2">
+                {evento.categorias.map((catId) => (
+                  <CategoriaBadge key={catId} id={catId} />
+                ))}
+                {evento.turno && <TurnoBadge turno={evento.turno} />}
+                <StatusBadge data={evento.data} />
+                {evento.destaque && (
+                  <span className="inline-flex items-center gap-0.5 rounded-full bg-secondary-500 text-white px-2 py-0.5 text-xs font-semibold">
+                    <Star size={11} fill="currentColor" />
+                    Destaque
+                  </span>
+                )}
+              </div>
+
+              {/* Title */}
+              <h3 className="text-sm sm:text-base font-semibold leading-snug text-neutral-950 break-words">
+                {evento.titulo}
+              </h3>
+
+              {/* Marco temporal */}
+              {evento.marcos && (
+                <p className="mt-1 text-xs text-primary-500 font-medium">
+                  {evento.marcos}
+                </p>
               )}
             </div>
 
-            {/* Title */}
-            <h3 className="text-sm sm:text-base font-semibold leading-snug text-neutral-950 break-words">
-              {evento.titulo}
-            </h3>
-
-            {/* Marco temporal */}
-            {evento.marcos && (
-              <p className="mt-1 text-xs text-primary-500 font-medium">
-                {evento.marcos}
-              </p>
-            )}
+            {/* Chevron */}
+            <ChevronDown
+              size={18}
+              className={cn(
+                "flex-shrink-0 mt-1 text-neutral-400 transition-transform duration-300",
+                isOpen && "rotate-180 text-primary-500",
+              )}
+            />
           </div>
+        </button>
 
-          {/* Chevron */}
-          <ChevronDown
-            size={18}
-            className={cn(
-              "flex-shrink-0 mt-1 text-neutral-400 transition-transform duration-300",
-              isOpen && "rotate-180 text-primary-500",
-            )}
+        {/* Botão de favoritar — coluna dedicada à direita, sempre visível */}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleFavorito(evento.id);
+          }}
+          className={cn(
+            "flex items-center justify-center px-3 border-l transition-all duration-150",
+            "min-w-[48px] rounded-tr-xl rounded-br-xl",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-inset",
+            favorito
+              ? "border-amber-200 text-amber-400 hover:text-amber-500 hover:bg-amber-50"
+              : "border-neutral-100 text-neutral-300 hover:text-amber-300 hover:bg-amber-50/50",
+          )}
+          aria-label={favorito ? "Desfavoritar evento" : "Favoritar evento"}
+          aria-pressed={favorito}
+        >
+          <Star
+            size={20}
+            strokeWidth={1.8}
+            fill={favorito ? "currentColor" : "none"}
           />
-        </div>
-      </button>
+        </button>
+      </div>
 
       {/* Expandable content */}
       <div

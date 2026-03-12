@@ -17,6 +17,7 @@ Site single-page de caráter informativo que apresenta todos os ~296 eventos do 
 - 👤 **Painel "Próximos Eventos"** com tabs de perfil (Eleitor, Candidato, Partido, Advogado, Atos Preparatórios)
 - 📅 **Navegação por meses** com Intersection Observer
 - ⏱️ **Contagem regressiva** até os turnos eleitorais
+- 🗓️ **Exportação para calendário (.ics)**: individual por evento e em lote para eventos filtrados, com lembrete opcional
 - 🔗 **URL compartilhável** com filtros sincronizados como query params
 - ♿ **Acessibilidade WCAG AA**: navegação por teclado, ARIA, contraste, reduced-motion
 
@@ -71,11 +72,13 @@ npm run build
 ```
 src/
 ├── components/
+│   ├── calendar/       # Exportação individual (.ics)
 │   ├── countdown/       # Contagem regressiva
-│   ├── filters/         # FilterPanel, FilterSummary
+│   ├── filters/         # FilterPanel, FilterSummary, exportação em lote
 │   ├── layout/          # Header, Footer
 │   ├── proximos-eventos/ # ProximosEventos, EventoProximoCard
-│   └── timeline/        # Timeline, MonthSection, MonthNav, EventCard, EventDetail, DateMarker
+│   ├── timeline/        # Timeline, MonthSection, MonthNav, EventCard, EventDetail, DateMarker
+│   └── ui/              # Tooltip e InfoTooltip
 ├── data/
 │   ├── eventos.ts       # ⭐ Array completo dos ~296 eventos
 │   ├── categorias.ts    # 11 categorias com cor e ícone
@@ -87,11 +90,25 @@ src/
 │   ├── useProximosEventos.ts
 │   └── useUrlFilters.ts
 ├── lib/
+│   ├── ics.ts           # Geração de arquivos .ics e download client-side
 │   ├── utils.ts         # Funções utilitárias de data e CSS
 │   └── search.ts        # Busca textual normalizada
 └── types/
+    ├── calendar.ts      # Tipos e opções de lembrete da exportação
     └── index.ts         # Interfaces TypeScript
 ```
+
+---
+
+## 🗓️ Exportação para Calendário
+
+O sistema permite exportar eventos em formato `.ics`, compatível com apps como Google Calendar, Apple Calendar, Outlook e Samsung Calendar.
+
+- **Exportação individual:** disponível dentro do card expandido de cada evento.
+- **Exportação em lote:** disponível no resumo de filtros, gerando um único `.ics` com todos os eventos filtrados.
+- **Lembretes suportados:** sem lembrete, 1 dia antes, 3 dias antes e 7 dias antes.
+- **Regra da exportação em lote:** quando o único filtro ativo for **Ocultar eventos passados**, a ação de exportar filtrados não é exibida.
+- **Ajuda contextual:** os fluxos individual e em lote exibem tooltip explicando como abrir/importar o arquivo após o download.
 
 ---
 

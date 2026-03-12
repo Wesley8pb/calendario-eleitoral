@@ -13,6 +13,8 @@ import {
   BarChart3,
   Award,
   Star,
+  Flag,
+  Bus,
   type LucideIcon,
 } from "lucide-react";
 import type { EventoCalendario, CategoriaID } from "../../types";
@@ -40,6 +42,8 @@ const iconeMap: Record<string, LucideIcon> = {
   BarChart3,
   Award,
   Calendar,
+  Flag,
+  Bus,
 };
 
 function CategoriaBadge({ id }: { id: CategoriaID }) {

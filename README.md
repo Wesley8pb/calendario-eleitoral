@@ -84,7 +84,7 @@ src/
 │   └── FavoritosContext.tsx  # Context de favoritos, consumido via useFavoritosContext()
 ├── data/
 │   ├── eventos.ts        # Array completo dos ~296 eventos
-│   ├── categorias.ts     # 11 categorias com cor e ícone
+│   ├── categorias.ts     # 13 categorias com cor e ícone
 │   └── constants.ts      # Datas fixas (1T, 2T, diplomação) e metadados da Resolução
 ├── hooks/
 │   ├── useCountdown.ts

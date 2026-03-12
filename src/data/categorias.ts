@@ -88,6 +88,22 @@ export const categorias: Categoria[] = [
     descricao:
       "Convenções, estatutos, normas internas, indicação de fiscais, distribuição de recursos — atos de responsabilidade exclusiva dos partidos políticos",
   },
+  {
+    id: "GAR",
+    nome: "Garantias Eleitorais",
+    cor: "#7B2040",
+    icone: "ShieldCheck",
+    descricao:
+      "Imunidade prisional de eleitores e candidatos, salvo-conduto eleitoral, restrição de força armada nos locais de votação, proibição de porte de armas por CAC",
+  },
+  {
+    id: "TRA",
+    nome: "Transporte Eleitoral",
+    cor: "#B54708",
+    icone: "Bus",
+    descricao:
+      "Organização do transporte gratuito de eleitores, Comissão Especial de Transporte, transporte especial para pessoas com deficiência, comunidades tradicionais e zonas rurais",
+  },
 ];
 
 export const categoriaMap = Object.fromEntries(

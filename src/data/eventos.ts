@@ -651,7 +651,7 @@ export const eventos: EventoCalendario[] = [
       "Data-limite para a Justiça Eleitoral disponibilizar aos partidos a relação de devedores de multa eleitoral",
     descricao:
       "Data-limite para a Justiça Eleitoral disponibilizar aos partidos políticos a relação de todas as devedoras e de todos os devedores de multa eleitoral, a qual embasará a expedição das certidões de quitação (Lei nº 9.504/1997, art. 11, § 9º).",
-    categorias: ["ADM"],
+    categorias: ["ELE", "ADM"],
     perfis: ["partido"],
     marcos: null,
     turno: null,
@@ -705,7 +705,7 @@ export const eventos: EventoCalendario[] = [
       "Início da vedação a emissoras de rádio e TV para transmitir programa apresentado por pré-candidato",
     descricao:
       "Data a partir da qual é vedado às emissoras de rádio e de televisão transmitirem programa apresentado ou comentado por pré-candidata ou pré-candidato (Lei nº 9.504/1997, art. 45, § 1º; e Resolução nº 23.610/2019/TSE, art. 43, § 2º).",
-    categorias: ["CON"],
+    categorias: ["CON", "PRO"],
     perfis: ["candidato", "partido"],
     marcos: null,
     turno: null,
@@ -1251,7 +1251,7 @@ export const eventos: EventoCalendario[] = [
       "Início do direito de resposta para candidatos, partidos e coligações",
     descricao:
       "Data a partir da qual é assegurado o exercício do direito de resposta à candidata, ao candidato, ao partido político, à federação ou à coligação atingidos, ainda que de forma indireta, por conceito, imagem ou afirmação caluniosa, difamatória, injuriosa ou notoriamente inverídica difundida por qualquer veículo de comunicação social, inclusive por provedores de aplicativos de internet e redes sociais (Lei nº 9.504/1997, arts. 6º-A e 58, caput; Lei nº 9.096/1995, art. 11-A, caput e § 8º; Resolução nº 23.608/2019/TSE, art. 31; e Resolução nº 23.610/2019/TSE, art. 30).",
-    categorias: ["ADM"],
+    categorias: ["PRO"],
     perfis: ["candidato", "partido", "advogado"],
     marcos: null,
     turno: null,
@@ -1331,7 +1331,7 @@ export const eventos: EventoCalendario[] = [
       "Último dia para emissoras de rádio/TV e provedores de internet indicarem representante legal à Justiça Eleitoral",
     descricao:
       "Data até a qual as emissoras de rádio e de televisão e os demais veículos de comunicação, inclusive provedores de aplicações de internet, deverão, independentemente de intimação, apresentar ao Tribunal Eleitoral, em meio físico ou eletrônico, a indicação de sua representante ou de seu representante legal, seus endereços para correspondência e de correio eletrônico e o número de telefone móvel que disponha de aplicativo de mensagens instantâneas, pelos quais receberão ofícios, intimações ou citações, podendo indicar procuradora ou procurador com ou sem poderes para receber citação, hipótese em que deverão juntar a respectiva procuração (Resolução nº 23.608/2019/TSE, art. 10; e Resolução nº 23.610/2019/TSE, art. 79).",
-    categorias: ["ADM"],
+    categorias: ["PRO", "ADM"],
     perfis: [],
     marcos: null,
     turno: null,
@@ -1822,7 +1822,7 @@ export const eventos: EventoCalendario[] = [
       "Vedações às emissoras de rádio e TV sobre propaganda política e tratamento privilegiado a candidatos",
     descricao:
       "Data a partir da qual é vedado às emissoras de rádio e de televisão, em sua programação normal e em seu noticiário (Lei nº 9.504/1997, art. 45, I, IV, V e VI; e Resolução nº 23.610/2019/TSE, art. 43): I - transmitir, ainda que sob a forma de entrevista jornalística, imagens de realização de pesquisa ou de qualquer outro tipo de consulta popular de natureza eleitoral em que seja possível identificar a(o) entrevistada(o) ou em que haja manipulação de dados; II - veicular propaganda política; III - dar tratamento privilegiado a candidata, candidato, partido político, federação ou coligação, inclusive sob a forma de retransmissão de live eleitoral; IV - veicular ou divulgar filmes, novelas, minisséries ou qualquer outro programa com alusão ou crítica voltada especificamente a candidata, candidato, partido político, federação ou coligação, mesmo que dissimuladamente, exceto programas jornalísticos ou debates políticos; e V - divulgar nome de programa que se refira a candidata ou candidato escolhido em convenção, ainda se preexistente, inclusive se coincidente com seu nome ou nome escolhido para constar da urna eletrônica.",
-    categorias: ["PRO"],
+    categorias: ["PRO", "CON"],
     perfis: ["advogado"],
     marcos: null,
     turno: null,
@@ -2129,7 +2129,7 @@ export const eventos: EventoCalendario[] = [
       "Início da obrigação de manter registro de tratamento de dados pessoais nas campanhas (até 18/12/2026)",
     descricao:
       "Data a partir da qual, até o dia 18 (dezoito) de dezembro de 2026, os partidos políticos, as federações, as coligações, as candidatas e os candidatos devem manter o registro das operações de tratamento de dados pessoais, permanecendo a obrigação em caso de ajuizamento de ação na qual se apure irregularidade ou ilicitude no tratamento de dados pelas campanhas (Resolução nº 23.610/2019/TSE, art. 33-C, caput e § 2º).",
-    categorias: ["ADM"],
+    categorias: ["PRO"],
     perfis: ["candidato", "partido"],
     marcos: null,
     turno: null,
@@ -2150,7 +2150,7 @@ export const eventos: EventoCalendario[] = [
       "Data-limite para órgãos públicos informarem à Justiça Eleitoral veículos disponíveis para transporte de eleitores",
     descricao:
       "Data-limite para as pessoas responsáveis por repartições, órgãos e unidades do serviço público federal, estadual e municipal oficiarem ao juízo eleitoral correspondente, informando o número, a espécie e a lotação dos veículos e embarcações de que dispõem para o transporte gratuito de eleitoras e de eleitores residentes em zonas rurais, aldeias indígenas, comunidades remanescentes dos quilombos e demais comunidades tradicionais para o primeiro e eventual segundo turno de votação (Lei nº 6.091/1974, art. 3º).",
-    categorias: ["ADM", "ELE"],
+    categorias: ["ADM", "ELE", "TRA"],
     perfis: [],
     marcos: null,
     turno: null,
@@ -2167,7 +2167,7 @@ export const eventos: EventoCalendario[] = [
       "Data-limite para o poder público informar à Justiça Eleitoral itinerários de transporte gratuito no dia da votação",
     descricao:
       "Data-limite para que o poder público informe ao juízo eleitoral itinerários, horários e modalidades de transporte que irá ofertar gratuitamente nos dias de votação.",
-    categorias: ["ADM", "ELE"],
+    categorias: ["ADM", "ELE", "TRA"],
     perfis: [],
     marcos: null,
     turno: null,
@@ -2375,7 +2375,7 @@ export const eventos: EventoCalendario[] = [
       "Instalação de telefones nas sedes dos diretórios partidários pelos serviços telefônicos",
     descricao:
       "Data a partir da qual, independentemente do critério para definição de prioridade, os serviços telefônicos, oficiais ou concedidos, farão instalar, nas sedes dos diretórios devidamente registrados, telefones necessários, mediante requerimento da(o) respectiva(o) Presidente e pagamento das taxas devidas (Código Eleitoral, art. 256, § 1º; e Resolução nº 23.610/2019/TSE, art. 118, parágrafo único).",
-    categorias: ["ADM"],
+    categorias: ["PAR"],
     perfis: ["partido"],
     marcos: null,
     turno: null,
@@ -2532,7 +2532,7 @@ export const eventos: EventoCalendario[] = [
       "Último dia para partidos indicarem membros para a Comissão Especial de Transporte",
     descricao:
       "Último dia para os partidos políticos e as federações indicarem aos juízos eleitorais até 3 (três) pessoas por agremiação para compor a Comissão Especial de Transporte para o primeiro e eventual segundo turno de votação (Lei nº 6.091/1974, arts. 14, § 1º, e 15; e Resolução nº 9.641/1974/TSE, art. 13, §§ 1º e 3º).",
-    categorias: ["PAR"],
+    categorias: ["PAR", "ADM", "TRA"],
     perfis: ["partido"],
     marcos: null,
     turno: null,
@@ -2558,7 +2558,7 @@ export const eventos: EventoCalendario[] = [
       "Último dia para partidos indicarem pessoas autorizadas a entregar mapas e mídias nas emissoras",
     descricao:
       "Último dia para os partidos, as federações e as coligações indicarem ao grupo de emissoras ou à emissora responsável pela geração do sinal para veiculação da propaganda eleitoral gratuita, as pessoas autorizadas a entregar os mapas e as mídias, comunicando eventual substituição com, no mínimo, 24 (vinte e quatro) horas de antecedência, dispensado o credenciamento para as(os) Presidentes das legendas e as(os) Vice-Presidentes e delegadas e delegados credenciados, mediante certidão obtida no sítio eletrônico do Tribunal Superior Eleitoral (Resolução nº 23.610/2019/TSE, art. 65, §§ 1º e 3º).",
-    categorias: ["PAR"],
+    categorias: ["PAR", "PRO"],
     perfis: ["partido"],
     marcos: null,
     turno: null,
@@ -2834,7 +2834,7 @@ export const eventos: EventoCalendario[] = [
       "Data-limite para instalação da Comissão Especial de Transporte pelo juízo eleitoral",
     descricao:
       "Último dia para o juízo eleitoral instalar Comissão Especial de Transporte (Lei nº 6.091/1974, art. 14; e Resolução nº 9.641/1974/TSE, art. 13).",
-    categorias: ["ADM"],
+    categorias: ["ADM", "TRA"],
     perfis: [],
     marcos: "30 dias antes do 1º turno",
     turno: null,
@@ -2852,7 +2852,7 @@ export const eventos: EventoCalendario[] = [
       "Data-limite para planejamento do transporte de eleitores e requisição de veículos (1T e 2T)",
     descricao:
       "Último dia para o planejamento, pela Juíza ou pelo Juiz Eleitoral, da execução do serviço de transporte de eleitoras e eleitores e para a requisição dos veículos e embarcações necessários aos órgãos ou unidades do serviço público, relativamente ao primeiro e eventual segundo turnos de votação (Lei nº 6.091/1974, art. 3º, § 2º).",
-    categorias: ["ADM"],
+    categorias: ["ADM", "TRA"],
     perfis: [],
     marcos: "30 dias antes do 1º turno",
     turno: "AMBOS",
@@ -3044,7 +3044,7 @@ export const eventos: EventoCalendario[] = [
       "Data-limite para eleitores com deficiência ou de comunidades tradicionais requererem transporte especial (1T)",
     descricao:
       "Último dia para a eleitora ou o eleitor com deficiência ou com mobilidade reduzida, bem como a população de territórios indígenas, de comunidades remanescentes de quilombos e demais comunidades tradicionais, requerer, por conta própria ou por curadora ou curador, apoiadora ou apoiador, ou procuradora ou procurador, o fornecimento de transporte especial previsto na Resolução que disciplina o Programa Seu Voto Importa.",
-    categorias: ["ELE", "ADM"],
+    categorias: ["ELE", "ADM", "TRA"],
     perfis: ["eleitor"],
     marcos: "20 dias antes do 1º turno",
     turno: "1T",
@@ -3151,7 +3151,7 @@ export const eventos: EventoCalendario[] = [
       "Início do período de imunidade prisional de candidatos (até 06/10/2026)",
     descricao:
       "Data a partir da qual, até 6 (seis) de outubro de 2026, nenhuma candidata ou candidato poderá ser detido ou preso, salvo em flagrante delito (Código Eleitoral, art. 236, § 1º).",
-    categorias: ["REG"],
+    categorias: ["GAR"],
     perfis: ["candidato", "advogado"],
     marcos: "15 dias antes do 1º turno",
     turno: "1T",
@@ -3168,7 +3168,7 @@ export const eventos: EventoCalendario[] = [
       "Data-limite para Juíza/Juiz Eleitoral requisitar servidores e instalações para transporte de eleitores",
     descricao:
       "Data-limite para a Juíza ou o Juiz Eleitoral requisitar servidoras, servidores e as instalações de órgãos da Administração Pública direta ou indireta da União, dos Estados e dos Municípios para possibilitar a execução dos serviços de transporte para o primeiro e eventual segundo turno de votação (Lei nº 6.091/1974, art. 1º, § 2º).",
-    categorias: ["ADM"],
+    categorias: ["ADM", "TRA"],
     perfis: [],
     marcos: "15 dias antes do 1º turno",
     turno: "AMBOS",
@@ -3185,7 +3185,7 @@ export const eventos: EventoCalendario[] = [
       "Divulgação do quadro geral de percursos e horários do transporte de eleitores (1T e 2T)",
     descricao:
       "Data em que deverá ser divulgado o quadro geral de percursos e horários programados para o transporte de eleitoras e de eleitores para o primeiro e eventual segundo turno de votação, contando-se da divulgação o prazo de 3 (três) dias para que os partidos políticos, as federações, as candidatas, os candidatos, as eleitoras e os eleitores apresentem reclamação (Lei nº 6.091/1974, art. 4º).",
-    categorias: ["ADM", "ELE"],
+    categorias: ["ADM", "ELE", "TRA"],
     perfis: ["eleitor"],
     marcos: "15 dias antes do 1º turno",
     turno: "AMBOS",
@@ -3258,7 +3258,7 @@ export const eventos: EventoCalendario[] = [
       "Início do período de imunidade prisional de eleitores (até 06/10/2026)",
     descricao:
       "Data a partir da qual, até 6 (seis) de outubro de 2026, nenhuma eleitora ou eleitor poderá ser preso ou detido, salvo em flagrante delito, ou em virtude de sentença criminal condenatória por crime inafiançável, ou por desrespeito a salvo-conduto (Código Eleitoral, art. 236, caput).",
-    categorias: ["ELE"],
+    categorias: ["GAR"],
     perfis: ["eleitor"],
     marcos: "5 dias antes do 1º turno",
     turno: "1T",
@@ -3431,7 +3431,7 @@ export const eventos: EventoCalendario[] = [
       "Início do período de expedição de salvo-conduto eleitoral (até 06/10/2026)",
     descricao:
       "Data a partir da qual, até 6 (seis) de outubro de 2026, o juízo eleitoral ou a(o) Presidente da Mesa Receptora poderá expedir salvo-conduto em favor de eleitora ou de eleitor que sofrer violência moral ou física na sua liberdade de votar ou pelo fato de haver votado (Código Eleitoral, art. 235).",
-    categorias: ["ELE"],
+    categorias: ["GAR"],
     perfis: ["eleitor"],
     marcos: "3 dias antes do 1º turno",
     turno: "1T",
@@ -3507,7 +3507,7 @@ export const eventos: EventoCalendario[] = [
       "Último dia para a Justiça Eleitoral confirmar disponibilidade do transporte especial (1T)",
     descricao:
       "Último dia para a Justiça Eleitoral confirmar a disponibilidade do serviço e dos dados do transporte especial a ser fornecido à eleitora e ao eleitor com deficiência ou com mobilidade reduzida que não disponham de meios próprios que viabilizem o comparecimento aos locais de votação no primeiro turno das eleições.",
-    categorias: ["ELE", "ADM"],
+    categorias: ["ELE", "ADM", "TRA"],
     perfis: ["eleitor"],
     marcos: "2 dias antes do 1º turno",
     turno: "1T",
@@ -3597,7 +3597,7 @@ export const eventos: EventoCalendario[] = [
       "Início da restrição de aproximação de força armada dos locais de votação (até 05/10/2026)",
     descricao:
       "Data a partir da qual, até 5 de outubro de 2026, a força armada não poderá se aproximar do lugar da votação ou nele adentrar sem ordem judicial ou da(o) Presidente da Mesa Receptora, exceto nos estabelecimentos penais e nas unidades de internação de adolescentes, respeitado o sigilo do voto, devendo se conservar a 100m (cem metros) da seção eleitoral (Código Eleitoral, art. 141).",
-    categorias: ["ADM"],
+    categorias: ["GAR"],
     perfis: ["eleitor"],
     marcos: "2 dias antes do 1º turno",
     turno: "1T",
@@ -3768,7 +3768,7 @@ export const eventos: EventoCalendario[] = [
       "Início da proibição de transporte de armas por CAC (até 05/10/2026)",
     descricao:
       "Data a partir da qual colecionadoras, colecionadores, atiradoras, atiradores, caçadoras e caçadores ficam proibidos, em todo o território nacional, até 5 de outubro de 2026, de transportar armas e munições.",
-    categorias: ["ADM"],
+    categorias: ["CON"],
     perfis: [],
     marcos: "1 dia antes do 1º turno",
     turno: "1T",
@@ -3927,7 +3927,7 @@ export const eventos: EventoCalendario[] = [
       "Início da disponibilidade dos dados dos resultados do 1T em centro de dados do TSE (até 04/04/2028)",
     descricao:
       "Data a partir da qual, até 4 de abril de 2028, os dados dos resultados relativos ao primeiro turno das eleições estarão disponíveis em centro de dados provido pelo Tribunal Superior Eleitoral.",
-    categorias: ["VOT", "DIP"],
+    categorias: ["FIS"],
     perfis: [],
     marcos: "1º turno",
     turno: "1T",
@@ -4048,7 +4048,7 @@ export const eventos: EventoCalendario[] = [
       "Último dia para eleitores com deficiência requererem transporte especial para o 2º turno",
     descricao:
       "Último dia para a eleitora ou o eleitor com deficiência ou com mobilidade reduzida requerer, para o segundo turno, por conta própria ou por curadora ou curador, apoiadora ou apoiador, ou procuradora ou procurador, o fornecimento de transporte especial previsto na Resolução que disciplina o Programa Seu Voto Importa.",
-    categorias: ["ELE", "ADM"],
+    categorias: ["ELE", "ADM", "TRA"],
     perfis: ["eleitor"],
     marcos: "20 dias antes do 2º turno",
     turno: "2T",
@@ -4084,7 +4084,7 @@ export const eventos: EventoCalendario[] = [
       "Fim do prazo de salvo-conduto eleitoral e da imunidade prisional de eleitores e candidatos (1T)",
     descricao:
       "Último dia da validade de salvo-conduto expedido por Juíza ou Juiz eleitoral ou pela(o) Presidente da Mesa Receptora em favor de eleitora ou de eleitor que sofrer violência moral ou física na sua liberdade de votar ou pelo fato de haver votado (Código Eleitoral, art. 235). Também é o término do período em que nenhuma eleitora ou eleitor, ou candidata/candidato, poderá ser preso ou detido (Código Eleitoral, art. 236, caput e § 1º).",
-    categorias: ["ELE", "REG"],
+    categorias: ["GAR"],
     perfis: ["eleitor", "candidato", "advogado"],
     marcos: "2 dias após o 1º turno",
     turno: "1T",
@@ -4181,7 +4181,7 @@ export const eventos: EventoCalendario[] = [
       "Início da imunidade prisional de candidatos do 2T (até 27/10/2026)",
     descricao:
       "Data a partir da qual, até 27 de outubro de 2026, nenhuma candidata ou candidato que participará do segundo turno poderá ser detido ou preso, salvo em flagrante delito (Código Eleitoral, art. 236, § 1º).",
-    categorias: ["REG"],
+    categorias: ["GAR"],
     perfis: ["candidato", "advogado"],
     marcos: "15 dias antes do 2º turno",
     turno: "2T",
@@ -4297,7 +4297,7 @@ export const eventos: EventoCalendario[] = [
       "Início da imunidade prisional de eleitores para o 2T (até 27/10/2026)",
     descricao:
       "Data a partir da qual, até 27 de outubro de 2026, nenhuma eleitora ou eleitor poderá ser preso ou detido, salvo em flagrante delito, ou em virtude de sentença criminal condenatória por crime inafiançável, ou por desrespeito a salvo-conduto (Código Eleitoral, art. 236, caput).",
-    categorias: ["ELE"],
+    categorias: ["GAR"],
     perfis: ["eleitor"],
     marcos: "5 dias antes do 2º turno",
     turno: "2T",
@@ -4486,7 +4486,7 @@ export const eventos: EventoCalendario[] = [
       "Início do período de expedição de salvo-conduto eleitoral (2T, até 27/10/2026)",
     descricao:
       "Data a partir da qual, até 27 de outubro de 2026, o juízo eleitoral ou a(o) Presidente da Mesa Receptora poderá expedir salvo-conduto em favor de eleitora ou de eleitor que sofrer violência moral ou física na sua liberdade de votar ou pelo fato de haver votado (Código Eleitoral, art. 235).",
-    categorias: ["ELE"],
+    categorias: ["GAR"],
     perfis: ["eleitor"],
     marcos: "3 dias antes do 2º turno",
     turno: "2T",
@@ -4520,7 +4520,7 @@ export const eventos: EventoCalendario[] = [
       "Último dia para Justiça Eleitoral confirmar transporte especial (2T)",
     descricao:
       "Último dia para a Justiça Eleitoral confirmar a disponibilidade do serviço e dos dados do transporte especial a ser fornecido à eleitora e ao eleitor com deficiência ou com mobilidade reduzida que não disponham de meios próprios que viabilizem o comparecimento aos locais de votação no dia da eleição em segundo turno.",
-    categorias: ["ELE", "ADM"],
+    categorias: ["ELE", "ADM", "TRA"],
     perfis: ["eleitor"],
     marcos: "2 dias antes do 2º turno",
     turno: "2T",
@@ -4654,7 +4654,7 @@ export const eventos: EventoCalendario[] = [
       "Início da restrição de aproximação de força armada dos locais de votação (2T, até 26/10)",
     descricao:
       "Data a partir da qual, até 26 de outubro de 2026, a força armada não poderá aproximar-se do lugar da votação ou nele adentrar sem ordem judicial ou da(o) Presidente da Mesa Receptora, exceto nos estabelecimentos penais e nas unidades de internação de adolescentes, respeitado o sigilo do voto, devendo se conservar a 100 m (cem metros) da seção eleitoral.",
-    categorias: ["ADM"],
+    categorias: ["GAR"],
     perfis: ["eleitor"],
     marcos: "2 dias antes do 2º turno",
     turno: "2T",
@@ -4756,7 +4756,7 @@ export const eventos: EventoCalendario[] = [
       "Início da proibição de transporte de armas por CAC (2T, até 26/10/2026)",
     descricao:
       "Data a partir da qual colecionadoras, colecionadores, atiradoras, atiradores, caçadoras e caçadores ficam proibidos, em todo o território nacional, até 26 de outubro de 2026, de transportar armas e munições.",
-    categorias: ["ADM"],
+    categorias: ["CON"],
     perfis: [],
     marcos: "1 dia antes do 2º turno",
     turno: "2T",
@@ -5042,7 +5042,7 @@ export const eventos: EventoCalendario[] = [
     titulo: "Término da imunidade prisional de eleitores e candidatos (2T)",
     descricao:
       "Último dia da validade de salvo-conduto expedido por Juíza ou Juiz eleitoral ou pela(o) Presidente da Mesa Receptora em favor de eleitora ou de eleitor que sofrer violência moral ou física na sua liberdade de votar ou pelo fato de haver votado (Código Eleitoral, art. 235, parágrafo único). Também é o término do período em que nenhuma eleitora ou eleitor, ou candidata/candidato, poderá ser preso ou detido (Código Eleitoral, art. 236, caput e § 1º).",
-    categorias: ["ELE", "REG"],
+    categorias: ["GAR"],
     perfis: ["eleitor", "candidato", "advogado"],
     marcos: "2 dias após o 2º turno",
     turno: "POS",

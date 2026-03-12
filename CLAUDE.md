@@ -3,7 +3,9 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 > [!IMPORTANT]
-> O projeto está em fase de manutenção e novas melhorias. **Não é mais necessário atualizar os arquivos `Documentations/ROADMAP.md` e `Documentations/PRD.md`**, a menos que haja uma mudança estrutural solicitada explicitamente. Registrar mudanças diretamente no `Documentations/CHANGELOG.md`.
+> O projeto está em fase de manutenção e novas melhorias. **Não é mais necessário atualizar os arquivos `Documentations/ROADMAP.md` e `Documentations/PRD.md`**, a menos que haja uma mudança estrutural solicitada explicitamente.
+>
+> **Registre TODA alteração no `Documentations/CHANGELOG.md`** ao final de cada sessão de trabalho, incluindo: correções de bugs, ajustes de UI, novas features, mudanças de categorização de eventos, atualizações de documentação e refatorações. Use o formato já estabelecido no arquivo (data, título da mudança, lista de arquivos modificados).
 
 ## Visão Geral
 
@@ -65,7 +67,7 @@ src/
 │       └── InfoTooltip.tsx          # Ícone de info com tooltip explicativo (usado nos exports)
 ├── data/
 │   ├── eventos.ts                   # Array de 296 EventoCalendario[] (Out/2025–Abr/2028)
-│   ├── categorias.ts                # 11 categorias com ID, cor hex, ícone Lucide
+│   ├── categorias.ts                # 13 categorias com ID, cor hex, ícone Lucide
 │   └── constants.ts                 # PRIMEIRO_TURNO, SEGUNDO_TURNO, DIPLOMACAO, metadados TSE
 ├── contexts/
 │   └── FavoritosContext.tsx         # Context + useFavoritosContext() — consome useFavoritos, provido no App.tsx
@@ -110,7 +112,8 @@ type Perfil = "eleitor" | "candidato" | "partido" | "advogado" | "atos-preparato
 
 type CategoriaID =
   | "ELE" | "REG" | "PRO" | "FIN" | "ADM" | "FIS"
-  | "CON" | "VOT" | "PES" | "DIP" | "PAR";
+  | "CON" | "VOT" | "PES" | "DIP" | "PAR"
+  | "GAR" | "TRA";
 
 // FilterState (src/hooks/useFilteredEvents.ts)
 interface FilterState {
@@ -137,6 +140,28 @@ interface EventoCalendario {
   destaque?: boolean;
 }
 ```
+
+### Categorias (`src/data/categorias.ts`)
+
+| ID | Nome | Cor | Ícone | Escopo |
+|----|------|-----|-------|--------|
+| ELE | Eleitor | #003E7E | User | Alistamento, biometria, justificativa, título, voto em trânsito |
+| REG | Registro de Candidatura | #1B6B4A | FileCheck | Convenções, pedidos de registro, substituição, julgamento |
+| PRO | Propaganda Eleitoral | #C75C00 | Megaphone | Rádio/TV, internet, comícios, alto-falantes, debates, impulsionamento |
+| FIN | Financiamento e Contas | #8B6914 | Landmark | FEFC, fundo partidário, arrecadação, prestação de contas, doações |
+| ADM | Administração Eleitoral | #3D5A80 | Building2 | Urnas, mesários, juntas, logística, cessão de servidores |
+| FIS | Fiscalização e Auditoria | #2E4057 | ShieldCheck | TPS, lacração, teste de integridade, Comissão de Auditoria |
+| CON | Condutas Vedadas | #B91C1C | Ban | Proibições à Adm. Pública, publicidade institucional, distribuição de bens |
+| VOT | Votação e Apuração | #1E3A5F | Vote | Dia da eleição, procedimentos, totalização, boletins |
+| PES | Pesquisas Eleitorais | #0E7490 | BarChart3 | Registro de pesquisas, divulgação, enquetes |
+| DIP | Pós-Eleição e Diplomação | #14532D | Award | Diplomação, encerramento de contas bancárias, cancelamento de CNPJ |
+| PAR | Atos Partidários | #5B21B6 | Flag | Convenções, estatutos, normas internas, indicação de fiscais, distribuição de recursos |
+| GAR | Garantias Eleitorais | #7B2040 | ShieldCheck | Imunidade prisional de eleitores e candidatos, salvo-conduto, restrição de força armada, proibição de armas CAC |
+| TRA | Transporte Eleitoral | #B54708 | Bus | Transporte gratuito de eleitores, Comissão Especial de Transporte, transporte especial para pessoas com deficiência |
+
+> Ao adicionar nova categoria: atualizar `CategoriaID` em `src/types/index.ts`, `categorias.ts`, e o `iconeMap` em `EventCard.tsx`.
+
+---
 
 ### Exportação para Calendário (.ics)
 

@@ -17,7 +17,9 @@ export type CategoriaID =
   | "VOT"
   | "PES"
   | "DIP"
-  | "PAR";
+  | "PAR"
+  | "GAR"
+  | "TRA";
 
 export interface Fundamentacao {
   norma: string; // Ex: "Lei nº 9.504/1997"

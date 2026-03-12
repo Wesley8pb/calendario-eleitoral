@@ -57,7 +57,7 @@ src/
 │   │   ├── EventDetail.tsx          # Detalhe expandido: descrição, obs., perfis, fundamentação, export
 │   │   └── MonthNav.tsx             # Barra horizontal sticky com chips dos meses, botão Início
 │   ├── filters/
-│   │   ├── FilterPanel.tsx          # Sidebar desktop (w-72) + bottom sheet mobile, expand/collapse
+│   │   ├── FilterPanel.tsx          # FAB fixo (bottom-left) → abre bottom sheet (mobile) ou drawer direito (desktop lg+)
 │   │   ├── FilterSummary.tsx        # Barra "Exibindo X de Y" + botão limpar filtros, aria-live
 │   │   └── BatchCalendarExport.tsx  # Exportação em lote (.ics) — integrado ao FilterSummary
 │   ├── countdown/
@@ -66,14 +66,17 @@ src/
 │   │   ├── ProximosEventos.tsx      # Grid CSS (1/2/3 cols), tabs de perfil + Destaques + Atos Prep.
 │   │   └── EventoProximoCard.tsx    # Data, título, badge categoria, badge urgência
 │   └── ui/
-│       ├── Tooltip.tsx              # Componente base de tooltip (Radix)
+│       ├── Tooltip.tsx              # Tooltip CSS customizado; props: content, position ("top"|"bottom"), wrap (quebra linha, max-w-[200px])
 │       └── InfoTooltip.tsx          # Ícone de info com tooltip explicativo (usado nos exports)
 ├── data/
 │   ├── eventos.ts                   # Array de 296 EventoCalendario[] (Out/2025–Abr/2028)
 │   ├── categorias.ts                # 11 categorias com ID, cor hex, ícone Lucide
 │   └── constants.ts                 # PRIMEIRO_TURNO, SEGUNDO_TURNO, DIPLOMACAO, metadados TSE
+├── contexts/
+│   └── FavoritosContext.tsx         # Context + useFavoritosContext() — consome useFavoritos, provido no App.tsx
 ├── hooks/
-│   ├── useFilteredEvents.ts         # Filtragem combinada AND: passados + categorias + turno + busca
+│   ├── useFilteredEvents.ts         # Filtragem combinada AND: passados + categorias + turno + busca + apenasFavoritos
+│   ├── useFavoritos.ts              # Estado de favoritos persistido em localStorage ("calendario-eleitoral-favoritos")
 │   ├── useCountdown.ts              # Timer regressivo: 1T (04/10/2026) → 2T (25/10/2026) → null
 │   ├── useProximosEventos.ts        # Próximos N eventos futuros filtrados por perfil
 │   ├── useUrlFilters.ts             # Sincronização filtros ↔ query params da URL
@@ -115,6 +118,16 @@ type CategoriaID =
   | "CON" | "VOT" | "PES" | "DIP" | "PAR";
 
 type CalendarReminder = "none" | "1d" | "3d" | "7d"; // src/types/calendar.ts
+
+// FilterState (src/hooks/useFilteredEvents.ts)
+interface FilterState {
+  ocultarPassados: boolean;
+  categorias: CategoriaID[];
+  turno: "1T" | "2T" | "POS" | null;
+  busca: string;
+  mes: string | null;          // chave "YYYY-MM"
+  apenasFavoritos: boolean;    // requer useFavoritosContext()
+}
 
 interface EventoCalendario {
   id: string;           // "YYYY-MM-DD-N"

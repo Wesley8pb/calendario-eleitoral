@@ -14,6 +14,7 @@ Este projeto é uma ferramenta institucional e interativa para consulta dos even
 Site single-page de caráter informativo que apresenta todos os ~296 eventos do calendário eleitoral em uma **timeline vertical interativa**, com:
 
 - 🔍 **Filtros avançados**: categorias, ocultar passados, turno, busca textual, mês.
+- ⭐ **Favoritos**: marque eventos com estrela; filtro "Apenas favoritos" no painel; persistido em localStorage.
 - 👤 **Painel "Próximos Eventos"** com tabs de perfil (Eleitor, Candidato, Partido, Advogado, Atos Preparatórios)
 - 📅 **Navegação por meses** com Intersection Observer
 - ⏱️ **Contagem regressiva** até os turnos eleitorais
@@ -72,30 +73,33 @@ npm run build
 ```
 src/
 ├── components/
-│   ├── calendar/       # Exportação individual (.ics)
-│   ├── countdown/       # Contagem regressiva
-│   ├── filters/         # FilterPanel, FilterSummary, exportação em lote
-│   ├── layout/          # Header, Footer
+│   ├── calendar/         # Exportação individual (.ics)
+│   ├── countdown/        # Contagem regressiva
+│   ├── filters/          # FilterPanel (FAB + drawer), FilterSummary, exportação em lote
+│   ├── layout/           # Header, Footer
 │   ├── proximos-eventos/ # ProximosEventos, EventoProximoCard
-│   ├── timeline/        # Timeline, MonthSection, MonthNav, EventCard, EventDetail, DateMarker
-│   └── ui/              # Tooltip e InfoTooltip
+│   ├── timeline/         # Timeline, MonthSection, MonthNav, EventCard, EventDetail, DateMarker
+│   └── ui/               # Tooltip (com prop `wrap`) e InfoTooltip
+├── contexts/
+│   └── FavoritosContext.tsx  # Context de favoritos, consumido via useFavoritosContext()
 ├── data/
-│   ├── eventos.ts       # ⭐ Array completo dos ~296 eventos
-│   ├── categorias.ts    # 11 categorias com cor e ícone
-│   └── constants.ts     # Datas fixas (1T, 2T, diplomação) e metadados da Resolução
+│   ├── eventos.ts        # Array completo dos ~296 eventos
+│   ├── categorias.ts     # 11 categorias com cor e ícone
+│   └── constants.ts      # Datas fixas (1T, 2T, diplomação) e metadados da Resolução
 ├── hooks/
 │   ├── useCountdown.ts
+│   ├── useFavoritos.ts   # Estado de favoritos persistido em localStorage
 │   ├── useFilteredEvents.ts
 │   ├── useLazyRender.ts
 │   ├── useProximosEventos.ts
 │   └── useUrlFilters.ts
 ├── lib/
-│   ├── ics.ts           # Geração de arquivos .ics e download client-side
-│   ├── utils.ts         # Funções utilitárias de data e CSS
-│   └── search.ts        # Busca textual normalizada
+│   ├── ics.ts            # Geração de arquivos .ics e download client-side
+│   ├── utils.ts          # Funções utilitárias de data e CSS
+│   └── search.ts         # Busca textual normalizada
 └── types/
-    ├── calendar.ts      # Tipos e opções de lembrete da exportação
-    └── index.ts         # Interfaces TypeScript
+    ├── calendar.ts       # Tipos e opções de lembrete da exportação
+    └── index.ts          # Interfaces TypeScript
 ```
 
 ---

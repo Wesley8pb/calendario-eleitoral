@@ -3034,6 +3034,7 @@ export const eventos: EventoCalendario[] = [
         url: "",
       },
     ],
+    destaque: true,
   },
 
   {
@@ -5562,6 +5563,7 @@ export const eventos: EventoCalendario[] = [
     ],
     observacoes:
       "Eleitores que não votaram no 1º turno e não justificaram no dia têm até esta data para apresentar justificativa no cartório eleitoral, pelo e-Título ou pelo site do TSE.",
+    destaque: true,
   },
 
   {
@@ -5879,6 +5881,7 @@ export const eventos: EventoCalendario[] = [
     ],
     observacoes:
       "Eleitores que não votaram no 2º turno e não justificaram no dia têm até esta data para apresentar justificativa.",
+    destaque: true,
   },
 
   {

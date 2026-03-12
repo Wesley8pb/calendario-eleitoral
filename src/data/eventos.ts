@@ -3034,6 +3034,7 @@ export const eventos: EventoCalendario[] = [
         url: "",
       },
     ],
+    destaque: true,
   },
 
   {

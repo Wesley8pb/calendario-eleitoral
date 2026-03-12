@@ -24,6 +24,7 @@ import {
   isEventoHoje,
 } from "../../lib/utils";
 import { EventDetail } from "./EventDetail";
+import { Tooltip } from "../ui/Tooltip";
 import { useFavoritosContext } from "../../contexts/FavoritosContext";
 
 // Mapeamento de nomes de ícone → componente Lucide
@@ -181,29 +182,34 @@ export function EventCard({ evento }: EventCardProps) {
         </button>
 
         {/* Botão de favoritar — coluna dedicada à direita, sempre visível */}
-        <button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            toggleFavorito(evento.id);
-          }}
-          className={cn(
-            "flex items-center justify-center px-3 border-l transition-all duration-150",
-            "min-w-[48px] rounded-tr-xl rounded-br-xl",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-inset",
-            favorito
-              ? "border-amber-200 text-amber-400 hover:text-amber-500 hover:bg-amber-50"
-              : "border-neutral-100 text-neutral-300 hover:text-amber-300 hover:bg-amber-50/50",
-          )}
-          aria-label={favorito ? "Desfavoritar evento" : "Favoritar evento"}
-          aria-pressed={favorito}
+        <Tooltip
+          content={favorito ? "Remover dos favoritos" : "Salvar nos favoritos"}
+          position="top"
         >
-          <Star
-            size={20}
-            strokeWidth={1.8}
-            fill={favorito ? "currentColor" : "none"}
-          />
-        </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleFavorito(evento.id);
+            }}
+            className={cn(
+              "flex items-center justify-center px-3 border-l transition-all duration-150",
+              "min-w-[48px] rounded-tr-xl rounded-br-xl",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-inset",
+              favorito
+                ? "border-amber-200 text-amber-400 hover:text-amber-500 hover:bg-amber-50"
+                : "border-neutral-100 text-neutral-300 hover:text-amber-300 hover:bg-amber-50/50",
+            )}
+            aria-label={favorito ? "Desfavoritar evento" : "Favoritar evento"}
+            aria-pressed={favorito}
+          >
+            <Star
+              size={20}
+              strokeWidth={1.8}
+              fill={favorito ? "currentColor" : "none"}
+            />
+          </button>
+        </Tooltip>
       </div>
 
       {/* Expandable content */}

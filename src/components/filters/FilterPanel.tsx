@@ -272,7 +272,7 @@ export function FilterPanel({
           );
 
           return totalFavoritos === 0 ? (
-            <Tooltip content="Nenhum evento favoritado. Clique na ⭐ de um evento para favoritar.">
+            <Tooltip content="Nenhum evento favoritado. Clique na ⭐ de um evento para favoritar." wrap>
               {botao}
             </Tooltip>
           ) : (
@@ -290,21 +290,21 @@ export function FilterPanel({
           {categorias.map((cat) => {
             const isActive = filtros.categorias.includes(cat.id);
             return (
-              <button
-                key={cat.id}
-                onClick={() => toggleCategoria(cat.id)}
-                className={cn(
-                  "rounded-full px-2.5 py-1 text-xs font-medium transition-all duration-150",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500",
-                  isActive
-                    ? "text-white shadow-sm"
-                    : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200",
-                )}
-                style={isActive ? { backgroundColor: cat.cor } : undefined}
-                title={cat.descricao}
-              >
-                {cat.nome}
-              </button>
+              <Tooltip key={cat.id} content={cat.descricao} wrap position="top">
+                <button
+                  onClick={() => toggleCategoria(cat.id)}
+                  className={cn(
+                    "rounded-full px-2.5 py-1 text-xs font-medium transition-all duration-150",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500",
+                    isActive
+                      ? "text-white shadow-sm"
+                      : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200",
+                  )}
+                  style={isActive ? { backgroundColor: cat.cor } : undefined}
+                >
+                  {cat.nome}
+                </button>
+              </Tooltip>
             );
           })}
         </div>

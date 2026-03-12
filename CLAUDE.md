@@ -9,10 +9,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Site single-page institucional que transforma o Calendário Eleitoral das Eleições Gerais 2026 (Resolução TSE nº 23.760/2026, 296 eventos) em uma timeline interativa, com filtros, busca textual, painel de próximos prazos por perfil e exportação para calendário (.ics).
 
-**Status:** v1.0 concluída. Pronta para deploy no Netlify.
-
----
-
 ## Stack
 
 - **Framework:** React 18 com TypeScript
@@ -20,9 +16,8 @@ Site single-page institucional que transforma o Calendário Eleitoral das Eleiç
 - **Componentes UI:** shadcn/ui (via Radix UI primitives)
 - **Ícones:** Lucide React
 - **Build:** Vite 7.x
-- **Deploy:** Netlify (configurado) ou Vercel
+- **Deploy:** Netlify
 - **Dados:** JSON estático embarcado em `src/data/eventos.ts` — sem backend, sem banco
-- **Bundle:** ~490 kB / ~123 kB gzipped
 
 ---
 
@@ -117,8 +112,6 @@ type CategoriaID =
   | "ELE" | "REG" | "PRO" | "FIN" | "ADM" | "FIS"
   | "CON" | "VOT" | "PES" | "DIP" | "PAR";
 
-type CalendarReminder = "none" | "1d" | "3d" | "7d"; // src/types/calendar.ts
-
 // FilterState (src/hooks/useFilteredEvents.ts)
 interface FilterState {
   ocultarPassados: boolean;
@@ -147,13 +140,7 @@ interface EventoCalendario {
 
 ### Exportação para Calendário (.ics)
 
-A lógica central está em `src/lib/ics.ts`:
-- `buildEventIcs(evento, reminder)` — gera conteúdo ICS para um evento
-- `buildEventsIcs(eventos[], reminder)` — gera conteúdo ICS para múltiplos eventos (lote)
-- `downloadIcsFile(content, fileName)` — cria Blob e dispara download client-side
-- `escapeIcsText(value)` — escapa caracteres especiais conforme RFC 5545
-
-**Regra de exibição da exportação em lote:** `BatchCalendarExport` não é renderizado quando o único filtro ativo é "Ocultar eventos passados" (sem categorias, turno ou busca selecionados).
+Lógica em `src/lib/ics.ts`. **Regra:** `BatchCalendarExport` não é renderizado quando o único filtro ativo é "Ocultar eventos passados" (sem categorias, turno ou busca).
 
 ### Fonte de Dados
 
@@ -170,12 +157,6 @@ Todos os eventos vêm **exclusivamente** do `Documentations/RESOLUÇÃO.md` (Res
 5. **Mobile-first:** Todo componente deve funcionar em 375px antes de ser expandido para desktop.
 6. **Paleta de cores:** Seguir rigorosamente o PRD (`tailwind.config.js`). Proibido: degradês lilás/roxo, cores partidárias.
 7. **Segurança:** Ao encontrar vulnerabilidade, sinalizar com `// AVISO DE SEGURANÇA:` e sugerir alternativa segura.
-
----
-
-## Pendências para Deploy
-
-> Antes do deploy definitivo, atualizar a URL base em: `og:url`, `og:image`, `twitter:image`, `<link rel="canonical">` e `public/sitemap.xml` com o domínio real.
 
 ---
 

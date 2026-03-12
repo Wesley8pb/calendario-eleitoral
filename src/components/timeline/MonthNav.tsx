@@ -87,7 +87,7 @@ export function MonthNav({
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    document.getElementById("monthnav")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   // Handlers para Drag-to-Scroll (Desktop)
@@ -130,6 +130,7 @@ export function MonthNav({
   return (
     <>
       <nav
+        id="monthnav"
         className="sticky top-0 z-30 bg-white/95 backdrop-blur-sm border-t-[3px] border-t-primary-700 border-b border-b-neutral-200 shadow-md"
         aria-label="Navegação por meses"
       >

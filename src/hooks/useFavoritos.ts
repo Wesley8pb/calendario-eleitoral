@@ -6,7 +6,13 @@ export function useFavoritos() {
   const [favoritos, setFavoritos] = useState<Set<string>>(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? new Set<string>(JSON.parse(raw) as string[]) : new Set<string>();
+      if (!raw) return new Set<string>();
+      const parsed = JSON.parse(raw) as unknown[];
+      // Valida formato dos IDs: apenas "YYYY-MM-DD-N" são aceitos
+      const valid = Array.isArray(parsed)
+        ? parsed.filter((id): id is string => typeof id === "string" && /^\d{4}-\d{2}-\d{2}-\d+$/.test(id))
+        : [];
+      return new Set<string>(valid);
     } catch {
       return new Set<string>();
     }

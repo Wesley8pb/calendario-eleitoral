@@ -1,10 +1,11 @@
 /**
- * Normaliza texto para busca: remove acentos, lowercase, trim.
+ * Normaliza texto para busca: remove acentos, caracteres de controle, lowercase, trim.
  */
 export function normalizeSearch(text: string): string {
   return text
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[\u0000-\u001F\u007F-\u009F]/g, "") // Remove caracteres de controle
     .toLowerCase()
     .trim();
 }

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://calendario-eleitoral-2026.netlify.app/sitemap.xml
+Sitemap: https://calendarioeleitoral.app.br/sitemap.xml

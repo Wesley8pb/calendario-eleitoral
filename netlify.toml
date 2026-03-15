@@ -10,10 +10,17 @@
   to = "/index.html"
   status = 200
 
-# ── HTTP → HTTPS (7D.2) ───────────────────────────────────────────────────
+# ── www → apex ────────────────────────────────────────────────────────────
 [[redirects]]
-  from = "http://calendario-eleitoral-2026.netlify.app/*"
-  to   = "https://calendario-eleitoral-2026.netlify.app/:splat"
+  from = "https://www.calendarioeleitoral.app.br/*"
+  to   = "https://calendarioeleitoral.app.br/:splat"
+  status = 301
+  force  = true
+
+# ── Domínio antigo Netlify → domínio personalizado ────────────────────────
+[[redirects]]
+  from = "https://calendario-eleitoral-2026.netlify.app/*"
+  to   = "https://calendarioeleitoral.app.br/:splat"
   status = 301
   force  = true
 

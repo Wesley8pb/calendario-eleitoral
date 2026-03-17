@@ -137,53 +137,59 @@ export function EventCard({ evento }: EventCardProps) {
       {/* Header do card: botão de expand + botão de favorito (irmãos, não aninhados) */}
       <div className="flex items-stretch">
         {/* Botão de expand — ocupa a maior parte do header */}
-        <button
-          type="button"
-          onClick={() => setIsOpen(!isOpen)}
-          className="flex-1 text-left p-3 sm:p-4 pr-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1 rounded-tl-xl rounded-bl-xl min-h-[44px]"
-          aria-expanded={isOpen}
-          aria-label={`${isOpen ? "Fechar" : "Abrir"} detalhes: ${evento.titulo}`}
+        <Tooltip
+          content={isOpen ? "Recolher informações" : "Expandir informações"}
+          position="top"
+          className="flex-1"
         >
-          <div className="flex items-start gap-2">
-            <div className="flex-1 min-w-0">
-              {/* Top row: categories + status */}
-              <div className="flex flex-wrap items-center gap-1.5 mb-2">
-                {evento.categorias.map((catId) => (
-                  <CategoriaBadge key={catId} id={catId} />
-                ))}
-                {evento.turno && <TurnoBadge turno={evento.turno} />}
-                <StatusBadge data={evento.data} />
-                {evento.destaque && (
-                  <span className="inline-flex items-center gap-0.5 rounded-full bg-secondary-500 text-white px-2 py-0.5 text-xs font-semibold">
-                    <Star size={11} fill="currentColor" />
-                    Destaque
-                  </span>
+          <button
+            type="button"
+            onClick={() => setIsOpen(!isOpen)}
+            className="w-full text-left p-3 sm:p-4 pr-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1 rounded-tl-xl rounded-bl-xl min-h-[44px]"
+            aria-expanded={isOpen}
+            aria-label={`${isOpen ? "Fechar" : "Abrir"} detalhes: ${evento.titulo}`}
+          >
+            <div className="flex items-start gap-2">
+              <div className="flex-1 min-w-0">
+                {/* Top row: categories + status */}
+                <div className="flex flex-wrap items-center gap-1.5 mb-2">
+                  {evento.categorias.map((catId) => (
+                    <CategoriaBadge key={catId} id={catId} />
+                  ))}
+                  {evento.turno && <TurnoBadge turno={evento.turno} />}
+                  <StatusBadge data={evento.data} />
+                  {evento.destaque && (
+                    <span className="inline-flex items-center gap-0.5 rounded-full bg-secondary-500 text-white px-2 py-0.5 text-xs font-semibold">
+                      <Star size={11} fill="currentColor" />
+                      Destaque
+                    </span>
+                  )}
+                </div>
+
+                {/* Title */}
+                <h3 className="text-sm sm:text-base font-semibold leading-snug text-neutral-950 break-words">
+                  {evento.titulo}
+                </h3>
+
+                {/* Marco temporal */}
+                {evento.marcos && (
+                  <p className="mt-1 text-xs text-primary-500 font-medium">
+                    {evento.marcos}
+                  </p>
                 )}
               </div>
 
-              {/* Title */}
-              <h3 className="text-sm sm:text-base font-semibold leading-snug text-neutral-950 break-words">
-                {evento.titulo}
-              </h3>
-
-              {/* Marco temporal */}
-              {evento.marcos && (
-                <p className="mt-1 text-xs text-primary-500 font-medium">
-                  {evento.marcos}
-                </p>
-              )}
+              {/* Chevron */}
+              <ChevronDown
+                size={18}
+                className={cn(
+                  "flex-shrink-0 mt-1 text-neutral-400 transition-transform duration-300",
+                  isOpen && "rotate-180 text-primary-500",
+                )}
+              />
             </div>
-
-            {/* Chevron */}
-            <ChevronDown
-              size={18}
-              className={cn(
-                "flex-shrink-0 mt-1 text-neutral-400 transition-transform duration-300",
-                isOpen && "rotate-180 text-primary-500",
-              )}
-            />
-          </div>
-        </button>
+          </button>
+        </Tooltip>
 
         {/* Botão de favoritar — coluna dedicada à direita, sempre visível */}
         <Tooltip

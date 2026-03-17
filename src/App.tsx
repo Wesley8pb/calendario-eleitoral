@@ -78,23 +78,17 @@ function App() {
             </div>
 
             <div className="flex items-center gap-2">
-              <Tooltip content={allExpanded ? "Recolher todos os meses" : "Expandir todos os meses"}>
+              <Tooltip content={allExpanded ? "Ocultar todos os meses" : "Mostrar todos os meses"}>
                 <button
                   onClick={() => setAllExpanded(!allExpanded)}
-                  className="flex items-center gap-2 px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-lg border transition-all duration-200 border-primary-200 bg-primary-50 text-primary-700 hover:bg-primary-100 active:scale-95"
-                  aria-label={allExpanded ? "Recolher todos os meses" : "Expandir todos os meses"}
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg text-primary-700 bg-primary-50 hover:bg-primary-100 border border-primary-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+                  aria-label={allExpanded ? "Ocultar todos os meses" : "Mostrar todos os meses"}
+                  aria-expanded={allExpanded}
                 >
-                  {allExpanded ? (
-                    <>
-                      <ChevronUp size={16} />
-                      <span className="hidden xs:inline">Recolher Tudo</span>
-                    </>
-                  ) : (
-                    <>
-                      <ChevronDown size={16} />
-                      <span className="hidden xs:inline">Expandir Tudo</span>
-                    </>
-                  )}
+                  <span className="hidden sm:inline">
+                    {allExpanded ? "Ocultar" : "Mostrar"}
+                  </span>
+                  {allExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                 </button>
               </Tooltip>
             </div>

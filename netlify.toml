@@ -4,12 +4,6 @@
   publish = "dist"
   command = "npm run build"
 
-# ── Redirect: SPA fallback ─────────────────────────────────────────────────
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
 # ── www → apex ────────────────────────────────────────────────────────────
 [[redirects]]
   from = "https://www.calendarioeleitoral.app.br/*"
@@ -23,6 +17,12 @@
   to   = "https://calendarioeleitoral.app.br/:splat"
   status = 301
   force  = true
+
+# ── Redirect: SPA fallback ─────────────────────────────────────────────────
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
 
 # ── Security Headers (7D.1) ───────────────────────────────────────────────
 [[headers]]

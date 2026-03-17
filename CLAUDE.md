@@ -9,6 +9,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Visão Geral
 
+**URL em Produção:** [https://calendarioeleitoral.app.br](https://calendarioeleitoral.app.br)
+
 Site single-page institucional que transforma o Calendário Eleitoral das Eleições Gerais 2026 (Resolução TSE nº 23.760/2026, 296 eventos) em uma timeline interativa, com filtros, busca textual, painel de próximos prazos por perfil e exportação para calendário (.ics).
 
 ## Stack

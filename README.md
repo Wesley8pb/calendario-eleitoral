@@ -11,6 +11,8 @@ Este projeto é uma ferramenta institucional e interativa para consulta dos even
 
 ## 📋 Sobre o Projeto
 
+**Acesse online:** [https://calendarioeleitoral.app.br](https://calendarioeleitoral.app.br)
+
 Site single-page de caráter informativo que apresenta todos os ~296 eventos do calendário eleitoral em uma **timeline vertical interativa**, com:
 
 - 🔍 **Filtros avançados**: categorias, ocultar passados, turno, busca textual, mês.

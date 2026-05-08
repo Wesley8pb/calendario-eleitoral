@@ -7,7 +7,7 @@ import { EventCard } from "./EventCard";
 
 interface TimelineProps {
   eventos: EventoCalendario[];
-  allExpanded: boolean;
+  allExpanded: boolean | null;
 }
 
 export function Timeline({ eventos, allExpanded }: TimelineProps) {
@@ -31,7 +31,7 @@ export function Timeline({ eventos, allExpanded }: TimelineProps) {
 
           return (
             <MonthSection
-              key={grupoMes.chave}
+              key={`${grupoMes.chave}-${allExpanded ?? "padrao"}`}
               id={`mes-${grupoMes.chave}`}
               label={grupoMes.label}
               eventCount={grupoMes.eventos.length}
@@ -39,7 +39,11 @@ export function Timeline({ eventos, allExpanded }: TimelineProps) {
               allExpanded={allExpanded}
             >
               {gruposDatas.map((grupoData) => (
-                <div key={grupoData.data} className="relative">
+                <div
+                  key={grupoData.data}
+                  data-date={grupoData.data}
+                  className="relative scroll-mt-36"
+                >
                   {/* DateMarker — row layout: circle + info lado a lado, acima dos cards */}
                   <div className="relative z-10 mb-2">
                     <DateMarker

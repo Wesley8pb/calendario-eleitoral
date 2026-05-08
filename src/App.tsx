@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { Header } from "./components/layout/Header";
-import { CalendarDays, ChevronDown, ChevronUp } from "lucide-react";
+import { CalendarCheck, CalendarDays, ChevronDown, ChevronUp } from "lucide-react";
 import { Tooltip } from "./components/ui/Tooltip";
 import { Footer } from "./components/layout/Footer";
 import { ProximosEventos } from "./components/proximos-eventos/ProximosEventos";
@@ -17,7 +17,7 @@ import { isEventoPassado, agruparPorMes } from "./lib/utils";
 
 function App() {
   const { filtros, setFiltros, limparFiltros } = useUrlFilters();
-  const [allExpanded, setAllExpanded] = useState(true);
+  const [allExpanded, setAllExpanded] = useState<boolean | null>(null);
   const { favoritos, toggleFavorito, isFavorito, totalFavoritos } = useFavoritos();
   const eventosFiltrados = useFilteredEvents(eventos, filtros, favoritos);
 
@@ -45,6 +45,46 @@ function App() {
     filtros.busca.trim() !== "" ||
     filtros.mes !== null ||
     filtros.apenasFavoritos;
+
+  const scrollToDataAtual = () => {
+    const hoje = new Date();
+    const hojeISO = `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, "0")}-${String(hoje.getDate()).padStart(2, "0")}`;
+    const datas = Array.from(new Set(eventosFiltrados.map((ev) => ev.data))).sort();
+    const dataAlvo =
+      datas.find((data) => data === hojeISO) ??
+      datas.find((data) => data > hojeISO) ??
+      datas[datas.length - 1];
+
+    if (!dataAlvo) return;
+
+    setAllExpanded(true);
+
+    const mesAlvo = dataAlvo.substring(0, 7);
+    const scrollToMesAlvo = () => {
+      document.getElementById(`mes-${mesAlvo}`)?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    };
+
+    scrollToMesAlvo();
+
+    let tentativas = 0;
+    const centralizarData = () => {
+      const el = document.querySelector<HTMLElement>(`[data-date="${dataAlvo}"]`);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
+      if (tentativas < 10) {
+        tentativas += 1;
+        scrollToMesAlvo();
+        window.setTimeout(centralizarData, 120);
+      }
+    };
+
+    window.setTimeout(centralizarData, 180);
+  };
 
   return (
     <FavoritosContext.Provider value={{ isFavorito, toggleFavorito }}>
@@ -78,17 +118,27 @@ function App() {
             </div>
 
             <div className="flex items-center gap-2">
-              <Tooltip content={allExpanded ? "Ocultar todos os meses" : "Mostrar todos os meses"}>
+              <Tooltip content="Ir para a data atual ou para a data mais próxima disponível">
                 <button
-                  onClick={() => setAllExpanded(!allExpanded)}
+                  onClick={scrollToDataAtual}
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg text-white bg-primary-700 hover:bg-primary-800 border border-primary-700 shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+                >
+                  <CalendarCheck size={18} />
+                  <span className="hidden sm:inline">Ir para data atual</span>
+                  <span className="sm:hidden">Hoje</span>
+                </button>
+              </Tooltip>
+              <Tooltip content={allExpanded === true ? "Ocultar todos os meses" : "Mostrar todos os meses"}>
+                <button
+                  onClick={() => setAllExpanded(allExpanded === true ? false : true)}
                   className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg text-primary-700 bg-primary-50 hover:bg-primary-100 border border-primary-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
-                  aria-label={allExpanded ? "Ocultar todos os meses" : "Mostrar todos os meses"}
-                  aria-expanded={allExpanded}
+                  aria-label={allExpanded === true ? "Ocultar todos os meses" : "Mostrar todos os meses"}
+                  aria-expanded={allExpanded === true}
                 >
                   <span className="hidden sm:inline">
-                    {allExpanded ? "Ocultar" : "Mostrar"}
+                    {allExpanded === true ? "Ocultar" : "Mostrar"}
                   </span>
-                  {allExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+                  {allExpanded === true ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                 </button>
               </Tooltip>
             </div>

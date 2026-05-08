@@ -131,16 +131,18 @@ export function MonthNav({
     <>
       <nav
         id="monthnav"
-        className="sticky top-0 z-30 bg-white/95 backdrop-blur-sm border-t-[3px] border-t-primary-700 border-b border-b-neutral-200 shadow-md"
+        className="sticky top-0 z-30 bg-primary-900 text-white border-y-4 border-secondary-500 shadow-2xl shadow-primary-900/25"
         aria-label="Navegação por meses"
       >
-        <div className="max-w-5xl mx-auto flex items-center px-4">
+        <div className="max-w-5xl mx-auto flex items-center px-3 sm:px-4">
           {/* Título instrutivo à esquerda */}
-          <div className="flex flex-shrink-0 items-center gap-2 mr-4 pr-4 border-r border-neutral-100 py-4 sm:py-5">
-            <CalendarDays size={18} className="text-primary-700 max-[360px]:hidden" />
+          <div className="flex flex-shrink-0 items-center gap-2 mr-3 sm:mr-4 pr-3 sm:pr-4 border-r border-white/20 py-3 sm:py-4">
+            <div className="hidden min-[360px]:flex h-9 w-9 items-center justify-center rounded-lg bg-secondary-500 text-white shadow-lg shadow-black/20">
+              <CalendarDays size={18} />
+            </div>
             <div className="flex flex-col leading-none">
-              <span className="text-[9px] sm:text-[10px] font-black text-neutral-400 uppercase tracking-widest">Acesso</span>
-              <span className="text-[11px] sm:text-xs font-bold text-primary-900 uppercase">Mensal</span>
+              <span className="text-[10px] sm:text-[11px] font-black text-secondary-100 uppercase tracking-widest">Acesso</span>
+              <span className="text-xs sm:text-sm font-black text-white uppercase">Mensal</span>
             </div>
           </div>
 
@@ -151,7 +153,7 @@ export function MonthNav({
             onMouseUp={handleMouseUp}
             onMouseMove={handleMouseMove}
             className={cn(
-              "flex-1 flex gap-1.5 overflow-x-auto py-4 sm:py-5 scrollbar-hide select-none",
+              "flex-1 flex gap-2 overflow-x-auto py-3 sm:py-4 scrollbar-hide select-none",
               !isDragging && "scroll-snap-x"
             )}
           >
@@ -168,16 +170,16 @@ export function MonthNav({
                   onClick={(e) => handleMonthClick(m.chave, e)}
                   onDragStart={(e) => e.preventDefault()}
                   className={cn(
-                    "flex-shrink-0 scroll-snap-start rounded-full px-4 py-2 text-sm font-medium",
+                    "flex-shrink-0 scroll-snap-start rounded-full px-4 py-2.5 text-sm font-bold",
                     "transition-all duration-200 whitespace-nowrap active:scale-95",
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1",
-                    "cursor-grab active:cursor-grabbing",
+                    "cursor-grab active:cursor-grabbing border",
                     flashedMonth === m.chave && "scale-95 brightness-110",
                     isActive
-                      ? "bg-primary-700 text-white shadow-sm"
+                      ? "bg-secondary-500 text-white border-secondary-500 shadow-lg shadow-black/25"
                       : isCurrent
-                        ? "bg-primary-100 text-primary-700 ring-1 ring-primary-300"
-                        : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200",
+                        ? "bg-white text-primary-900 border-secondary-500 ring-2 ring-secondary-500"
+                        : "bg-white/10 text-white border-white/20 hover:bg-white hover:border-white hover:text-primary-900",
                   )}
                   aria-current={isActive ? "true" : undefined}
                 >

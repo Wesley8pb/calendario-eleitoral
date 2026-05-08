@@ -20,7 +20,7 @@ const VALID_TURNOS = ["1T", "2T", "POS"] as const;
 function parseUrlToFilters(): FilterState {
   const params = new URLSearchParams(window.location.search);
 
-  // Se não há nenhum parâmetro na URL, retorna padrão (ocultarPassados: true)
+  // Se não há nenhum parâmetro na URL, retorna padrão (mostrar passados)
   if (params.toString() === "") return FILTRO_PADRAO;
 
   const catParam = params.get("cat");
@@ -38,9 +38,9 @@ function parseUrlToFilters(): FilterState {
 
   const busca = params.get("q") ?? "";
 
-  // Default é ocultar; se o param for "mostrar", desativa o ocultar
+  // Default é mostrar; se o param for "ocultar", ativa o ocultar
   const passadosParam = params.get("passados");
-  const ocultarPassados = passadosParam === "mostrar" ? false : true;
+  const ocultarPassados = passadosParam === "ocultar";
 
   // Filtro por mês (YYYY-MM)
   const mesParam = params.get("mes");
@@ -53,8 +53,8 @@ function parseUrlToFilters(): FilterState {
 function filtersToUrl(filtros: FilterState): string {
   const params = new URLSearchParams();
 
-  // Só escreve param quando o user explicitamente quer MOSTRAR passados (não-default)
-  if (!filtros.ocultarPassados) params.set("passados", "mostrar");
+  // Só escreve param quando o user explicitamente quer ocultar passados
+  if (filtros.ocultarPassados) params.set("passados", "ocultar");
   if (filtros.categorias.length > 0)
     params.set("cat", filtros.categorias.join(","));
   if (filtros.turno) params.set("turno", filtros.turno);

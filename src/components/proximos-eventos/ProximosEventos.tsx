@@ -30,7 +30,6 @@ const PERFIS_TABS: Array<{
     { value: "eleitor", label: "Eleitor" },
     { value: "candidato", label: "Candidato" },
     { value: "partido", label: "Partido" },
-    { value: "advogado", label: "Advogado" },
     { value: "atos-preparatorios", label: "Atos Preparatórios" },
   ];
 
@@ -51,7 +50,7 @@ function getPerfilSalvo(): TabValue {
 export function ProximosEventos() {
   const [isExpanded, setIsExpanded] = useState(true);
   const [perfilAtivo, setPerfilAtivo] = useState<TabValue>(getPerfilSalvo);
-  const proximosEventos = useProximosEventos(eventos, perfilAtivo, 6);
+  const proximosEventos = useProximosEventos(eventos, perfilAtivo, 9);
   const tabRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
 
   // Navegação por teclado entre tabs (6B.6): setas ←→
@@ -119,7 +118,6 @@ export function ProximosEventos() {
                   <li><span className="font-semibold text-white">Eleitor:</span> Título, votação e justificativa.</li>
                   <li><span className="font-semibold text-white">Candidato:</span> Registros, campanhas e contas.</li>
                   <li><span className="font-semibold text-white">Partido:</span> Convenções, filiações e fundos.</li>
-                  <li><span className="font-semibold text-white">Advogado:</span> Prazos processuais e jurídicos.</li>
                   <li><span className="font-semibold text-white">Atos Preparatórios:</span> Organização da Justiça Eleitoral.</li>
                 </ul>
                 {/* Arrow */}

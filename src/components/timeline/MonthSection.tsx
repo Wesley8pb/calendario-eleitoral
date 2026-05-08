@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Calendar, ChevronDown, ChevronUp } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { useLazyRender } from "../../hooks/useLazyRender";
@@ -9,7 +9,7 @@ interface MonthSectionProps {
   label: string; // "Outubro / 2026"
   eventCount: number;
   isCurrentMonth?: boolean;
-  allExpanded?: boolean;
+  allExpanded?: boolean | null;
   children: React.ReactNode;
 }
 
@@ -21,14 +21,9 @@ export function MonthSection({
   allExpanded,
   children,
 }: MonthSectionProps) {
-  const [isExpanded, setIsExpanded] = useState(true);
-
-  // Sincronizar com o estado global quando ele mudar
-  useEffect(() => {
-    if (allExpanded !== undefined) {
-      setIsExpanded(allExpanded);
-    }
-  }, [allExpanded]);
+  const [isExpanded, setIsExpanded] = useState(() =>
+    Boolean(allExpanded ?? isCurrentMonth),
+  );
 
   const { ref, isVisible } = useLazyRender("500px");
 

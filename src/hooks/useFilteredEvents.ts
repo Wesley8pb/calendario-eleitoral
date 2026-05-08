@@ -13,7 +13,7 @@ export interface FilterState {
 }
 
 export const FILTRO_PADRAO: FilterState = {
-  ocultarPassados: true,
+  ocultarPassados: false,
   categorias: [],
   turno: null,
   busca: "",

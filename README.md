@@ -17,7 +17,7 @@ Site single-page de caráter informativo que apresenta todos os ~296 eventos do 
 
 - 🔍 **Filtros avançados**: categorias, ocultar passados, turno, busca textual, mês.
 - ⭐ **Favoritos**: marque eventos com estrela; filtro "Apenas favoritos" no painel; persistido em localStorage.
-- 👤 **Painel "Próximos Eventos"** com tabs de perfil (Eleitor, Candidato, Partido, Advogado, Atos Preparatórios)
+- 👤 **Painel "Próximos Eventos"** com tabs de perfil (Destaques,Eleitor, Candidato, Partido e Atos Preparatórios)
 - 📅 **Navegação por meses** com Intersection Observer
 - ⏱️ **Contagem regressiva** até os turnos eleitorais
 - 🗓️ **Exportação para calendário (.ics)**: individual por evento e em lote para eventos filtrados, com lembrete opcional

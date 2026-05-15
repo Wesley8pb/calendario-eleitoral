@@ -179,14 +179,17 @@ export function EventCard({ evento }: EventCardProps) {
                 )}
               </div>
 
-              {/* Chevron */}
-              <ChevronDown
-                size={18}
+              {/* Chevron de expansão — agora mais proeminente */}
+              <div
                 className={cn(
-                  "flex-shrink-0 mt-1 text-neutral-400 transition-transform duration-300",
-                  isOpen && "rotate-180 text-primary-500",
+                  "flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full transition-all duration-300 mt-0.5",
+                  isOpen 
+                    ? "bg-primary-600 text-white rotate-180 shadow-sm" 
+                    : "bg-neutral-100 text-neutral-500 group-hover:bg-primary-50 group-hover:text-primary-600"
                 )}
-              />
+              >
+                <ChevronDown size={20} strokeWidth={2.5} />
+              </div>
             </div>
           </button>
         </Tooltip>

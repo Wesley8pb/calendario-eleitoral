@@ -76,15 +76,15 @@ export function MonthSection({
             <button
               onClick={() => setIsExpanded(!isExpanded)}
               className={cn(
-                "flex items-center justify-center p-1.5 rounded-lg transition-colors border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500",
-                isCurrentMonth
-                  ? "text-primary-700 bg-primary-100 hover:bg-primary-200 border-primary-200"
-                  : "text-neutral-500 bg-neutral-100 hover:bg-neutral-200 border-neutral-200"
+                "flex items-center justify-center p-2 rounded-lg transition-all border shadow-sm active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500",
+                isExpanded
+                  ? "bg-primary-700 text-white border-primary-800 hover:bg-primary-800"
+                  : "bg-white text-primary-700 border-primary-300 hover:bg-primary-50 hover:border-primary-400"
               )}
               aria-label={isExpanded ? "Recolher eventos" : "Expandir eventos"}
               aria-expanded={isExpanded}
             >
-              {isExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+              {isExpanded ? <ChevronUp size={20} strokeWidth={2.5} /> : <ChevronDown size={20} strokeWidth={2.5} />}
             </button>
           </Tooltip>
         </div>

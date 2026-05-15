@@ -14,12 +14,15 @@ import { useUrlFilters } from "./hooks/useUrlFilters";
 import { useFavoritos } from "./hooks/useFavoritos";
 import { FavoritosContext } from "./contexts/FavoritosContext";
 import { isEventoPassado, agruparPorMes } from "./lib/utils";
+import { HelpToast } from "./components/ui/HelpToast";
+import { HelpCircle } from "lucide-react";
 
 function App() {
   const { filtros, setFiltros, limparFiltros } = useUrlFilters();
   const [allExpanded, setAllExpanded] = useState<boolean | null>(null);
   const { favoritos, toggleFavorito, isFavorito, totalFavoritos } = useFavoritos();
   const eventosFiltrados = useFilteredEvents(eventos, filtros, favoritos);
+  const [isHelpOpen, setIsHelpOpen] = useState(false);
 
   // Contagem de eventos passados
   const totalPassados = eventos.filter((ev) => isEventoPassado(ev.data)).length;
@@ -118,27 +121,37 @@ function App() {
             </div>
 
             <div className="flex items-center gap-2">
+              <button
+                onClick={() => setIsHelpOpen(true)}
+                className="flex items-center gap-2 px-3.5 py-2 text-sm font-bold rounded-lg text-white bg-secondary-500 hover:bg-secondary-700 border border-secondary-700 shadow-md hover:shadow-lg transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary-500 focus-visible:ring-offset-2"
+              >
+                <HelpCircle size={18} strokeWidth={2.5} />
+                <span className="hidden md:inline">Como adicionar ao seu calendário</span>
+                <span className="md:hidden">Guia Importação</span>
+              </button>
+
               <Tooltip content="Ir para a data atual ou para a data mais próxima disponível">
                 <button
                   onClick={scrollToDataAtual}
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg text-white bg-primary-700 hover:bg-primary-800 border border-primary-700 shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+                  className="flex items-center gap-2 px-3.5 py-2 text-sm font-bold rounded-lg text-white bg-primary-700 hover:bg-primary-900 border border-primary-900 shadow-md hover:shadow-lg transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
                 >
-                  <CalendarCheck size={18} />
+                  <CalendarCheck size={18} strokeWidth={2.5} />
                   <span className="hidden sm:inline">Ir para data atual</span>
                   <span className="sm:hidden">Hoje</span>
                 </button>
               </Tooltip>
+
               <Tooltip content={allExpanded === true ? "Ocultar todos os meses" : "Mostrar todos os meses"}>
                 <button
                   onClick={() => setAllExpanded(allExpanded === true ? false : true)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-lg text-primary-700 bg-primary-50 hover:bg-primary-100 border border-primary-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+                  className="flex items-center gap-2 px-3.5 py-2 text-sm font-bold rounded-lg text-primary-700 bg-primary-50 hover:bg-primary-100 border border-primary-200 shadow-sm hover:shadow transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
                   aria-label={allExpanded === true ? "Ocultar todos os meses" : "Mostrar todos os meses"}
                   aria-expanded={allExpanded === true}
                 >
                   <span className="hidden sm:inline">
-                    {allExpanded === true ? "Ocultar" : "Mostrar"}
+                    {allExpanded === true ? "Ocultar meses" : "Mostrar meses"}
                   </span>
-                  {allExpanded === true ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+                  {allExpanded === true ? <ChevronUp size={20} strokeWidth={2.5} /> : <ChevronDown size={20} strokeWidth={2.5} />}
                 </button>
               </Tooltip>
             </div>
@@ -175,6 +188,7 @@ function App() {
         mesesDisponiveis={mesesDisponiveis}
       />
       <Footer />
+      <HelpToast isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} />
     </div>
     </FavoritosContext.Provider>
   );

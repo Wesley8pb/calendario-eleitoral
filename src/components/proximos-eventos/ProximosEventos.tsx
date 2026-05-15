@@ -21,12 +21,12 @@ const PERFIS_TABS: Array<{
   label: string;
   icon?: React.ReactNode;
 }> = [
+    { value: "todos", label: "Todos" },
     {
       value: "destaques",
       label: "Destaques",
       icon: <Star size={13} className="fill-amber-400 text-amber-500" />,
     },
-    { value: "todos", label: "Todos" },
     { value: "eleitor", label: "Eleitor" },
     { value: "candidato", label: "Candidato" },
     { value: "partido", label: "Partido" },
@@ -44,7 +44,7 @@ function getPerfilSalvo(): TabValue {
   } catch {
     /* localStorage indisponível */
   }
-  return "destaques"; // Destaques como default inicial!
+  return "todos"; // Todos como default inicial!
 }
 
 export function ProximosEventos() {
@@ -113,13 +113,16 @@ export function ProximosEventos() {
               <div className="absolute left-1/2 sm:left-auto sm:right-1/2 sm:translate-x-1/2 -translate-x-1/2 -bottom-2 translate-y-full sm:bottom-full sm:-translate-y-2 mb-2 w-64 bg-neutral-800 text-white text-[11px] sm:text-xs p-3 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 pointer-events-none border border-neutral-700">
                 <p className="font-semibold mb-1.5 text-neutral-100">Filtrar por perfil:</p>
                 <ul className="space-y-1 text-neutral-300">
-                  <li><span className="font-semibold text-amber-400">Destaques:</span> Eventos mais relevantes e urgentes.</li>
                   <li><span className="font-semibold text-white">Todos:</span> Exibe todos os eventos cadastrados.</li>
+                  <li><span className="font-semibold text-amber-400">Destaques:</span> Eventos mais relevantes e urgentes.</li>
                   <li><span className="font-semibold text-white">Eleitor:</span> Título, votação e justificativa.</li>
-                  <li><span className="font-semibold text-white">Candidato:</span> Registros, campanhas e contas.</li>
+                  <li><span className="font-semibold text-white">Candidato:</span> Registros, propaganda eleitoral e contas.</li>
                   <li><span className="font-semibold text-white">Partido:</span> Convenções, filiações e fundos.</li>
                   <li><span className="font-semibold text-white">Atos Preparatórios:</span> Organização da Justiça Eleitoral.</li>
                 </ul>
+                <p className="mt-2 pt-2 border-t border-neutral-700 text-neutral-400 italic">
+                  São exibidos sempre os próximos 9 eventos da categoria selecionada.
+                </p>
                 {/* Arrow */}
                 <div className="absolute left-1/2 sm:left-auto sm:right-1/2 sm:translate-x-1/2 -translate-x-1/2 -top-2 sm:top-auto sm:bottom-[-8px] border-[4px] border-transparent border-b-neutral-800 sm:border-b-transparent sm:border-t-neutral-800"></div>
               </div>

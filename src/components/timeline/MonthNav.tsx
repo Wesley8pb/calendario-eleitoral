@@ -66,6 +66,9 @@ export function MonthNav({
   const [flashedMonth, setFlashedMonth] = useState<string | null>(null);
 
   const scrollToMonth = useCallback((chave: string) => {
+    // Expande o mês antes de navegar para ele
+    window.dispatchEvent(new CustomEvent("expand-month", { detail: { monthId: `mes-${chave}` } }));
+
     const el = document.getElementById(`mes-${chave}`);
     if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "start" });

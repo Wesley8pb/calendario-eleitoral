@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Calendar, ChevronDown, ChevronUp } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { useLazyRender } from "../../hooks/useLazyRender";
@@ -26,6 +26,15 @@ export function MonthSection({
   );
 
   const { ref, isVisible } = useLazyRender("500px");
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const { monthId } = (e as CustomEvent<{ monthId: string }>).detail;
+      if (monthId === id) setIsExpanded(true);
+    };
+    window.addEventListener("expand-month", handler);
+    return () => window.removeEventListener("expand-month", handler);
+  }, [id]);
 
   return (
     <section

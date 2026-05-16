@@ -60,9 +60,10 @@ function App() {
 
     if (!dataAlvo) return;
 
-    setAllExpanded(true);
-
     const mesAlvo = dataAlvo.substring(0, 7);
+    window.dispatchEvent(
+      new CustomEvent("expand-month", { detail: { monthId: `mes-${mesAlvo}` } }),
+    );
     const scrollToMesAlvo = () => {
       document.getElementById(`mes-${mesAlvo}`)?.scrollIntoView({
         behavior: "smooth",

@@ -31,7 +31,7 @@ export function HelpToast({ isOpen, onClose }: HelpToastProps) {
       <div className="relative w-full overflow-hidden rounded-2xl border border-white/20 bg-white/95 p-5 shadow-2xl backdrop-blur-xl sm:p-6">
         {/* Background Accent */}
         <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-primary-100/50 blur-3xl" />
-        
+
         <div className="relative">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
@@ -52,22 +52,22 @@ export function HelpToast({ isOpen, onClose }: HelpToastProps) {
           </div>
 
           <div className="space-y-4">
-            <HelpItem 
+            <HelpItem
               icon={<Calendar size={16} />}
               title="Individual"
               description="Expanda qualquer evento e clique em 'Adicionar ao calendário' para baixar o arquivo .ics."
             />
-            <HelpItem 
+            <HelpItem
               icon={<ListChecks size={16} />}
               title="Em Lote"
-              description="Use o painel 'Exportar eventos filtrados' acima da lista para baixar todos os eventos visíveis de uma vez."
+              description="Use o painel 'Exportar eventos filtrados' acima da lista para baixar todos os eventos visíveis de uma vez. Para que funcione, é necessário fazer alguma filtragem antes."
             />
-            <HelpItem 
+            <HelpItem
               icon={<Filter size={16} />}
               title="Refinar com Filtros"
               description="Use o painel de filtros (ícone flutuante) para selecionar apenas categorias, meses, ou turnos específicos antes de exportar."
             />
-            <HelpItem 
+            <HelpItem
               icon={<Star size={16} />}
               title="Favoritos"
               description="Marque eventos com a estrela e filtre por 'Apenas favoritos' para criar um calendário 100% personalizado."

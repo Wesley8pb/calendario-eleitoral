@@ -523,6 +523,25 @@ export const eventos: EventoCalendario[] = [
   },
 
   {
+    id: "2026-05-07-2",
+    data: "2026-05-07",
+    diaSemana: "quinta-feira",
+    titulo: "Liberação das certidões circunstanciadas no Sistema ELO",
+    descricao: "Liberação das certidões circunstanciadas no Sistema ELO.",
+    categorias: ["ADM"],
+    perfis: ["atos-preparatorios"],
+    marcos: null,
+    turno: null,
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
+    ],
+  },
+
+  {
     id: "2026-05-13-1",
     data: "2026-05-13",
     diaSemana: "quarta-feira",
@@ -644,6 +663,48 @@ export const eventos: EventoCalendario[] = [
   },
 
   {
+    id: "2026-06-03-1",
+    data: "2026-06-03",
+    diaSemana: "quarta-feira",
+    titulo:
+      "Último dia para envio dos lotes de RAE, incluídos os diligenciados, e dos arquivos de biometria",
+    descricao:
+      "Último dia para envio dos lotes de RAE, incluídos os diligenciados, e dos arquivos de biometria.",
+    categorias: ["ADM"],
+    perfis: ["atos-preparatorios"],
+    marcos: null,
+    turno: null,
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
+    ],
+  },
+
+  {
+    id: "2026-06-03-2",
+    data: "2026-06-03",
+    diaSemana: "quarta-feira",
+    titulo:
+      "Último dia para recebimento na CGE de pedidos de alteração excepcional de situação de RAE",
+    descricao:
+      "Último dia para recebimento, na Corregedoria-Geral Eleitoral, de pedidos de alteração excepcional de situação de RAE.",
+    categorias: ["ADM"],
+    perfis: ["atos-preparatorios"],
+    marcos: null,
+    turno: null,
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
+    ],
+  },
+
+  {
     id: "2026-06-05-1",
     data: "2026-06-05",
     diaSemana: "sexta-feira",
@@ -657,6 +718,82 @@ export const eventos: EventoCalendario[] = [
     turno: null,
     fundamentacao: [
       { norma: "Lei nº 9.504/1997", dispositivo: "art. 11, § 9º", url: "" },
+    ],
+  },
+
+  {
+    id: "2026-06-08-1",
+    data: "2026-06-08",
+    diaSemana: "segunda-feira",
+    titulo: "Último dia para alteração, indeferimento ou exclusão de RAE pela zona eleitoral",
+    descricao: "Último dia para alteração, indeferimento ou exclusão de RAE pela zona eleitoral.",
+    categorias: ["ADM"],
+    perfis: ["atos-preparatorios"],
+    marcos: null,
+    turno: null,
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
+    ],
+  },
+
+  {
+    id: "2026-06-09-1",
+    data: "2026-06-09",
+    diaSemana: "terça-feira",
+    titulo: "Último dia para a alteração excepcional de situação de RAE solicitada à CGE",
+    descricao: "Último dia para a alteração excepcional de situação de RAE solicitada à Corregedoria-Geral Eleitoral.",
+    categorias: ["ADM"],
+    perfis: ["atos-preparatorios"],
+    marcos: null,
+    turno: null,
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
+    ],
+  },
+
+  {
+    id: "2026-06-09-2",
+    data: "2026-06-09",
+    diaSemana: "terça-feira",
+    titulo: "Processamento automático de RAEs não enviados pelas zonas eleitorais ao TSE ou pendentes",
+    descricao: "Processamento automático dos formulários de RAE não enviados até essa data pelas zonas eleitorais ao Tribunal Superior Eleitoral, ou com pendências de processamento, à exceção dos lotes criados pelas zonas do exterior e dos requerimentos oriundos de solicitações formuladas por meio do Título Net nas quais não tenha havido, durante o atendimento, coleta obrigatória de dado biométrico ou autenticação biométrica.",
+    categorias: ["ADM"],
+    perfis: ["atos-preparatorios"],
+    marcos: null,
+    turno: null,
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
+    ],
+  },
+
+  {
+    id: "2026-06-15-1",
+    data: "2026-06-15",
+    diaSemana: "segunda-feira",
+    titulo: "Último dia para recebimento na CGE de pedidos de regularização de histórico ou reversão de operações",
+    descricao: "Último dia para recebimento, na Corregedoria-Geral Eleitoral, de pedidos de regularização de histórico de inscrições ou de reversão de operações.",
+    categorias: ["ADM"],
+    perfis: ["atos-preparatorios"],
+    marcos: null,
+    turno: null,
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
     ],
   },
 
@@ -695,6 +832,44 @@ export const eventos: EventoCalendario[] = [
     marcos: null,
     turno: null,
     fundamentacao: [],
+  },
+
+  {
+    id: "2026-06-22-2",
+    data: "2026-06-22",
+    diaSemana: "segunda-feira",
+    titulo: "Último dia para cadastramento de situações de DE-PARA dos tipos 1 a 5 pela zona eleitoral",
+    descricao: "Último dia para o cadastramento de situações de DE-PARA dos tipos 1 a 5 pela zona eleitoral.",
+    categorias: ["ADM"],
+    perfis: ["atos-preparatorios"],
+    marcos: null,
+    turno: null,
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
+    ],
+  },
+
+  {
+    id: "2026-06-25-1",
+    data: "2026-06-25",
+    diaSemana: "quinta-feira",
+    titulo: "Último dia para cadastramento de solicitações DE-PARA do tipo 6 pela zona eleitoral",
+    descricao: "Último dia para cadastramento de solicitações DE-PARA do tipo 6 pela zona eleitoral.",
+    categorias: ["ADM"],
+    perfis: ["atos-preparatorios"],
+    marcos: null,
+    turno: null,
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
+    ],
   },
 
   {
@@ -741,6 +916,45 @@ export const eventos: EventoCalendario[] = [
         url: "",
       },
     ],
+  },
+
+  {
+    id: "2026-06-30-3",
+    data: "2026-06-30",
+    diaSemana: "terça-feira",
+    titulo: "Último dia para cadastramento de solicitações DE-PARA do tipo 7 e envio à CGE",
+    descricao: "Último dia para o cadastramento de solicitações DE-PARA do tipo 7 e para o envio da solicitação à CGE.",
+    categorias: ["ADM"],
+    perfis: ["atos-preparatorios"],
+    marcos: null,
+    turno: null,
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
+    ],
+  },
+
+  {
+    id: "2026-06-30-4",
+    data: "2026-06-30",
+    diaSemana: "terça-feira",
+    titulo: "Início da restrição de alteração imediata da inscrição por digitação de códigos de ASE",
+    descricao: "Data a partir da qual os códigos de ASE 019, 043, 337, 361, 370, 450 e 469 digitados pelas zonas eleitorais não alterarão de imediato a situação da inscrição.",
+    categorias: ["ADM"],
+    perfis: ["atos-preparatorios"],
+    marcos: null,
+    turno: null,
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
+    ],
+    observacoes: "A data anterior (29 de junho) é o último dia para registro desses ASEs; após essa data, eles só surtirão efeito após as eleições. Além disso, os óbitos e suspensões a partir desta data deverão ser carimbados nos cadernos de votação com base em relatório extraído do ELO ou INFODIP.",
   },
 
   // ══════════════════════════════════════════════════════════════════
@@ -933,6 +1147,25 @@ export const eventos: EventoCalendario[] = [
   },
 
   {
+    id: "2026-07-06-3",
+    data: "2026-07-06",
+    diaSemana: "segunda-feira",
+    titulo: "Encerramento do processamento do cadastro eleitoral",
+    descricao: "Encerramento do processamento do cadastro eleitoral para as Eleições 2026.",
+    categorias: ["ADM"],
+    perfis: ["atos-preparatorios"],
+    marcos: null,
+    turno: null,
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
+    ],
+  },
+
+  {
     id: "2026-07-07-1",
     data: "2026-07-07",
     diaSemana: "terça-feira",
@@ -941,12 +1174,17 @@ export const eventos: EventoCalendario[] = [
     descricao:
       "Início do prazo para que Juízas e Juízes publiquem edital com a nomeação das pessoas que atuarão, no primeiro e eventual segundo turno, como apoio logístico e como integrantes das Mesas Receptoras de Votos (inclusive as do exterior e as específicas para voto em trânsito) e de Justificativa, contando-se da publicação do edital o prazo de 5 (cinco) dias para que os partidos políticos, as federações e as coligações reclamem das designações e para que as pessoas nomeadas apresentem recusa, salvo se o impedimento for superveniente (Código Eleitoral, art. 120, § 4º; Lei nº 9.504/1997, art. 63, caput).",
     categorias: ["ADM"],
-    perfis: [],
+    perfis: ["atos-preparatorios"],
     marcos: null,
     turno: null,
     fundamentacao: [
       { norma: "Código Eleitoral", dispositivo: "art. 120, § 4º", url: "" },
       { norma: "Lei nº 9.504/1997", dispositivo: "art. 63, caput", url: "" },
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
     ],
   },
 
@@ -974,10 +1212,16 @@ export const eventos: EventoCalendario[] = [
     descricao:
       "Início do prazo para cadastramento de agregação de seções eleitorais.",
     categorias: ["ADM"],
-    perfis: [],
+    perfis: ["atos-preparatorios"],
     marcos: null,
     turno: null,
-    fundamentacao: [],
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
+    ],
   },
 
   {
@@ -1007,14 +1251,20 @@ export const eventos: EventoCalendario[] = [
     data: "2026-07-17",
     diaSemana: "sexta-feira",
     titulo:
-      "Início da habilitação de locais de votação para voto em trânsito em municípios com mais de 100 mil eleitores",
+      "Início da habilitacao de locais de votação para voto em trânsito em municípios com mais de 100 mil eleitores",
     descricao:
       "Data a partir da qual, até 20 (vinte) de agosto de 2026, nos municípios com eleitorado apto superior a 100.000 (cem mil), devem ser habilitados locais de votação ou criados locais específicos para essa finalidade.",
     categorias: ["ADM", "ELE"],
-    perfis: ["eleitor"],
+    perfis: ["eleitor", "atos-preparatorios"],
     marcos: null,
     turno: null,
-    fundamentacao: [],
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
+    ],
   },
 
   {
@@ -1026,10 +1276,16 @@ export const eventos: EventoCalendario[] = [
     descricao:
       "Data-limite para a criação, no Cadastro Eleitoral, de novos locais de votação onde funcionarão as seções eleitorais dos estabelecimentos penais e das unidades de internação de adolescentes, caso não existam.",
     categorias: ["ADM"],
-    perfis: [],
+    perfis: ["atos-preparatorios"],
     marcos: null,
     turno: null,
-    fundamentacao: [],
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
+    ],
   },
 
   {
@@ -1041,10 +1297,16 @@ export const eventos: EventoCalendario[] = [
     descricao:
       "Data a partir da qual será disponibilizada, na internet, consulta dos locais de votação com vagas para voto em trânsito e para a transferência temporária de seção para militares, agentes de segurança pública, guardas municipais, Juízas e Juízes Eleitorais, Juízas e Juízes auxiliares, servidoras e servidores da Justiça Eleitoral e promotoras e promotores eleitorais em serviço no dia das eleições.",
     categorias: ["ELE", "ADM"],
-    perfis: ["eleitor"],
+    perfis: ["eleitor", "atos-preparatorios"],
     marcos: null,
     turno: null,
-    fundamentacao: [],
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
+    ],
     observacoes:
       "A partir desta data é possível consultar online quais locais de votação têm vagas para o voto em trânsito (votar fora da sua seção de origem).",
   },
@@ -1563,6 +1825,44 @@ export const eventos: EventoCalendario[] = [
   },
 
   {
+    id: "2026-07-20-22",
+    data: "2026-07-20",
+    diaSemana: "segunda-feira",
+    titulo: "Divulgação do eleitorado apto para as Eleições 2026",
+    descricao: "Divulgação do eleitorado apto para votar nas Eleições de 2026, com dados estatísticos detalhados por município e perfil do eleitorado.",
+    categorias: ["ADM"],
+    perfis: ["atos-preparatorios"],
+    marcos: null,
+    turno: null,
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
+    ],
+  },
+
+  {
+    id: "2026-07-23-1",
+    data: "2026-07-23",
+    diaSemana: "quinta-feira",
+    titulo: "Início do prazo para cadastramento de alocação temporária de seções",
+    descricao: "Início do prazo para o cadastramento, no Sistema ELO, de transferência temporária (alocação temporária) de seção eleitoral.",
+    categorias: ["ADM"],
+    perfis: ["atos-preparatorios"],
+    marcos: null,
+    turno: null,
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
+    ],
+  },
+
+  {
     id: "2026-07-24-1",
     data: "2026-07-24",
     diaSemana: "sexta-feira",
@@ -1721,11 +2021,11 @@ export const eventos: EventoCalendario[] = [
     data: "2026-08-05",
     diaSemana: "quarta-feira",
     titulo:
-      "Último dia para Juízes Eleitorais publicarem edital de nomeação de mesários e apoio logístico",
+      "Último dia para nomeação de mesários e apoio logístico e lançamento de códigos de ASE",
     descricao:
-      'Último dia para que as Juízas e os Juízes Eleitorais publiquem edital, contendo o nome das pessoas nomeadas como mesárias e mesários e para prestar apoio logístico, no primeiro e no eventual segundo turno de votação, contando-se o prazo de 5 (cinco) dias para que os partidos políticos, as federações e as coligações reclamem das nomeações e para que as pessoas nomeadas apresentem recusa, salvo se o impedimento for superveniente, com exceção das que atuarão (Código Eleitoral, art. 120, caput e § 4º; Lei nº 9.504/1997, art. 63, caput): I - nos locais específicos para voto em trânsito; II - nas seções instaladas em estabelecimentos penais e em unidades de internação de adolescentes; e III - como "auxiliares de auditoria" nos testes de integridade.',
+      "Último dia para nomeação de membras e membros das mesas receptoras e do pessoal de apoio logístico para primeiro e eventual segundo turnos e para lançamento dos respectivos códigos de ASE no Sistema ELO.",
     categorias: ["ADM"],
-    perfis: [],
+    perfis: ["atos-preparatorios"],
     marcos: "60 dias antes do 1º turno",
     turno: null,
     fundamentacao: [
@@ -1735,6 +2035,11 @@ export const eventos: EventoCalendario[] = [
         url: "",
       },
       { norma: "Lei nº 9.504/1997", dispositivo: "art. 63, caput", url: "" },
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
     ],
   },
 
@@ -2525,6 +2830,25 @@ export const eventos: EventoCalendario[] = [
   },
 
   {
+    id: "2026-08-24-1",
+    data: "2026-08-24",
+    diaSemana: "segunda-feira",
+    titulo: "Prazo final para digitação/cancelamento de transferência temporária (regra geral)",
+    descricao: "Prazo final para a digitação no Sistema ELO e o cancelamento de transferência temporária do eleitorado (regra geral).",
+    categorias: ["ADM"],
+    perfis: ["atos-preparatorios"],
+    marcos: null,
+    turno: null,
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
+    ],
+  },
+
+  {
     id: "2026-08-25-1",
     data: "2026-08-25",
     diaSemana: "terça-feira",
@@ -2599,10 +2923,16 @@ export const eventos: EventoCalendario[] = [
     titulo: "Último dia para agregação de seções pelas zonas eleitorais",
     descricao: "Último dia para agregação de seções pelas zonas eleitorais.",
     categorias: ["ADM"],
-    perfis: [],
+    perfis: ["atos-preparatorios"],
     marcos: null,
     turno: null,
-    fundamentacao: [],
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
+    ],
   },
 
   {
@@ -2632,11 +2962,16 @@ export const eventos: EventoCalendario[] = [
     descricao:
       'Último dia para que o requerimento, a alteração ou o cancelamento da habilitação para votar em seção distinta da origem seja formulado por: I - mesárias, mesários e as pessoas que atuarão como apoio logístico, inclusive as nomeadas e nomeados como "auxiliares de auditoria" para os testes de integridade das urnas eletrônicas, nos termos da Resolução nº 23.673/2021/TSE; e II - agentes penitenciárias(os), policiais penais e servidoras ou servidores de estabelecimentos penais e de unidades de internação de adolescentes custodiadas(os) nos quais haverá instalação de seções eleitorais.',
     categorias: ["ADM"],
-    perfis: [],
+    perfis: ["atos-preparatorios"],
     marcos: null,
     turno: null,
     fundamentacao: [
       { norma: "Resolução nº 23.673/2021/TSE", dispositivo: "caput", url: "" },
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
     ],
   },
 

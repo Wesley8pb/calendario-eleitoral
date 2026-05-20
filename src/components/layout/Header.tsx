@@ -37,16 +37,28 @@ export function Header() {
           2026, organizados para você.
         </p>
 
-        {/* Resolution link */}
-        <a
-          href={RESOLUCAO_TSE.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 mt-3 text-xs text-white/60 hover:text-white/90 transition-colors underline underline-offset-2"
-        >
-          {RESOLUCAO_TSE.titulo} — DJE {RESOLUCAO_TSE.dje}
-          <ExternalLink size={11} />
-        </a>
+        {/* Resolution links */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mt-4">
+          <a
+            href={RESOLUCAO_TSE.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs text-white/60 hover:text-white/90 transition-colors underline underline-offset-2"
+          >
+            {RESOLUCAO_TSE.titulo}
+            <ExternalLink size={11} />
+          </a>
+          <span className="hidden sm:inline text-white/30 text-xs select-none">•</span>
+          <a
+            href="https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-xs text-white/60 hover:text-white/90 transition-colors underline underline-offset-2"
+          >
+            Resolução nº 23.750/2026 (datas mais importantes)
+            <ExternalLink size={11} />
+          </a>
+        </div>
 
         {/* Countdown */}
         <div className="mt-8">

@@ -35,7 +35,7 @@ export function HelpToast({ isOpen, onClose }: HelpToastProps) {
         <div className="relative">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
-              <div className="rounded-lg bg-primary-600 p-1.5 text-white">
+              <div className="rounded-lg bg-primary-700 p-1.5 text-white">
                 <Info size={18} />
               </div>
               <h3 className="text-base font-bold text-neutral-900">
@@ -76,7 +76,7 @@ export function HelpToast({ isOpen, onClose }: HelpToastProps) {
 
           <button
             onClick={onClose}
-            className="mt-6 w-full rounded-xl bg-primary-600 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:bg-primary-700 active:scale-[0.98]"
+            className="mt-6 w-full rounded-xl bg-primary-700 py-2.5 text-sm font-bold text-white shadow-md transition-all hover:bg-primary-900 active:scale-[0.98]"
           >
             Entendi, obrigado!
           </button>
@@ -89,7 +89,7 @@ export function HelpToast({ isOpen, onClose }: HelpToastProps) {
 function HelpItem({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
   return (
     <div className="flex gap-3">
-      <div className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary-50 text-primary-600">
+      <div className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary-50 text-primary-700">
         {icon}
       </div>
       <div>

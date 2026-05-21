@@ -90,11 +90,58 @@ function App() {
     window.setTimeout(centralizarData, 180);
   };
 
+  const handleSelectEvent = (eventId: string, data: string) => {
+    // 1. Verificar se o evento está na lista de filtrados. Caso contrário, limpa os filtros.
+    const estaNaLista = eventosFiltrados.some((ev) => ev.id === eventId);
+    if (!estaNaLista) {
+      limparFiltros();
+    }
+
+    // 2. Determinar o mês do evento
+    const mesAlvo = data.substring(0, 7);
+    const monthId = `mes-${mesAlvo}`;
+
+    // 3. Expandir o mês
+    window.dispatchEvent(
+      new CustomEvent("expand-month", { detail: { monthId } }),
+    );
+
+    // 4. Scroll inicial para o contêiner do mês para acionar o IntersectionObserver (lazy rendering)
+    const scrollToMesAlvo = () => {
+      document.getElementById(monthId)?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    };
+    scrollToMesAlvo();
+
+    // 5. Loop de retentativas para aguardar a montagem do card no DOM (lazy render)
+    let tentativas = 0;
+    const centralizarEAbrir = () => {
+      const el = document.querySelector<HTMLElement>(`[data-event-id="${eventId}"]`);
+      if (el) {
+        // Encontrado! Rola até ele e dispara o evento para abrir os detalhes
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+        window.dispatchEvent(
+          new CustomEvent("open-event", { detail: { eventId } }),
+        );
+        return;
+      }
+      if (tentativas < 15) {
+        tentativas += 1;
+        scrollToMesAlvo(); // Garante o scroll contínuo e acionamento do lazy render
+        window.setTimeout(centralizarEAbrir, 100);
+      }
+    };
+
+    window.setTimeout(centralizarEAbrir, 150);
+  };
+
   return (
     <FavoritosContext.Provider value={{ isFavorito, toggleFavorito }}>
     <div className="min-h-screen flex flex-col bg-neutral-50 overflow-x-hidden">
       <Header />
-      <ProximosEventos />
+      <ProximosEventos onSelectEvent={handleSelectEvent} />
       <MonthNav eventos={eventosFiltrados} />
       <FilterSummary
         totalEventos={eventos.length}
@@ -108,7 +155,7 @@ function App() {
         <main>
           <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-neutral-100">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 bg-primary-50 rounded-xl text-primary-600">
+              <div className="p-2.5 bg-primary-50 rounded-xl text-primary-700">
                 <CalendarDays size={24} strokeWidth={2} />
               </div>
               <div>

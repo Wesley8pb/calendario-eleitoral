@@ -12,8 +12,12 @@ export default {
         // Cor primária institucional (Azul TSE)
         primary: {
           900: "#0C2340",
+          800: "#002D5E",
           700: "#003E7E",
+          600: "#0C549B",
           500: "#1A6FB5",
+          400: "#6CA0D6",
+          300: "#90BAE7",
           200: "#A8C8EC",
           100: "#E8F1FA",
         },

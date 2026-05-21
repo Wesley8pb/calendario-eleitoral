@@ -121,6 +121,18 @@ export function EventCard({ evento }: EventCardProps) {
     return () => document.removeEventListener("keydown", handler);
   }, [isOpen]);
 
+  // Escutar evento para expandir detalhes do card
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const { eventId } = (e as CustomEvent<{ eventId: string }>).detail;
+      if (eventId === evento.id) {
+        setIsOpen(true);
+      }
+    };
+    window.addEventListener("open-event", handler);
+    return () => window.removeEventListener("open-event", handler);
+  }, [evento.id]);
+
   return (
     <article
       data-event-id={evento.id}
@@ -179,13 +191,13 @@ export function EventCard({ evento }: EventCardProps) {
                 )}
               </div>
 
-              {/* Chevron de expansão — agora mais proeminente */}
+              {/* Chevron de expansão — agora mais proeminente e robusto */}
               <div
                 className={cn(
                   "flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full transition-all duration-300 mt-0.5",
                   isOpen 
-                    ? "bg-primary-600 text-white rotate-180 shadow-sm" 
-                    : "bg-neutral-100 text-neutral-500 group-hover:bg-primary-50 group-hover:text-primary-600"
+                    ? "bg-primary-100 text-primary-700 rotate-180 shadow-sm" 
+                    : "bg-neutral-100 text-neutral-500 group-hover:bg-primary-50 group-hover:text-primary-700"
                 )}
               >
                 <ChevronDown size={20} strokeWidth={2.5} />

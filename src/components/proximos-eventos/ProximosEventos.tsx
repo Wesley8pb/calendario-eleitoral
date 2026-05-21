@@ -47,7 +47,11 @@ function getPerfilSalvo(): TabValue {
   return "todos"; // Todos como default inicial!
 }
 
-export function ProximosEventos() {
+interface ProximosEventosProps {
+  onSelectEvent?: (eventId: string, data: string) => void;
+}
+
+export function ProximosEventos({ onSelectEvent }: ProximosEventosProps) {
   const [isExpanded, setIsExpanded] = useState(true);
   const [perfilAtivo, setPerfilAtivo] = useState<TabValue>(getPerfilSalvo);
   const proximosEventos = useProximosEventos(eventos, perfilAtivo, 9);
@@ -85,7 +89,12 @@ export function ProximosEventos() {
     }
   }, [perfilAtivo]);
 
-  const scrollToEvento = (eventoId: string) => {
+  const scrollToEvento = (eventoId: string, data: string) => {
+    if (onSelectEvent) {
+      onSelectEvent(eventoId, data);
+      return;
+    }
+
     // Localiza o card na timeline pelo data-event-id
     const el = document.querySelector(`[data-event-id="${eventoId}"]`);
     if (el) {
@@ -109,7 +118,7 @@ export function ProximosEventos() {
               Próximos Eventos
             </h2>
             <div className="relative group cursor-help ml-1 flex items-center">
-              <Info size={16} className="text-neutral-400 hover:text-primary-600 transition-colors" />
+              <Info size={16} className="text-neutral-400 hover:text-primary-700 transition-colors" />
               <div className="absolute left-1/2 sm:left-auto sm:right-1/2 sm:translate-x-1/2 -translate-x-1/2 -bottom-2 translate-y-full sm:bottom-full sm:-translate-y-2 mb-2 w-64 bg-neutral-800 text-white text-[11px] sm:text-xs p-3 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 pointer-events-none border border-neutral-700">
                 <p className="font-semibold mb-1.5 text-neutral-100">Filtrar por perfil:</p>
                 <ul className="space-y-1 text-neutral-300">
@@ -191,7 +200,7 @@ export function ProximosEventos() {
                   <EventoProximoCard
                     key={ev.id}
                     evento={ev}
-                    onClick={() => scrollToEvento(ev.id)}
+                    onClick={() => scrollToEvento(ev.id, ev.data)}
                   />
                 ))}
               </div>

@@ -703,7 +703,7 @@ export const eventos: EventoCalendario[] = [
         url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
       },
     ],
-    observacoes: "Pedidos de alteração que não podem ser realizados pela própria zona eleitoral (ex.: reversão de RAE de 'INDEFERIDO' para 'DIGITADO', que implica novo processamento) devem ser remetidos à CRE-PB via PJe, classe RSE, com justificativa, documentos comprobatórios e assinatura do juiz eleitoral. Recomenda-se encaminhar com no mínimo dois dias úteis de antecedência, pois há etapas intermediárias entre a zona e a CGE.",
+    observacoes: "Pedidos de alteração que não podem ser realizados pela própria zona eleitoral (ex.: reversão de RAE de 'INDEFERIDO' para 'DIGITADO', que implica novo processamento) devem ser remetidos à CRE via PJe, classe RSE, com justificativa, documentos comprobatórios e assinatura do juiz eleitoral. Recomenda-se encaminhar com no mínimo dois dias úteis de antecedência, pois há etapas intermediárias entre a zona e a CGE.",
   },
 
   {
@@ -824,7 +824,7 @@ export const eventos: EventoCalendario[] = [
         url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
       },
     ],
-    observacoes: "Aplica-se a reversões de transferências já atualizadas e ajustes em registros de ASE de suspensão que não impliquem novos processamentos de RAEs. Os pedidos devem ser remetidos à CRE-PB via PJe, classe RSE, com justificativa, documentos comprobatórios e assinatura do juiz eleitoral. Recomenda-se encaminhar com no mínimo dois dias úteis de antecedência.",
+    observacoes: "Aplica-se a reversões de transferências já atualizadas e ajustes em registros de ASE de suspensão que não impliquem novos processamentos de RAEs. Os pedidos devem ser remetidos à CRE via PJe, classe RSE, com justificativa, documentos comprobatórios e assinatura do juiz eleitoral. Recomenda-se encaminhar com no mínimo dois dias úteis de antecedência.",
   },
 
   {
@@ -901,7 +901,7 @@ export const eventos: EventoCalendario[] = [
         url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
       },
     ],
-    observacoes: "Os de-para tipos 1 a 4 não se aplicam ao TRE-PB nas Eleições 2026. O de-para tipo 5 destina-se à mudança permanente de seção para outro local de votação (ex.: local demolido ou fechado definitivamente). Para mudanças aplicáveis apenas às Eleições 2026, utilize a 'alocação provisória', disponível após o encerramento do Cadastro em julho. É necessário vistoriar os locais de votação previamente. Após o registro no ELO, não é necessária autorização do TRE-PB para processamento.",
+    observacoes: "Os de-para tipos 1 a 4 não se aplicam ao TRE nas Eleições 2026. O de-para tipo 5 destina-se à mudança permanente de seção para outro local de votação (ex.: local demolido ou fechado definitivamente). Para mudanças aplicáveis apenas às Eleições 2026, utilize a 'alocação provisória', disponível após o encerramento do Cadastro em julho. É necessário vistoriar os locais de votação previamente. Após o registro no ELO, não é necessária autorização do TRE para processamento.",
   },
 
   {
@@ -921,7 +921,7 @@ export const eventos: EventoCalendario[] = [
         url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
       },
     ],
-    observacoes: "O de-para tipo 6 destina-se à junção permanente de duas ou mais seções em uma única, indicado quando a seção diminuta não tem potencial de crescimento futuro. Para junções aplicáveis apenas às Eleições 2026, utilize a 'agregação de seções', disponível após o encerramento do Cadastro em julho. Deve-se emitir previamente a lista dos eleitores das seções a extinguir. Após o registro no ELO, é necessário solicitar autorização ao TRE-PB, preferencialmente via chamado GLPI.",
+    observacoes: "O de-para tipo 6 destina-se à junção permanente de duas ou mais seções em uma única, indicado quando a seção diminuta não tem potencial de crescimento futuro. Para junções aplicáveis apenas às Eleições 2026, utilize a 'agregação de seções', disponível após o encerramento do Cadastro em julho. Deve-se emitir previamente a lista dos eleitores das seções a extinguir. Após o registro no ELO, é necessário solicitar autorização ao TRE, preferencialmente via chamado GLPI.",
   },
 
   {
@@ -1017,7 +1017,7 @@ export const eventos: EventoCalendario[] = [
         url: "",
       },
     ],
-    observacoes: "O de-para tipo 7 permite a movimentação extraordinária de eleitores entre seções de um mesmo local de votação para corrigir desequilíbrios que causem transtornos evidentes no dia da votação — não se destina à simples equalização de quantitativos. A operação tem caráter definitivo e é realizada pelo próprio sistema (não há indicação manual dos eleitores). Eleitores com deficiência e idosos só podem ser movimentados para seções com acessibilidade. A solicitação deve ser feita via registro no ELO e ofício encaminhado pelo SEI à CRE-PB com documentação justificadora. Os eleitores movimentados devem ser comunicados sobre sua nova seção.",
+    observacoes: "O de-para tipo 7 permite a movimentação extraordinária de eleitores entre seções de um mesmo local de votação para corrigir desequilíbrios que causem transtornos evidentes no dia da votação — não se destina à simples equalização de quantitativos. A operação tem caráter definitivo e é realizada pelo próprio sistema (não há indicação manual dos eleitores). Eleitores com deficiência e idosos só podem ser movimentados para seções com acessibilidade. A solicitação deve ser feita via registro no ELO e ofício encaminhado pelo SEI à CRE com documentação justificadora. Os eleitores movimentados devem ser comunicados sobre sua nova seção.",
   },
 
   {

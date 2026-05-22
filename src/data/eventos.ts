@@ -681,6 +681,7 @@ export const eventos: EventoCalendario[] = [
         url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
       },
     ],
+    observacoes: "No sistema ELO: no ambiente Central de Atendimento, atender as Solicitações Web pendentes, convertendo-as em RAE (se os documentos estiverem adequados) ou excluindo-as (se estiverem em desacordo com as regras de gravação). No ambiente Zona Eleitoral: fechar os lotes abertos em uso, emitir o relatório de decisão coletiva para deferimento pelo juiz eleitoral, enviar os lotes para processamento e verificar os RAEs em diligência. Havendo pendências biométricas, contatar os eleitores para nova coleta antes do prazo; havendo biometrias pendentes de envio, abrir chamado GLPI imediatamente, anexando o relatório.",
   },
 
   {
@@ -698,10 +699,11 @@ export const eventos: EventoCalendario[] = [
     fundamentacao: [
       {
         norma: "Resolução nº 23.750/2026",
-        dispositivo: "",
+        dispositivo: "art. 10, parágrafo único, I",
         url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
       },
     ],
+    observacoes: "Pedidos de alteração que não podem ser realizados pela própria zona eleitoral (ex.: reversão de RAE de 'INDEFERIDO' para 'DIGITADO', que implica novo processamento) devem ser remetidos à CRE-PB via PJe, classe RSE, com justificativa, documentos comprobatórios e assinatura do juiz eleitoral. Recomenda-se encaminhar com no mínimo dois dias úteis de antecedência, pois há etapas intermediárias entre a zona e a CGE.",
   },
 
   {
@@ -737,7 +739,13 @@ export const eventos: EventoCalendario[] = [
         dispositivo: "",
         url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
       },
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "art. 9º, § 3º",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
     ],
+    observacoes: "Inclui operações de reversão realizadas pela CGE em decorrência de pedidos encaminhados até 3 de junho. Também abrange os casos em que o TRE, ao julgar recurso contra indeferimento de alistamento, comunica o provimento à CGE até 3 de junho para que esta efetue a alteração até esta data.",
   },
 
   {
@@ -776,6 +784,27 @@ export const eventos: EventoCalendario[] = [
         url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
       },
     ],
+    observacoes: "RAEs ainda nas situações 'DIGITADO', 'PENDENTE DE COLETA', 'EM DILIGÊNCIA' ou 'EM DILIGÊNCIA VIRTUAL' serão processados automaticamente nesta data. A partir de então, não será mais possível solicitar ou realizar reversões ou alterações de operações que ensejem novos processamentos de RAEs.",
+  },
+
+  {
+    id: "2026-06-13-1",
+    data: "2026-06-13",
+    diaSemana: "sábado",
+    titulo: "Manutenção preventiva da infraestrutura do cadastro — indisponibilidade do Sistema ELO",
+    descricao: "Manutenção preventiva da infraestrutura do cadastro, com indisponibilidade do Sistema ELO e de outros sistemas associados ao cadastro eleitoral, em ambientes de produção e treinamento, nos dias 13 e 14 de junho de 2026 (sábado e domingo).",
+    categorias: ["ADM"],
+    perfis: ["atos-preparatorios"],
+    marcos: null,
+    turno: null,
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
+    ],
+    observacoes: "A zona eleitoral deve reagendar qualquer atividade cartorária que envolva acesso ao ELO ou outros sistemas relacionados ao Cadastro Eleitoral neste final de semana.",
   },
 
   {
@@ -795,6 +824,7 @@ export const eventos: EventoCalendario[] = [
         url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
       },
     ],
+    observacoes: "Aplica-se a reversões de transferências já atualizadas e ajustes em registros de ASE de suspensão que não impliquem novos processamentos de RAEs. Os pedidos devem ser remetidos à CRE-PB via PJe, classe RSE, com justificativa, documentos comprobatórios e assinatura do juiz eleitoral. Recomenda-se encaminhar com no mínimo dois dias úteis de antecedência.",
   },
 
   {
@@ -817,6 +847,26 @@ export const eventos: EventoCalendario[] = [
         url: "",
       },
     ],
+  },
+
+  {
+    id: "2026-06-18-1",
+    data: "2026-06-18",
+    diaSemana: "quinta-feira",
+    titulo: "Último dia para envio ao TSE dos lotes de RAE corrigidos no banco de erros",
+    descricao: "Último dia para o envio, ao Tribunal Superior Eleitoral, dos lotes de Requerimento de Alistamento Eleitoral (RAE) corrigidos no banco de erros.",
+    categorias: ["ADM"],
+    perfis: ["atos-preparatorios"],
+    marcos: null,
+    turno: null,
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
+    ],
+    observacoes: "No sistema ELO, acessar 'Ajuste >> Banco de Erros >> Consulta', selecionar a situação 'Em Banco de Erros (Com erro e/ou Corrigido)' e acessar cada RAE listado para editar (se passível de correção) ou excluir (caso contrário). RAEs editados e gravados passarão automaticamente à situação 'FECHADO' e serão processados sem necessidade de ação adicional. Para erros do tipo 'CEP/LOGRADOURO INVÁLIDO' ou 'BAIRRO INEXISTENTE', pesquisar pelo CEP ou logradouro e selecionar o bairro na lista apresentada pelo sistema. Em caso de dificuldades, contatar a COGECAD ou a SESOC.",
   },
 
   {
@@ -851,6 +901,7 @@ export const eventos: EventoCalendario[] = [
         url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
       },
     ],
+    observacoes: "Os de-para tipos 1 a 4 não se aplicam ao TRE-PB nas Eleições 2026. O de-para tipo 5 destina-se à mudança permanente de seção para outro local de votação (ex.: local demolido ou fechado definitivamente). Para mudanças aplicáveis apenas às Eleições 2026, utilize a 'alocação provisória', disponível após o encerramento do Cadastro em julho. É necessário vistoriar os locais de votação previamente. Após o registro no ELO, não é necessária autorização do TRE-PB para processamento.",
   },
 
   {
@@ -870,6 +921,32 @@ export const eventos: EventoCalendario[] = [
         url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
       },
     ],
+    observacoes: "O de-para tipo 6 destina-se à junção permanente de duas ou mais seções em uma única, indicado quando a seção diminuta não tem potencial de crescimento futuro. Para junções aplicáveis apenas às Eleições 2026, utilize a 'agregação de seções', disponível após o encerramento do Cadastro em julho. Deve-se emitir previamente a lista dos eleitores das seções a extinguir. Após o registro no ELO, é necessário solicitar autorização ao TRE-PB, preferencialmente via chamado GLPI.",
+  },
+
+  {
+    id: "2026-06-25-2",
+    data: "2026-06-25",
+    diaSemana: "quinta-feira",
+    titulo: "Último dia para digitação de decisões de coincidências pelas corregedorias e zonas eleitorais",
+    descricao: "Último dia para as corregedorias e as zonas eleitorais digitarem as decisões de coincidências identificadas por batimento de dados biográficos.",
+    categorias: ["ADM"],
+    perfis: ["atos-preparatorios"],
+    marcos: null,
+    turno: null,
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.750/2026",
+        dispositivo: "",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
+      },
+      {
+        norma: "Resolução TSE nº 23.659/2021",
+        dispositivo: "",
+        url: "",
+      },
+    ],
+    observacoes: "Verificar possíveis duplicidades sob responsabilidade da zona eleitoral em 'Ajuste >> Coincidência >> Pendências' no ELO e instruir os respectivos processos no PJe. Após a decisão judicial, registrá-la no mesmo caminho e, se necessário, comunicar a decisão às demais unidades judiciárias envolvidas.",
   },
 
   {
@@ -934,7 +1011,13 @@ export const eventos: EventoCalendario[] = [
         dispositivo: "",
         url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
       },
+      {
+        norma: "Provimento CGE nº 2/2024",
+        dispositivo: "",
+        url: "",
+      },
     ],
+    observacoes: "O de-para tipo 7 permite a movimentação extraordinária de eleitores entre seções de um mesmo local de votação para corrigir desequilíbrios que causem transtornos evidentes no dia da votação — não se destina à simples equalização de quantitativos. A operação tem caráter definitivo e é realizada pelo próprio sistema (não há indicação manual dos eleitores). Eleitores com deficiência e idosos só podem ser movimentados para seções com acessibilidade. A solicitação deve ser feita via registro no ELO e ofício encaminhado pelo SEI à CRE-PB com documentação justificadora. Os eleitores movimentados devem ser comunicados sobre sua nova seção.",
   },
 
   {
@@ -1163,6 +1246,7 @@ export const eventos: EventoCalendario[] = [
         url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
       },
     ],
+    observacoes: "A partir desta data, não haverá mais alteração na quantidade de eleitores aptos à votação. Ainda serão possíveis apenas mudanças de município, local ou seção de votação, por meio de transferências temporárias, alocações provisórias e agregações de seções. Todos os procedimentos que impliquem mudança no local de votação do eleitor devem ser devidamente divulgados.",
   },
 
   {

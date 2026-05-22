@@ -54,11 +54,30 @@ test.describe('Calendário Eleitoral 2026', () => {
   test('deve ser responsivo em mobile', async ({ page }) => {
     // Simular mobile
     await page.setViewportSize({ width: 375, height: 667 });
-    
+
     await expect(page.locator('h1')).toBeVisible();
-    
+
     // Verificar que elementos estão adaptados
     const timeline = page.locator('.relative').first();
     await expect(timeline).toBeVisible();
+  });
+
+  test('deve exibir o botão Favoritar todos na toolbar', async ({ page }) => {
+    const btn = page.locator('button[aria-label*="Favoritar todos"]');
+    await expect(btn).toBeVisible();
+  });
+
+  test('deve favoritar todos os eventos visíveis ao clicar', async ({ page }) => {
+    const btn = page.locator('button[aria-label*="Favoritar todos"]');
+    await btn.click();
+    await expect(page.locator('button[aria-label*="Desfavoritar todos"]')).toBeVisible();
+  });
+
+  test('deve desfavoritar todos ao clicar novamente', async ({ page }) => {
+    // Favoritar todos
+    await page.locator('button[aria-label*="Favoritar todos"]').click();
+    // Desfavoritar todos
+    await page.locator('button[aria-label*="Desfavoritar todos"]').click();
+    await expect(page.locator('button[aria-label*="Favoritar todos"]')).toBeVisible();
   });
 });

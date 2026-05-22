@@ -40,10 +40,28 @@ export function useFavoritos() {
     [favoritos],
   );
 
+  const favoritarTodos = useCallback((ids: string[]) => {
+    setFavoritos((prev) => {
+      const next = new Set(prev);
+      ids.forEach((id) => next.add(id));
+      return next;
+    });
+  }, []);
+
+  const desfavoritarTodos = useCallback((ids: string[]) => {
+    setFavoritos((prev) => {
+      const next = new Set(prev);
+      ids.forEach((id) => next.delete(id));
+      return next;
+    });
+  }, []);
+
   return {
     favoritos,
     toggleFavorito,
     isFavorito,
     totalFavoritos: favoritos.size,
+    favoritarTodos,
+    desfavoritarTodos,
   };
 }

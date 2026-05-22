@@ -946,7 +946,7 @@ export const eventos: EventoCalendario[] = [
         url: "https://www.tse.jus.br/legislacao/codigo-eleitoral/normas-editadas-pelo-tse/resolucao-no-23-659-de-26-de-outubro-de-2021",
       },
     ],
-    observacoes: "Verificar possíveis duplicidades sob responsabilidade da zona eleitoral em 'Ajuste >> Coincidência >> Pendências' no ELO e instruir os respectivos processos no PJe. Após a decisão judicial, registrá-la no mesmo caminho e, se necessário, comunicar a decisão às demais unidades judiciárias envolvidas.",
+    observacoes: "Verificar possíveis duplicidades sob responsabilidade da zona eleitoral em 'Ajuste >> Coincidência >> Pendências' no ELO e instruir os respectivos processos no PJe. Após a decisão judicial, registrá-la no mesmo caminho e, se necessário, comunicar a decisão às demais unidades judiciárias envolvidas. A [Resolução TSE 23.659/2021](https://www.tse.jus.br/legislacao/codigo-eleitoral/normas-editadas-pelo-tse/resolucao-no-23-659-de-26-de-outubro-de-2021) estabelece os procedimentos necessários para tratamento das inconformidades detectadas no batimento de inscrições.",
   },
 
   {

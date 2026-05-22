@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { Header } from "./components/layout/Header";
-import { CalendarCheck, CalendarDays, ChevronDown, ChevronUp } from "lucide-react";
+import { CalendarCheck, CalendarDays, ChevronDown, ChevronUp, Star, StarOff } from "lucide-react";
 import { Tooltip } from "./components/ui/Tooltip";
 import { Footer } from "./components/layout/Footer";
 import { ProximosEventos } from "./components/proximos-eventos/ProximosEventos";
@@ -20,7 +20,7 @@ import { HelpCircle } from "lucide-react";
 function App() {
   const { filtros, setFiltros, limparFiltros } = useUrlFilters();
   const [allExpanded, setAllExpanded] = useState<boolean | null>(null);
-  const { favoritos, toggleFavorito, isFavorito, totalFavoritos } = useFavoritos();
+  const { favoritos, toggleFavorito, isFavorito, totalFavoritos, favoritarTodos, desfavoritarTodos } = useFavoritos();
   const eventosFiltrados = useFilteredEvents(eventos, filtros, favoritos);
   const [isHelpOpen, setIsHelpOpen] = useState(false);
 
@@ -34,6 +34,11 @@ function App() {
       label: m.label,
     }));
   }, []);
+
+  const algumVisivelFavoritado = useMemo(
+    () => eventosFiltrados.some((ev) => favoritos.has(ev.id)),
+    [eventosFiltrados, favoritos],
+  );
 
   const hasActiveFilters =
     filtros.ocultarPassados ||
@@ -88,6 +93,15 @@ function App() {
     };
 
     window.setTimeout(centralizarData, 180);
+  };
+
+  const handleToggleFavoritarTodos = () => {
+    const ids = eventosFiltrados.map((ev) => ev.id);
+    if (algumVisivelFavoritado) {
+      desfavoritarTodos(ids);
+    } else {
+      favoritarTodos(ids);
+    }
   };
 
   const handleSelectEvent = (eventId: string, data: string) => {
@@ -169,6 +183,33 @@ function App() {
             </div>
 
             <div className="flex items-center gap-2">
+              <Tooltip
+                content={
+                  algumVisivelFavoritado
+                    ? "Remover todos os eventos visíveis dos favoritos"
+                    : "Adicionar todos os eventos visíveis aos favoritos"
+                }
+              >
+                <button
+                  onClick={handleToggleFavoritarTodos}
+                  aria-label={
+                    algumVisivelFavoritado
+                      ? "Desfavoritar todos os eventos visíveis"
+                      : "Favoritar todos os eventos visíveis"
+                  }
+                  className="flex items-center gap-2 px-3.5 py-2 text-sm font-bold rounded-lg text-primary-700 bg-primary-50 hover:bg-primary-100 border border-primary-200 shadow-sm hover:shadow transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+                >
+                  {algumVisivelFavoritado ? (
+                    <StarOff size={18} strokeWidth={2.5} />
+                  ) : (
+                    <Star size={18} strokeWidth={2.5} />
+                  )}
+                  <span className="hidden sm:inline">
+                    {algumVisivelFavoritado ? "Desfavoritar todos" : "Favoritar todos"}
+                  </span>
+                </button>
+              </Tooltip>
+
               <button
                 onClick={() => setIsHelpOpen(true)}
                 className="flex items-center gap-2 px-3.5 py-2 text-sm font-bold rounded-lg text-white bg-secondary-500 hover:bg-secondary-700 border border-secondary-700 shadow-md hover:shadow-lg transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary-500 focus-visible:ring-offset-2"

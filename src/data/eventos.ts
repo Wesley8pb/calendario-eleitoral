@@ -921,7 +921,7 @@ export const eventos: EventoCalendario[] = [
         url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
       },
     ],
-    observacoes: "O de-para tipo 6 destina-se à junção permanente de duas ou mais seções em uma única, indicado quando a seção diminuta não tem potencial de crescimento futuro. Para junções aplicáveis apenas às Eleições 2026, utilize a 'agregação de seções', disponível após o encerramento do Cadastro em julho. Deve-se emitir previamente a lista dos eleitores das seções a extinguir. Após o registro no ELO, é necessário solicitar autorização ao TRE, preferencialmente via chamado GLPI. Mais informações sobre o uso da funcionalidade \"de-para 5\" no ELO podem ser consultadas no [Canal do Conhecimento do TSE](https://sticonhecimento.tse.jus.br/csele/secad/sistemas/elo/manual/controle/de-para/de-para-do-tipo-5).",
+    observacoes: "O de-para tipo 6 destina-se à junção permanente de duas ou mais seções em uma única, indicado quando a seção diminuta não tem potencial de crescimento futuro. Para junções aplicáveis apenas às Eleições 2026, utilize a 'agregação de seções', disponível após o encerramento do Cadastro em julho. Deve-se emitir previamente a lista dos eleitores das seções a extinguir. Após o registro no ELO, é necessário solicitar autorização ao TRE, preferencialmente via chamado GLPI. Mais informações sobre o uso da funcionalidade \"de-para 6\" no ELO podem ser consultadas no [Canal do Conhecimento do TSE](https://sticonhecimento.tse.jus.br/csele/secad/sistemas/elo/manual/controle/de-para/de-para-do-tipo-6).",
   },
 
   {

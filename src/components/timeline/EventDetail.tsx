@@ -2,6 +2,25 @@ import { BookOpen, ExternalLink, Info } from "lucide-react";
 import type { EventoCalendario } from "../../types";
 import { CalendarExportPanel } from "../calendar/CalendarExportPanel";
 
+function parseObservacoes(text: string): React.ReactNode[] {
+  const linkRegex = /\[([^\]]+)\]\((https:\/\/[^)]+)\)/g;
+  const nodes: React.ReactNode[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  while ((match = linkRegex.exec(text)) !== null) {
+    if (match.index > lastIndex) nodes.push(text.slice(lastIndex, match.index));
+    nodes.push(
+      <a key={match.index} href={match[2]} target="_blank" rel="noopener noreferrer"
+        className="underline font-semibold hover:text-primary-900 transition-colors">
+        {match[1]}
+      </a>
+    );
+    lastIndex = match.index + match[0].length;
+  }
+  if (lastIndex < text.length) nodes.push(text.slice(lastIndex));
+  return nodes;
+}
+
 interface EventDetailProps {
   evento: EventoCalendario;
 }
@@ -57,7 +76,7 @@ export function EventDetail({ evento }: EventDetailProps) {
         <div className="flex gap-2 rounded-lg bg-primary-100/50 border border-primary-200/60 p-3">
           <Info size={16} className="flex-shrink-0 text-primary-500 mt-0.5" />
           <p className="text-xs text-primary-700 leading-relaxed">
-            {evento.observacoes}
+            {parseObservacoes(evento.observacoes!)}
           </p>
         </div>
       )}

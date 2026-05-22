@@ -943,7 +943,7 @@ export const eventos: EventoCalendario[] = [
       {
         norma: "Resolução TSE nº 23.659/2021",
         dispositivo: "",
-        url: "",
+        url: "https://www.tse.jus.br/legislacao/codigo-eleitoral/normas-editadas-pelo-tse/resolucao-no-23-659-de-26-de-outubro-de-2021",
       },
     ],
     observacoes: "Verificar possíveis duplicidades sob responsabilidade da zona eleitoral em 'Ajuste >> Coincidência >> Pendências' no ELO e instruir os respectivos processos no PJe. Após a decisão judicial, registrá-la no mesmo caminho e, se necessário, comunicar a decisão às demais unidades judiciárias envolvidas.",

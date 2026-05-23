@@ -1,5 +1,26 @@
 # Changelog
 
+## [2026-05-23] Feature: Seção "Meus Eventos" com criação, edição e exportação .ics via localStorage
+
+Permite que o usuário registre até 20 eventos pessoais persistidos no `localStorage`, sem necessidade de backend. A seção aparece logo após o calendário interativo.
+
+**Arquivos criados:**
+- `src/types/custom.ts` — tipo `EventoCustom`, paleta de 8 cores, constante `MAX_MEUS_EVENTOS = 20`
+- `src/hooks/useMeusEventos.ts` — CRUD com validação + persistência em `localStorage` (padrão do `useFavoritos`)
+- `src/components/meus-eventos/MeusEventos.tsx` — seção com header, grid de cards, exportação em lote e estado vazio
+- `src/components/meus-eventos/MeuEventoCard.tsx` — card com borda colorida, urgência, edição, exclusão com confirmação e export .ics individual
+- `src/components/meus-eventos/MeuEventoForm.tsx` — modal form responsivo (bottom-sheet mobile / drawer `lg:`): campos título, data, notas, seletor de cor
+
+**Arquivos modificados:**
+- `src/types/index.ts` — campo opcional `corPersonalizada?` em `EventoCalendario`
+- `src/hooks/useFilteredEvents.ts` — campo `apenasMeusEventos` em `FilterState`; lógica de exclusão/inclusão de eventos customizados na timeline
+- `src/hooks/useUrlFilters.ts` — `apenasMeusEventos` ignorado na URL (estado pessoal do browser)
+- `src/lib/ics.ts` — funções `buildCustomEventIcs` e `buildCustomEventsIcs` com suporte a `CalendarReminder`
+- `src/lib/utils.ts` — função `toEventoCalendario` (converte `EventoCustom` → `EventoCalendario` para exibição na timeline)
+- `src/components/filters/FilterPanel.tsx` — botão "Meus eventos" ao lado do de favoritos (seção "Pessoais"); stats box adaptativos; `totalMeusEventos` como nova prop
+- `src/components/timeline/EventCard.tsx` — renderização diferenciada para eventos customizados (chip colorido "Meu evento" em vez de badges de categoria)
+- `src/App.tsx` — integração completa: `useMeusEventos`, merge de arrays para `useFilteredEvents`, seção `<MeusEventos />`, `totalMeusEventos` no `FilterPanel`
+
 ## [2026-05-22] Eventos de junho-julho 2026: novos cards e observações operacionais
 
 **Arquivos modificados:**

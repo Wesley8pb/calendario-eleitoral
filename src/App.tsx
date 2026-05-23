@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { Header } from "./components/layout/Header";
-import { CalendarCheck, CalendarDays, ChevronDown, ChevronUp, Star, StarOff } from "lucide-react";
+import { CalendarCheck, CalendarDays, ChevronDown, ChevronUp, Star, StarOff, HelpCircle } from "lucide-react";
 import { Tooltip } from "./components/ui/Tooltip";
 import { Footer } from "./components/layout/Footer";
 import { ProximosEventos } from "./components/proximos-eventos/ProximosEventos";
@@ -8,21 +8,34 @@ import { MonthNav } from "./components/timeline/MonthNav";
 import { Timeline } from "./components/timeline/Timeline";
 import { FilterPanel } from "./components/filters/FilterPanel";
 import { FilterSummary } from "./components/filters/FilterSummary";
+import { MeusEventos } from "./components/meus-eventos/MeusEventos";
 import { eventos } from "./data/eventos";
 import { useFilteredEvents } from "./hooks/useFilteredEvents";
 import { useUrlFilters } from "./hooks/useUrlFilters";
 import { useFavoritos } from "./hooks/useFavoritos";
+import { useMeusEventos } from "./hooks/useMeusEventos";
 import { FavoritosContext } from "./contexts/FavoritosContext";
-import { isEventoPassado, agruparPorMes } from "./lib/utils";
+import { isEventoPassado, agruparPorMes, toEventoCalendario } from "./lib/utils";
 import { HelpToast } from "./components/ui/HelpToast";
-import { HelpCircle } from "lucide-react";
 
 function App() {
   const { filtros, setFiltros, limparFiltros } = useUrlFilters();
   const [allExpanded, setAllExpanded] = useState<boolean | null>(null);
   const { favoritos, toggleFavorito, isFavorito, totalFavoritos, favoritarTodos, desfavoritarTodos } = useFavoritos();
-  const eventosFiltrados = useFilteredEvents(eventos, filtros, favoritos);
+  const { meusEventos, addEvento, editEvento, removeEvento, totalMeusEventos, limiteAtingido } = useMeusEventos();
   const [isHelpOpen, setIsHelpOpen] = useState(false);
+
+  const meusEventosConvertidos = useMemo(
+    () => meusEventos.map(toEventoCalendario),
+    [meusEventos],
+  );
+
+  const todosEventos = useMemo(
+    () => [...eventos, ...meusEventosConvertidos],
+    [meusEventosConvertidos],
+  );
+
+  const eventosFiltrados = useFilteredEvents(todosEventos, filtros, favoritos);
 
   // Contagem de eventos passados
   const totalPassados = eventos.filter((ev) => isEventoPassado(ev.data)).length;
@@ -46,13 +59,17 @@ function App() {
     filtros.turno !== null ||
     filtros.busca.trim() !== "" ||
     filtros.mes !== null ||
-    filtros.apenasFavoritos;
+    filtros.apenasFavoritos ||
+    filtros.apenasMeusEventos;
+
+  // batch export só faz sentido para eventos TSE — não para meus eventos (que têm sua própria seção)
   const canExportFilteredEvents =
-    filtros.categorias.length > 0 ||
-    filtros.turno !== null ||
-    filtros.busca.trim() !== "" ||
-    filtros.mes !== null ||
-    filtros.apenasFavoritos;
+    !filtros.apenasMeusEventos &&
+    (filtros.categorias.length > 0 ||
+      filtros.turno !== null ||
+      filtros.busca.trim() !== "" ||
+      filtros.mes !== null ||
+      filtros.apenasFavoritos);
 
   const scrollToDataAtual = () => {
     const hoje = new Date();
@@ -266,6 +283,13 @@ function App() {
           )}
         </main>
       </div>
+      <MeusEventos
+        meusEventos={meusEventos}
+        onAdd={addEvento}
+        onEdit={editEvento}
+        onDelete={removeEvento}
+        limiteAtingido={limiteAtingido}
+      />
       <FilterPanel
         filtros={filtros}
         onChange={setFiltros}
@@ -274,6 +298,7 @@ function App() {
         totalFiltrados={eventosFiltrados.length}
         totalPassados={totalPassados}
         totalFavoritos={totalFavoritos}
+        totalMeusEventos={totalMeusEventos}
         mesesDisponiveis={mesesDisponiveis}
       />
       <Footer />

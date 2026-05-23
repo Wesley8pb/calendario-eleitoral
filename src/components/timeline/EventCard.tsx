@@ -133,18 +133,22 @@ export function EventCard({ evento }: EventCardProps) {
     return () => window.removeEventListener("open-event", handler);
   }, [evento.id]);
 
+  const isCustom = evento.id.startsWith("custom-");
+
   return (
     <article
       data-event-id={evento.id}
       className={cn(
         "group relative rounded-xl border bg-white shadow-card transition-all duration-200",
-        "hover:shadow-card-hover hover:border-primary-200",
-        evento.destaque &&
+        "hover:shadow-card-hover",
+        isCustom && "border-l-4 hover:border-primary-200",
+        !isCustom && evento.destaque &&
           "border-secondary-500 border-l-4 bg-secondary-100/30",
-        !evento.destaque && "border-neutral-100",
-        favorito && !evento.destaque && "border-amber-300 border-l-4",
+        !isCustom && !evento.destaque && "border-neutral-100 hover:border-primary-200",
+        !isCustom && favorito && !evento.destaque && "border-amber-300 border-l-4",
         isOpen && "ring-1 ring-primary-200 shadow-card-hover",
       )}
+      style={isCustom && evento.corPersonalizada ? { borderLeftColor: evento.corPersonalizada } : undefined}
     >
       {/* Header do card: botão de expand + botão de favorito (irmãos, não aninhados) */}
       <div className="flex items-stretch">
@@ -165,12 +169,23 @@ export function EventCard({ evento }: EventCardProps) {
               <div className="flex-1 min-w-0">
                 {/* Top row: categories + status */}
                 <div className="flex flex-wrap items-center gap-1.5 mb-2">
-                  {evento.categorias.map((catId) => (
-                    <CategoriaBadge key={catId} id={catId} />
-                  ))}
-                  {evento.turno && <TurnoBadge turno={evento.turno} />}
+                  {isCustom ? (
+                    <span
+                      className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium text-white"
+                      style={{ backgroundColor: evento.corPersonalizada ?? "#0D9488" }}
+                    >
+                      Meu evento
+                    </span>
+                  ) : (
+                    <>
+                      {evento.categorias.map((catId) => (
+                        <CategoriaBadge key={catId} id={catId} />
+                      ))}
+                      {evento.turno && <TurnoBadge turno={evento.turno} />}
+                    </>
+                  )}
                   <StatusBadge data={evento.data} />
-                  {evento.destaque && (
+                  {!isCustom && evento.destaque && (
                     <span className="inline-flex items-center gap-0.5 rounded-full bg-secondary-500 text-white px-2 py-0.5 text-xs font-semibold">
                       <Star size={11} fill="currentColor" />
                       Destaque

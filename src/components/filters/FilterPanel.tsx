@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Filter, Search, X, CalendarDays, Star } from "lucide-react";
+import { Filter, Search, X, CalendarDays, Star, BookMarked } from "lucide-react";
 import type { CategoriaID } from "../../types";
 import { categorias } from "../../data/categorias";
 import type { FilterState } from "../../hooks/useFilteredEvents";
@@ -14,6 +14,7 @@ interface FilterPanelProps {
   totalFiltrados: number;
   totalPassados: number;
   totalFavoritos: number;
+  totalMeusEventos: number;
   mesesDisponiveis: Array<{ chave: string; label: string }>;
 }
 
@@ -25,6 +26,7 @@ export function FilterPanel({
   totalFiltrados,
   totalPassados,
   totalFavoritos,
+  totalMeusEventos,
   mesesDisponiveis,
 }: FilterPanelProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -91,7 +93,8 @@ export function FilterPanel({
     filtros.turno !== null ||
     filtros.busca.trim() !== "" ||
     filtros.mes !== null ||
-    filtros.apenasFavoritos;
+    filtros.apenasFavoritos ||
+    filtros.apenasMeusEventos;
 
   const activeFilterCount =
     (filtros.ocultarPassados ? 1 : 0) +
@@ -99,7 +102,8 @@ export function FilterPanel({
     (filtros.turno !== null ? 1 : 0) +
     (filtros.busca.trim() !== "" ? 1 : 0) +
     (filtros.mes !== null ? 1 : 0) +
-    (filtros.apenasFavoritos ? 1 : 0);
+    (filtros.apenasFavoritos ? 1 : 0) +
+    (filtros.apenasMeusEventos ? 1 : 0);
 
   const closePanel = () => {
     setIsOpen(false);
@@ -109,26 +113,43 @@ export function FilterPanel({
   const filterContent = (
     <div className="space-y-5">
       {/* Contagem de eventos */}
-      <div className="bg-neutral-50 rounded-lg p-3 space-y-1">
-        <div className="flex items-center justify-between">
-          <span className="text-xs text-neutral-500">Eventos exibidos</span>
-          <span className="text-sm font-bold text-primary-700">
-            {totalFiltrados}
-          </span>
+      {filtros.apenasMeusEventos ? (
+        <div className="bg-teal-50 rounded-lg p-3 space-y-1">
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-neutral-500">Meus eventos exibidos</span>
+            <span className="text-sm font-bold text-teal-700">
+              {totalFiltrados}
+            </span>
+          </div>
+          <div className="border-t border-teal-100 pt-1 mt-1 flex items-center justify-between">
+            <span className="text-xs text-neutral-500">Total de meus eventos</span>
+            <span className="text-sm font-bold text-neutral-700">
+              {totalMeusEventos}
+            </span>
+          </div>
         </div>
-        <div className="flex items-center justify-between">
-          <span className="text-xs text-neutral-500">Eventos passados</span>
-          <span className="text-sm font-semibold text-neutral-400">
-            {totalPassados}
-          </span>
+      ) : (
+        <div className="bg-neutral-50 rounded-lg p-3 space-y-1">
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-neutral-500">Eventos exibidos</span>
+            <span className="text-sm font-bold text-primary-700">
+              {totalFiltrados}
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-neutral-500">Eventos passados</span>
+            <span className="text-sm font-semibold text-neutral-400">
+              {totalPassados}
+            </span>
+          </div>
+          <div className="border-t border-neutral-200 pt-1 mt-1 flex items-center justify-between">
+            <span className="text-xs text-neutral-500">Total de eventos</span>
+            <span className="text-sm font-bold text-neutral-700">
+              {totalEventos}
+            </span>
+          </div>
         </div>
-        <div className="border-t border-neutral-200 pt-1 mt-1 flex items-center justify-between">
-          <span className="text-xs text-neutral-500">Total de eventos</span>
-          <span className="text-sm font-bold text-neutral-700">
-            {totalEventos}
-          </span>
-        </div>
-      </div>
+      )}
 
       {/* Busca textual */}
       <div>
@@ -226,59 +247,126 @@ export function FilterPanel({
         </label>
       </div>
 
-      {/* Favoritos */}
+      {/* Filtros pessoais: Favoritos + Meus Eventos */}
       <div>
-        {(() => {
-          const botao = (
-            <button
-              role="switch"
-              aria-checked={filtros.apenasFavoritos}
-              disabled={totalFavoritos === 0}
-              onClick={() =>
-                onChange({
-                  ...filtros,
-                  apenasFavoritos: !filtros.apenasFavoritos,
-                })
-              }
-              className={cn(
-                "inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-150",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400",
-                filtros.apenasFavoritos
-                  ? "bg-amber-400 text-white shadow-sm"
-                  : totalFavoritos === 0
-                    ? "bg-neutral-100 text-neutral-400 cursor-not-allowed"
-                    : "bg-neutral-100 text-neutral-600 hover:bg-amber-50 hover:text-amber-600",
-              )}
-            >
-              <Star
-                size={13}
-                strokeWidth={2}
-                fill={filtros.apenasFavoritos ? "currentColor" : "none"}
-              />
-              Apenas favoritos
-              {totalFavoritos > 0 && (
-                <span
-                  className={cn(
-                    "rounded-full px-1.5 py-0.5 text-xs font-bold",
-                    filtros.apenasFavoritos
-                      ? "bg-white/30 text-white"
-                      : "bg-amber-100 text-amber-700",
-                  )}
-                >
-                  {totalFavoritos}
-                </span>
-              )}
-            </button>
-          );
+        <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wide mb-2">
+          Pessoais
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {/* Apenas favoritos */}
+          {(() => {
+            const botao = (
+              <button
+                role="switch"
+                aria-checked={filtros.apenasFavoritos}
+                disabled={totalFavoritos === 0}
+                onClick={() =>
+                  onChange({
+                    ...filtros,
+                    apenasFavoritos: !filtros.apenasFavoritos,
+                    apenasMeusEventos: false,
+                  })
+                }
+                className={cn(
+                  "inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-150",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400",
+                  filtros.apenasFavoritos
+                    ? "bg-amber-400 text-white shadow-sm"
+                    : totalFavoritos === 0
+                      ? "bg-neutral-100 text-neutral-400 cursor-not-allowed"
+                      : "bg-neutral-100 text-neutral-600 hover:bg-amber-50 hover:text-amber-600",
+                )}
+              >
+                <Star
+                  size={13}
+                  strokeWidth={2}
+                  fill={filtros.apenasFavoritos ? "currentColor" : "none"}
+                />
+                Apenas favoritos
+                {totalFavoritos > 0 && (
+                  <span
+                    className={cn(
+                      "rounded-full px-1.5 py-0.5 text-xs font-bold",
+                      filtros.apenasFavoritos
+                        ? "bg-white/30 text-white"
+                        : "bg-amber-100 text-amber-700",
+                    )}
+                  >
+                    {totalFavoritos}
+                  </span>
+                )}
+              </button>
+            );
 
-          return totalFavoritos === 0 ? (
-            <Tooltip content="Nenhum evento favoritado. Clique na ⭐ de um evento para favoritar." wrap>
-              {botao}
-            </Tooltip>
-          ) : (
-            botao
-          );
-        })()}
+            return totalFavoritos === 0 ? (
+              <Tooltip
+                content="Nenhum evento favoritado. Clique na ⭐ de um evento para favoritar."
+                wrap
+              >
+                {botao}
+              </Tooltip>
+            ) : (
+              botao
+            );
+          })()}
+
+          {/* Meus Eventos */}
+          {(() => {
+            const botao = (
+              <button
+                role="switch"
+                aria-checked={filtros.apenasMeusEventos}
+                disabled={totalMeusEventos === 0}
+                onClick={() =>
+                  onChange({
+                    ...filtros,
+                    apenasMeusEventos: !filtros.apenasMeusEventos,
+                    apenasFavoritos: false,
+                  })
+                }
+                className={cn(
+                  "inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-150",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-400",
+                  filtros.apenasMeusEventos
+                    ? "bg-teal-600 text-white shadow-sm"
+                    : totalMeusEventos === 0
+                      ? "bg-neutral-100 text-neutral-400 cursor-not-allowed"
+                      : "bg-neutral-100 text-neutral-600 hover:bg-teal-50 hover:text-teal-700",
+                )}
+              >
+                <BookMarked
+                  size={13}
+                  strokeWidth={2}
+                  fill={filtros.apenasMeusEventos ? "currentColor" : "none"}
+                />
+                Meus eventos
+                {totalMeusEventos > 0 && (
+                  <span
+                    className={cn(
+                      "rounded-full px-1.5 py-0.5 text-xs font-bold",
+                      filtros.apenasMeusEventos
+                        ? "bg-white/30 text-white"
+                        : "bg-teal-100 text-teal-700",
+                    )}
+                  >
+                    {totalMeusEventos}
+                  </span>
+                )}
+              </button>
+            );
+
+            return totalMeusEventos === 0 ? (
+              <Tooltip
+                content='Você ainda não criou eventos pessoais. Use a seção "Meus Eventos" abaixo do calendário.'
+                wrap
+              >
+                {botao}
+              </Tooltip>
+            ) : (
+              botao
+            );
+          })()}
+        </div>
       </div>
 
       {/* Categorias */}

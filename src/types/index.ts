@@ -40,6 +40,7 @@ export interface EventoCalendario {
   fundamentacao: Fundamentacao[];
   observacoes?: string;
   destaque?: boolean;
+  corPersonalizada?: string; // usado apenas em eventos customizados do usuário
 }
 
 export interface Categoria {

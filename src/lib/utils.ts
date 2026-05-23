@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import type { EventoCalendario } from "../types";
+import type { EventoCustom } from "../types/custom";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -135,6 +136,26 @@ export function getDiasAte(dataISO: string): number {
   const d = parseDataISO(dataISO);
   const hoje = getHoje();
   return Math.ceil((d.getTime() - hoje.getTime()) / (1000 * 60 * 60 * 24));
+}
+
+// ─── Conversão de EventoCustom → EventoCalendario ──────────────────────────
+
+export function toEventoCalendario(e: EventoCustom): EventoCalendario {
+  return {
+    id: e.id,
+    data: e.data,
+    diaSemana: getDiaSemana(e.data),
+    titulo: e.titulo,
+    descricao: e.descricao ?? "",
+    categorias: [],
+    perfis: [],
+    marcos: null,
+    turno: null,
+    fundamentacao: [],
+    observacoes: undefined,
+    destaque: false,
+    corPersonalizada: e.cor,
+  };
 }
 
 // ─── Agrupamento de eventos ─────────────────────────────────────────────────

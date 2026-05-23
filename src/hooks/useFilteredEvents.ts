@@ -9,7 +9,8 @@ export interface FilterState {
   turno: "1T" | "2T" | "POS" | null; // null = todos
   busca: string;
   mes: string | null; // "YYYY-MM" ou null = todos
-  apenasFavoritos: boolean; // não serializado na URL — estado pessoal do browser
+  apenasFavoritos: boolean;    // não serializado na URL — estado pessoal do browser
+  apenasMeusEventos: boolean;  // não serializado na URL — estado pessoal do browser
 }
 
 export const FILTRO_PADRAO: FilterState = {
@@ -19,6 +20,7 @@ export const FILTRO_PADRAO: FilterState = {
   busca: "",
   mes: null,
   apenasFavoritos: false,
+  apenasMeusEventos: false,
 };
 
 /**
@@ -33,6 +35,15 @@ export function useFilteredEvents(
 ): EventoCalendario[] {
   return useMemo(() => {
     return eventos.filter((ev) => {
+      const isCustom = ev.id.startsWith("custom-");
+
+      // 0. Separação custom/TSE — nunca mistura os dois na timeline
+      if (filtros.apenasMeusEventos) {
+        if (!isCustom) return false;
+      } else {
+        if (isCustom) return false;
+      }
+
       // 1. Ocultar passados
       if (filtros.ocultarPassados && isEventoPassado(ev.data)) {
         return false;
@@ -81,8 +92,8 @@ export function useFilteredEvents(
         }
       }
 
-      // 6. Apenas favoritos
-      if (filtros.apenasFavoritos && !favoritosIds.has(ev.id)) {
+      // 6. Apenas favoritos (só se não estiver em modo meus eventos)
+      if (!filtros.apenasMeusEventos && filtros.apenasFavoritos && !favoritosIds.has(ev.id)) {
         return false;
       }
 

@@ -40,17 +40,23 @@ function App() {
   // Contagem de eventos passados
   const totalPassados = eventos.filter((ev) => isEventoPassado(ev.data)).length;
 
-  // Lista de meses disponíveis para o dropdown (a partir de TODOS os eventos, sem filtro)
+  // Lista de meses disponíveis inclui meses com eventos customizados
   const mesesDisponiveis = useMemo(() => {
-    return agruparPorMes(eventos).map((m) => ({
+    return agruparPorMes(todosEventos).map((m) => ({
       chave: m.chave,
       label: m.label,
     }));
-  }, []);
+  }, [todosEventos]);
+
+  // Considera apenas eventos TSE para favoritar em lote (eventos customizados não são favoritáveis)
+  const eventosTSEFiltrados = useMemo(
+    () => eventosFiltrados.filter((ev) => !ev.id.startsWith("custom-")),
+    [eventosFiltrados],
+  );
 
   const algumVisivelFavoritado = useMemo(
-    () => eventosFiltrados.some((ev) => favoritos.has(ev.id)),
-    [eventosFiltrados, favoritos],
+    () => eventosTSEFiltrados.some((ev) => favoritos.has(ev.id)),
+    [eventosTSEFiltrados, favoritos],
   );
 
   const hasActiveFilters =
@@ -113,7 +119,7 @@ function App() {
   };
 
   const handleToggleFavoritarTodos = () => {
-    const ids = eventosFiltrados.map((ev) => ev.id);
+    const ids = eventosTSEFiltrados.map((ev) => ev.id);
     if (algumVisivelFavoritado) {
       desfavoritarTodos(ids);
     } else {

@@ -37,12 +37,9 @@ export function useFilteredEvents(
     return eventos.filter((ev) => {
       const isCustom = ev.id.startsWith("custom-");
 
-      // 0. Separação custom/TSE — nunca mistura os dois na timeline
-      if (filtros.apenasMeusEventos) {
-        if (!isCustom) return false;
-      } else {
-        if (isCustom) return false;
-      }
+      // 0. Quando o filtro "apenasMeusEventos" está ativo, mostra só eventos customizados.
+      // Caso contrário, todos os eventos (TSE + customizados) aparecem na timeline.
+      if (filtros.apenasMeusEventos && !isCustom) return false;
 
       // 1. Ocultar passados
       if (filtros.ocultarPassados && isEventoPassado(ev.data)) {

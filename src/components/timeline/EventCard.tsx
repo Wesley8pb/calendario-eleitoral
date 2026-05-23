@@ -161,7 +161,12 @@ export function EventCard({ evento }: EventCardProps) {
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className="w-full text-left p-3 sm:p-4 pr-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1 rounded-tl-xl rounded-bl-xl min-h-[44px]"
+            className={cn(
+              "w-full text-left p-3 sm:p-4 pr-2 cursor-pointer",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1",
+              "rounded-tl-xl rounded-bl-xl min-h-[44px]",
+              isCustom && "rounded-tr-xl rounded-br-xl",
+            )}
             aria-expanded={isOpen}
             aria-label={`${isOpen ? "Fechar" : "Abrir"} detalhes: ${evento.titulo}`}
           >
@@ -174,7 +179,7 @@ export function EventCard({ evento }: EventCardProps) {
                       className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium text-white"
                       style={{ backgroundColor: evento.corPersonalizada ?? "#0D9488" }}
                     >
-                      Meu evento
+                      Evento particular
                     </span>
                   ) : (
                     <>
@@ -221,35 +226,37 @@ export function EventCard({ evento }: EventCardProps) {
           </button>
         </Tooltip>
 
-        {/* Botão de favoritar — coluna dedicada à direita, sempre visível */}
-        <Tooltip
-          content={favorito ? "Remover dos favoritos" : "Salvar nos favoritos"}
-          position="top"
-        >
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              toggleFavorito(evento.id);
-            }}
-            className={cn(
-              "flex items-center justify-center px-3 border-l transition-all duration-150",
-              "min-w-[48px] rounded-tr-xl rounded-br-xl",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-inset",
-              favorito
-                ? "border-amber-200 text-amber-400 hover:text-amber-500 hover:bg-amber-50"
-                : "border-neutral-100 text-neutral-300 hover:text-amber-300 hover:bg-amber-50/50",
-            )}
-            aria-label={favorito ? "Desfavoritar evento" : "Favoritar evento"}
-            aria-pressed={favorito}
+        {/* Botão de favoritar — só para eventos TSE */}
+        {!isCustom && (
+          <Tooltip
+            content={favorito ? "Remover dos favoritos" : "Salvar nos favoritos"}
+            position="top"
           >
-            <Star
-              size={20}
-              strokeWidth={1.8}
-              fill={favorito ? "currentColor" : "none"}
-            />
-          </button>
-        </Tooltip>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleFavorito(evento.id);
+              }}
+              className={cn(
+                "flex items-center justify-center px-3 border-l transition-all duration-150",
+                "min-w-[48px] rounded-tr-xl rounded-br-xl",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-inset",
+                favorito
+                  ? "border-amber-200 text-amber-400 hover:text-amber-500 hover:bg-amber-50"
+                  : "border-neutral-100 text-neutral-300 hover:text-amber-300 hover:bg-amber-50/50",
+              )}
+              aria-label={favorito ? "Desfavoritar evento" : "Favoritar evento"}
+              aria-pressed={favorito}
+            >
+              <Star
+                size={20}
+                strokeWidth={1.8}
+                fill={favorito ? "currentColor" : "none"}
+              />
+            </button>
+          </Tooltip>
+        )}
       </div>
 
       {/* Expandable content */}

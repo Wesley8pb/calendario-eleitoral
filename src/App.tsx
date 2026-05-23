@@ -22,7 +22,7 @@ function App() {
   const { filtros, setFiltros, limparFiltros } = useUrlFilters();
   const [allExpanded, setAllExpanded] = useState<boolean | null>(null);
   const { favoritos, toggleFavorito, isFavorito, totalFavoritos, favoritarTodos, desfavoritarTodos } = useFavoritos();
-  const { meusEventos, addEvento, editEvento, removeEvento, totalMeusEventos, limiteAtingido } = useMeusEventos();
+  const { meusEventos, addEvento, editEvento, removeEvento, importarEventos, totalMeusEventos, limiteAtingido } = useMeusEventos();
   const [isHelpOpen, setIsHelpOpen] = useState(false);
 
   const meusEventosConvertidos = useMemo(
@@ -288,6 +288,7 @@ function App() {
         onAdd={addEvento}
         onEdit={editEvento}
         onDelete={removeEvento}
+        onImportar={importarEventos}
         limiteAtingido={limiteAtingido}
       />
       <FilterPanel

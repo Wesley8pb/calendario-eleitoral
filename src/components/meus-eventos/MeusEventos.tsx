@@ -6,6 +6,7 @@ import {
   ChevronUp,
   Download,
   CalendarPlus,
+  Settings2,
 } from "lucide-react";
 import type { EventoCustom } from "../../types/custom";
 import { MAX_MEUS_EVENTOS } from "../../types/custom";
@@ -13,6 +14,7 @@ import { cn } from "../../lib/utils";
 import { Tooltip } from "../ui/Tooltip";
 import { MeuEventoCard } from "./MeuEventoCard";
 import { MeuEventoForm } from "./MeuEventoForm";
+import { GerenciarEventosModal } from "./GerenciarEventosModal";
 import { buildCustomEventsIcs, downloadIcsFile } from "../../lib/ics";
 import {
   calendarReminderOptions,
@@ -24,6 +26,7 @@ interface MeusEventosProps {
   onAdd: (dados: Omit<EventoCustom, "id" | "criadoEm">) => void;
   onEdit: (id: string, changes: Partial<Omit<EventoCustom, "id" | "criadoEm">>) => void;
   onDelete: (id: string) => void;
+  onImportar: (eventos: EventoCustom[]) => void;
   limiteAtingido: boolean;
 }
 
@@ -32,10 +35,12 @@ export function MeusEventos({
   onAdd,
   onEdit,
   onDelete,
+  onImportar,
   limiteAtingido,
 }: MeusEventosProps) {
   const [isExpanded, setIsExpanded] = useState(true);
   const [formOpen, setFormOpen] = useState(false);
+  const [gerenciarOpen, setGerenciarOpen] = useState(false);
   const [editando, setEditando] = useState<EventoCustom | null>(null);
   const [showBatchExport, setShowBatchExport] = useState(false);
   const [batchReminder, setBatchReminder] = useState<CalendarReminder>("none");
@@ -96,7 +101,24 @@ export function MeusEventos({
         </div>
 
         <div className="flex items-center gap-2 flex-wrap">
-          {/* Exportar todos — só aparece quando tem eventos */}
+          {/* Gerenciar — backup/restore */}
+          <Tooltip content="Importar e exportar eventos (backup)">
+            <button
+              onClick={() => setGerenciarOpen(true)}
+              className={cn(
+                "flex items-center gap-2 px-3.5 py-2 text-sm font-bold rounded-lg",
+                "text-neutral-600 bg-white hover:bg-neutral-50 border border-neutral-200",
+                "shadow-sm hover:shadow transition-all active:scale-95",
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400",
+              )}
+              aria-label="Gerenciar eventos — importar e exportar"
+            >
+              <Settings2 size={18} strokeWidth={2.5} />
+              <span className="hidden sm:inline">Gerenciar</span>
+            </button>
+          </Tooltip>
+
+          {/* Exportar todos (.ics) — só aparece quando tem eventos */}
           {temEventos && (
             <div className="relative">
               <button
@@ -110,7 +132,6 @@ export function MeusEventos({
 
               {showBatchExport && (
                 <>
-                  {/* Overlay para fechar ao clicar fora */}
                   <div
                     className="fixed inset-0 z-10"
                     onClick={() => setShowBatchExport(false)}
@@ -237,7 +258,16 @@ export function MeusEventos({
         </div>
       )}
 
-      {/* Formulário modal */}
+      {/* Modal: Gerenciar Eventos */}
+      {gerenciarOpen && (
+        <GerenciarEventosModal
+          meusEventos={meusEventos}
+          onImportar={onImportar}
+          onClose={() => setGerenciarOpen(false)}
+        />
+      )}
+
+      {/* Modal: Formulário de criação/edição */}
       {formOpen && (
         <MeuEventoForm
           evento={editando}

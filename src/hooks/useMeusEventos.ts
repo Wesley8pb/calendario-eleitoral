@@ -65,11 +65,20 @@ export function useMeusEventos() {
     setMeusEventos((prev) => prev.filter((e) => e.id !== id));
   }, []);
 
+  const importarEventos = useCallback((eventos: EventoCustom[]) => {
+    const validos = eventos
+      .filter(isValidEvento)
+      .slice(0, MAX_MEUS_EVENTOS)
+      .sort((a, b) => a.data.localeCompare(b.data));
+    setMeusEventos(validos);
+  }, []);
+
   return {
     meusEventos,
     addEvento,
     editEvento,
     removeEvento,
+    importarEventos,
     totalMeusEventos: meusEventos.length,
     limiteAtingido: meusEventos.length >= MAX_MEUS_EVENTOS,
   };

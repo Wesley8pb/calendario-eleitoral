@@ -188,7 +188,7 @@ function App() {
         onLimpar={limparFiltros}
         eventosFiltrados={eventosFiltrados}
       />
-      <div className="flex-1 max-w-5xl w-full mx-auto px-3 sm:px-4 py-6 sm:py-8">
+      <div id="calendario-interativo" className="flex-1 max-w-5xl w-full mx-auto px-3 sm:px-4 py-6 sm:py-8">
         <main>
           <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-neutral-100">
             <div className="flex items-center gap-3">

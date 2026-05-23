@@ -81,7 +81,7 @@ export function MeusEventos({
   };
 
   return (
-    <section className="max-w-5xl w-full mx-auto px-3 sm:px-4 py-6 sm:py-8 border-t border-neutral-100">
+    <section id="meus-eventos" className="max-w-5xl w-full mx-auto px-3 sm:px-4 py-6 sm:py-8 border-t border-neutral-100">
       {/* Header da seção */}
       <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-neutral-100">
         <div className="flex items-center gap-3">

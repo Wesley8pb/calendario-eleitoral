@@ -1,6 +1,10 @@
-import { ExternalLink, Scale } from "lucide-react";
+import { ExternalLink, Scale, CalendarDays, BookMarked, ChevronDown } from "lucide-react";
 import { Countdown } from "../countdown/Countdown";
 import { RESOLUCAO_TSE } from "../../data/constants";
+
+function scrollTo(id: string) {
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
 
 export function Header() {
   return (
@@ -63,6 +67,27 @@ export function Header() {
         {/* Countdown */}
         <div className="mt-8">
           <Countdown />
+        </div>
+
+        {/* Botões de navegação rápida */}
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <button
+            onClick={() => scrollTo("calendario-interativo")}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-primary-800 bg-white hover:bg-white/90 shadow-md hover:shadow-lg transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary-800"
+          >
+            <CalendarDays size={17} strokeWidth={2.5} />
+            Calendário Interativo
+            <ChevronDown size={15} strokeWidth={2.5} className="opacity-60" />
+          </button>
+
+          <button
+            onClick={() => scrollTo("meus-eventos")}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-white bg-teal-600/80 hover:bg-teal-500/90 border border-teal-400/40 shadow-md hover:shadow-lg transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-300 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-800"
+          >
+            <BookMarked size={17} strokeWidth={2.5} />
+            Meus Eventos
+            <ChevronDown size={15} strokeWidth={2.5} className="opacity-60" />
+          </button>
         </div>
       </div>
     </header>

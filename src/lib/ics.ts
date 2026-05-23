@@ -1,4 +1,5 @@
 import type { EventoCalendario } from "../types";
+import type { EventoCustom } from "../types/custom";
 import type { CalendarReminder } from "../types/calendar";
 
 const CRLF = "\r\n";
@@ -143,6 +144,54 @@ export function buildEventsIcs(
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
     ...eventos.flatMap((evento) => buildVevent(evento, reminder, dtstamp)),
+    "END:VCALENDAR",
+  ];
+
+  return `${lines.map(foldIcsLine).join(CRLF)}${CRLF}`;
+}
+
+export function buildCustomEventIcs(
+  evento: EventoCustom,
+  reminder: CalendarReminder,
+): string {
+  return buildCustomEventsIcs([evento], reminder);
+}
+
+export function buildCustomEventsIcs(
+  eventos: EventoCustom[],
+  reminder: CalendarReminder,
+): string {
+  const dtstamp = formatUtcTimestamp(new Date());
+  const valarm = buildValarm(reminder);
+
+  const vevents = eventos.flatMap((evento) => {
+    const descricao = evento.descricao?.trim()
+      ? `${evento.descricao.trim()}\n\n${PROJECT_SIGNATURE}`
+      : PROJECT_SIGNATURE;
+
+    const lines = [
+      "BEGIN:VEVENT",
+      `UID:${evento.id}@calendario-eleitoral`,
+      `DTSTAMP:${dtstamp}`,
+      `SUMMARY:${escapeIcsText(evento.titulo)}`,
+      `DTSTART;VALUE=DATE:${formatDateValue(parseDateOnly(evento.data))}`,
+      `DTEND;VALUE=DATE:${getNextDayValue(evento.data)}`,
+      `DESCRIPTION:${escapeIcsText(descricao)}`,
+      "STATUS:CONFIRMED",
+      "TRANSP:OPAQUE",
+      ...(valarm ? valarm.split(CRLF) : []),
+      "END:VEVENT",
+    ];
+    return lines;
+  });
+
+  const lines = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    `PRODID:${PROD_ID}`,
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH",
+    ...vevents,
     "END:VCALENDAR",
   ];
 

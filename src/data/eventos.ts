@@ -1037,7 +1037,7 @@ export const eventos: EventoCalendario[] = [
         url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
       },
     ],
-    observacoes: "A data anterior (29 de junho) é o último dia para registro desses ASEs; após essa data, eles só surtirão efeito após as eleições. Além disso, os óbitos e suspensões a partir desta data deverão ser carimbados nos cadernos de votação com base em relatório extraído do ELO ou INFODIP.",
+    observacoes: "A data anterior (29 de junho) é o último dia para registro desses ASEs; após essa data, eles só surtirão efeito após as eleições. A alteração da situação somente se dará entre os dias 26 de outubro e 3 de novembro de 2026. Além disso, os óbitos e suspensões a partir desta data deverão ser carimbados nos cadernos de votação com base em relatório extraído do ELO ou INFODIP.",
   },
 
   // ══════════════════════════════════════════════════════════════════

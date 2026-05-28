@@ -1,5 +1,13 @@
 # Changelog
 
+## [2026-05-28] Eventos de junho 2026: atualização de observação para alteração de situação por código ASE
+
+**Arquivos modificados:**
+- `src/data/eventos.ts` — Inclusão da data de alteração da situação nas observações do evento `2026-06-30-4` (restrição de ASE).
+
+**Detalhes da alteração:**
+- Adicionado nas observações do evento de 30 de junho de 2026: *"A alteração da situação somente se dará entre os dias 26 de outubro e 3 de novembro de 2026."*
+
 ## [2026-05-23] Feature: Seção "Meus Eventos" com criação, edição e exportação .ics via localStorage
 
 Permite que o usuário registre até 20 eventos pessoais persistidos no `localStorage`, sem necessidade de backend. A seção aparece logo após o calendário interativo.

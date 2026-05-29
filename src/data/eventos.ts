@@ -866,7 +866,7 @@ export const eventos: EventoCalendario[] = [
         url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
       },
     ],
-    observacoes: "No sistema ELO, acessar 'Ajuste >> Banco de Erros >> Consulta', selecionar a situação 'Em Banco de Erros (Com erro e/ou Corrigido)' e acessar cada RAE listado para editar (se passível de correção) ou excluir (caso contrário). RAEs editados e gravados passarão automaticamente à situação 'FECHADO' e serão processados sem necessidade de ação adicional. Para erros do tipo 'CEP/LOGRADOURO INVÁLIDO' ou 'BAIRRO INEXISTENTE', pesquisar pelo CEP ou logradouro e selecionar o bairro na lista apresentada pelo sistema. Em caso de dificuldades, contatar a COGECAD ou a SESOC.",
+    observacoes: "No sistema ELO, acessar 'Ajuste >> Banco de Erros >> Consulta', selecionar a situação 'Em Banco de Erros (Com erro e/ou Corrigido)' e acessar cada RAE listado para editar (se passível de correção) ou excluir (caso contrário). RAEs editados e gravados passarão automaticamente à situação 'FECHADO' e serão processados sem necessidade de ação adicional. Para erros do tipo 'CEP/LOGRADOURO INVÁLIDO' ou 'BAIRRO INEXISTENTE', pesquisar pelo CEP ou logradouro e selecionar o bairro na lista apresentada pelo sistema. Em caso de dificuldades, contatar a seção ou coordenadoria responsável pelo Cadastro eleitoral em seu tribunal.",
   },
 
   {

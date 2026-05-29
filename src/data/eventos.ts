@@ -1272,7 +1272,7 @@ export const eventos: EventoCalendario[] = [
       },
     ],
     observacoes:
-      "Para instruções sobre o gerenciamento e operacionalização das convocações, consulte o [Manual do Convoca+](https://sticonhecimento.tse.jus.br/csele/secad/sistemas/elo/manual/processo-eleitoral/convoca/resolveuid/5a1cf205db6e445eb268e70dbedaac0c).",
+      "Para instruções sobre o gerenciamento e operacionalização das convocações, consulte o [Manual do Convoca+](https://sticonhecimento.tse.jus.br/csele/secad/sistemas/elo/manual/processo-eleitoral/convoca/resolveuid/5a1cf205db6e445eb268e70dbedaac0c) e assista ao [vídeo instrucional](https://www.youtube.com/watch?v=UZKJU5cktY8).",
   },
 
   {
@@ -2130,7 +2130,7 @@ export const eventos: EventoCalendario[] = [
       },
     ],
     observacoes:
-      "Para instruções sobre o gerenciamento e operacionalização das convocações, consulte o [Manual do Convoca+](https://sticonhecimento.tse.jus.br/csele/secad/sistemas/elo/manual/processo-eleitoral/convoca/resolveuid/5a1cf205db6e445eb268e70dbedaac0c).",
+      "Para instruções sobre o gerenciamento e operacionalização das convocações, consulte o [Manual do Convoca+](https://sticonhecimento.tse.jus.br/csele/secad/sistemas/elo/manual/processo-eleitoral/convoca/resolveuid/5a1cf205db6e445eb268e70dbedaac0c) e assista ao [vídeo instrucional](https://www.youtube.com/watch?v=UZKJU5cktY8).",
   },
 
   {

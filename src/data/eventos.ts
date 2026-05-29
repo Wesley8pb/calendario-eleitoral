@@ -1261,6 +1261,7 @@ export const eventos: EventoCalendario[] = [
     perfis: ["atos-preparatorios"],
     marcos: null,
     turno: null,
+    destaque: true,
     fundamentacao: [
       { norma: "Código Eleitoral", dispositivo: "art. 120, § 4º", url: "" },
       { norma: "Lei nº 9.504/1997", dispositivo: "art. 63, caput", url: "" },
@@ -1270,6 +1271,8 @@ export const eventos: EventoCalendario[] = [
         url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
       },
     ],
+    observacoes:
+      "Para instruções sobre o gerenciamento e operacionalização das convocações, consulte o [Manual do Convoca+](https://sticonhecimento.tse.jus.br/csele/secad/sistemas/elo/manual/processo-eleitoral/convoca/resolveuid/5a1cf205db6e445eb268e70dbedaac0c).",
   },
 
   {
@@ -2112,6 +2115,7 @@ export const eventos: EventoCalendario[] = [
     perfis: ["atos-preparatorios"],
     marcos: "60 dias antes do 1º turno",
     turno: null,
+    destaque: true,
     fundamentacao: [
       {
         norma: "Código Eleitoral",
@@ -2125,6 +2129,8 @@ export const eventos: EventoCalendario[] = [
         url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
       },
     ],
+    observacoes:
+      "Para instruções sobre o gerenciamento e operacionalização das convocações, consulte o [Manual do Convoca+](https://sticonhecimento.tse.jus.br/csele/secad/sistemas/elo/manual/processo-eleitoral/convoca/resolveuid/5a1cf205db6e445eb268e70dbedaac0c).",
   },
 
   {

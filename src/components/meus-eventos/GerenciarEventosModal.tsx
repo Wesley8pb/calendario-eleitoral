@@ -36,6 +36,8 @@ function isEventoValido(val: unknown): val is EventoCustom {
     /^\d{4}-\d{2}-\d{2}$/.test(v.data) &&
     typeof v.titulo === "string" &&
     v.titulo.trim().length > 0 &&
+    v.titulo.trim().length <= 120 &&
+    (v.descricao === undefined || typeof v.descricao === "string") &&
     typeof v.cor === "string" &&
     typeof v.criadoEm === "string"
   );

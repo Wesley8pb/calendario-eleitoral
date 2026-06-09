@@ -1,5 +1,16 @@
 # Changelog
 
+## [2026-06-09] Segurança: validação reforçada na importação de "Meus Eventos"
+
+Endurece a validação de eventos importados via arquivo `.json` para ficar consistente com as regras do formulário e evitar a entrada de dados malformados no `localStorage`.
+
+**Arquivos modificados:**
+- `src/hooks/useMeusEventos.ts` — `isValidEvento` agora rejeita `titulo` com mais de 120 caracteres e valida que `descricao`, quando presente, seja string.
+- `src/components/meus-eventos/GerenciarEventosModal.tsx` — `isEventoValido` recebe as mesmas verificações (limite de 120 caracteres no `titulo` e checagem de tipo de `descricao`).
+
+**Detalhes da alteração:**
+- Antes, o limite de 120 caracteres no título e a obrigatoriedade de `descricao` ser texto eram garantidos apenas pelo formulário; a importação de arquivo não os aplicava. Agora ambos os caminhos compartilham as mesmas regras.
+
 ## [2026-05-28] Eventos de junho 2026: atualização de observação para alteração de situação por código ASE
 
 **Arquivos modificados:**

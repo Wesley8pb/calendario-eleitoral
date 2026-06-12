@@ -1947,6 +1947,8 @@ export const eventos: EventoCalendario[] = [
         url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026",
       },
     ],
+    observacoes:
+      "As alocações provisórias podem ser realizadas até a véspera da eleição, devendo a ação ser planejada e tomado o cuidado de realizar a divulgação para as eleitoras e os eleitores. Cabe destacar que as alocações provisórias também se refletem no e-Título do eleitor.",
   },
 
   {

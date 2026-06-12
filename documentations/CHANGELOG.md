@@ -1,5 +1,13 @@
 # Changelog
 
+## [2026-06-12] Eventos de julho 2026: atualização de observação para alocação provisória
+
+**Arquivos modificados:**
+- `src/data/eventos.ts` — Inclusão de observação no evento de início do prazo para cadastramento de alocação temporária (`2026-07-23-1`).
+
+**Detalhes da alteração:**
+- Adicionado nas observações do evento de 23 de julho de 2026: *"As alocações provisórias podem ser realizadas até a véspera da eleição, devendo a ação ser planejada e tomado o cuidado de realizar a divulgação para as eleitoras e os eleitores. Cabe destacar que as alocações provisórias também se refletem no e-Título do eleitor."*
+
 ## [2026-06-09] Segurança: validação reforçada na importação de "Meus Eventos"
 
 Endurece a validação de eventos importados via arquivo `.json` para ficar consistente com as regras do formulário e evitar a entrada de dados malformados no `localStorage`.

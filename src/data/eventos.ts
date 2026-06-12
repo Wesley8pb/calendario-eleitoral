@@ -1395,7 +1395,7 @@ export const eventos: EventoCalendario[] = [
       },
     ],
     observacoes:
-      "A partir desta data é possível consultar online quais locais de votação têm vagas para o voto em trânsito (votar fora da sua seção de origem).",
+      "A partir desta data é possível consultar online quais locais de votação têm vagas para o voto em trânsito (votar fora da sua seção de origem). Para a transferência temporária (TTE) de militares, policiais e servidores em serviço no dia da eleição, acesse a [Extranet do TSE](https://extranet.tse.jus.br/justica-eleitoral/tribunais-regionais-eleitorais?activeAccordion=b6d4def7-2ec5-42a8-8306-231c08c88e42) para baixar o documento 'Requerimento de Eleitores Transferidos Temporariamente e especificações'.",
   },
 
   {
@@ -1884,16 +1884,16 @@ export const eventos: EventoCalendario[] = [
     titulo:
       "Início da habilitação para voto em trânsito e transferência temporária de seção (até 20/08/2026)",
     descricao:
-      "Data a partir da qual, até 20 (vinte) de agosto de 2026, poderão habilitar-se, na Justiça Eleitoral, para votar em outra seção ou em outro local de votação: I - a eleitora ou o eleitor em trânsito no solo brasileiro, por meio do autoatendimento ou mediante comparecimento ao Cartório Eleitoral; II - presas e presos provisórios e adolescentes em unidades de internação, mediante formulário próprio encaminhado pela administração dos estabelecimentos penais e das unidades de internação de adolescentes; III - militares e agentes de segurança pública em serviço no dia da eleição, mediante listagem encaminhada pela chefia ou comando do órgão ao qual estiverem subordinados; IV - pessoas com deficiência ou com mobilidade reduzida; V - indígenas, quilombolas, integrantes das demais comunidades tradicionais e residentes de assentamentos rurais; VI - Juízas e Juízes Eleitorais, Juízas e Juízes auxiliares, servidoras e servidores da Justiça Eleitoral e promotoras e promotores eleitorais em serviço no dia das eleições, mediante listagem encaminhada pelo órgão ou pela unidade a que estiver vinculada(o) a eleitora ou o eleitor; e VII - pessoas em situação de rua (Resolução nº 425/2021/CNJ).",
+      "Data a partir da qual, até 20 (vinte) de agosto de 2026, poderão habilitar-se, na Justiça Eleitoral, para votar em outra seção ou em outro local de votação: I - a eleitora ou o eleitor em trânsito no solo brasileiro, por meio do autoatendimento ou mediante comparecimento ao Cartório Eleitoral; II - presas e presos provisórios e adolescentes in unidades de internação, mediante formulário próprio encaminhado pela administração dos estabelecimentos penais e das unidades de internação de adolescentes; III - militares e agentes de segurança pública em serviço no dia da eleição, mediante listagem encaminhada pela chefia ou comando do órgão ao qual estiverem subordinados; IV - pessoas com deficiência ou com mobilidade reduzida; V - indígenas, quilombolas, integrantes das demais comunidades tradicionais e residentes de assentamentos rurais; VI - Juízas e Juízes Eleitorais, Juízas e Juízes auxiliares, servidoras e servidores da Justiça Eleitoral e promotoras e promotores eleitorais em serviço no dia das eleições, mediante listagem encaminhada pelo órgão ou pela unidade a que estiver vinculada(o) a eleitora ou o eleitor; e VII - pessoas em situação de rua (Resolução nº 425/2021/CNJ).",
     categorias: ["ELE"],
-    perfis: ["eleitor"],
+    perfis: ["eleitor", "atos-preparatorios"],
     marcos: null,
     turno: null,
     fundamentacao: [
       { norma: "Resolução nº 425/2021/CNJ", dispositivo: "caput", url: "" },
     ],
     observacoes:
-      "Eleitores em situações especiais (viagem, internação, serviço no dia da eleição, deficiência, etc.) podem solicitar o voto em trânsito — votar fora da sua seção de origem — até 20/08/2026.",
+      "Eleitores em situações especiais (viagem, internação, serviço no dia da eleição, deficiência, etc.) podem solicitar o voto em trânsito — votar fora da sua seção de origem — até 20/08/2026. Para a transferência temporária (TTE) de militares, policiais e servidores em serviço no dia da eleição, acesse a [Extranet do TSE](https://extranet.tse.jus.br/justica-eleitoral/tribunais-regionais-eleitorais?activeAccordion=b6d4def7-2ec5-42a8-8306-231c08c88e42) para baixar o documento 'Requerimento de Eleitores Transferidos Temporariamente e especificações'.",
   },
 
   {

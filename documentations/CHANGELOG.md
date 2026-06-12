@@ -1,12 +1,13 @@
 # Changelog
 
-## [2026-06-12] Eventos de julho 2026: atualização de observação para alocação provisória
+## [2026-06-12] Atualizações de observações operacionais (julho 2026)
 
 **Arquivos modificados:**
-- `src/data/eventos.ts` — Inclusão de observação no evento de início do prazo para cadastramento de alocação temporária (`2026-07-23-1`).
+- `src/data/eventos.ts` — Atualização de observações nos eventos de alocação provisória (`2026-07-23-1`), consulta de locais/vagas para TTE (`2026-07-19-1`) e início da habilitação para TTE/voto em trânsito (`2026-07-20-20`).
 
 **Detalhes da alteração:**
-- Adicionado nas observações do evento de 23 de julho de 2026: *"As alocações provisórias podem ser realizadas até a véspera da eleição, devendo a ação ser planejada e tomado o cuidado de realizar a divulgação para as eleitoras e os eleitores. Cabe destacar que as alocações provisórias também se refletem no e-Título do eleitor."*
+- Evento `2026-07-23-1` (23 de julho de 2026): adicionada observação destacando que alocações provisórias podem ocorrer até a véspera da eleição (com necessidade de planejamento e divulgação) e que refletem no e-Título.
+- Eventos `2026-07-19-1` (19 de julho de 2026) e `2026-07-20-20` (20 de julho de 2026): adicionado hiperlink para a Extranet do TSE e orientação de download do documento *"Requerimento de Eleitores Transferidos Temporariamente e especificações"* para a transferência temporária de militares, policiais e servidores da Justiça Eleitoral em serviço no dia da eleição. No evento do dia 20/07, também foi incluído o perfil `atos-preparatorios` para melhor visibilidade administrativa.
 
 ## [2026-06-09] Segurança: validação reforçada na importação de "Meus Eventos"
 

@@ -1,6 +1,7 @@
 // Datas fixas das Eleições 2026 — Resolução TSE nº 23.760/2026
-export const PRIMEIRO_TURNO = new Date("2026-10-04T00:00:00");
-export const SEGUNDO_TURNO = new Date("2026-10-25T00:00:00");
+// Abertura da votação às 08:00 (horário de Brasília, UTC-3)
+export const PRIMEIRO_TURNO = new Date("2026-10-04T08:00:00-03:00");
+export const SEGUNDO_TURNO = new Date("2026-10-25T08:00:00-03:00");
 export const DIPLOMACAO = new Date("2026-12-18T00:00:00");
 
 // Referência normativa

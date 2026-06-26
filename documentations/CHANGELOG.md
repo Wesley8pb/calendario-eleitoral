@@ -1,5 +1,12 @@
 # Changelog
 
+## [2026-06-26] Contador regressivo: alvo ajustado para 08:00 (horário de Brasília)
+
+O contador passava a zerar à meia-noite (00:00) do dia da eleição, no horário local do navegador. Agora mira a abertura da votação, às 08:00 no fuso de Brasília (UTC-3), para qualquer usuário independentemente do fuso do dispositivo.
+
+**Arquivos modificados:**
+- `src/data/constants.ts` — `PRIMEIRO_TURNO` e `SEGUNDO_TURNO` passam de `2026-10-04T00:00:00`/`2026-10-25T00:00:00` (hora local) para `2026-10-04T08:00:00-03:00`/`2026-10-25T08:00:00-03:00` (08:00 horário de Brasília).
+
 ## [2026-06-12] Atualizações de observações operacionais (julho 2026)
 
 **Arquivos modificados:**

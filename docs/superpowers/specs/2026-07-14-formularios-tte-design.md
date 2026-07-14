@@ -31,3 +31,7 @@ As observações continuarão armazenadas como texto com links no formato Markdo
 - Serão executados os testes pertinentes, verificação de tipos, lint e build de produção.
 - A apresentação será conferida em largura móvel de 375 px e em desktop.
 - A mudança será registrada em `Documentations/CHANGELOG.md`.
+
+## Adendo: evento em destaque
+
+O evento `2026-07-20-20` será marcado com `destaque: true`, reutilizando o tratamento visual nativo do `EventCard`. Nenhum outro evento de 20 de julho ou 20 de agosto terá sua condição de destaque alterada. Por decisão do responsável, a conferência será feita visualmente no localhost, sem testes automatizados nesta sessão.

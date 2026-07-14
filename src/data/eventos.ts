@@ -1889,6 +1889,7 @@ export const eventos: EventoCalendario[] = [
     perfis: ["eleitor", "atos-preparatorios"],
     marcos: null,
     turno: null,
+    destaque: true,
     fundamentacao: [
       { norma: "Resolução nº 425/2021/CNJ", dispositivo: "caput", url: "" },
     ],

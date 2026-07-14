@@ -5,7 +5,7 @@
 Os eventos de início e encerramento da habilitação para voto em trânsito agora oferecem acesso direto aos quatro formulários de transferência temporária de eleitores disponibilizados pelo TRE-PB.
 
 **Arquivos modificados:**
-- `src/data/eventos.ts` — substituição do link genérico da Extranet pelos formulários para presos provisórios, militares, membros e servidores da Justiça Eleitoral e pessoas em serviço em unidades penais ou de internação nos eventos `2026-07-20-20` e `2026-08-20-1`.
+- `src/data/eventos.ts` — substituição do link genérico da Extranet pelos formulários para presos provisórios, militares, membros e servidores da Justiça Eleitoral e pessoas em serviço em unidades penais ou de internação nos eventos `2026-07-20-20` e `2026-08-20-1`; o evento `2026-07-20-20` também foi marcado como destaque.
 - `src/components/timeline/EventDetail.tsx` — preservação das quebras de linha nas observações para exibir os formulários em lista vertical.
 - `.gitignore` — inclusão da pasta local `.worktrees/` entre os caminhos ignorados pelo Git.
 - `docs/superpowers/specs/2026-07-14-formularios-tte-design.md` — especificação aprovada da alteração.

@@ -1893,7 +1893,7 @@ export const eventos: EventoCalendario[] = [
       { norma: "Resolução nº 425/2021/CNJ", dispositivo: "caput", url: "" },
     ],
     observacoes:
-      "Eleitores em situações especiais (viagem, internação, serviço no dia da eleição, deficiência, etc.) podem solicitar o voto em trânsito — votar fora da sua seção de origem — até 20/08/2026. Para a transferência temporária (TTE) de militares, policiais e servidores em serviço no dia da eleição, acesse a [Extranet do TSE](https://extranet.tse.jus.br/justica-eleitoral/tribunais-regionais-eleitorais?activeAccordion=b6d4def7-2ec5-42a8-8306-231c08c88e42) para baixar o documento 'Requerimento de Eleitores Transferidos Temporariamente e especificações'.",
+      "Eleitores em situações especiais (viagem, internação, serviço no dia da eleição, deficiência, etc.) podem solicitar o voto em trânsito — votar fora da sua seção de origem — até 20/08/2026. Formulários para transferência temporária (TTE):\n• [Presos provisórios](https://www.tre-pb.jus.br/eleicoes/e/arquivos/tre-pb-requerimento-tte-presos-provisorios/@@display-file/file/TRE-PB-requerimento-tte-presos-provisorios.pdf)\n• [Militares](https://www.tre-pb.jus.br/eleicoes/e/arquivos/tre-pb-requerimento-tte-militares-em-transito/@@display-file/file/TRE-PB-requerimento-tte-militares-em-transito.pdf)\n• [Juízas, juízes, promotoras, promotores eleitorais e servidoras e servidores da Justiça Eleitoral](https://www.tre-pb.jus.br/eleicoes/e/arquivos/tre-pb-requerimento-tte-servidores-justica-eleitoral/@@display-file/file/TRE-PB-requerimento-tte-servidores-justica-eleitoral.pdf)\n• [Pessoas em serviço em unidades penais ou de internação](https://www.tre-pb.jus.br/eleicoes/e/arquivos/tre-pb-requerimento-tte-pessoal-estabelecimento-penal-unidades-de-internacao/@@display-file/file/TRE-PB-requerimento-tte-pessoal-estabelecimento-penal-unidades-de-internacao.pdf)",
   },
 
   {
@@ -2838,7 +2838,7 @@ export const eventos: EventoCalendario[] = [
       { norma: "Resolução nº 425/2021/CNJ", dispositivo: "caput", url: "" },
     ],
     observacoes:
-      "Último prazo para eleitores em situações especiais (viagem, serviço de mesário, militar em serviço, pessoa com deficiência, etc.) solicitarem o voto em trânsito.",
+      "Último prazo para eleitores em situações especiais (viagem, serviço de mesário, militar em serviço, pessoa com deficiência, etc.) solicitarem o voto em trânsito. Formulários para transferência temporária (TTE):\n• [Presos provisórios](https://www.tre-pb.jus.br/eleicoes/e/arquivos/tre-pb-requerimento-tte-presos-provisorios/@@display-file/file/TRE-PB-requerimento-tte-presos-provisorios.pdf)\n• [Militares](https://www.tre-pb.jus.br/eleicoes/e/arquivos/tre-pb-requerimento-tte-militares-em-transito/@@display-file/file/TRE-PB-requerimento-tte-militares-em-transito.pdf)\n• [Juízas, juízes, promotoras, promotores eleitorais e servidoras e servidores da Justiça Eleitoral](https://www.tre-pb.jus.br/eleicoes/e/arquivos/tre-pb-requerimento-tte-servidores-justica-eleitoral/@@display-file/file/TRE-PB-requerimento-tte-servidores-justica-eleitoral.pdf)\n• [Pessoas em serviço em unidades penais ou de internação](https://www.tre-pb.jus.br/eleicoes/e/arquivos/tre-pb-requerimento-tte-pessoal-estabelecimento-penal-unidades-de-internacao/@@display-file/file/TRE-PB-requerimento-tte-pessoal-estabelecimento-penal-unidades-de-internacao.pdf)",
   },
 
   {

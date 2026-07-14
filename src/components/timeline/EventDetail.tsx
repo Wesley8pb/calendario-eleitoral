@@ -75,7 +75,7 @@ export function EventDetail({ evento }: EventDetailProps) {
       {evento.observacoes && (
         <div className="flex gap-2 rounded-lg bg-primary-100/50 border border-primary-200/60 p-3">
           <Info size={16} className="flex-shrink-0 text-primary-500 mt-0.5" />
-          <p className="text-xs text-primary-700 leading-relaxed">
+          <p className="text-xs text-primary-700 leading-relaxed whitespace-pre-line break-words">
             {parseObservacoes(evento.observacoes!)}
           </p>
         </div>

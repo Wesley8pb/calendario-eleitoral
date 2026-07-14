@@ -22,6 +22,7 @@ O site passa a reunir 28 referências oficiais em uma seção própria após “
 **Validação:**
 - Catálogo confirmado com 28 referências únicas nas contagens aprovadas: 5 leis e códigos, 12 resoluções e normas, 4 formulários TTE, 6 manuais e orientações e 1 portal oficial.
 - Verificação automatizada confirma a presença da Resolução TSE nº 23.610/2019, do Manual ELO de TTE e de todas as URLs informativas usadas nos eventos.
+- Revisão pré-publicação ajustou a Resolução TSE nº 9.641/1974 para sua página oficial específica, em substituição ao índice geral de resoluções.
 - Type-check, build de produção e lint dos arquivos alterados concluídos sem erros.
 - O lint global ainda aponta seis ocorrências preexistentes em `HelpToast.tsx`, `search.ts` e `tests/security.test.ts`, não modificados nesta entrega.
 

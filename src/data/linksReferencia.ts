@@ -149,7 +149,7 @@ export const linksReferencia: readonly LinkReferencia[] = [
   {
     id: "res-tse-9641-1974",
     titulo: "Resolução TSE nº 9.641/1974 — Transporte e alimentação de eleitores",
-    url: "https://www.tse.jus.br/legislacao/codigo-eleitoral/normas-editadas-pelo-tse",
+    url: "https://www.tse.jus.br/legislacao/compilada/res/1974/resolucao-ndeg-9-641-de-29-de-agosto-de-1974",
     categoria: "resolucoes-normas",
   },
   {

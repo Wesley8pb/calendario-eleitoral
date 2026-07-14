@@ -1,5 +1,19 @@
 # Changelog
 
+## [2026-07-14] Formulários de transferência temporária individualizados
+
+Os eventos de início e encerramento da habilitação para voto em trânsito agora oferecem acesso direto aos quatro formulários de transferência temporária de eleitores disponibilizados pelo TRE-PB.
+
+**Arquivos modificados:**
+- `src/data/eventos.ts` — substituição do link genérico da Extranet pelos formulários para presos provisórios, militares, membros e servidores da Justiça Eleitoral e pessoas em serviço em unidades penais ou de internação nos eventos `2026-07-20-20` e `2026-08-20-1`.
+- `src/components/timeline/EventDetail.tsx` — preservação das quebras de linha nas observações para exibir os formulários em lista vertical.
+- `.gitignore` — inclusão da pasta local `.worktrees/` entre os caminhos ignorados pelo Git.
+- `docs/superpowers/specs/2026-07-14-formularios-tte-design.md` — especificação aprovada da alteração.
+- `docs/superpowers/plans/2026-07-14-formularios-tte.md` — plano de implementação da alteração.
+
+**Validação:**
+- Testes automatizados dispensados por solicitação do responsável, que realizará a conferência visual pelo ambiente localhost.
+
 ## [2026-06-26] Contador regressivo: alvo ajustado para 08:00 (horário de Brasília)
 
 O contador passava a zerar à meia-noite (00:00) do dia da eleição, no horário local do navegador. Agora mira a abertura da votação, às 08:00 no fuso de Brasília (UTC-3), para qualquer usuário independentemente do fuso do dispositivo.

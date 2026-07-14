@@ -1,3 +1,5 @@
+import { getLinkReferencia } from "./linksReferencia";
+
 // Datas fixas das Eleições 2026 — Resolução TSE nº 23.760/2026
 // Abertura da votação às 08:00 (horário de Brasília, UTC-3)
 export const PRIMEIRO_TURNO = new Date("2026-10-04T08:00:00-03:00");
@@ -8,6 +10,6 @@ export const DIPLOMACAO = new Date("2026-12-18T00:00:00");
 export const RESOLUCAO_TSE = {
   numero: "nº 23.760/2026",
   titulo: "Resolução TSE nº 23.760/2026",
-  url: "https://www.tse.jus.br/eleicoes/eleicoes-2026-content/normas-e-documentacoes/arquivos-2026/resolucao-e-voto-calendario/@@display-file/file/Resolucao-e-voto-calendario.pdf",
+  url: getLinkReferencia("res-tse-23760-2026").url,
   dje: "04/03/2026",
 };

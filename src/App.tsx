@@ -9,6 +9,7 @@ import { Timeline } from "./components/timeline/Timeline";
 import { FilterPanel } from "./components/filters/FilterPanel";
 import { FilterSummary } from "./components/filters/FilterSummary";
 import { MeusEventos } from "./components/meus-eventos/MeusEventos";
+import { LinksReferencia } from "./components/links-referencia/LinksReferencia";
 import { eventos } from "./data/eventos";
 import { useFilteredEvents } from "./hooks/useFilteredEvents";
 import { useUrlFilters } from "./hooks/useUrlFilters";
@@ -297,6 +298,7 @@ function App() {
         onImportar={importarEventos}
         limiteAtingido={limiteAtingido}
       />
+      <LinksReferencia />
       <FilterPanel
         filtros={filtros}
         onChange={setFiltros}

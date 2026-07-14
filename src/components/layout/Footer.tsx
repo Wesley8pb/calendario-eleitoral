@@ -1,5 +1,9 @@
 import { ExternalLink, Scale, Instagram } from "lucide-react";
 import { RESOLUCAO_TSE } from "../../data/constants";
+import { getLinkReferencia } from "../../data/linksReferencia";
+
+const resolucaoCalendario = getLinkReferencia("res-tse-23760-2026");
+const resolucaoCadastro = getLinkReferencia("res-tse-23750-2026");
 
 export function Footer() {
   const ano = new Date().getFullYear();
@@ -13,17 +17,17 @@ export function Footer() {
           <p className="text-sm text-center">
             Dados extraídos da{" "}
             <a
-              href={RESOLUCAO_TSE.url}
+              href={resolucaoCalendario.url}
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/90 underline underline-offset-2 hover:text-white transition-colors inline-flex items-center gap-1"
             >
-              {RESOLUCAO_TSE.titulo}
+              Resolução TSE nº 23.760/2026
               <ExternalLink size={11} />
             </a>{" "}
             e da{" "}
             <a
-              href="https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026"
+              href={resolucaoCadastro.url}
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/90 underline underline-offset-2 hover:text-white transition-colors inline-flex items-center gap-1"

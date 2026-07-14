@@ -1,5 +1,30 @@
 # Changelog
 
+## [2026-07-14] Central de links de referência
+
+O site passa a reunir 28 referências oficiais em uma seção própria após “Meus Eventos”, organizada em cinco categorias. Um novo botão no header leva diretamente à seção, e uma verificação de integridade garante que links informativos usados nos eventos também estejam presentes no catálogo central.
+
+**Arquivos criados:**
+- `src/data/linksReferencia.ts` — catálogo imutável com leis, resoluções, formulários TTE, manuais, orientações e portais oficiais, além de consulta por identificador.
+- `src/components/links-referencia/LinksReferencia.tsx` — seção responsiva em cards, com uma coluna no mobile, duas no desktop e links externos acessíveis.
+- `tests/links-referencia.test.ts` — verificação de quantidade, categorização, duplicidades, HTTPS e cobertura das URLs informativas dos eventos.
+- `docs/superpowers/specs/2026-07-14-links-referencia-design.md` — especificação visual e funcional aprovada.
+- `docs/superpowers/plans/2026-07-14-links-referencia.md` — plano técnico da implementação.
+
+**Arquivos modificados:**
+- `src/components/layout/Header.tsx` — inclusão do botão “Links de referência” e consumo centralizado das duas resoluções exibidas no topo.
+- `src/components/layout/Footer.tsx` — substituição das URLs repetidas das resoluções por consultas ao catálogo; o Instagram permanece apenas como crédito pessoal.
+- `src/App.tsx` — posicionamento da nova seção após “Meus Eventos” e antes do rodapé.
+- `src/data/constants.ts` — URL da Resolução TSE nº 23.760/2026 passa a ser obtida do catálogo.
+- `src/data/eventos.ts` — normalização da URL da Resolução TSE nº 23.659/2021 para o endereço canônico catalogado.
+- `README.md` — documentação da regra obrigatória de manutenção do catálogo.
+
+**Validação:**
+- Catálogo confirmado com 28 referências únicas nas contagens aprovadas: 5 leis e códigos, 12 resoluções e normas, 4 formulários TTE, 6 manuais e orientações e 1 portal oficial.
+- Verificação automatizada confirma a presença da Resolução TSE nº 23.610/2019, do Manual ELO de TTE e de todas as URLs informativas usadas nos eventos.
+- Type-check, build de produção e lint dos arquivos alterados concluídos sem erros.
+- O lint global ainda aponta seis ocorrências preexistentes em `HelpToast.tsx`, `search.ts` e `tests/security.test.ts`, não modificados nesta entrega.
+
 ## [2026-07-14] Formulários de transferência temporária individualizados
 
 Os eventos de início e encerramento da habilitação para voto em trânsito agora oferecem acesso direto aos quatro formulários de transferência temporária de eleitores disponibilizados pelo TRE-PB.

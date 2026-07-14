@@ -118,6 +118,22 @@ O sistema permite exportar eventos em formato `.ics`, compatível com apps como 
 
 ---
 
+## 🔗 Links de referência
+
+A seção **Links de referência**, exibida após “Meus Eventos”, reúne em categorias todas as leis, normas, formulários, manuais e páginas oficiais citados pelo site. Sua fonte única é `src/data/linksReferencia.ts`.
+
+Ao incluir um novo link informativo em um evento, em `observacoes`, em `fundamentacao` ou em outro componente do site, cadastre simultaneamente a mesma URL nesse catálogo. A única exceção são links expressamente usados como crédito pessoal, como o Instagram do autor no rodapé.
+
+Depois de editar referências, execute a verificação de integridade:
+
+```bash
+node tests/links-referencia.test.ts
+```
+
+O teste rejeita IDs e URLs duplicados e confirma que todos os links informativos presentes em `src/data/eventos.ts` também estão catalogados.
+
+---
+
 ## ➕ Como adicionar ou editar eventos
 
 Todos os eventos estão em `src/data/eventos.ts`. Cada evento segue a interface:

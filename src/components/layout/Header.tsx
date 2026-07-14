@@ -1,6 +1,9 @@
-import { ExternalLink, Scale, CalendarDays, BookMarked, ChevronDown } from "lucide-react";
+import { ExternalLink, Scale, CalendarDays, BookMarked, ChevronDown, Link2 } from "lucide-react";
 import { Countdown } from "../countdown/Countdown";
-import { RESOLUCAO_TSE } from "../../data/constants";
+import { getLinkReferencia } from "../../data/linksReferencia";
+
+const resolucaoCalendario = getLinkReferencia("res-tse-23760-2026");
+const resolucaoCadastro = getLinkReferencia("res-tse-23750-2026");
 
 function scrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -44,17 +47,17 @@ export function Header() {
         {/* Resolution links */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mt-4">
           <a
-            href={RESOLUCAO_TSE.url}
+            href={resolucaoCalendario.url}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-xs text-white/60 hover:text-white/90 transition-colors underline underline-offset-2"
           >
-            {RESOLUCAO_TSE.titulo}
+            Resolução TSE nº 23.760/2026
             <ExternalLink size={11} />
           </a>
           <span className="hidden sm:inline text-white/30 text-xs select-none">•</span>
           <a
-            href="https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-750-de-26-de-fevereiro-de-2026"
+            href={resolucaoCadastro.url}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-xs text-white/60 hover:text-white/90 transition-colors underline underline-offset-2"
@@ -86,6 +89,15 @@ export function Header() {
           >
             <BookMarked size={17} strokeWidth={2.5} />
             Meus Eventos
+            <ChevronDown size={15} strokeWidth={2.5} className="opacity-60" />
+          </button>
+
+          <button
+            onClick={() => scrollTo("links-referencia")}
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-primary-900 bg-secondary-500 hover:bg-secondary-100 border border-secondary-500/70 shadow-md hover:shadow-lg transition-all active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-primary-800"
+          >
+            <Link2 size={17} strokeWidth={2.5} />
+            Links de referência
             <ChevronDown size={15} strokeWidth={2.5} className="opacity-60" />
           </button>
         </div>

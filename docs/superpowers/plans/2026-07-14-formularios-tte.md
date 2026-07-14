@@ -202,3 +202,34 @@ Expected: nenhum erro de whitespace; somente os arquivos previstos aparecem no e
 git add -- Documentations/CHANGELOG.md
 git commit -m "docs: registra formularios individualizados de TTE"
 ```
+
+### Task 4: Marcar o evento de 20 de julho como destaque
+
+**Files:**
+- Modify: `src/data/eventos.ts:1888-1892`
+- Modify: `documentations/CHANGELOG.md:3-16`
+
+> Exceção aprovada pelo responsável: não criar nem executar testes automatizados nesta sessão; a conferência será feita visualmente no localhost.
+
+- [ ] **Step 1: Ativar o destaque no evento correto**
+
+Adicionar a propriedade abaixo ao evento `2026-07-20-20`, após `turno`:
+
+```typescript
+    destaque: true,
+```
+
+- [ ] **Step 2: Registrar a categorização no changelog**
+
+Acrescentar à lista de alterações de `src/data/eventos.ts` que o evento `2026-07-20-20` foi marcado como destaque.
+
+- [ ] **Step 3: Conferir no localhost**
+
+Abrir `http://127.0.0.1:5173/?mes=2026-07` e confirmar que o evento exibe o badge “Destaque” e o tratamento visual correspondente.
+
+- [ ] **Step 4: Versionar a alteração**
+
+```powershell
+git add -- src/data/eventos.ts documentations/CHANGELOG.md
+git commit -m "feat: destaca evento de habilitacao para TTE"
+```

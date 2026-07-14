@@ -113,8 +113,8 @@ Uma verificação automatizada deverá:
 
 ## Documentação
 
-- Atualizar `Documentations/PRD.md` com a nova seção e a regra obrigatória de manutenção do catálogo.
-- Registrar todos os arquivos alterados em `Documentations/CHANGELOG.md`.
+- Atualizar `README.md` com a nova seção e a regra obrigatória de manutenção do catálogo. O repositório atual não possui `Documentations/PRD.md` versionado.
+- Registrar todos os arquivos alterados em `documentations/CHANGELOG.md`.
 - Não atualizar o roadmap, pois a feature será entregue na mesma sessão de desenvolvimento e não altera a direção futura do produto.
 
 ## Verificação da implementação

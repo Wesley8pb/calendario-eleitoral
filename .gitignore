@@ -79,6 +79,7 @@ Documentations/
 .agents/
 .claude/
 .gemini/
+.worktrees/
 nul
 
 # Playwright

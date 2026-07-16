@@ -1,5 +1,15 @@
 # Changelog
 
+## [2026-07-16] Rótulo do mês nos marcadores da timeline
+
+Inclui a abreviação do mês em cinza discreto sob todos os círculos de data para facilitar a orientação temporal durante a rolagem do calendário, sem aumentar o espaçamento vertical entre os eventos.
+
+**Arquivos modificados:**
+- `src/components/timeline/DateMarker.tsx` — extrai o mês da data ISO e exibe a abreviação em três letras, com posicionamento absoluto e identificação acessível do nome completo.
+- `Documentations/CHANGELOG.md` — registra a melhoria visual.
+- `docs/superpowers/specs/2026-07-16-month-label-date-marker-design.md` — documenta a decisão visual aprovada.
+- `docs/superpowers/plans/2026-07-16-month-label-date-marker.md` — registra o plano de implementação executado.
+
 ## [2026-07-14] Central de links de referência
 
 O site passa a reunir 28 referências oficiais em uma seção própria após “Meus Eventos”, organizada em cinco categorias. Um novo botão no header leva diretamente à seção, e uma verificação de integridade garante que links informativos usados nos eventos também estejam presentes no catálogo central.

@@ -7,14 +7,30 @@ interface DateMarkerProps {
   eventCount: number;
 }
 
+const MESES = [
+  { abreviacao: "JAN", nome: "janeiro" },
+  { abreviacao: "FEV", nome: "fevereiro" },
+  { abreviacao: "MAR", nome: "março" },
+  { abreviacao: "ABR", nome: "abril" },
+  { abreviacao: "MAI", nome: "maio" },
+  { abreviacao: "JUN", nome: "junho" },
+  { abreviacao: "JUL", nome: "julho" },
+  { abreviacao: "AGO", nome: "agosto" },
+  { abreviacao: "SET", nome: "setembro" },
+  { abreviacao: "OUT", nome: "outubro" },
+  { abreviacao: "NOV", nome: "novembro" },
+  { abreviacao: "DEZ", nome: "dezembro" },
+] as const;
+
 export function DateMarker({
   data,
   diaSemana,
   marcos,
   eventCount,
 }: DateMarkerProps) {
-  const [, , day] = data.split("-");
+  const [, month, day] = data.split("-");
   const dayNum = parseInt(day, 10);
+  const mes = MESES[Number(month) - 1];
 
   return (
     <div className="flex items-start gap-3 relative">
@@ -29,6 +45,14 @@ export function DateMarker({
         >
           {dayNum}
         </div>
+        {mes && (
+          <span
+            className="absolute top-11 left-1/2 -translate-x-1/2 bg-neutral-50 px-1 text-[10px] font-semibold leading-none tracking-[0.08em] text-neutral-400"
+            aria-label={`Mês de ${mes.nome}`}
+          >
+            {mes.abreviacao}
+          </span>
+        )}
       </div>
 
       {/* Info do dia */}

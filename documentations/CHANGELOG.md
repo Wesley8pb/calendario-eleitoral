@@ -8,6 +8,11 @@ Retificação de harmonização normativa da Resolução TSE nº 23.760/2026: o 
 - `src/data/eventos.ts` — evento `2026-08-15-3`: título e descrição passam a referir-se somente às secretarias dos tribunais eleitorais.
 - `Documentations/CHANGELOG.md` — registro da retificação.
 
+**Validação:**
+- Varredura em `src/`, `tests/`, `e2e/`, `docs/` e `README.md`: nenhuma outra ocorrência da redação anterior ("cartórios eleitorais e secretarias dos Tribunais") permanece no repositório.
+- Menções remanescentes a "cartório" em `src/data/eventos.ts` foram conferidas e preservadas por integrarem outros dispositivos com redação própria: contagem contínua de prazos processuais (`2026-08-15-4`), justificativa eleitoral pós-turno (`2026-12-03-1` e `2027-01-08-1`) e impedimento de chefe de cartório por parentesco (`2026-12-18-2`).
+- Total de eventos inalterado (296): a retificação altera apenas a redação de um evento existente, sem inclusão ou exclusão.
+
 ## [2026-07-16] Rótulo do mês nos marcadores da timeline
 
 Inclui a abreviação do mês em cinza discreto sob todos os círculos de data para facilitar a orientação temporal durante a rolagem do calendário, sem aumentar o espaçamento vertical entre os eventos.

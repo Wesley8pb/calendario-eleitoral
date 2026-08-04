@@ -1,5 +1,13 @@
 # Changelog
 
+## [2026-08-04] Plantão de 15/08 restrito às secretarias dos tribunais eleitorais
+
+Retificação de harmonização normativa da Resolução TSE nº 23.760/2026: o evento de 15/08/2026 que abria o regime de funcionamento aos sábados, domingos e feriados deixa de mencionar os cartórios eleitorais, alcançando apenas as secretarias dos tribunais eleitorais. O ajuste alinha o evento de abertura ao seu correspondente de encerramento em 18/12/2026 (`2026-12-18-3`), que já adotava a redação atual.
+
+**Arquivos modificados:**
+- `src/data/eventos.ts` — evento `2026-08-15-3`: título e descrição passam a referir-se somente às secretarias dos tribunais eleitorais.
+- `Documentations/CHANGELOG.md` — registro da retificação.
+
 ## [2026-07-16] Rótulo do mês nos marcadores da timeline
 
 Inclui a abreviação do mês em cinza discreto sob todos os círculos de data para facilitar a orientação temporal durante a rolagem do calendário, sem aumentar o espaçamento vertical entre os eventos.

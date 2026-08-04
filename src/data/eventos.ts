@@ -2285,9 +2285,9 @@ export const eventos: EventoCalendario[] = [
     data: "2026-08-15",
     diaSemana: "sábado",
     titulo:
-      "Cartórios eleitorais e secretarias dos Tribunais passam a funcionar aos sábados, domingos e feriados",
+      "Secretarias dos tribunais eleitorais passam a funcionar aos sábados, domingos e feriados",
     descricao:
-      "Data a partir da qual os cartórios eleitorais e as secretarias dos Tribunais Eleitorais permanecerão abertos aos sábados, domingos e feriados (Lei Complementar nº 64/1990, art. 16).",
+      "Data a partir da qual as secretarias dos tribunais eleitorais permanecerão abertas aos sábados, domingos e feriados (Lei Complementar nº 64/1990, art. 16).",
     categorias: ["ADM"],
     perfis: [],
     marcos: null,

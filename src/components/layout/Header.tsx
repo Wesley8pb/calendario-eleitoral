@@ -32,7 +32,7 @@ export function Header() {
         </div>
 
         {/* Title */}
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight tracking-tight">
+        <h1 className="font-display font-bold text-white text-3xl sm:text-5xl lg:text-[3.5rem] leading-[1.1] tracking-[-0.02em] [text-shadow:0_2px_12px_rgba(0,0,0,0.30)]">
           Calendário Eleitoral
           <br />
           <span className="text-secondary-500">Eleições 2026</span>

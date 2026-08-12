@@ -1,5 +1,30 @@
 # Changelog
 
+## [2026-08-12] Título do Header em serifa Lora, com escala ampliada e filete dourado
+
+O título "Calendário Eleitoral / Eleições 2026" usava Inter no peso 700 a 36 px no desktop — o mesmo peso máximo carregado para todo o resto do site, o que não criava hierarquia alguma entre o título e o corpo da interface. Passa a usar a serifa Lora no peso 700, em escala de 30 px no mobile, 48 px a partir de 640 px e 56 px a partir de 1024 px, com um filete dourado decorativo separando o título da descrição.
+
+O destaque vem de contraste de família, não de massa tipográfica. Cinco famílias foram renderizadas sobre o gradiente real do Header antes da escolha; a alternativa de manter Inter e subir para os pesos 800 ou 900 foi renderizada e descartada por soar a produto de tecnologia em vez de Justiça Eleitoral.
+
+**Arquivos modificados:**
+- `index.html` — família Lora acrescentada à consulta do Google Fonts que já existia. **Apenas o peso 700**, que é o único com consumidor.
+- `tailwind.config.js` — novo token `fontFamily.display`, resolvendo para `["Lora", "Georgia", "serif"]`. O fallback Georgia é deliberado: durante a troca do `display=swap` a substituição ocorre entre duas serifas, o que mantém pequeno o deslocamento de layout. Um fallback sem serifa produziria salto visível de sans para serifa.
+- `src/components/layout/Header.tsx` — `h1` com `font-display`, escala `text-3xl sm:text-5xl lg:text-[3.5rem]`, entrelinha 1,1, tracking -0,02 em e sombra `0 2px 12px rgba(0,0,0,0.30)`, que é o que descola a serifa do gradiente azul. Acrescentado o filete dourado de 2 px em `secondary-500` a 85%, com `aria-hidden`. A margem superior da descrição saiu de `mt-3` para `mt-4 sm:mt-[18px]`, equilibrando o espaço nos dois lados do filete.
+- `Documentations/CHANGELOG.md` — registro desta sessão.
+
+**Arquivos criados:**
+- `tests/header-tipografia.test.ts` — 18 asserções que travam as decisões da spec: pesos requisitados da Lora, token e fallback do Tailwind, escala, sombra, entrelinha, tracking, unicidade do `h1`, cor do ano, dimensões e acessibilidade do filete, ausência de hexadecimal solto no Header e integridade da CSP das fontes.
+
+**Nenhuma alteração de segurança.** A `netlify.toml` já autorizava `https://fonts.googleapis.com` em `style-src` e `https://fonts.gstatic.com` em `font-src`, porque o projeto já usava Google Fonts. A CSP não foi tocada, e um dos testes garante isso.
+
+**Validação:**
+- `npx tsc --noEmit` e `npm run build` sem erros.
+- `tests/header-tipografia.test.ts`: 18/18. `tests/links-referencia.test.ts`: 11/11. `tests/ics.test.ts`: 24/24. `tests/security.test.ts`: 25/25.
+- `npm run lint` segue com os 6 erros preexistentes de `src/components/ui/HelpToast.tsx`, `src/lib/search.ts` e `tests/security.test.ts`, sem nenhum acréscimo. Esses erros são anteriores a esta sessão e não foram tocados.
+- Verificação visual no navegador em 320, 375, 640, 768 e 1280 px: título em duas linhas em todas as larguras, sem scroll horizontal, e Lora efetivamente carregada — não o fallback.
+- A escala foi medida, não estimada. O mobile foi primeiro testado a 32 px e recuou para 30 px porque a 320 px o título quebrava em três linhas. A 320 px a linha "Calendário Eleitoral" ocupa 275 px dos 288 px disponíveis, que é o limite da composição em uma linha.
+- A suíte e2e do Playwright não entrou na verificação: os navegadores do Playwright local não estão baixados e `npx playwright test` falha pedindo `npx playwright install`. Situação preexistente, não introduzida aqui.
+
 ## [2026-08-12] Programa Seu Voto Importa: fundamentação na Resolução TSE nº 23.753/2026 e vedação de transporte por candidatos e partidos
 
 O calendário já citava textualmente a "Resolução que disciplina o Programa Seu Voto Importa" em quatro eventos de transporte especial, mas sem nunca identificá-la e com `fundamentacao` vazia. A norma foi localizada — Resolução TSE nº 23.753/2026, de 26 de fevereiro de 2026 — e os quatro eventos passam a apontar para ela. Da leitura integral da resolução, o único dispositivo com relevância temporal ainda ausente do calendário era a vedação do art. 3º, § 2º, que ganha eventos próprios nos dois dias de votação.

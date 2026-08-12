@@ -13,7 +13,7 @@ Este projeto é uma ferramenta institucional e interativa para consulta dos even
 
 **Acesse online:** [https://calendarioeleitoral.app.br](https://calendarioeleitoral.app.br)
 
-Site single-page de caráter informativo que apresenta todos os ~296 eventos do calendário eleitoral em uma **timeline vertical interativa**, com:
+Site single-page de caráter informativo que apresenta todos os 316 eventos do calendário eleitoral em uma **timeline vertical interativa**, com:
 
 - 🔍 **Filtros avançados**: categorias, ocultar passados, turno, busca textual, mês.
 - ⭐ **Favoritos**: marque eventos com estrela; filtro "Apenas favoritos" no painel; persistido em localStorage.
@@ -85,7 +85,7 @@ src/
 ├── contexts/
 │   └── FavoritosContext.tsx  # Context de favoritos, consumido via useFavoritosContext()
 ├── data/
-│   ├── eventos.ts        # Array completo dos ~296 eventos
+│   ├── eventos.ts        # Array completo dos 316 eventos
 │   ├── categorias.ts     # 13 categorias com cor e ícone
 │   └── constants.ts      # Datas fixas (1T, 2T, diplomação) e metadados da Resolução
 ├── hooks/

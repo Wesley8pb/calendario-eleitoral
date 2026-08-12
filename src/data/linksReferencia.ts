@@ -99,6 +99,12 @@ export const linksReferencia: readonly LinkReferencia[] = [
     categoria: "resolucoes-normas",
   },
   {
+    id: "res-tse-23753-2026",
+    titulo: "Resolução TSE nº 23.753/2026 — Programa Seu Voto Importa",
+    url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-753-de-26-de-fevereiro-de-2026",
+    categoria: "resolucoes-normas",
+  },
+  {
     id: "res-tse-23610-2019",
     titulo: "Resolução TSE nº 23.610/2019 — Propaganda eleitoral",
     url: "https://www.tse.jus.br/legislacao/compilada/res/2019/resolucao-no-23-610-de-18-de-dezembro-de-2019",

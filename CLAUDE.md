@@ -11,7 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **URL em Produção:** [https://calendarioeleitoral.app.br](https://calendarioeleitoral.app.br)
 
-Site single-page institucional que transforma o Calendário Eleitoral das Eleições Gerais 2026 (Resolução TSE nº 23.760/2026, 296 eventos) em uma timeline interativa, com filtros, busca textual, painel de próximos prazos por perfil e exportação para calendário (.ics).
+Site single-page institucional que transforma o Calendário Eleitoral das Eleições Gerais 2026 (316 eventos, base na Resolução TSE nº 23.760/2026 e em resoluções complementares) em uma timeline interativa, com filtros, busca textual, painel de próximos prazos por perfil e exportação para calendário (.ics).
 
 ## Stack
 
@@ -68,7 +68,7 @@ src/
 │       ├── Tooltip.tsx              # Tooltip CSS customizado; props: content, position ("top"|"bottom"), wrap (quebra linha, max-w-[200px])
 │       └── InfoTooltip.tsx          # Ícone de info com tooltip explicativo (usado nos exports)
 ├── data/
-│   ├── eventos.ts                   # Array de 296 EventoCalendario[] (Out/2025–Abr/2028)
+│   ├── eventos.ts                   # Array de 316 EventoCalendario[] (Out/2025–Abr/2028)
 │   ├── categorias.ts                # 13 categorias com ID, cor hex, ícone Lucide
 │   └── constants.ts                 # PRIMEIRO_TURNO, SEGUNDO_TURNO, DIPLOMACAO, metadados TSE
 ├── contexts/
@@ -171,7 +171,9 @@ Lógica em `src/lib/ics.ts`. **Regra:** `BatchCalendarExport` não é renderizad
 
 ### Fonte de Dados
 
-Todos os eventos vêm **exclusivamente** do `Documentations/RESOLUÇÃO.md` (Resolução TSE nº 23.760/2026). O campo `fundamentacao[].url` permanece `""` — coleta de URLs foi descartada.
+A fonte primária é o `Documentations/RESOLUÇÃO.md` (Resolução TSE nº 23.760/2026), de onde vem a maioria dos eventos. Também são admitidos eventos oriundos de **resoluções complementares do TSE** (ex.: nº 23.750/2026 — cronograma do cadastro eleitoral; nº 23.753/2026 — Programa Seu Voto Importa), desde que o dispositivo tenha marco temporal definido. Nesses casos, a `descricao` é transcrita literalmente da norma de origem e a `fundamentacao` é obrigatória.
+
+O campo `fundamentacao[].url` fica `""` por padrão — não há coleta sistemática de URLs. Quando preenchido (hoje em 35 das 420 entradas), deve apontar para a página oficial da norma no `tse.jus.br` **e** ser espelhado em `src/data/linksReferencia.ts`, exigência verificada por `tests/links-referencia.test.ts`.
 
 ---
 
@@ -180,7 +182,7 @@ Todos os eventos vêm **exclusivamente** do `Documentations/RESOLUÇÃO.md` (Res
 1. **Dados:** NUNCA inventar eventos. Transcrever `descricao` literalmente da Resolução.
 2. **Stack:** Não instalar bibliotecas além das previstas sem justificativa explícita.
 3. **Perfis:** `'servidor'` é proibido em `perfis[]`. `'atos-preparatorios'` é filtro, não é atribuído a eventos.
-4. **URLs de legislação:** Campo `url` em `fundamentacao[]` permanece `""`.
+4. **URLs de legislação:** Campo `url` em `fundamentacao[]` fica `""` por padrão. Se preenchido, use a página oficial da norma no `tse.jus.br` e cadastre a mesma URL em `src/data/linksReferencia.ts` — sem isso, `tests/links-referencia.test.ts` falha.
 5. **Mobile-first:** Todo componente deve funcionar em 375px antes de ser expandido para desktop.
 6. **Paleta de cores:** Seguir rigorosamente o PRD (`tailwind.config.js`). Proibido: degradês lilás/roxo, cores partidárias.
 7. **Segurança:** Ao encontrar vulnerabilidade, sinalizar com `// AVISO DE SEGURANÇA:` e sugerir alternativa segura.
@@ -189,7 +191,7 @@ Todos os eventos vêm **exclusivamente** do `Documentations/RESOLUÇÃO.md` (Res
 
 ## Referências
 
-- `Documentations/RESOLUÇÃO.md` — Fonte primária dos 296 eventos
+- `Documentations/RESOLUÇÃO.md` — Fonte primária dos eventos do calendário
 - `Documentations/CHANGELOG.md` — Histórico detalhado de cada sprint
 - `Documentations/PRD.md` — Requisitos completos do produto
 - `documentations/deploy_guide.md` — Guia de deploy Netlify vs Vercel

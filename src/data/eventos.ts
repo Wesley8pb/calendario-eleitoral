@@ -3477,9 +3477,15 @@ export const eventos: EventoCalendario[] = [
     perfis: ["eleitor"],
     marcos: "20 dias antes do 1º turno",
     turno: "1T",
-    fundamentacao: [],
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.753/2026",
+        dispositivo: "arts. 4º e 5º, caput",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-753-de-26-de-fevereiro-de-2026",
+      },
+    ],
     observacoes:
-      "Eleitores com deficiência ou mobilidade reduzida, e populações indígenas, quilombolas e tradicionais podem solicitar transporte especial para votar até esta data.",
+      "Eleitores com deficiência ou mobilidade reduzida, e populações indígenas, quilombolas e tradicionais podem solicitar transporte especial para votar até esta data. O Programa Seu Voto Importa é disciplinado pela Resolução nº 23.753/2026/TSE. O pedido pode ser feito pelo próprio eleitor, por curador, apoiador ou procurador, no cartório eleitoral ou por canal não presencial divulgado pelo TRE, mediante autodeclaração ou documentação comprobatória.",
   },
 
   {
@@ -3940,7 +3946,15 @@ export const eventos: EventoCalendario[] = [
     perfis: ["eleitor"],
     marcos: "2 dias antes do 1º turno",
     turno: "1T",
-    fundamentacao: [],
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.753/2026",
+        dispositivo: "art. 3º, IV",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-753-de-26-de-fevereiro-de-2026",
+      },
+    ],
+    observacoes:
+      "Prazo de 48 horas antes da votação para o TRE confirmar ao eleitor a disponibilidade do serviço e os dados do transporte a ser fornecido, no âmbito do Programa Seu Voto Importa.",
   },
 
   {
@@ -4379,6 +4393,29 @@ export const eventos: EventoCalendario[] = [
   },
 
   {
+    id: "2026-10-04-10",
+    data: "2026-10-04",
+    diaSemana: "domingo",
+    titulo:
+      "Vedação a candidatos, partidos, federações, coligações ou qualquer pessoa de fornecer transporte a eleitores (1º turno)",
+    descricao:
+      "É vedado às candidatas e aos candidatos, aos órgãos partidários, às federações, às coligações ou a qualquer pessoa o fornecimento de transporte a eleitoras ou eleitores no dia da votação (Resolução nº 23.753/2026/TSE, art. 3º, § 2º).",
+    categorias: ["CON", "TRA"],
+    perfis: ["candidato", "partido", "advogado"],
+    marcos: "1º turno",
+    turno: "1T",
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.753/2026",
+        dispositivo: "art. 3º, § 2º",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-753-de-26-de-fevereiro-de-2026",
+      },
+    ],
+    observacoes:
+      "O transporte de eleitores no dia da votação é atribuição exclusiva da Justiça Eleitoral. Aos partidos, coligações e federações é facultado apenas fiscalizar a regularidade do serviço de transporte especial, vedada qualquer forma de interferência, patrocínio, promoção ou benefício político decorrente da sua prestação (Resolução nº 23.753/2026/TSE, art. 3º, § 3º).",
+  },
+
+  {
     id: "2026-10-05-1",
     data: "2026-10-05",
     diaSemana: "segunda-feira",
@@ -4481,7 +4518,15 @@ export const eventos: EventoCalendario[] = [
     perfis: ["eleitor"],
     marcos: "20 dias antes do 2º turno",
     turno: "2T",
-    fundamentacao: [],
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.753/2026",
+        dispositivo: "art. 5º, caput",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-753-de-26-de-fevereiro-de-2026",
+      },
+    ],
+    observacoes:
+      "O pedido deve ser renovado para o segundo turno. Pode ser feito pelo próprio eleitor, por curador, apoiador ou procurador, no cartório eleitoral ou por canal não presencial divulgado pelo TRE, mediante autodeclaração ou documentação comprobatória.",
   },
 
   {
@@ -4953,7 +4998,15 @@ export const eventos: EventoCalendario[] = [
     perfis: ["eleitor"],
     marcos: "2 dias antes do 2º turno",
     turno: "2T",
-    fundamentacao: [],
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.753/2026",
+        dispositivo: "art. 3º, IV",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-753-de-26-de-fevereiro-de-2026",
+      },
+    ],
+    observacoes:
+      "Prazo de 48 horas antes da votação para o TRE confirmar ao eleitor a disponibilidade do serviço e os dados do transporte a ser fornecido, no âmbito do Programa Seu Voto Importa.",
   },
 
   {
@@ -5364,6 +5417,29 @@ export const eventos: EventoCalendario[] = [
     marcos: "2º turno",
     turno: "2T",
     fundamentacao: [],
+  },
+
+  {
+    id: "2026-10-25-7",
+    data: "2026-10-25",
+    diaSemana: "domingo",
+    titulo:
+      "Vedação a candidatos, partidos, federações, coligações ou qualquer pessoa de fornecer transporte a eleitores (2º turno)",
+    descricao:
+      "É vedado às candidatas e aos candidatos, aos órgãos partidários, às federações, às coligações ou a qualquer pessoa o fornecimento de transporte a eleitoras ou eleitores no dia da votação (Resolução nº 23.753/2026/TSE, art. 3º, § 2º).",
+    categorias: ["CON", "TRA"],
+    perfis: ["candidato", "partido", "advogado"],
+    marcos: "2º turno",
+    turno: "2T",
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.753/2026",
+        dispositivo: "art. 3º, § 2º",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-753-de-26-de-fevereiro-de-2026",
+      },
+    ],
+    observacoes:
+      "O transporte de eleitores no dia da votação é atribuição exclusiva da Justiça Eleitoral. Aos partidos, coligações e federações é facultado apenas fiscalizar a regularidade do serviço de transporte especial, vedada qualquer forma de interferência, patrocínio, promoção ou benefício político decorrente da sua prestação (Resolução nº 23.753/2026/TSE, art. 3º, § 3º).",
   },
 
   {

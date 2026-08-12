@@ -1,5 +1,40 @@
 # Changelog
 
+## [2026-08-12] Programa Seu Voto Importa: fundamentação na Resolução TSE nº 23.753/2026 e vedação de transporte por candidatos e partidos
+
+O calendário já citava textualmente a "Resolução que disciplina o Programa Seu Voto Importa" em quatro eventos de transporte especial, mas sem nunca identificá-la e com `fundamentacao` vazia. A norma foi localizada — Resolução TSE nº 23.753/2026, de 26 de fevereiro de 2026 — e os quatro eventos passam a apontar para ela. Da leitura integral da resolução, o único dispositivo com relevância temporal ainda ausente do calendário era a vedação do art. 3º, § 2º, que ganha eventos próprios nos dois dias de votação.
+
+Nenhum prazo novo com data fixa decorre da resolução: os dois marcos que ela cria (pedido até 20 dias antes e confirmação até 48 horas antes) já constavam do calendário, derivados da Resolução nº 23.760/2026.
+
+**Eventos criados (2):**
+- `2026-10-04-10` e `2026-10-25-7` — vedação a candidatas, candidatos, órgãos partidários, federações, coligações ou qualquer pessoa de fornecer transporte a eleitoras ou eleitores no dia da votação, para o primeiro e o segundo turno. Categorias `CON` e `TRA`; perfis candidato, partido e advogado. As `observacoes` registram a faculdade de fiscalização dos partidos prevista no art. 3º, § 3º, com a vedação de interferência, patrocínio, promoção ou benefício político.
+
+**Arquivos modificados:**
+- `src/data/eventos.ts` — eventos `2026-09-14-4` (art. 5º, caput, e art. 4º, que ampara as comunidades indígenas, quilombolas e tradicionais), `2026-10-05-5` (art. 5º, caput), `2026-10-02-1` e `2026-10-23-1` (art. 3º, IV) recebem `fundamentacao` apontando para a Resolução nº 23.753/2026, com URL da íntegra no portal do TSE, e `observacoes` explicando o procedimento do pedido e o prazo de confirmação. As `descricao` foram preservadas na transcrição literal da Resolução nº 23.760/2026.
+- `src/data/linksReferencia.ts` — nova referência `res-tse-23753-2026` na categoria `resolucoes-normas`, exigida pela verificação de cobertura das URLs dos eventos.
+- `tests/links-referencia.test.ts` — contagens aprovadas atualizadas de 28 para 29 referências e de 12 para 13 em `resolucoes-normas`.
+- `Documentations/CHANGELOG.md` — registro desta sessão.
+
+**Descartado por ausência de marco temporal:**
+- Art. 2º, § 2º — remessa dos acordos de cooperação ao Ministério Público Eleitoral em 5 dias da assinatura: prazo relativo a evento sem data definida.
+- Art. 6º — prioridade de atendimento no local de votação aos beneficiários do Programa.
+- Art. 7º, parágrafo único — alteração permanente do local de votação requerida até 150 dias antes da eleição (07/05/2026): não incluído por colidir com o marco oficial de 06/05/2026 (`2026-05-06-1`, 151 dias antes do primeiro turno, art. 91 da Lei nº 9.504/1997), data em que o recebimento de revisões já se encerra.
+
+**Validação:**
+- `npx tsc --noEmit` sem erros e `npm run build` concluído (1784 módulos transformados).
+- `tests/links-referencia.test.ts`: 11/11. A verificação falhava antes da inclusão no catálogo central, exatamente no teste "Todas as URLs informativas dos eventos estão catalogadas".
+- `tests/ics.test.ts`: 24/24. `tests/security.test.ts`: 25/25.
+- Confirmado por varredura que a vedação do art. 3º, § 2º não tinha correspondente no calendário, inclusive sob a Lei nº 6.091/1974, art. 11.
+- Total de eventos: 316, sendo 314 antes desta sessão, todos com `id` único e no intervalo de 04/10/2025 a 04/04/2028.
+
+**Correção de documentação defasada (mesma sessão):**
+
+A contagem de 296 eventos em `CLAUDE.md` e `README.md` estava defasada desde antes desta alteração e foi corrigida para 316. Duas afirmações que esta sessão tornou incorretas também foram ajustadas.
+
+- `CLAUDE.md` — a seção "Fonte de Dados" afirmava que todos os eventos vinham **exclusivamente** da Resolução nº 23.760/2026; passa a admitir expressamente eventos de resoluções complementares com marco temporal definido, mantida a exigência de transcrição literal da norma de origem e de `fundamentacao` preenchida. A mesma seção e a regra 4 diziam que `fundamentacao[].url` permanece `""` e que a coleta de URLs foi descartada, o que já não descrevia o repositório: hoje 35 das 420 entradas de fundamentação têm URL. A redação passa a tratar `""` como padrão e a registrar a obrigação de espelhar toda URL preenchida em `src/data/linksReferencia.ts`, sob pena de falha em `tests/links-referencia.test.ts` — armadilha em que esta própria sessão caiu.
+- `README.md` — contagem de eventos na visão geral e na árvore de pastas.
+- Registro histórico da entrada de 04/08/2026 preservado como publicado, ainda que a contagem de 296 ali mencionada já estivesse incorreta na ocasião.
+
 ## [2026-08-04] Plantão de 15/08 restrito às secretarias dos tribunais eleitorais
 
 Retificação de harmonização normativa da Resolução TSE nº 23.760/2026: o evento de 15/08/2026 que abria o regime de funcionamento aos sábados, domingos e feriados deixa de mencionar os cartórios eleitorais, alcançando apenas as secretarias dos tribunais eleitorais. O ajuste alinha o evento de abertura ao seu correspondente de encerramento em 18/12/2026 (`2026-12-18-3`), que já adotava a redação atual.

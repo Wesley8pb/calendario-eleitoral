@@ -194,7 +194,7 @@ Expected: nenhum erro de tipo e build concluído. O aviso de chunk acima de 500 
 
 Run: `npm run lint`
 
-Expected: **falha com exatamente 6 erros, todos preexistentes** — um `no-control-regex` em `src/lib/search.ts:8` e quatro `@typescript-eslint/no-explicit-any` em `tests/security.test.ts:59-62`. Esse é o estado do repositório antes desta tarefa, medido em 12/08/2026. O critério é não aumentar essa contagem e não introduzir erro nos arquivos tocados aqui. **Não corrija os 6 erros preexistentes nesta tarefa** — são de arquivos fora do escopo e merecem decisão própria.
+Expected: **falha com exatamente 6 erros, todos preexistentes** — um `react-hooks/set-state-in-effect` em `src/components/ui/HelpToast.tsx:16`, um `no-control-regex` em `src/lib/search.ts:8` e quatro `@typescript-eslint/no-explicit-any` em `tests/security.test.ts:59-62`. Esse é o estado do repositório antes desta tarefa, medido em 12/08/2026. O critério é não aumentar essa contagem e não introduzir erro nos arquivos tocados aqui. **Não corrija os 6 erros preexistentes nesta tarefa** — são de arquivos fora do escopo e merecem decisão própria.
 
 - [ ] **Step 8: Commit**
 
@@ -377,7 +377,7 @@ O destaque vem de contraste de família, não de massa tipográfica. Cinco famí
 **Validação:**
 - `npx tsc --noEmit` e `npm run build` sem erros.
 - `tests/header-tipografia.test.ts`: 18/18. `tests/links-referencia.test.ts`: 11/11. `tests/ics.test.ts`: 24/24. `tests/security.test.ts`: 25/25.
-- `npm run lint` segue com os 6 erros preexistentes de `src/lib/search.ts` e `tests/security.test.ts`, sem nenhum acréscimo. Esses erros são anteriores a esta sessão e não foram tocados.
+- `npm run lint` segue com os 6 erros preexistentes de `src/components/ui/HelpToast.tsx`, `src/lib/search.ts` e `tests/security.test.ts`, sem nenhum acréscimo. Esses erros são anteriores a esta sessão e não foram tocados.
 - Verificação visual no navegador em 320, 375, 640, 768 e 1280 px: título em duas linhas em todas as larguras, sem scroll horizontal, e Lora efetivamente carregada — não o fallback.
 - A escala foi medida, não estimada. O mobile foi primeiro testado a 32 px e recuou para 30 px porque a 320 px o título quebrava em três linhas. A 320 px a linha "Calendário Eleitoral" ocupa 275 px dos 288 px disponíveis, que é o limite da composição em uma linha.
 - A suíte e2e do Playwright não entrou na verificação: os navegadores do Playwright local não estão baixados e `npx playwright test` falha pedindo `npx playwright install`. Situação preexistente, não introduzida aqui.

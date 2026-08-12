@@ -13,18 +13,19 @@ O destaque vem de contraste de família, não de massa tipográfica. Cinco famí
 - `documentations/CHANGELOG.md` — registro desta sessão.
 
 **Arquivos criados:**
-- `tests/header-tipografia.test.ts` — 18 asserções que travam as decisões da spec: pesos requisitados da Lora, token e fallback do Tailwind, escala, sombra, entrelinha, tracking, unicidade do `h1`, cor do ano, dimensões e acessibilidade do filete, ausência de hexadecimal solto no Header e integridade da CSP das fontes.
+- `tests/header-tipografia.test.ts` — 20 asserções que travam as decisões da spec: pesos requisitados da Lora, token e fallback do Tailwind, escala, sombra, entrelinha, tracking, unicidade do `h1`, cor do ano, dimensões e acessibilidade do filete, ausência de literais de cor fora da paleta no Header e integridade da CSP das fontes.
 
 **Nenhuma alteração de segurança.** A `netlify.toml` já autorizava `https://fonts.googleapis.com` em `style-src` e `https://fonts.gstatic.com` em `font-src`, porque o projeto já usava Google Fonts. A CSP não foi tocada, e um dos testes garante isso.
 
 **Validação:**
 - `npx tsc --noEmit` e `npm run build` sem erros.
-- `tests/header-tipografia.test.ts`: 18/18. `tests/links-referencia.test.ts`: 11/11. `tests/ics.test.ts`: 24/24. `tests/security.test.ts`: 25/25.
+- `tests/header-tipografia.test.ts`: 20/20. `tests/links-referencia.test.ts`: 11/11. `tests/ics.test.ts`: 24/24. `tests/security.test.ts`: 25/25. Contagens conferidas na própria `main` após o merge, não apenas no branch.
 - `npm run lint` segue com os 6 erros preexistentes de `src/components/ui/HelpToast.tsx`, `src/lib/search.ts` e `tests/security.test.ts`, sem nenhum acréscimo. Esses erros são anteriores a esta sessão e não foram tocados.
 - Verificação visual no navegador em 320, 375, 640, 768 e 1280 px: título em duas linhas em todas as larguras, sem scroll horizontal, e Lora efetivamente carregada — não o fallback.
 - A escala foi medida, não estimada. O mobile foi primeiro testado a 32 px e recuou para 30 px porque a 320 px o título quebrava em três linhas. A 320 px a linha "Calendário Eleitoral" ocupa 275 px dos 288 px disponíveis, que é o limite da composição em uma linha.
 - A suíte e2e do Playwright não entrou na verificação: os navegadores do Playwright local não estão baixados e `npx playwright test` falha pedindo `npx playwright install`. Situação preexistente, não introduzida aqui.
 - **Onda de correções do review final do branch (mesma sessão):** sete achados Minor corrigidos — `perfis` dos eventos de vedação de transporte (`2026-10-04-10`, `2026-10-25-7`) passa a incluir `eleitor`; `observacoes` do evento `2026-10-05-5` deixa de atribuir ao art. 5º uma renovação de pedido que ele não prevê; removido parágrafo defasado sobre carregamento do peso 600 na spec de tipografia; `tests/header-tipografia.test.ts` ganhou ancoragem por `h-0.5` na extração do filete, checagem de hex de 3 dígitos e de `hsl(`, renomeação da asserção de hex de 6 dígitos e escopo do texto do `h1` restrito à própria marcação do elemento; e corrigida a grafia `Documentations/CHANGELOG.md` → `documentations/CHANGELOG.md` nas duas entradas de 2026-08-12.
+- **Supressão de verificação de design (mesma sessão):** o hook de design do Impeccable sinaliza a Inter como fonte manjada em `index.html`. Registrada supressão no valor mais estreito possível — regra `overused-font` apenas para o valor `inter` — em `.impeccable/config.json`, com o motivo apontando a decisão: manter a Inter no corpo do site foi escolha explícita, e a spec põe a troca da fonte do corpo em Fora de escopo. A personalidade tipográfica vem da Lora no título. A regra segue ativa para todas as outras fontes manjadas.
 
 ## [2026-08-12] Programa Seu Voto Importa: fundamentação na Resolução TSE nº 23.753/2026 e vedação de transporte por candidatos e partidos
 

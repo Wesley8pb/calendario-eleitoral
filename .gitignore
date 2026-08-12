@@ -88,3 +88,6 @@ nul
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# Impeccable — cache local do hook de design (a config em .impeccable/config.json e versionada)
+/.impeccable/hook.cache.json

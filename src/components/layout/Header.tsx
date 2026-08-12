@@ -38,8 +38,14 @@ export function Header() {
           <span className="text-secondary-500">Eleições 2026</span>
         </h1>
 
+        {/* Filete dourado decorativo */}
+        <div
+          aria-hidden="true"
+          className="mx-auto mt-4 sm:mt-[18px] h-0.5 w-14 sm:w-16 lg:w-[72px] rounded bg-secondary-500/85"
+        />
+
         {/* Description */}
-        <p className="text-white/70 text-sm sm:text-base max-w-xl mx-auto mt-3 leading-relaxed">
+        <p className="text-white/70 text-sm sm:text-base max-w-xl mx-auto mt-4 sm:mt-[18px] leading-relaxed">
           Todos os prazos e datas do processo eleitoral das Eleições Gerais de
           2026, organizados para você.
         </p>

@@ -73,6 +73,19 @@ test(
 );
 test("Header.tsx não introduz cor hexadecimal fora da paleta", !/#[0-9a-fA-F]{6}/.test(header));
 
+const filete = header.match(/<div\s+aria-hidden="true"\s+className="([^"]*)"\s*\/>/)?.[1] ?? "";
+
+test("O filete dourado existe e é decorativo", filete !== "");
+test(
+  "O filete usa a escala de largura 56/64/72 px",
+  ["w-14", "sm:w-16", "lg:w-[72px]"].every((c) => filete.split(/\s+/).includes(c)),
+);
+test(
+  "O filete usa o dourado da paleta a 85%, 2 px de altura e cantos arredondados",
+  ["bg-secondary-500/85", "h-0.5", "rounded"].every((c) => filete.split(/\s+/).includes(c)),
+);
+test("O filete é centralizado", filete.split(/\s+/).includes("mx-auto"));
+
 console.log(`\n=== RESULTADO: ${passed}/${passed + failed} testes passaram ===\n`);
 
 if (failed > 0) process.exit(1);

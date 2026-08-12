@@ -10,7 +10,7 @@ O destaque vem de contraste de família, não de massa tipográfica. Cinco famí
 - `index.html` — família Lora acrescentada à consulta do Google Fonts que já existia. **Apenas o peso 700**, que é o único com consumidor.
 - `tailwind.config.js` — novo token `fontFamily.display`, resolvendo para `["Lora", "Georgia", "serif"]`. O fallback Georgia é deliberado: durante a troca do `display=swap` a substituição ocorre entre duas serifas, o que mantém pequeno o deslocamento de layout. Um fallback sem serifa produziria salto visível de sans para serifa.
 - `src/components/layout/Header.tsx` — `h1` com `font-display`, escala `text-3xl sm:text-5xl lg:text-[3.5rem]`, entrelinha 1,1, tracking -0,02 em e sombra `0 2px 12px rgba(0,0,0,0.30)`, que é o que descola a serifa do gradiente azul. Acrescentado o filete dourado de 2 px em `secondary-500` a 85%, com `aria-hidden`. A margem superior da descrição saiu de `mt-3` para `mt-4 sm:mt-[18px]`, equilibrando o espaço nos dois lados do filete.
-- `Documentations/CHANGELOG.md` — registro desta sessão.
+- `documentations/CHANGELOG.md` — registro desta sessão.
 
 **Arquivos criados:**
 - `tests/header-tipografia.test.ts` — 18 asserções que travam as decisões da spec: pesos requisitados da Lora, token e fallback do Tailwind, escala, sombra, entrelinha, tracking, unicidade do `h1`, cor do ano, dimensões e acessibilidade do filete, ausência de hexadecimal solto no Header e integridade da CSP das fontes.
@@ -24,6 +24,7 @@ O destaque vem de contraste de família, não de massa tipográfica. Cinco famí
 - Verificação visual no navegador em 320, 375, 640, 768 e 1280 px: título em duas linhas em todas as larguras, sem scroll horizontal, e Lora efetivamente carregada — não o fallback.
 - A escala foi medida, não estimada. O mobile foi primeiro testado a 32 px e recuou para 30 px porque a 320 px o título quebrava em três linhas. A 320 px a linha "Calendário Eleitoral" ocupa 275 px dos 288 px disponíveis, que é o limite da composição em uma linha.
 - A suíte e2e do Playwright não entrou na verificação: os navegadores do Playwright local não estão baixados e `npx playwright test` falha pedindo `npx playwright install`. Situação preexistente, não introduzida aqui.
+- **Onda de correções do review final do branch (mesma sessão):** sete achados Minor corrigidos — `perfis` dos eventos de vedação de transporte (`2026-10-04-10`, `2026-10-25-7`) passa a incluir `eleitor`; `observacoes` do evento `2026-10-05-5` deixa de atribuir ao art. 5º uma renovação de pedido que ele não prevê; removido parágrafo defasado sobre carregamento do peso 600 na spec de tipografia; `tests/header-tipografia.test.ts` ganhou ancoragem por `h-0.5` na extração do filete, checagem de hex de 3 dígitos e de `hsl(`, renomeação da asserção de hex de 6 dígitos e escopo do texto do `h1` restrito à própria marcação do elemento; e corrigida a grafia `Documentations/CHANGELOG.md` → `documentations/CHANGELOG.md` nas duas entradas de 2026-08-12.
 
 ## [2026-08-12] Programa Seu Voto Importa: fundamentação na Resolução TSE nº 23.753/2026 e vedação de transporte por candidatos e partidos
 
@@ -38,7 +39,7 @@ Nenhum prazo novo com data fixa decorre da resolução: os dois marcos que ela c
 - `src/data/eventos.ts` — eventos `2026-09-14-4` (art. 5º, caput, e art. 4º, que ampara as comunidades indígenas, quilombolas e tradicionais), `2026-10-05-5` (art. 5º, caput), `2026-10-02-1` e `2026-10-23-1` (art. 3º, IV) recebem `fundamentacao` apontando para a Resolução nº 23.753/2026, com URL da íntegra no portal do TSE, e `observacoes` explicando o procedimento do pedido e o prazo de confirmação. As `descricao` foram preservadas na transcrição literal da Resolução nº 23.760/2026.
 - `src/data/linksReferencia.ts` — nova referência `res-tse-23753-2026` na categoria `resolucoes-normas`, exigida pela verificação de cobertura das URLs dos eventos.
 - `tests/links-referencia.test.ts` — contagens aprovadas atualizadas de 28 para 29 referências e de 12 para 13 em `resolucoes-normas`.
-- `Documentations/CHANGELOG.md` — registro desta sessão.
+- `documentations/CHANGELOG.md` — registro desta sessão.
 
 **Descartado por ausência de marco temporal:**
 - Art. 2º, § 2º — remessa dos acordos de cooperação ao Ministério Público Eleitoral em 5 dias da assinatura: prazo relativo a evento sem data definida.

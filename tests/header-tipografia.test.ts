@@ -58,9 +58,11 @@ test(
     classesDoH1.split(/\s+/).includes("tracking-[-0.02em]"),
 );
 test("Existe exatamente um h1 no Header", (header.match(/<h1[\s>]/g) ?? []).length === 1);
+const h1Html = header.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1] ?? "";
+
 test(
   "O h1 preserva o texto original",
-  header.includes("Calendário Eleitoral") && header.includes("Eleições 2026"),
+  h1Html.includes("Calendário Eleitoral") && h1Html.includes("Eleições 2026"),
 );
 test(
   "O ano permanece em secondary-500",
@@ -71,9 +73,15 @@ test(
   netlify.includes("https://fonts.googleapis.com") &&
     netlify.includes("font-src https://fonts.gstatic.com"),
 );
-test("Header.tsx não introduz cor hexadecimal fora da paleta", !/#[0-9a-fA-F]{6}/.test(header));
+test(
+  "Header.tsx não introduz literal hexadecimal de 6 dígitos fora da paleta",
+  !/#[0-9a-fA-F]{6}/.test(header),
+);
+test("Header.tsx não introduz literal hexadecimal de 3 dígitos", !/#[0-9a-fA-F]{3}\b/.test(header));
+test("Header.tsx não introduz cor via hsl()", !/hsl\(/.test(header));
 
-const filete = header.match(/<div\s+aria-hidden="true"\s+className="([^"]*)"\s*\/>/)?.[1] ?? "";
+const filete =
+  header.match(/<div\s+aria-hidden="true"\s+className="([^"]*h-0\.5[^"]*)"\s*\/>/)?.[1] ?? "";
 
 test("O filete dourado existe e é decorativo", filete !== "");
 test(

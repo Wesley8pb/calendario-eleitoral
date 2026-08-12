@@ -43,8 +43,6 @@ A família é registrada em `tailwind.config.js` como um token novo em `fontFami
 
 A mudança de marcação se concentra no `h1` do `Header.tsx` e no filete acrescentado imediatamente após ele. Sombra de texto e espaçamento entre letras usam valores arbitrários do Tailwind, por não existirem como tokens.
 
-O peso 600 é carregado além do 700 porque o token `display` fica disponível para uso futuro e um único peso tornaria qualquer variação mais leve dependente de simulação pelo navegador. Se ao fim da implementação o peso 600 não tiver nenhum consumidor, ele deve ser removido da consulta para não custar transferência sem uso.
-
 ## Acessibilidade
 
 A estrutura semântica não muda: permanece um único `h1` com o mesmo texto, na mesma ordem de leitura. O filete é puramente decorativo e recebe `aria-hidden`, para não introduzir ruído em leitores de tela.

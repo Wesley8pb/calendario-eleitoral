@@ -4401,7 +4401,7 @@ export const eventos: EventoCalendario[] = [
     descricao:
       "É vedado às candidatas e aos candidatos, aos órgãos partidários, às federações, às coligações ou a qualquer pessoa o fornecimento de transporte a eleitoras ou eleitores no dia da votação (Resolução nº 23.753/2026/TSE, art. 3º, § 2º).",
     categorias: ["CON", "TRA"],
-    perfis: ["candidato", "partido", "advogado"],
+    perfis: ["eleitor", "candidato", "partido", "advogado"],
     marcos: "1º turno",
     turno: "1T",
     fundamentacao: [
@@ -4526,7 +4526,7 @@ export const eventos: EventoCalendario[] = [
       },
     ],
     observacoes:
-      "O pedido deve ser renovado para o segundo turno. Pode ser feito pelo próprio eleitor, por curador, apoiador ou procurador, no cartório eleitoral ou por canal não presencial divulgado pelo TRE, mediante autodeclaração ou documentação comprobatória.",
+      "O calendário eleitoral fixa prazo próprio para o segundo turno, distinto do aplicável ao primeiro. Pode ser feito pelo próprio eleitor, por curador, apoiador ou procurador, no cartório eleitoral ou por canal não presencial divulgado pelo TRE, mediante autodeclaração ou documentação comprobatória.",
   },
 
   {
@@ -5428,7 +5428,7 @@ export const eventos: EventoCalendario[] = [
     descricao:
       "É vedado às candidatas e aos candidatos, aos órgãos partidários, às federações, às coligações ou a qualquer pessoa o fornecimento de transporte a eleitoras ou eleitores no dia da votação (Resolução nº 23.753/2026/TSE, art. 3º, § 2º).",
     categorias: ["CON", "TRA"],
-    perfis: ["candidato", "partido", "advogado"],
+    perfis: ["eleitor", "candidato", "partido", "advogado"],
     marcos: "2º turno",
     turno: "2T",
     fundamentacao: [

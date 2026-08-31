@@ -106,6 +106,50 @@ test(
 );
 test("Descrição menciona o JE Connect", descricao.includes("JE Connect"));
 
+// ─── Filtro por âmbito ───────────────────────────────────────────────────────
+const { FILTRO_PADRAO } = await import("../src/hooks/useFilteredEvents");
+const { parseUrlToFilters, filtersToUrl } = await import(
+  "../src/hooks/useUrlFilters"
+);
+
+console.log("\n=== TESTES DE FILTRO POR ÂMBITO ===\n");
+
+test("FILTRO_PADRAO nasce com ambito null", FILTRO_PADRAO.ambito === null);
+
+test(
+  "URL ?ambito=tre-pb é lida como TRE-PB",
+  parseUrlToFilters("?ambito=tre-pb").ambito === "TRE-PB",
+);
+test(
+  "URL ?ambito=nacional é lida como nacional",
+  parseUrlToFilters("?ambito=nacional").ambito === "nacional",
+);
+test(
+  "Valor inválido de ambito na URL é descartado",
+  parseUrlToFilters("?ambito=marte").ambito === null,
+);
+test(
+  "URL sem parâmetros mantém ambito null",
+  parseUrlToFilters("").ambito === null,
+);
+test(
+  "Filtro TRE-PB é serializado para a URL",
+  filtersToUrl({ ...FILTRO_PADRAO, ambito: "TRE-PB" }, "/") === "?ambito=tre-pb",
+);
+test(
+  "Filtro nacional é serializado para a URL",
+  filtersToUrl({ ...FILTRO_PADRAO, ambito: "nacional" }, "/") ===
+    "?ambito=nacional",
+);
+test(
+  "ambito null não escreve parâmetro na URL",
+  filtersToUrl(FILTRO_PADRAO, "/") === "/",
+);
+test(
+  "Round-trip URL → estado → URL preserva o âmbito",
+  filtersToUrl(parseUrlToFilters("?ambito=tre-pb"), "/") === "?ambito=tre-pb",
+);
+
 console.log(`\n=== RESULTADO: ${passed}/${passed + failed} testes passaram ===\n`);
 
 if (failed > 0) process.exit(1);

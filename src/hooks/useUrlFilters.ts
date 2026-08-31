@@ -16,9 +16,10 @@ const VALID_CATS: CategoriaID[] = [
   "PAR",
 ];
 const VALID_TURNOS = ["1T", "2T", "POS"] as const;
+const VALID_AMBITOS = ["TRE-PB", "nacional"] as const;
 
-function parseUrlToFilters(): FilterState {
-  const params = new URLSearchParams(window.location.search);
+export function parseUrlToFilters(search: string): FilterState {
+  const params = new URLSearchParams(search);
 
   // Se não há nenhum parâmetro na URL, retorna padrão (mostrar passados)
   if (params.toString() === "") return FILTRO_PADRAO;
@@ -46,11 +47,29 @@ function parseUrlToFilters(): FilterState {
   const mesParam = params.get("mes");
   const mes = mesParam && /^\d{4}-\d{2}$/.test(mesParam) ? mesParam : null;
 
+  // Âmbito: "tre-pb" na URL → "TRE-PB" no estado
+  const ambitoParam = params.get("ambito");
+  const ambitoNormalizado = ambitoParam === "tre-pb" ? "TRE-PB" : ambitoParam;
+  const ambito = VALID_AMBITOS.includes(
+    ambitoNormalizado as (typeof VALID_AMBITOS)[number],
+  )
+    ? (ambitoNormalizado as (typeof VALID_AMBITOS)[number])
+    : null;
+
   // apenasFavoritos e apenasMeusEventos nunca vêm da URL (estado pessoal do browser)
-  return { ocultarPassados, categorias, turno, busca, mes, apenasFavoritos: false, apenasMeusEventos: false };
+  return {
+    ocultarPassados,
+    categorias,
+    turno,
+    busca,
+    mes,
+    ambito,
+    apenasFavoritos: false,
+    apenasMeusEventos: false,
+  };
 }
 
-function filtersToUrl(filtros: FilterState): string {
+export function filtersToUrl(filtros: FilterState, pathname: string): string {
   const params = new URLSearchParams();
 
   // Só escreve param quando o user explicitamente quer ocultar passados
@@ -60,19 +79,21 @@ function filtersToUrl(filtros: FilterState): string {
   if (filtros.turno) params.set("turno", filtros.turno);
   if (filtros.busca.trim()) params.set("q", filtros.busca.trim());
   if (filtros.mes) params.set("mes", filtros.mes);
+  if (filtros.ambito)
+    params.set("ambito", filtros.ambito === "TRE-PB" ? "tre-pb" : "nacional");
 
   const qs = params.toString();
-  return qs ? `?${qs}` : window.location.pathname;
+  return qs ? `?${qs}` : pathname;
 }
 
 export function useUrlFilters() {
   const [filtros, setFiltrosState] = useState<FilterState>(() =>
-    parseUrlToFilters(),
+    parseUrlToFilters(window.location.search),
   );
 
   // Sync state → URL
   useEffect(() => {
-    const newUrl = filtersToUrl(filtros);
+    const newUrl = filtersToUrl(filtros, window.location.pathname);
     const currentUrl = window.location.pathname + window.location.search;
     if (newUrl !== currentUrl) {
       window.history.replaceState(null, "", newUrl);

@@ -9,6 +9,7 @@ export interface FilterState {
   turno: "1T" | "2T" | "POS" | null; // null = todos
   busca: string;
   mes: string | null; // "YYYY-MM" ou null = todos
+  ambito: "TRE-PB" | "nacional" | null; // null = todos os âmbitos
   apenasFavoritos: boolean;    // não serializado na URL — estado pessoal do browser
   apenasMeusEventos: boolean;  // não serializado na URL — estado pessoal do browser
 }
@@ -19,6 +20,7 @@ export const FILTRO_PADRAO: FilterState = {
   turno: null,
   busca: "",
   mes: null,
+  ambito: null,
   apenasFavoritos: false,
   apenasMeusEventos: false,
 };
@@ -40,6 +42,13 @@ export function useFilteredEvents(
       // 0. Quando o filtro "apenasMeusEventos" está ativo, mostra só eventos customizados.
       // Caso contrário, todos os eventos (TSE + customizados) aparecem na timeline.
       if (filtros.apenasMeusEventos && !isCustom) return false;
+
+      // 0b. Filtro de âmbito — aplica-se apenas a eventos oficiais.
+      // Eventos particulares do usuário são governados por apenasMeusEventos.
+      if (filtros.ambito && !isCustom) {
+        if (filtros.ambito === "TRE-PB" && ev.ambito !== "TRE-PB") return false;
+        if (filtros.ambito === "nacional" && ev.ambito !== undefined) return false;
+      }
 
       // 1. Ocultar passados
       if (filtros.ocultarPassados && isEventoPassado(ev.data)) {

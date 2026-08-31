@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Filter, Search, X, CalendarDays, Star, BookMarked } from "lucide-react";
 import type { CategoriaID } from "../../types";
 import { categorias } from "../../data/categorias";
+import { AMBITO_TRE_PB } from "../../data/ambitos";
 import type { FilterState } from "../../hooks/useFilteredEvents";
 import { cn } from "../../lib/utils";
 import { Tooltip } from "../ui/Tooltip";
@@ -93,6 +94,7 @@ export function FilterPanel({
     filtros.turno !== null ||
     filtros.busca.trim() !== "" ||
     filtros.mes !== null ||
+    filtros.ambito !== null ||
     filtros.apenasFavoritos ||
     filtros.apenasMeusEventos;
 
@@ -102,6 +104,7 @@ export function FilterPanel({
     (filtros.turno !== null ? 1 : 0) +
     (filtros.busca.trim() !== "" ? 1 : 0) +
     (filtros.mes !== null ? 1 : 0) +
+    (filtros.ambito !== null ? 1 : 0) +
     (filtros.apenasFavoritos ? 1 : 0) +
     (filtros.apenasMeusEventos ? 1 : 0);
 
@@ -396,6 +399,48 @@ export function FilterPanel({
             );
           })}
         </div>
+      </div>
+
+      {/* Âmbito */}
+      <div>
+        <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wide mb-2">
+          Âmbito
+        </p>
+        <div className="flex flex-wrap gap-1.5">
+          {(
+            [
+              { valor: null, label: "Todos", cor: null },
+              { valor: "nacional", label: "Nacional (TSE)", cor: null },
+              { valor: "TRE-PB", label: AMBITO_TRE_PB.nome, cor: AMBITO_TRE_PB.cor },
+            ] as const
+          ).map((opcao) => {
+            const isActive = filtros.ambito === opcao.valor;
+            return (
+              <button
+                key={opcao.valor ?? "todos"}
+                onClick={() => onChange({ ...filtros, ambito: opcao.valor })}
+                aria-pressed={isActive}
+                className={cn(
+                  "rounded-full px-3 py-1.5 text-xs font-medium transition-all duration-150",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500",
+                  !isActive && "bg-neutral-100 text-neutral-600 hover:bg-neutral-200",
+                  isActive && "text-white shadow-sm",
+                  // "Todos" e "Nacional" usam o azul institucional via classe;
+                  // so TRE-PB pinta pela constante de ambito.
+                  isActive && !opcao.cor && "bg-primary-700",
+                )}
+                style={isActive && opcao.cor ? { backgroundColor: opcao.cor } : undefined}
+              >
+                {opcao.label}
+              </button>
+            );
+          })}
+        </div>
+        {filtros.ambito === "TRE-PB" && (
+          <p className="mt-1.5 text-xs text-neutral-500 leading-snug">
+            {AMBITO_TRE_PB.descricao}
+          </p>
+        )}
       </div>
 
       {/* Turno */}

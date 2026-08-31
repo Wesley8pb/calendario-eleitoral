@@ -11,6 +11,7 @@ import { FilterSummary } from "./components/filters/FilterSummary";
 import { MeusEventos } from "./components/meus-eventos/MeusEventos";
 import { LinksReferencia } from "./components/links-referencia/LinksReferencia";
 import { eventos } from "./data/eventos";
+import { eventosTrePb } from "./data/eventosTrePb";
 import { useFilteredEvents } from "./hooks/useFilteredEvents";
 import { useUrlFilters } from "./hooks/useUrlFilters";
 import { useFavoritos } from "./hooks/useFavoritos";
@@ -32,14 +33,18 @@ function App() {
   );
 
   const todosEventos = useMemo(
-    () => [...eventos, ...meusEventosConvertidos],
+    () => [...eventos, ...eventosTrePb, ...meusEventosConvertidos],
     [meusEventosConvertidos],
   );
+
+  // Eventos oficiais = nacionais (TSE) + regionais (TRE-PB). Exclui os do usuario.
+  const eventosOficiais = useMemo(() => [...eventos, ...eventosTrePb], []);
+  const totalOficiais = eventos.length + eventosTrePb.length;
 
   const eventosFiltrados = useFilteredEvents(todosEventos, filtros, favoritos);
 
   // Contagem de eventos passados
-  const totalPassados = eventos.filter((ev) => isEventoPassado(ev.data)).length;
+  const totalPassados = eventosOficiais.filter((ev) => isEventoPassado(ev.data)).length;
 
   // Lista de meses disponíveis inclui meses com eventos customizados
   const mesesDisponiveis = useMemo(() => {
@@ -66,6 +71,7 @@ function App() {
     filtros.turno !== null ||
     filtros.busca.trim() !== "" ||
     filtros.mes !== null ||
+    filtros.ambito !== null ||
     filtros.apenasFavoritos ||
     filtros.apenasMeusEventos;
 
@@ -76,6 +82,7 @@ function App() {
       filtros.turno !== null ||
       filtros.busca.trim() !== "" ||
       filtros.mes !== null ||
+      filtros.ambito !== null ||
       filtros.apenasFavoritos);
 
   const scrollToDataAtual = () => {
@@ -182,7 +189,7 @@ function App() {
       <ProximosEventos onSelectEvent={handleSelectEvent} />
       <MonthNav eventos={eventosFiltrados} />
       <FilterSummary
-        totalEventos={eventos.length}
+        totalEventos={totalOficiais}
         totalFiltrados={eventosFiltrados.length}
         hasActiveFilters={hasActiveFilters}
         canExportFilteredEvents={canExportFilteredEvents}
@@ -303,7 +310,7 @@ function App() {
         filtros={filtros}
         onChange={setFiltros}
         onLimpar={limparFiltros}
-        totalEventos={eventos.length}
+        totalEventos={totalOficiais}
         totalFiltrados={eventosFiltrados.length}
         totalPassados={totalPassados}
         totalFavoritos={totalFavoritos}

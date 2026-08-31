@@ -223,6 +223,72 @@ test(
     /doc\.restrito/.test(eventDetail),
 );
 
+// ─── Integração: App, painel de filtros e .ics ───────────────────────────────
+const appSource = readFileSync("src/App.tsx", "utf8");
+const filterPanel = readFileSync(
+  "src/components/filters/FilterPanel.tsx",
+  "utf8",
+);
+const { buildEventDescription } = await import("../src/lib/ics");
+
+console.log("\n=== TESTES DE INTEGRAÇÃO ===\n");
+
+test("App importa eventosTrePb", appSource.includes('from "./data/eventosTrePb"'));
+test(
+  "App concatena eventosTrePb na lista exibida",
+  /\[\s*\.\.\.eventos,\s*\.\.\.eventosTrePb,\s*\.\.\.meusEventosConvertidos\s*\]/.test(
+    appSource,
+  ),
+);
+test(
+  "Contador total soma os eventos regionais",
+  /eventos\.length\s*\+\s*eventosTrePb\.length/.test(appSource),
+);
+test(
+  "hasActiveFilters considera o âmbito",
+  /filtros\.ambito\s*!==\s*null/.test(appSource),
+);
+test("FilterPanel expõe o grupo Âmbito", filterPanel.includes("Âmbito"));
+test(
+  "FilterPanel conta o âmbito entre os filtros ativos",
+  /filtros\.ambito\s*!==\s*null\s*\?\s*1\s*:\s*0/.test(filterPanel),
+);
+
+// ProximosEventos monta a própria lista, sem passar por App.tsx: se ele não
+// concatenar os regionais, o badge TRE-PB do card compacto nunca renderiza.
+const proximosEventosSource = readFileSync(
+  "src/components/proximos-eventos/ProximosEventos.tsx",
+  "utf8",
+);
+test(
+  "ProximosEventos alimenta-se também dos eventos regionais",
+  proximosEventosSource.includes('from "../../data/eventosTrePb"') &&
+    /\[\s*\.\.\.eventos,\s*\.\.\.eventosTrePb\s*\]/.test(proximosEventosSource),
+);
+
+const descricaoIcs = buildEventDescription(memorando as EventoCalendario);
+test(
+  "Descrição do .ics carrega a URL do memorando",
+  descricaoIcs.includes("sei.tre-pb.jus.br"),
+);
+test(
+  "Descrição do .ics nomeia o documento de origem",
+  descricaoIcs.includes("Documento de origem:"),
+);
+test(
+  "Descrição do .ics avisa sobre o acesso restrito",
+  descricaoIcs.includes("acesso restrito"),
+);
+
+// ─── Regressão: todas as categorias sobrevivem à URL ─────────────────────────
+console.log("\n=== TESTE DE REGRESSÃO: CATEGORIAS NA URL ===\n");
+
+test(
+  "As 13 categorias sobrevivem ao round-trip pela URL",
+  parseUrlToFilters("?cat=ELE,REG,PRO,FIN,ADM,FIS,CON,VOT,PES,DIP,PAR,GAR,TRA")
+    .categorias.length === 13,
+);
+
 console.log(`\n=== RESULTADO: ${passed}/${passed + failed} testes passaram ===\n`);
 
 if (failed > 0) process.exit(1);

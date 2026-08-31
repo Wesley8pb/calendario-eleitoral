@@ -90,6 +90,12 @@ export function buildEventDescription(evento: EventoCalendario): string {
     sections.push(`Observacoes:\n${evento.observacoes.trim()}`);
   }
 
+  if (evento.documentoOrigem) {
+    const { titulo, unidade, url, restrito } = evento.documentoOrigem;
+    const aviso = restrito ? " (acesso restrito a servidores)" : "";
+    sections.push(`Documento de origem:\n${titulo} - ${unidade}${aviso}\n${url}`);
+  }
+
   if (evento.fundamentacao.length > 0) {
     const fundamentacao = evento.fundamentacao
       .map((item) => `${item.norma} - ${item.dispositivo}`)

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import {
   Clock,
   CalendarClock,
@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import type { Perfil } from "../../types";
 import { eventos } from "../../data/eventos";
+import { eventosTrePb } from "../../data/eventosTrePb";
 import { useProximosEventos } from "../../hooks/useProximosEventos";
 import { EventoProximoCard } from "./EventoProximoCard";
 import { cn } from "../../lib/utils";
@@ -54,7 +55,9 @@ interface ProximosEventosProps {
 export function ProximosEventos({ onSelectEvent }: ProximosEventosProps) {
   const [isExpanded, setIsExpanded] = useState(true);
   const [perfilAtivo, setPerfilAtivo] = useState<TabValue>(getPerfilSalvo);
-  const proximosEventos = useProximosEventos(eventos, perfilAtivo, 9);
+  // Eventos oficiais: nacionais (TSE) + regionais (TRE-PB).
+  const eventosOficiais = useMemo(() => [...eventos, ...eventosTrePb], []);
+  const proximosEventos = useProximosEventos(eventosOficiais, perfilAtivo, 9);
   const tabRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
 
   // Navegação por teclado entre tabs (6B.6): setas ←→

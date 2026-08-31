@@ -14,6 +14,8 @@ const VALID_CATS: CategoriaID[] = [
   "PES",
   "DIP",
   "PAR",
+  "GAR",
+  "TRA",
 ];
 const VALID_TURNOS = ["1T", "2T", "POS"] as const;
 const VALID_AMBITOS = ["TRE-PB", "nacional"] as const;

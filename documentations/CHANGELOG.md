@@ -1,5 +1,40 @@
 # Changelog
 
+## [2026-08-31] Eventos de âmbito regional TRE-PB, com card diferenciado e documento de origem
+
+O calendário continha exclusivamente eventos de âmbito nacional, extraídos da Resolução TSE nº 23.760/2026 e de resoluções complementares. Passa a acomodar também atos próprios do TRE-PB com marco temporal definido — memorandos-circulares dirigidos às Zonas Eleitorais da Paraíba. O primeiro evento cadastrado é o prazo de 11/09/2026 do Memorando-Circular nº 18/2026 - TRE-PB/PTRE/DG/STIC (cadastramento no sistema SINPLES).
+
+O âmbito foi modelado como **eixo próprio, não como 14ª categoria**. As 13 categorias descrevem assunto; "TRE-PB" é origem. Uma categoria nova forçaria uma escolha falsa em cada evento regional — o Memorando 18/2026 trata de urnas de contingência, LAT e juntas eleitorais, ou seja, é inequivocamente Administração Eleitoral. O evento regional agora mantém sua categoria de assunto **e** ganha a marca de âmbito por cima, cada eixo com seu próprio filtro.
+
+Os eventos regionais vivem em arquivo separado por uma razão concreta: `tests/links-referencia.test.ts` exige que toda URL presente em `eventos.ts` esteja catalogada em `linksReferencia.ts`, que é a central pública de legislação. Uma URL do SEI interno não pertence a esse catálogo — não é norma e não abre para o público.
+
+**Arquivos criados:**
+- `src/data/ambitos.ts` — `AMBITO_TRE_PB` e `ambitoMap`. Fonte única da cor `#0F766E` (verde-petróleo), do rótulo e do ícone; nenhum componente repete o hexadecimal, e há teste que trava isso.
+- `src/data/eventosTrePb.ts` — eventos de âmbito regional, com a `descricao` transcrita literalmente do memorando. Cada memorando novo é um append neste arquivo.
+- `tests/ambito-tre-pb.test.ts` — 59 asserções travando as decisões da spec: integridade do dado do evento, ausência de URL do SEI em `eventos.ts`, round-trip do filtro pela URL, identidade visual do card, bloco de documento de origem e a ligação em `App`, `FilterPanel`, `ProximosEventos` e `.ics`.
+
+**Arquivos modificados:**
+- `src/types/index.ts` — `Ambito`, `DocumentoOrigem` e os campos **opcionais** `ambito` e `documentoOrigem` em `EventoCalendario`. Sendo opcionais, os 316 eventos existentes não sofreram alteração: não houve migração de dado. `DocumentoOrigem` é campo próprio, e não mais um item de `fundamentacao[]` — memorando-circular é ato administrativo interno, não norma.
+- `src/hooks/useFilteredEvents.ts` — `FilterState.ambito` (`"TRE-PB" | "nacional" | null`) e a regra correspondente, que se aplica apenas a eventos oficiais; eventos particulares do usuário seguem governados por `apenasMeusEventos`.
+- `src/hooks/useUrlFilters.ts` — parâmetro `?ambito=tre-pb`. `parseUrlToFilters` e `filtersToUrl` deixaram de ler `window` diretamente: recebem a query string e o pathname por parâmetro e passaram a ser exportadas, o que as tornou testáveis fora do navegador. **Correção de bug preexistente:** `VALID_CATS` listava 11 das 13 categorias — faltavam `GAR` e `TRA`, de modo que um link com `?cat=GAR` ou `?cat=TRA` perdia o filtro em silêncio ao ser aberto.
+- `src/components/timeline/EventCard.tsx` — faixa lateral de 4 px, fundo levemente tingido e badge TRE-PB à frente das categorias. Destaque e favorito continuam prevalecendo sobre o âmbito na borda esquerda, para não haver duas cores concorrendo na mesma aresta. O card regional preserva favorito e exportação `.ics`, por ser evento oficial — distinto dos eventos particulares.
+- `src/components/timeline/EventDetail.tsx` — bloco "Documento de origem" acima da fundamentação legal, com link externo (`rel="noopener noreferrer"`) e o aviso "SEI/TRE-PB — acesso restrito a servidores". O aviso não é decorativo: o site é público e o endereço do SEI só resolve para quem está autenticado; sem ele, um visitante externo encontraria uma tela de login sem explicação.
+- `src/components/proximos-eventos/EventoProximoCard.tsx` — badge TRE-PB compacto, para que a distinção sobreviva ao painel de Próximos Prazos.
+- `src/components/proximos-eventos/ProximosEventos.tsx` — passa a montar a lista a partir de `[...eventos, ...eventosTrePb]`. O componente monta a própria lista sem passar por `App.tsx`; sem esta alteração o badge do card compacto nunca renderizaria. A falha foi encontrada na verificação em navegador, não nos testes, e ganhou asserção própria.
+- `src/components/filters/FilterPanel.tsx` — grupo "Âmbito" com três opções (Todos / Nacional (TSE) / TRE-PB), acima do grupo Turno, contabilizado no total de filtros ativos. As opções neutras usam a classe `bg-primary-700`; só TRE-PB pinta pela constante de âmbito.
+- `src/App.tsx` — `todosEventos` concatena os regionais e os contadores de total e de passados somam as duas listas oficiais (317 eventos).
+- `src/lib/ics.ts` — a descrição do evento exportado passa a carregar título, unidade e URL do documento de origem, com o aviso de acesso restrito. Sem isso, quem leva o prazo para o próprio calendário perderia o link no momento em que fosse precisar dele.
+- `Documentations/CHANGELOG.md` — registro desta sessão.
+
+**Documentação:**
+- `docs/superpowers/specs/2026-08-31-eventos-tre-pb-design.md` — spec de projeto, com a transcrição integral do memorando e a URL completa do SEI.
+- `docs/superpowers/plans/2026-08-31-eventos-tre-pb.md` — plano de implementação em seis tasks.
+
+**Validação:**
+- `tests/ambito-tre-pb.test.ts`: 59/59. `tests/ics.test.ts`: 24/24. `tests/links-referencia.test.ts`: 11/11. `tests/security.test.ts`: 25/25. `tests/header-tipografia.test.ts`: 20/20.
+- `npx tsc --noEmit` e `npm run build` sem erros. `npm run lint` segue com os 6 erros preexistentes de `src/components/ui/HelpToast.tsx`, `src/lib/search.ts` e `tests/security.test.ts`, sem nenhum acréscimo.
+- Verificação em navegador a 375 px: borda esquerda medida em `rgb(15, 118, 110)` a 4 px e fundo `rgba(240, 253, 250, 0.4)`; badge TRE-PB visível na timeline e no card compacto; link do SEI com `target="_blank"`, `rel="noopener noreferrer"` e `infra_hash` preservado; aviso de acesso restrito visível; sem scroll horizontal no documento e sem erro de console. Filtro `?ambito=tre-pb` reduz a timeline a um evento e sobrevive ao recarregamento da página.
+
 ## [2026-08-12] Título do Header em serifa Lora, com escala ampliada e filete dourado
 
 O título "Calendário Eleitoral / Eleições 2026" usava Inter no peso 700 a 36 px no desktop — o mesmo peso máximo carregado para todo o resto do site, o que não criava hierarquia alguma entre o título e o corpo da interface. Passa a usar a serifa Lora no peso 700, em escala de 30 px no mobile, 48 px a partir de 640 px e 56 px a partir de 1024 px, com um filete dourado decorativo separando o título da descrição.

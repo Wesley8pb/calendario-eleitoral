@@ -21,6 +21,20 @@ export type CategoriaID =
   | "GAR"
   | "TRA";
 
+/** Âmbito de origem do evento. Ausente = âmbito nacional (TSE). */
+export type Ambito = "TRE-PB";
+
+/**
+ * Ato administrativo que origina um evento de âmbito regional.
+ * Distinto de Fundamentacao, que é reservada a normas.
+ */
+export interface DocumentoOrigem {
+  titulo: string; // Ex: "Memorando-Circular nº 18/2026"
+  unidade: string; // Ex: "TRE-PB/PTRE/DG/STIC"
+  url: string;
+  restrito?: boolean; // true → exibe aviso de acesso restrito
+}
+
 export interface Fundamentacao {
   norma: string; // Ex: "Lei nº 9.504/1997"
   dispositivo: string; // Ex: "art. 91, caput"
@@ -41,6 +55,8 @@ export interface EventoCalendario {
   observacoes?: string;
   destaque?: boolean;
   corPersonalizada?: string; // usado apenas em eventos customizados do usuário
+  ambito?: Ambito; // ausente = evento nacional (TSE)
+  documentoOrigem?: DocumentoOrigem; // ato administrativo de origem
 }
 
 export interface Categoria {

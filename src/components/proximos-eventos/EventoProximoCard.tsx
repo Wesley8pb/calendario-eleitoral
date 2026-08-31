@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import type { EventoCalendario } from "../../types";
 import { categoriaMap } from "../../data/categorias";
+import { AMBITO_TRE_PB } from "../../data/ambitos";
 import {
   formatDate,
   getDiasAte,
@@ -47,6 +48,8 @@ export function EventoProximoCard({ evento, onClick }: EventoProximoCardProps) {
   const diasAte = getDiasAte(evento.data);
   const hoje = isEventoHoje(evento.data);
   const estaSemana = isEventoProximo(evento.data, 7);
+  const isTrePb = evento.ambito === "TRE-PB";
+  const AmbitoIcon = iconeMap[AMBITO_TRE_PB.icone] ?? Calendar;
 
   let urgenciaBadge: React.ReactNode;
   if (hoje) {
@@ -91,8 +94,18 @@ export function EventoProximoCard({ evento, onClick }: EventoProximoCardProps) {
         {evento.titulo}
       </h4>
 
-      {/* Category badge */}
-      <div className="mt-auto">
+      {/* Category badge + ambito */}
+      <div className="mt-auto flex flex-wrap items-center gap-1.5">
+        {isTrePb && (
+          <span
+            className="inline-flex items-center gap-1 rounded-full px-2 py-1 text-[11px] font-semibold text-white"
+            style={{ backgroundColor: AMBITO_TRE_PB.cor }}
+            title={AMBITO_TRE_PB.rotulo}
+          >
+            <AmbitoIcon size={12} strokeWidth={2.2} />
+            {AMBITO_TRE_PB.nome}
+          </span>
+        )}
         {cat && (
           <span
             className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium text-white"

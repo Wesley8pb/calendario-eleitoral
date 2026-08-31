@@ -150,6 +150,49 @@ test(
   filtersToUrl(parseUrlToFilters("?ambito=tre-pb"), "/") === "?ambito=tre-pb",
 );
 
+// ─── Identidade visual do card ───────────────────────────────────────────────
+const eventCard = readFileSync("src/components/timeline/EventCard.tsx", "utf8");
+const proximoCard = readFileSync(
+  "src/components/proximos-eventos/EventoProximoCard.tsx",
+  "utf8",
+);
+
+console.log("\n=== TESTES DE IDENTIDADE VISUAL DO CARD ===\n");
+
+test(
+  "EventCard importa a constante de âmbito",
+  /import\s*\{[^}]*AMBITO_TRE_PB[^}]*\}\s*from\s*"\.\.\/\.\.\/data\/ambitos"/.test(
+    eventCard,
+  ),
+);
+test(
+  "EventCard deriva isTrePb do campo ambito",
+  /const\s+isTrePb\s*=\s*evento\.ambito\s*===\s*"TRE-PB"/.test(eventCard),
+);
+test(
+  "EventCard não repete o hexadecimal do âmbito",
+  !eventCard.includes("#0F766E"),
+);
+test(
+  "EventoProximoCard não repete o hexadecimal do âmbito",
+  !proximoCard.includes("#0F766E"),
+);
+test(
+  "EventoProximoCard importa a constante de âmbito",
+  proximoCard.includes("AMBITO_TRE_PB"),
+);
+test(
+  "Destaque e favorito prevalecem sobre o âmbito na borda esquerda",
+  /const\s+bordaAmbito\s*=\s*isTrePb\s*&&\s*!isCustom\s*&&\s*!evento\.destaque\s*&&\s*!favorito/.test(
+    eventCard,
+  ),
+);
+test(
+  "Card regional preserva o botão de favorito (condicionado só a isCustom)",
+  eventCard.includes("{!isCustom && (") &&
+    !eventCard.includes("{!isCustom && !isTrePb && ("),
+);
+
 console.log(`\n=== RESULTADO: ${passed}/${passed + failed} testes passaram ===\n`);
 
 if (failed > 0) process.exit(1);

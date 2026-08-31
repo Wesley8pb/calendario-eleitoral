@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import type { EventoCalendario, CategoriaID } from "../../types";
 import { categoriaMap } from "../../data/categorias";
+import { AMBITO_TRE_PB } from "../../data/ambitos";
 import {
   cn,
   isEventoPassado,
@@ -59,6 +60,21 @@ function CategoriaBadge({ id }: { id: CategoriaID }) {
     >
       <Icon size={12} strokeWidth={2.2} />
       <span className="hidden sm:inline">{cat.nome}</span>
+    </span>
+  );
+}
+
+function AmbitoBadge() {
+  const Icon = iconeMap[AMBITO_TRE_PB.icone] ?? Calendar;
+
+  return (
+    <span
+      className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold text-white"
+      style={{ backgroundColor: AMBITO_TRE_PB.cor }}
+      title={AMBITO_TRE_PB.rotulo}
+    >
+      <Icon size={12} strokeWidth={2.2} />
+      {AMBITO_TRE_PB.nome}
     </span>
   );
 }
@@ -134,6 +150,10 @@ export function EventCard({ evento }: EventCardProps) {
   }, [evento.id]);
 
   const isCustom = evento.id.startsWith("custom-");
+  const isTrePb = evento.ambito === "TRE-PB";
+  // Destaque e favorito ja ocupam a borda esquerda; o ambito so a assume quando
+  // ela esta livre, para nao haver duas cores concorrendo na mesma aresta.
+  const bordaAmbito = isTrePb && !isCustom && !evento.destaque && !favorito;
 
   return (
     <article
@@ -142,13 +162,21 @@ export function EventCard({ evento }: EventCardProps) {
         "group relative rounded-xl border bg-white shadow-card transition-all duration-200",
         "hover:shadow-card-hover",
         isCustom && "border-l-4 hover:border-primary-200",
+        !isCustom && isTrePb && "bg-teal-50/40",
+        bordaAmbito && "border-l-4",
         !isCustom && evento.destaque &&
           "border-secondary-500 border-l-4 bg-secondary-100/30",
         !isCustom && !evento.destaque && "border-neutral-100 hover:border-primary-200",
         !isCustom && favorito && !evento.destaque && "border-amber-300 border-l-4",
         isOpen && "ring-1 ring-primary-200 shadow-card-hover",
       )}
-      style={isCustom && evento.corPersonalizada ? { borderLeftColor: evento.corPersonalizada } : undefined}
+      style={
+        isCustom && evento.corPersonalizada
+          ? { borderLeftColor: evento.corPersonalizada }
+          : bordaAmbito
+            ? { borderLeftColor: AMBITO_TRE_PB.cor }
+            : undefined
+      }
     >
       {/* Header do card: botão de expand + botão de favorito (irmãos, não aninhados) */}
       <div className="flex items-stretch">
@@ -183,6 +211,7 @@ export function EventCard({ evento }: EventCardProps) {
                     </span>
                   ) : (
                     <>
+                      {isTrePb && <AmbitoBadge />}
                       {evento.categorias.map((catId) => (
                         <CategoriaBadge key={catId} id={catId} />
                       ))}

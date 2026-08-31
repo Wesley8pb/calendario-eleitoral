@@ -193,6 +193,36 @@ test(
     !eventCard.includes("{!isCustom && !isTrePb && ("),
 );
 
+// ─── Documento de origem no detalhe ──────────────────────────────────────────
+const eventDetail = readFileSync(
+  "src/components/timeline/EventDetail.tsx",
+  "utf8",
+);
+
+console.log("\n=== TESTES DO BLOCO DOCUMENTO DE ORIGEM ===\n");
+
+test(
+  "EventDetail renderiza o bloco Documento de origem",
+  eventDetail.includes("Documento de origem"),
+);
+test(
+  "O bloco é condicionado à existência de documentoOrigem",
+  /evento\.documentoOrigem\s*&&/.test(eventDetail),
+);
+test(
+  "O link do documento abre em nova aba com rel seguro",
+  /rel="noopener noreferrer"/.test(eventDetail),
+);
+test(
+  "O aviso de acesso restrito existe e nomeia o SEI/TRE-PB",
+  eventDetail.includes("SEI/TRE-PB") && eventDetail.includes("acesso restrito"),
+);
+test(
+  "O aviso é condicionado ao campo restrito",
+  /documentoOrigem\.restrito/.test(eventDetail) ||
+    /doc\.restrito/.test(eventDetail),
+);
+
 console.log(`\n=== RESULTADO: ${passed}/${passed + failed} testes passaram ===\n`);
 
 if (failed > 0) process.exit(1);

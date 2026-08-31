@@ -1,5 +1,5 @@
-import { BookOpen, ExternalLink, Info } from "lucide-react";
-import type { EventoCalendario } from "../../types";
+import { BookOpen, ExternalLink, FileText, Info, Lock } from "lucide-react";
+import type { DocumentoOrigem, EventoCalendario } from "../../types";
 import { CalendarExportPanel } from "../calendar/CalendarExportPanel";
 
 function parseObservacoes(text: string): React.ReactNode[] {
@@ -63,6 +63,39 @@ function FundamentacaoChip({
   );
 }
 
+function DocumentoOrigemBloco({ doc }: { doc: DocumentoOrigem }) {
+  return (
+    <div className="space-y-1.5">
+      <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wide">
+        Documento de origem
+      </p>
+      <a
+        href={doc.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-start gap-2 rounded-lg border border-teal-200 bg-teal-50 px-3 py-2 text-left transition-colors hover:bg-teal-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
+      >
+        <FileText size={16} className="mt-0.5 flex-shrink-0 text-teal-700" />
+        <span className="min-w-0">
+          <span className="block text-sm font-semibold text-teal-900 break-words">
+            {doc.titulo}
+            <ExternalLink size={12} className="ml-1 inline opacity-60" />
+          </span>
+          <span className="block text-xs text-teal-700 break-words">
+            {doc.unidade}
+          </span>
+        </span>
+      </a>
+      {doc.restrito && (
+        <p className="flex items-center gap-1.5 text-xs text-neutral-500">
+          <Lock size={11} className="flex-shrink-0" />
+          SEI/TRE-PB — acesso restrito a servidores
+        </p>
+      )}
+    </div>
+  );
+}
+
 export function EventDetail({ evento }: EventDetailProps) {
   return (
     <div className="px-3 sm:px-4 pb-4 pt-1 space-y-3 animate-slide-down">
@@ -82,6 +115,11 @@ export function EventDetail({ evento }: EventDetailProps) {
       )}
 
       <CalendarExportPanel evento={evento} />
+
+      {/* Documento administrativo de origem */}
+      {evento.documentoOrigem && (
+        <DocumentoOrigemBloco doc={evento.documentoOrigem} />
+      )}
 
       {/* Fundamentação legal */}
       {evento.fundamentacao.length > 0 && (

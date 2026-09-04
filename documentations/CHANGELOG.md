@@ -1,5 +1,60 @@
 # Changelog
 
+## [2026-09-04] Cronograma de preparação de urnas do TRE-PB — 10 eventos com escala por polo
+
+O Cronograma de Preparação de Urnas das Eleições 2026 (v2), da STIC/TRE-PB, escala as 68 zonas eleitorais da Paraíba em cinco dias por turno — 21 a 25/09 no primeiro, 12 a 16/10 no segundo —, distribuídas simultaneamente em cinco polos: NVIJPA (João Pessoa), NVICGE (Campina Grande), NVIPAT (Patos), NVIPBL (Pombal) e NVICJZ (Cajazeiras). Entram como **10 eventos, um por data**, e não um por zona: quem consulta quer saber o que acontece no dia.
+
+**A escala é campo estruturado, não texto.** O dia mais cheio (13/10) tem 21 zonas em 5 polos; como parágrafo corrido isso é ilegível, e a busca não conseguiria distinguir "Patos" município de "Patos" polo. Por isso `preparacaoUrnas: PoloPreparacao[]` em `EventoCalendario`, renderizado por componente próprio.
+
+**Visual — agrupado por polo.** Cada polo é um bloco com filete colorido à esquerda, sigla, cidade e contador de zonas; dentro, uma linha por zona com número, município-sede e horário. Uma coluna no celular, duas a partir de `sm`. Um filete cinza de 1 px (`neutral-300`) separa as duas colunas. Ele é elemento próprio, absolutamente posicionado, e não borda dos itens: como borda ficava picotado, parando antes da última linha sempre que o polo tinha número ímpar de zonas — foi o que motivou a troca, depois de a primeira versão sair "quase imperceptível". É `aria-hidden`, some abaixo de `sm` (onde a lista é de coluna única) e não é renderizado quando o polo tem uma zona só, caso em que não existe segunda coluna. Medido em navegador: 4 filetes visíveis a 1280 px, com altura cheia de cada lista (64, 95, 64 e 32 px), e 0 a 375 px. Alternativas descartadas: tabela única ZE/Sede/Horário/Polo (perde o agrupamento e exige rolagem horizontal em 375px) e agrupamento por faixa de horário (dispersa cada polo por várias seções).
+
+**A busca alcança a escala.** `camposBuscaveis()` nasceu como função pura em `search.ts` justamente para ser testável fora do React: monta o texto indexado do evento incluindo sigla e cidade do polo, número da zona e município-sede. Buscar "Cabedelo", "NVIPBL" ou "Pombal" leva ao card do dia certo; "Sapé" traz 25/09 e não 23/09. Sem isso os cards só apareceriam buscando por "urna".
+
+**Arquivos criados:**
+- `src/data/nvis.ts` — `nviMap` e `ORDEM_NVIS`. Fonte única da cidade e da cor de cada polo, no mesmo espírito de `ambitos.ts`; nenhum componente repete o hexadecimal, e há teste que trava isso. As cinco cores são distintas entre si e nenhuma reaproveita o verde-petróleo do âmbito TRE-PB, que já marca a borda do card.
+- `src/components/timeline/PreparacaoUrnasBloco.tsx` — o bloco agrupado, com `aria-label` próprio.
+
+**Arquivos modificados:**
+- `src/types/index.ts` — `NviID`, `ZonaPreparacao`, `PoloPreparacao` e o campo **opcional** `preparacaoUrnas`. Sendo opcional, nenhum dos 319 eventos nacionais precisou mudar.
+- `src/data/eventosTrePb.ts` — os 10 eventos, gerados a partir da tabela do cronograma, não digitados: 68 zonas × 2 turnos é onde o erro de transcrição mora. Categoria ADM, âmbito TRE-PB, turno 1T/2T, `fundamentacao: []` (é ato administrativo, não norma) e `documentoOrigem` apontando para o PDF **público** do TRE-PB — sem o aviso de acesso restrito, que só cabe ao SEI.
+- `src/lib/search.ts` — `camposBuscaveis()`.
+- `src/hooks/useFilteredEvents.ts` — passa a consumir `camposBuscaveis()` em vez de montar o array de campos inline.
+- `src/lib/ics.ts` — a descrição do evento exportado carrega a escala completa ("NVIPBL - Pombal: 69ª São Bento 07h–17h"). Quem leva o prazo para o próprio calendário precisa do horário e do polo lá dentro, não só do título.
+- `src/components/timeline/EventDetail.tsx` — renderiza o bloco logo após a descrição, antes das observações.
+- `tests/ambito-tre-pb.test.ts` — a asserção `eventosTrePb.length === 1` era um snapshot e foi substituída por 27 asserções sobre o cronograma: contagem de 68 zonas por turno sem repetição, ordem canônica dos polos, ordem crescente das zonas, formato de horário e de número de zona, URL pública do PDF, comportamento da busca (positivo e negativo) e conteúdo do `.ics`. Total: 86 asserções.
+- `CLAUDE.md`, `AGENTS.md` — seção "Eventos regionais e o cronograma de urnas do TRE-PB".
+- `Documentations/CHANGELOG.md` — registro desta sessão.
+
+**Verificação:** `npx tsc --noEmit` e `eslint` limpos nos arquivos tocados; `npm run build` concluído; as cinco suítes de `tests/` passaram (86, 11, 25, 24 e 20 asserções). Conferência em navegador (Comet, Playwright) a 1280px e 375px: busca por "cabedelo" retorna exatamente 1 card, bloco expande sem erro de página e **zero overflow horizontal** nos dois tamanhos. O truncamento de "Campina Gra…" e "São João do Rio do…" surgiu nessa conferência e foi corrigido — município nunca é truncado.
+
+**Pendência conhecida:** o cronograma não expande a sigla "NVI", que por isso não é desdobrada em nenhum ponto da interface. O PDF grafa a 74ª zona como "ÀGUA BRANCA"; foi cadastrada como "Água Branca".
+
+## [2026-09-04] Incorporação da Resolução TSE nº 23.771/2026 ao calendário
+
+A Resolução nº 23.771, de 3 de agosto de 2026 (DJE/TSE nº 131, de 7.8.2026, p. 248-251), alterou o Anexo I da Resolução nº 23.760/2026 em dez itens. Sete já constavam do calendário com a redação correta; os outros três estavam ausentes, um estava com a data vencida e um com o destinatário errado. A divergência mais grave era a do FEFC: o prazo de distribuição às candidaturas de mulheres, pessoas negras e indígenas aparecia como encerrado em 30/08, quando a norma o prorrogou para 08/09 — o site exibia como vencido um prazo ainda aberto.
+
+A Resolução nº 23.771/2026 **não** foi lançada em `fundamentacao[]`: é norma meramente alteradora, e a fonte do calendário continua sendo a Resolução nº 23.760/2026. O padrão do arquivo é citar a norma material referida entre parênteses no texto do calendário — a própria 23.760 nunca aparece em `fundamentacao[]`, e 45 eventos têm o campo vazio justamente porque o calendário não indica dispositivo. A alteração ficou registrada em `observacoes`, que é o texto exibido no card expandido, e no cabeçalho de `src/data/eventos.ts`.
+
+**Eventos acrescentados (3):**
+- `2026-10-09-3` — último dia para as agremiações transferirem recursos do FEFC a candidaturas majoritárias que concorram ao 2º turno (Res. nº 23.607/2019/TSE, art. 17, §§ 9º-A e 9º-B; art. 6º da Res. nº 23.605/2019/TSE). Categorias FIN e PAR, perfis partido e candidato, turno 2T.
+- `2026-10-14-1` — último dia para os TREs encaminharem ao TSE os relatórios individuais de auditoria de cada Regional, relativos ao 1º turno. Categoria FIS, turno 1T, marco "10 dias após o 1º turno". `fundamentacao: []`, porque o item do calendário não remete a dispositivo algum.
+- `2026-11-04-1` — o mesmo prazo relativo ao 2º turno. Categoria FIS, turno POS, marco "10 dias após o 2º turno".
+
+**Eventos corrigidos (2):**
+- Distribuição do FEFC e do Fundo Partidário a mulheres, negros e indígenas — movido de 30/08 para **08/09/2026** (terça-feira). O antigo `2026-08-30-1` foi removido e o evento renasceu como `2026-09-08-1`; o id mudou porque ele é derivado da data. Em consequência, o único evento restante de 30/08 (homologação dos programas de verificação) foi renumerado de `2026-08-30-2` para `2026-08-30-1`.
+- `2026-10-09-2` — relatório conclusivo da auditoria de funcionamento das urnas (1T): o destinatário passou de "ao Tribunal Superior Eleitoral" para "ao respectivo Tribunal Regional Eleitoral", conforme a nova redação.
+
+**Itens da 23.771 já contemplados, conferidos sem alteração (7):** 15/08 item 3 (`2026-08-15-3`), 30/08 homologação (`2026-08-30-1`), 02/10 item 1 (`2026-10-02-1`), 05/10 item 9 (`2026-10-05-5`), 09/10 item 2 (`2026-10-09-2`), 23/10 item 1 (`2026-10-23-1`) e a publicação dos relatórios em 24/11 (`2026-11-24-3`, item da Res. 23.673/2021 que a 23.771 não tocou).
+
+**Arquivos modificados:**
+- `src/data/eventos.ts` — as cinco alterações acima. Total de eventos: **319** (antes 316), todos com id único e em ordem cronológica.
+- `src/data/eventos.ts` (cabeçalho) — registro da norma alteradora, ao lado da fonte primária.
+- `CLAUDE.md`, `AGENTS.md` — contagem 316 → 319; total de entradas de `fundamentacao[]` 420 → 422; menção à Res. nº 23.771/2026 como alteradora da 23.760.
+- `README.md` — contagem 316 → 319 e menção à norma alteradora.
+- `Documentations/CHANGELOG.md` — registro desta sessão.
+
+**Verificação:** `npx tsc --noEmit` e `npx eslint src/data/eventos.ts` sem erros; `npm run build` concluído; as cinco suítes de `tests/` passaram (11, 59, 25, 24 e 20 asserções). Nenhuma URL nova em `fundamentacao[].url`, portanto `linksReferencia.ts` não precisou de alteração.
+
 ## [2026-08-31] Eventos de âmbito regional TRE-PB, com card diferenciado e documento de origem
 
 O calendário continha exclusivamente eventos de âmbito nacional, extraídos da Resolução TSE nº 23.760/2026 e de resoluções complementares. Passa a acomodar também atos próprios do TRE-PB com marco temporal definido — memorandos-circulares dirigidos às Zonas Eleitorais da Paraíba. O primeiro evento cadastrado é o prazo de 11/09/2026 do Memorando-Circular nº 18/2026 - TRE-PB/PTRE/DG/STIC (cadastramento no sistema SINPLES).

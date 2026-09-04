@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import type { EventoCalendario, CategoriaID } from "../types";
 import { isEventoPassado } from "../lib/utils";
-import { matchesSearch } from "../lib/search";
+import { camposBuscaveis, matchesSearch } from "../lib/search";
 
 export interface FilterState {
   ocultarPassados: boolean;
@@ -78,14 +78,7 @@ export function useFilteredEvents(
 
       // 4. Busca textual
       if (filtros.busca) {
-        const campos = [
-          ev.titulo,
-          ev.descricao,
-          ...ev.fundamentacao.map((f) => `${f.norma} ${f.dispositivo}`),
-          ev.observacoes ?? "",
-        ].join(" ");
-
-        if (!matchesSearch(campos, filtros.busca)) {
+        if (!matchesSearch(camposBuscaveis(ev), filtros.busca)) {
           return false;
         }
       }

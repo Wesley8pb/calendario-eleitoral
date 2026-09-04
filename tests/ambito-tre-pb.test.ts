@@ -8,6 +8,8 @@ import { readFileSync } from "node:fs";
 import type { EventoCalendario } from "../src/types";
 import { eventosTrePb } from "../src/data/eventosTrePb";
 import { AMBITO_TRE_PB, ambitoMap } from "../src/data/ambitos";
+import { nviMap, ORDEM_NVIS } from "../src/data/nvis";
+import { camposBuscaveis, matchesSearch } from "../src/lib/search";
 
 let passed = 0;
 let failed = 0;
@@ -40,7 +42,200 @@ test(
   "Nenhuma URL do SEI foi introduzida em src/data/eventos.ts",
   !eventosSource.includes("sei.tre-pb.jus.br"),
 );
-test("eventosTrePb contém exatamente 1 evento", eventosTrePb.length === 1);
+test(
+  "eventosTrePb contém 11 eventos (1 memorando + 10 de preparação de urnas)",
+  eventosTrePb.length === 11,
+);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Cronograma de preparação de urnas (STIC/TRE-PB)
+// ─────────────────────────────────────────────────────────────────────────────
+console.log("\n=== CRONOGRAMA DE PREPARAÇÃO DE URNAS ===\n");
+
+const PDF_CRONOGRAMA =
+  "https://www.tre-pb.jus.br/eleicoes/e/arquivos/" +
+  "cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_geral-v2/" +
+  "@@display-file/file/" +
+  "cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_geral-v2.pdf";
+
+const preparacao = eventosTrePb.filter((ev) => ev.preparacaoUrnas?.length);
+
+test("Há 10 eventos de preparação de urnas", preparacao.length === 10);
+test(
+  "5 datas no 1º turno (21 a 25/09) e 5 no 2º (12 a 16/10)",
+  JSON.stringify(preparacao.map((ev) => ev.data)) ===
+    JSON.stringify([
+      "2026-09-21", "2026-09-22", "2026-09-23", "2026-09-24", "2026-09-25",
+      "2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-16",
+    ]),
+);
+test(
+  "Todos são de âmbito TRE-PB e categoria ADM",
+  preparacao.every(
+    (ev) => ev.ambito === "TRE-PB" && ev.categorias.join() === "ADM",
+  ),
+);
+test(
+  "Todos apontam para o PDF público do cronograma, sem marca de acesso restrito",
+  preparacao.every(
+    (ev) =>
+      ev.documentoOrigem?.url === PDF_CRONOGRAMA &&
+      ev.documentoOrigem?.unidade === "TRE-PB/STIC" &&
+      ev.documentoOrigem?.restrito !== true,
+  ),
+);
+test(
+  "A URL do cronograma usa HTTPS no domínio tre-pb.jus.br",
+  PDF_CRONOGRAMA.startsWith("https://www.tre-pb.jus.br/"),
+);
+
+// Cada turno escala as 68 zonas eleitorais, uma única vez.
+for (const [rotulo, turno] of [["1º turno", "1T"], ["2º turno", "2T"]] as const) {
+  const zonas = preparacao
+    .filter((ev) => ev.turno === turno)
+    .flatMap((ev) => ev.preparacaoUrnas!.flatMap((p) => p.zonas));
+
+  test(`${rotulo}: 68 zonas eleitorais escaladas`, zonas.length === 68);
+  test(
+    `${rotulo}: nenhuma zona aparece em duas datas`,
+    new Set(zonas.map((z) => z.ze)).size === 68,
+  );
+}
+
+test(
+  "Todo polo citado existe em nviMap e na ordem canônica",
+  preparacao.every((ev) =>
+    ev.preparacaoUrnas!.every(
+      (p) => nviMap[p.nvi] !== undefined && ORDEM_NVIS.includes(p.nvi),
+    ),
+  ),
+);
+test(
+  "Os polos de cada card seguem a ordem canônica",
+  preparacao.every((ev) => {
+    const idx = ev.preparacaoUrnas!.map((p) => ORDEM_NVIS.indexOf(p.nvi));
+    return idx.every((v, i) => i === 0 || idx[i - 1] < v);
+  }),
+);
+test(
+  "As zonas de cada polo estão em ordem crescente",
+  preparacao.every((ev) =>
+    ev.preparacaoUrnas!.every((p) => {
+      const n = p.zonas.map((z) => parseInt(z.ze, 10));
+      return n.every((v, i) => i === 0 || n[i - 1] < v);
+    }),
+  ),
+);
+test(
+  "Todo horário segue o formato 00h–00h",
+  preparacao.every((ev) =>
+    ev.preparacaoUrnas!.every((p) =>
+      p.zonas.every((z) => /^\d{2}h–\d{2}h$/.test(z.horario)),
+    ),
+  ),
+);
+test(
+  "Toda zona tem número no formato 00ª e município-sede preenchido",
+  preparacao.every((ev) =>
+    ev.preparacaoUrnas!.every((p) =>
+      p.zonas.every((z) => /^\d{2}ª$/.test(z.ze) && z.sede.trim().length > 0),
+    ),
+  ),
+);
+
+// A busca precisa alcançar polo, número de zona e município — é como se procura.
+const dia23 = preparacao.find((ev) => ev.data === "2026-09-23")!;
+test(
+  'Busca por município encontra o card ("Cabedelo" → 23/09)',
+  matchesSearch(camposBuscaveis(dia23), "cabedelo"),
+);
+test(
+  'Busca ignora acento ("juazeirinho" → 23/09)',
+  matchesSearch(camposBuscaveis(dia23), "juazeirinho"),
+);
+test(
+  'Busca por sigla de polo encontra o card ("NVIPBL" → 23/09)',
+  matchesSearch(camposBuscaveis(dia23), "nvipbl"),
+);
+test(
+  'Busca pela cidade do polo encontra o card ("Pombal" → 23/09)',
+  matchesSearch(camposBuscaveis(dia23), "pombal"),
+);
+test(
+  'Busca por município ausente da data não retorna o card ("Sapé" ∉ 23/09)',
+  !matchesSearch(camposBuscaveis(dia23), "sape"),
+);
+test(
+  'Busca por município ausente encontra a data certa ("Sapé" ∈ 25/09)',
+  matchesSearch(
+    camposBuscaveis(preparacao.find((ev) => ev.data === "2026-09-25")!),
+    "sape",
+  ),
+);
+
+// O .ics precisa levar a escala junto — sem ela o evento exportado fica vazio.
+const { buildEventDescription: descreverIcs } = await import(
+  "../src/lib/ics"
+);
+const icsDia23 = descreverIcs(dia23);
+test(
+  "Descrição do .ics traz a escala de preparação de urnas",
+  icsDia23.includes("Escala de preparacao de urnas:"),
+);
+test(
+  "Descrição do .ics nomeia o polo com a cidade",
+  icsDia23.includes("NVIPBL - Pombal:"),
+);
+test(
+  "Descrição do .ics traz zona, município e horário",
+  icsDia23.includes("57ª Cabedelo 08h–18h"),
+);
+test(
+  "Descrição do .ics traz o link público do cronograma",
+  icsDia23.includes(PDF_CRONOGRAMA),
+);
+
+// As cores dos polos são únicas e vivem só em nvis.ts.
+test(
+  "Cada polo tem cor distinta",
+  new Set(ORDEM_NVIS.map((n) => nviMap[n].cor)).size === ORDEM_NVIS.length,
+);
+test(
+  "Nenhum polo reutiliza a cor do âmbito TRE-PB",
+  ORDEM_NVIS.every((n) => nviMap[n].cor !== AMBITO_TRE_PB.cor),
+);
+const blocoSource = readFileSync(
+  "src/components/timeline/PreparacaoUrnasBloco.tsx",
+  "utf8",
+);
+test(
+  "O filete entre colunas só é exibido a partir do breakpoint sm",
+  /absolute inset-y-0 left-1\/2 hidden w-px bg-neutral-300 sm:block/.test(
+    blocoSource,
+  ),
+);
+test(
+  "O filete não é renderizado quando o polo tem uma zona só",
+  blocoSource.includes("polo.zonas.length > 1 &&"),
+);
+test(
+  "O filete é decorativo e não entra na árvore de acessibilidade",
+  /aria-hidden="true"\s+className="pointer-events-none absolute inset-y-0/.test(
+    blocoSource,
+  ),
+);
+test(
+  "A grade de duas colunas também é condicionada a sm",
+  blocoSource.includes("sm:grid-cols-2") &&
+    !/(?<!sm:)grid-cols-2/.test(blocoSource),
+);
+test(
+  "Nenhum hexadecimal de polo está escrito no componente",
+  !readFileSync(
+    "src/components/timeline/PreparacaoUrnasBloco.tsx",
+    "utf8",
+  ).match(/#[0-9a-fA-F]{6}/),
+);
 test(
   "Todo evento de eventosTrePb declara ambito TRE-PB",
   eventosTrePb.every((ev) => ev.ambito === "TRE-PB"),

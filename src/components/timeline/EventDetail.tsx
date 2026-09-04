@@ -1,6 +1,7 @@
 import { BookOpen, ExternalLink, FileText, Info, Lock } from "lucide-react";
 import type { DocumentoOrigem, EventoCalendario } from "../../types";
 import { CalendarExportPanel } from "../calendar/CalendarExportPanel";
+import { PreparacaoUrnasBloco } from "./PreparacaoUrnasBloco";
 
 function parseObservacoes(text: string): React.ReactNode[] {
   const linkRegex = /\[([^\]]+)\]\((https:\/\/[^)]+)\)/g;
@@ -103,6 +104,11 @@ export function EventDetail({ evento }: EventDetailProps) {
       <div className="text-sm text-neutral-700 leading-relaxed whitespace-pre-line break-words">
         {evento.descricao}
       </div>
+
+      {/* Escala de preparação de urnas (cronograma TRE-PB) */}
+      {evento.preparacaoUrnas && evento.preparacaoUrnas.length > 0 && (
+        <PreparacaoUrnasBloco polos={evento.preparacaoUrnas} />
+      )}
 
       {/* Observações */}
       {evento.observacoes && (

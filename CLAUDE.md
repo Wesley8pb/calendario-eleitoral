@@ -11,7 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **URL em Produção:** [https://calendarioeleitoral.app.br](https://calendarioeleitoral.app.br)
 
-Site single-page institucional que transforma o Calendário Eleitoral das Eleições Gerais 2026 (316 eventos, base na Resolução TSE nº 23.760/2026 e em resoluções complementares) em uma timeline interativa, com filtros, busca textual, painel de próximos prazos por perfil e exportação para calendário (.ics).
+Site single-page institucional que transforma o Calendário Eleitoral das Eleições Gerais 2026 (319 eventos, base na Resolução TSE nº 23.760/2026, alterada pela Resolução nº 23.771/2026, e em resoluções complementares) em uma timeline interativa, com filtros, busca textual, painel de próximos prazos por perfil e exportação para calendário (.ics).
 
 ## Stack
 
@@ -68,7 +68,7 @@ src/
 │       ├── Tooltip.tsx              # Tooltip CSS customizado; props: content, position ("top"|"bottom"), wrap (quebra linha, max-w-[200px])
 │       └── InfoTooltip.tsx          # Ícone de info com tooltip explicativo (usado nos exports)
 ├── data/
-│   ├── eventos.ts                   # Array de 316 EventoCalendario[] (Out/2025–Abr/2028)
+│   ├── eventos.ts                   # Array de 319 EventoCalendario[] (Out/2025–Abr/2028)
 │   ├── categorias.ts                # 13 categorias com ID, cor hex, ícone Lucide
 │   └── constants.ts                 # PRIMEIRO_TURNO, SEGUNDO_TURNO, DIPLOMACAO, metadados TSE
 ├── contexts/
@@ -173,7 +173,19 @@ Lógica em `src/lib/ics.ts`. **Regra:** `BatchCalendarExport` não é renderizad
 
 A fonte primária é o `Documentations/RESOLUÇÃO.md` (Resolução TSE nº 23.760/2026), de onde vem a maioria dos eventos. Também são admitidos eventos oriundos de **resoluções complementares do TSE** (ex.: nº 23.750/2026 — cronograma do cadastro eleitoral; nº 23.753/2026 — Programa Seu Voto Importa), desde que o dispositivo tenha marco temporal definido. Nesses casos, a `descricao` é transcrita literalmente da norma de origem e a `fundamentacao` é obrigatória.
 
-O campo `fundamentacao[].url` fica `""` por padrão — não há coleta sistemática de URLs. Quando preenchido (hoje em 35 das 420 entradas), deve apontar para a página oficial da norma no `tse.jus.br` **e** ser espelhado em `src/data/linksReferencia.ts`, exigência verificada por `tests/links-referencia.test.ts`.
+O campo `fundamentacao[].url` fica `""` por padrão — não há coleta sistemática de URLs. Quando preenchido (hoje em 35 das 422 entradas), deve apontar para a página oficial da norma no `tse.jus.br` **e** ser espelhado em `src/data/linksReferencia.ts`, exigência verificada por `tests/links-referencia.test.ts`.
+
+### Eventos regionais e o cronograma de urnas do TRE-PB
+
+Eventos de âmbito regional vivem em `src/data/eventosTrePb.ts`, separados de `eventos.ts` porque nascem de atos administrativos, não de legislação — e porque `tests/links-referencia.test.ts` exige que toda URL de `eventos.ts` esteja catalogada em `linksReferencia.ts`.
+
+Os 10 eventos de preparação de urnas (21–25/09 e 12–16/10/2026) carregam a escala no campo estruturado `preparacaoUrnas: PoloPreparacao[]`, e **não** na `descricao`. Motivo: numa mesma data há preparação simultânea em até 5 polos e 21 zonas eleitorais; como texto corrido isso vira parede, e a busca não conseguiria distinguir município de zona.
+
+- `src/data/nvis.ts` — fonte única da cidade e da cor de cada polo (`nviMap`, `ORDEM_NVIS`). Nenhum componente repete o hexadecimal; há teste que trava isso. A sigla "NVI" não é expandida em lugar nenhum porque o cronograma oficial não a expande.
+- `src/components/timeline/PreparacaoUrnasBloco.tsx` — renderiza a escala agrupada por polo, uma coluna no celular e duas a partir de `sm`. Município nunca é truncado: é o dado que a pessoa procura.
+- `camposBuscaveis()` em `src/lib/search.ts` — função pura que monta o texto indexado do evento, incluindo sigla do polo, cidade do polo, número da zona e município-sede. É o que faz "Cabedelo", "57" ou "Pombal" acharem o card do dia certo. `useFilteredEvents` consome essa função; não replique a lógica no hook.
+
+Ao acrescentar um cronograma novo, gere os eventos a partir da tabela em vez de digitá-los: 68 zonas × 2 turnos é onde o erro de transcrição mora.
 
 ---
 

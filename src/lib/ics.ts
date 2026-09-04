@@ -1,4 +1,5 @@
 import type { EventoCalendario } from "../types";
+import { nviMap } from "../data/nvis";
 import type { EventoCustom } from "../types/custom";
 import type { CalendarReminder } from "../types/calendar";
 
@@ -85,6 +86,19 @@ export function buildValarm(reminder: CalendarReminder): string {
 
 export function buildEventDescription(evento: EventoCalendario): string {
   const sections = [evento.descricao.trim()];
+
+  if (evento.preparacaoUrnas?.length) {
+    const escala = evento.preparacaoUrnas
+      .map((polo) => {
+        const zonas = polo.zonas
+          .map((z) => `${z.ze} ${z.sede} ${z.horario}`)
+          .join("; ");
+        return `${polo.nvi} - ${nviMap[polo.nvi].cidade}: ${zonas}`;
+      })
+      .join("\n");
+
+    sections.push(`Escala de preparacao de urnas:\n${escala}`);
+  }
 
   if (evento.observacoes?.trim()) {
     sections.push(`Observacoes:\n${evento.observacoes.trim()}`);

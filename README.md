@@ -3,7 +3,7 @@
 > [!TIP]
 > **Orientação para IA:** Sempre inicie o gerenciamento de contexto lendo primeiro os arquivos `CLAUDE.md` (para diretrizes técnicas e stack) e `Documentations/CHANGELOG.md` (para histórico de alterações e estado atual).
 
-Este projeto é uma ferramenta institucional e interativa para consulta dos eventos, prazos e marcos do calendário eleitoral das Eleições Gerais 2026, baseado na **Resolução TSE nº 23.760/2026** (DJE/TSE de 04/03/2026).
+Este projeto é uma ferramenta institucional e interativa para consulta dos eventos, prazos e marcos do calendário eleitoral das Eleições Gerais 2026, baseado na **Resolução TSE nº 23.760/2026** (DJE/TSE de 04/03/2026), alterada pela **Resolução TSE nº 23.771/2026** (DJE/TSE de 07/08/2026).
 
 **Desenvolvido por:** Wesley Wagner de Brito Silva — servidor da 56ª Zona Eleitoral/PB
 
@@ -13,7 +13,7 @@ Este projeto é uma ferramenta institucional e interativa para consulta dos even
 
 **Acesse online:** [https://calendarioeleitoral.app.br](https://calendarioeleitoral.app.br)
 
-Site single-page de caráter informativo que apresenta todos os 316 eventos do calendário eleitoral em uma **timeline vertical interativa**, com:
+Site single-page de caráter informativo que apresenta todos os 319 eventos do calendário eleitoral em uma **timeline vertical interativa**, com:
 
 - 🔍 **Filtros avançados**: categorias, ocultar passados, turno, busca textual, mês.
 - ⭐ **Favoritos**: marque eventos com estrela; filtro "Apenas favoritos" no painel; persistido em localStorage.
@@ -85,7 +85,7 @@ src/
 ├── contexts/
 │   └── FavoritosContext.tsx  # Context de favoritos, consumido via useFavoritosContext()
 ├── data/
-│   ├── eventos.ts        # Array completo dos 316 eventos
+│   ├── eventos.ts        # Array completo dos 319 eventos
 │   ├── categorias.ts     # 13 categorias com cor e ícone
 │   └── constants.ts      # Datas fixas (1T, 2T, diplomação) e metadados da Resolução
 ├── hooks/

@@ -3,6 +3,7 @@ import type { EventoCalendario } from "../types";
 // ─────────────────────────────────────────────────────────────────────────────
 // Fonte: Resolução TSE nº 23.760/2026 (Instrução nº 0600273-13.2026.6.00.0000)
 // Publicada no DJE/TSE em 04/03/2026
+// Alterada pela Resolução TSE nº 23.771/2026 (DJE/TSE nº 131, de 07/08/2026)
 // URLs de legislação (fundamentacao[].url) serão preenchidas na Sprint 7C
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -3102,27 +3103,6 @@ export const eventos: EventoCalendario[] = [
     data: "2026-08-30",
     diaSemana: "domingo",
     titulo:
-      "Último dia para distribuição do FEFC e do Fundo Partidário às candidaturas de mulheres, negros e indígenas",
-    descricao:
-      "Último dia para os partidos efetuarem a distribuição dos recursos públicos do Fundo Especial de Financiamento de Campanha (FEFC) e do Fundo Partidário às candidaturas de mulheres, de pessoas negras e de indígenas (Resolução nº 23.607/2019/TSE, arts. 17, § 9º, e 19, § 10).",
-    categorias: ["FIN", "PAR"],
-    perfis: ["partido"],
-    marcos: null,
-    turno: null,
-    fundamentacao: [
-      {
-        norma: "Resolução nº 23.607/2019/TSE",
-        dispositivo: "arts. 17, § 9º, e 19, § 10",
-        url: "",
-      },
-    ],
-  },
-
-  {
-    id: "2026-08-30-2",
-    data: "2026-08-30",
-    diaSemana: "domingo",
-    titulo:
       "Último dia para o TSE homologar programas de verificação das entidades fiscalizadoras",
     descricao:
       "Último dia para o Tribunal Superior Eleitoral homologar os programas de verificação dos sistemas eleitorais desenvolvidos pelas entidades fiscalizadoras para fins de auditoria, observada a data da Cerimônia de Assinatura Digital e Lacração dos Sistemas (Resolução nº 23.673/2021/TSE, art. 16, § 1º).",
@@ -3323,6 +3303,29 @@ export const eventos: EventoCalendario[] = [
     marcos: "30 dias antes do 1º turno",
     turno: null,
     fundamentacao: [],
+  },
+
+  {
+    id: "2026-09-08-1",
+    data: "2026-09-08",
+    diaSemana: "terça-feira",
+    titulo:
+      "Último dia para distribuição do FEFC e do Fundo Partidário às candidaturas de mulheres, negros e indígenas",
+    descricao:
+      "Último dia para os partidos efetuarem a distribuição dos recursos públicos do Fundo Especial de Financiamento de Campanha (FEFC) e do Fundo Partidário às candidaturas de mulheres, de pessoas negras e de indígenas (Resolução nº 23.607/2019/TSE, arts. 17, § 9º, e 19, § 10).",
+    categorias: ["FIN", "PAR"],
+    perfis: ["partido"],
+    marcos: null,
+    turno: null,
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.607/2019/TSE",
+        dispositivo: "arts. 17, § 9º, e 19, § 10",
+        url: "",
+      },
+    ],
+    observacoes:
+      "Prazo originalmente fixado em 30 de agosto de 2026 e prorrogado para 8 de setembro de 2026 pela Resolução nº 23.771/2026/TSE (DJE/TSE nº 131, de 7.8.2026).",
   },
 
   {
@@ -4633,7 +4636,7 @@ export const eventos: EventoCalendario[] = [
     titulo:
       "Último dia para empresa de auditoria encaminhar relatório conclusivo de auditoria de urnas (1T)",
     descricao:
-      "Último dia para a instituição conveniada ou a empresa de auditoria encaminhar ao Tribunal Superior Eleitoral relatório conclusivo da fiscalização realizada na auditoria de funcionamento das urnas eletrônicas, relativa ao primeiro turno (Resolução nº 23.673/2021/TSE, art. 66).",
+      "Último dia para a instituição conveniada ou a empresa de auditoria encaminhar ao respectivo Tribunal Regional Eleitoral relatório conclusivo da fiscalização realizada na auditoria de funcionamento das urnas eletrônicas, relativa ao primeiro turno (Resolução nº 23.673/2021/TSE, art. 66).",
     categorias: ["FIS"],
     perfis: [],
     marcos: "5 dias após o 1º turno",
@@ -4645,6 +4648,36 @@ export const eventos: EventoCalendario[] = [
         url: "",
       },
     ],
+    observacoes:
+      "A Resolução nº 23.771/2026/TSE alterou a redação deste item: o relatório passou a ser encaminhado ao respectivo Tribunal Regional Eleitoral, e não mais ao Tribunal Superior Eleitoral.",
+  },
+
+  {
+    id: "2026-10-09-3",
+    data: "2026-10-09",
+    diaSemana: "sexta-feira",
+    titulo:
+      "Último dia para partidos transferirem recursos do FEFC a candidaturas majoritárias que concorram ao 2º turno",
+    descricao:
+      "Último dia para a transferência, pelas agremiações, de recursos do Fundo Especial de Financiamento de Campanha (FEFC) destinados, exclusivamente, às candidatas e aos candidatos a cargos majoritários que concorram ao segundo turno, desde que os respectivos valores estejam expressamente previstos nos critérios de distribuição definidos pelo partido político, nos termos do art. 6º da Resolução nº 23.605/2019/TSE (Resolução nº 23.607/2019/TSE, art. 17, §§ 9º-A e 9º-B).",
+    categorias: ["FIN", "PAR"],
+    perfis: ["partido", "candidato"],
+    marcos: "5 dias após o 1º turno",
+    turno: "2T",
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.607/2019/TSE",
+        dispositivo: "art. 17, §§ 9º-A e 9º-B",
+        url: "",
+      },
+      {
+        norma: "Resolução nº 23.605/2019/TSE",
+        dispositivo: "art. 6º",
+        url: "",
+      },
+    ],
+    observacoes:
+      "Item acrescentado ao Calendário Eleitoral pela Resolução nº 23.771/2026/TSE (DJE/TSE nº 131, de 7.8.2026).",
   },
 
   {
@@ -4677,6 +4710,23 @@ export const eventos: EventoCalendario[] = [
     marcos: null,
     turno: null,
     fundamentacao: [],
+  },
+
+  {
+    id: "2026-10-14-1",
+    data: "2026-10-14",
+    diaSemana: "quarta-feira",
+    titulo:
+      "Último dia para os TREs encaminharem ao TSE os relatórios individuais de auditoria (1T)",
+    descricao:
+      "Último dia para os Tribunais Regionais Eleitorais encaminharem ao Tribunal Superior Eleitoral os relatórios individuais de auditoria de cada Regional, relativos ao 1º turno, elaborados pela instituição pública de fiscalização ou pela empresa especializada em auditoria contratada.",
+    categorias: ["FIS"],
+    perfis: [],
+    marcos: "10 dias após o 1º turno",
+    turno: "1T",
+    fundamentacao: [],
+    observacoes:
+      "Item acrescentado ao Calendário Eleitoral pela Resolução nº 23.771/2026/TSE (DJE/TSE nº 131, de 7.8.2026).",
   },
 
   {
@@ -5787,6 +5837,23 @@ export const eventos: EventoCalendario[] = [
     marcos: "30 dias após o 1º turno",
     turno: "POS",
     fundamentacao: [],
+  },
+
+  {
+    id: "2026-11-04-1",
+    data: "2026-11-04",
+    diaSemana: "quarta-feira",
+    titulo:
+      "Último dia para os TREs encaminharem ao TSE os relatórios individuais de auditoria (2T)",
+    descricao:
+      "Último dia para os Tribunais Regionais Eleitorais encaminharem ao Tribunal Superior Eleitoral os relatórios individuais de auditoria de cada Regional, relativos ao 2º turno, elaborados pela instituição pública de fiscalização ou pela empresa especializada em auditoria contratada.",
+    categorias: ["FIS"],
+    perfis: [],
+    marcos: "10 dias após o 2º turno",
+    turno: "POS",
+    fundamentacao: [],
+    observacoes:
+      "Item acrescentado ao Calendário Eleitoral pela Resolução nº 23.771/2026/TSE (DJE/TSE nº 131, de 7.8.2026).",
   },
 
   {

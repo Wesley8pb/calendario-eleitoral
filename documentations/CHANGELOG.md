@@ -1,5 +1,77 @@
 # Changelog
 
+## [2026-09-10] Siglas NVI e SJI passam a ser expandidas
+
+Duas siglas apareciam cruas na interface porque os documentos de origem não as expandem. O TRE-PB informou as expansões:
+
+- **NVI** — Núcleo de Voto Informatizado. Vive em `NVI_EXPANSAO`, em `src/data/nvis.ts`, ao lado da cidade e da cor de cada polo. Aparece **uma vez por card**, como legenda logo abaixo do cabeçalho da escala, e não repetida em cada um dos cinco polos — e como texto, não como tooltip, que no celular não abre. `camposBuscaveis()` também a indexa: procurar "núcleo de voto informatizado" chega aos cards de preparação de urnas.
+- **SJI** — Secretaria Judiciária da Informação. Entra nas observações dos dois eventos que a citam no título (fechamento do CAND em 15/09 e relatório "Ambiente de Votação" em 16/09). O título fica com a sigla, por causa do limite de 120 caracteres.
+
+**AGGTIC segue sem expansão**, pela regra de sempre: o despacho de origem não a expande.
+
+**Arquivos modificados:**
+- `src/data/nvis.ts` — `NVI_EXPANSAO`.
+- `src/components/timeline/PreparacaoUrnasBloco.tsx` — a legenda.
+- `src/lib/search.ts` — a expansão entra no texto indexado.
+- `src/data/eventosTrePb.ts` — SJI expandida em dois eventos.
+- `tests/ambito-tre-pb.test.ts` — 4 asserções novas (116 → 120), inclusive a de que a legenda aparece uma vez só.
+- `CLAUDE.md`, `AGENTS.md` — a nota de que "NVI" não era expandida foi substituída pela expansão.
+
+## [2026-09-10] Retificação dos municípios-sede da 49ª, 75ª e 74ª zonas eleitorais
+
+Três municípios-sede da escala de preparação de urnas divergem do PDF do cronograma da STIC/TRE-PB. A divergência é **deliberada**: prevalece o cadastro das zonas eleitorais, conferido pelo TRE-PB.
+
+| Zona | Grafia no PDF | No calendário |
+|---|---|---|
+| 49ª | AROEIRAS | **Queimadas** |
+| 75ª | GURINHÉM | **Itabaiana** |
+| 74ª | ÀGUA BRANCA | **Água Branca** |
+
+As duas primeiras não são questão de grafia: são municípios diferentes. A 49ª passa a dividir sede com a 59ª (Queimadas) e a 75ª com a 06ª (Itabaiana) — mais de uma zona por município já era o caso de Patos (28ª, 51ª e 65ª) e de João Pessoa (01ª, 64ª, 70ª, 76ª e 77ª). Como os eventos foram **gerados** a partir da tabela, e não digitados, uma regeração futura reintroduziria a grafia do PDF: por isso a divergência está registrada em comentário no topo de `src/data/eventosTrePb.ts` e travada por asserção nos dois turnos.
+
+**36ª e 38ª zonas, ambas de Catolé do Rocha, no mesmo dia e horário do 2º turno — está correto.** Foi levantado como possível erro de fonte e confirmado: o PDF traz as duas em 14/10/2026, 07h–17h, NVIPBL, e o TRE-PB confirmou. Há teste que trava o par, para que a coincidência não seja "corrigida" adiante.
+
+**Arquivos modificados:**
+- `src/data/eventosTrePb.ts` — as seis ocorrências (três zonas × dois turnos) e o comentário de cabeçalho que explica por que não são erro.
+- `tests/ambito-tre-pb.test.ts` — 4 asserções novas (112 → 116): sede das três zonas nos dois turnos e o par de Catolé do Rocha em 14/10.
+
+**Verificação:** conferência linha a linha contra o texto extraído do PDF publicado na página Eleições 2026 do TRE-PB; `npx tsc --noEmit` limpo; `npm run build` concluído; as cinco suítes passaram (116, 12, 25, 24 e 20 asserções).
+
+## [2026-09-10] Preparativos de 14 a 18/09 no TRE-PB — Despacho AGGTIC e a Resolução de Atos Gerais
+
+O Despacho nº 2497253/2026 — AGGTIC (Processo 0007829-57.2026.6.15.8000) pede a publicação, no calendário interno do TRE-PB, de cinco atividades da semana que antecede a preparação das urnas. Entram como **6 eventos** de âmbito TRE-PB, em `src/data/eventosTrePb.ts`:
+
+| Data | Atividade | Fundamento |
+|---|---|---|
+| 14/09 | Oficialização do SISTOT pela Zona Eleitoral | art. 5º, caput e §§ 1º e 2º |
+| 15/09 | Fechamento do CAND pela SJI | art. 94, caput, I, IV e V, e § 1º |
+| 16/09 | Relatório "Ambiente de Votação" pela SJI | art. 92, caput e § 2º |
+| 16/09 | Relatório "Ambiente de Votação" pela Zona Eleitoral | art. 93, caput e parágrafo único |
+| 17/09 | Geração de mídias pela STIC — 1º de 2 dias | arts. 94 e 95 |
+| 18/09 | Geração de mídias pela STIC — 2º de 2 dias | arts. 94 e 95 |
+
+**Cinco linhas na tabela do despacho, seis cards.** "17 e 18/09/26 — Geração de mídias pela STIC" é um bloco único na origem, mas a unidade da timeline é a data: com um só card, o dia 18 sumiria da linha do tempo. Os dois cards trazem a mesma transcrição e se distinguem no título ("1º de 2 dias", "2º de 2 dias"); a descrição de ambos registra que a atividade ocorre em 17 e 18 de setembro.
+
+**Estes eventos têm `fundamentacao` — e os de preparação de urnas não.** A diferença é real, não inconsistência. O cronograma de urnas é escala: o TRE-PB decide qual zona vai a qual polo, e nenhuma norma diz isso. Já as cinco atividades do despacho são deveres da Resolução nº 23.751/2026/TSE (Atos Gerais do Processo Eleitoral); o despacho apenas fixa as datas locais em que serão cumpridos. Por isso os seis carregam **as duas coisas**: `documentoOrigem` no despacho do SEI (restrito) e `fundamentacao` na Resolução, com URL para a página oficial no `tse.jus.br`.
+
+**Relação com o que já estava no calendário.** Nenhuma das cinco atividades tem evento nacional correspondente — arts. 5º e 92 a 97 da Res. 23.751/2026 não fixam data, delegando-a ao planejamento de cada TRE. Há, porém, duas conexões que os cards registram em `observacoes`:
+
+- **Com o calendário nacional:** o fechamento do CAND em 15/09 depende de 14/09, data em que todos os pedidos de registro devem estar julgados pelas instâncias ordinárias (`2026-09-14-2`) e em que se encerra o prazo geral de substituição de candidaturas (`2026-09-14-3`). O CAND é a fotografia das candidaturas que vai para a urna; fechá-lo antes seria fotografar cedo demais.
+- **Com os eventos regionais já publicados:** as seis datas formam a cadeia que desemboca nas cerimônias de preparação de urnas de 21 a 25/09 — oficialização do SISTOT → fechamento do CAND → conferência do "Ambiente de Votação" → geração de mídias → preparação nos polos. Todos os seis cards trazem essa cadeia por extenso.
+
+**Ordem das duas emissões de 16/09.** O art. 93 condiciona a emissão pelo juízo eleitoral à conclusão dos procedimentos do art. 92, a cargo do Tribunal — os cards seguem essa sequência: SJI primeiro, Zona Eleitoral em seguida.
+
+**Arquivos modificados:**
+- `src/data/eventosTrePb.ts` — os 6 eventos (11 → 17). Categoria `ADM` em todos; o fechamento do CAND recebe também `REG`, por ser o corte técnico do registro de candidaturas. `perfis: []`, `turno: "1T"`, `marcos: null`.
+- `src/data/linksReferencia.ts` — Resolução TSE nº 23.751/2026 catalogada em "Resoluções e normas do TSE" (29 → 30 referências).
+- `tests/ambito-tre-pb.test.ts` — 22 asserções novas (90 → 112): contagem e ordem das datas, dias da semana conferidos contra o calendário de 2026, mapeamento evento → dispositivo, unicidade do despacho de origem com marca de acesso restrito, transcrição do art. 5º, presença do relatório "Ambiente de Votação" nas duas emissões, registro da cadeia até 21/09 e busca por "SISTOT", "CAND" e "mídias".
+- `tests/links-referencia.test.ts` — contagens atualizadas e asserção de que a Res. 23.751/2026 está catalogada.
+- `CLAUDE.md`, `AGENTS.md` — por que estes eventos regionais têm fundamentação e os de urnas não.
+
+**Verificação:** `npx tsc --noEmit` limpo; `npm run build` concluído; as cinco suítes de `tests/` passaram (112, 12, 25, 24 e 20 asserções). Os dispositivos foram conferidos no texto integral da Resolução nº 23.751/2026 no `tse.jus.br`, não de memória.
+
+**Pendência conhecida:** as siglas "SJI" e "AGGTIC" não são expandidas em nenhum ponto da interface, pela mesma razão de "NVI" — o documento de origem não as expande.
+
 ## [2026-09-04] Cronograma de preparação de urnas do TRE-PB — 10 eventos com escala por polo
 
 O Cronograma de Preparação de Urnas das Eleições 2026 (v2), da STIC/TRE-PB, escala as 68 zonas eleitorais da Paraíba em cinco dias por turno — 21 a 25/09 no primeiro, 12 a 16/10 no segundo —, distribuídas simultaneamente em cinco polos: NVIJPA (João Pessoa), NVICGE (Campina Grande), NVIPAT (Patos), NVIPBL (Pombal) e NVICJZ (Cajazeiras). Entram como **10 eventos, um por data**, e não um por zona: quem consulta quer saber o que acontece no dia.
@@ -27,7 +99,7 @@ O Cronograma de Preparação de Urnas das Eleições 2026 (v2), da STIC/TRE-PB, 
 
 **Verificação:** `npx tsc --noEmit` e `eslint` limpos nos arquivos tocados; `npm run build` concluído; as cinco suítes de `tests/` passaram (86, 11, 25, 24 e 20 asserções). Conferência em navegador (Comet, Playwright) a 1280px e 375px: busca por "cabedelo" retorna exatamente 1 card, bloco expande sem erro de página e **zero overflow horizontal** nos dois tamanhos. O truncamento de "Campina Gra…" e "São João do Rio do…" surgiu nessa conferência e foi corrigido — município nunca é truncado.
 
-**Pendência conhecida:** o cronograma não expande a sigla "NVI", que por isso não é desdobrada em nenhum ponto da interface. O PDF grafa a 74ª zona como "ÀGUA BRANCA"; foi cadastrada como "Água Branca".
+**Pendência conhecida:** o cronograma não expande a sigla "NVI" — resolvido em 10/09/2026, com a expansão informada pelo Tribunal.
 
 ## [2026-09-04] Incorporação da Resolução TSE nº 23.771/2026 ao calendário
 

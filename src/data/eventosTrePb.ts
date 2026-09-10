@@ -12,6 +12,17 @@ import type { EventoCalendario } from "../types";
 // Os eventos de preparação de urnas são gerados a partir do cronograma da
 // STIC/TRE-PB; a escala por polo vive no campo estruturado preparacaoUrnas,
 // e não na descrição, para poder ser renderizada agrupada e indexada na busca.
+//
+// TRÊS DIVERGÊNCIAS DELIBERADAS EM RELAÇÃO AO PDF DO CRONOGRAMA — não "corrija"
+// de volta sem falar com o TRE-PB. Os municípios-sede abaixo foram retificados
+// por conferência do cadastro das zonas eleitorais:
+//
+//   49ª — o PDF grafa "AROEIRAS";     a sede é Queimadas.
+//   75ª — o PDF grafa "GURINHÉM";     a sede é Itabaiana.
+//   74ª — o PDF grafa "ÀGUA BRANCA";  o município é Água Branca.
+//
+// Conferido e mantido como está no PDF: a 36ª e a 38ª zonas, ambas de Catolé do
+// Rocha, preparam no mesmo dia e horário no 2º turno (14/10, 07h–17h, NVIPBL).
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const eventosTrePb: EventoCalendario[] = [
@@ -44,6 +55,197 @@ export const eventosTrePb: EventoCalendario[] = [
   },
 
   {
+    id: "2026-09-14-trepb-1",
+    data: "2026-09-14",
+    diaSemana: "segunda-feira",
+    titulo:
+      "Oficialização do SISTOT pela Zona Eleitoral (TRE-PB)",
+    descricao:
+      "Oficialização do SISTOT pela Zona Eleitoral.\n\n" +
+      "A oficialização dos sistemas eleitorais observará cronograma técnico definido pelo Tribunal Superior Eleitoral e será realizada, em cada circunscrição, pela autoridade eleitoral ou por servidora ou servidor a quem for delegada a atribuição, utilizando-se código de acesso individualizado. A oficialização consiste em etapa técnica a partir da qual o sistema somente admite o tráfego de arquivos assinados por outros sistemas já oficializados, não se exigindo formalidade ou solenidade (Resolução nº 23.751/2026/TSE, art. 5º, caput e §§ 1º e 2º).",
+    categorias: ["ADM"],
+    perfis: [],
+    ambito: "TRE-PB",
+    marcos: null,
+    turno: "1T",
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.751/2026/TSE",
+        dispositivo: "art. 5º, caput e §§ 1º e 2º",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-751-de-26-de-fevereiro-de-2026",
+      },
+    ],
+    documentoOrigem: {
+      titulo:
+        "Despacho nº 2497253/2026 — Processo 0007829-57.2026.6.15.8000",
+      unidade: "TRE-PB/STIC/AGGTIC",
+      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=procedimento_controlar&acao_retorno=procedimento_controlar&id_procedimento=2571853&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=d001df209a8aae7b90d46db75cf33094b9c44d6ed6d45450b95f0823574d0330",
+      restrito: true,
+    },
+    observacoes:
+      "Prazo interno do TRE-PB, sem correspondente no calendário nacional. Etapa do encadeamento técnico que antecede a preparação das urnas na Paraíba: oficialização do SISTOT (14/09) → fechamento do CAND (15/09) → conferência do relatório \"Ambiente de Votação\" (16/09) → geração de mídias (17 e 18/09) → cerimônias de preparação de urnas nos polos (a partir de 21/09).",
+  },
+
+  {
+    id: "2026-09-15-trepb-1",
+    data: "2026-09-15",
+    diaSemana: "terça-feira",
+    titulo:
+      "Fechamento do CAND pela SJI (TRE-PB)",
+    descricao:
+      "Fechamento do CAND pela SJI.\n\n" +
+      "Os dados das tabelas de partidos políticos, federações e coligações concorrentes, de candidatas e candidatos aptos e de candidatas e candidatos inaptos a concorrer à eleição para cargos proporcionais, utilizados na geração das mídias, são os relativos à data do fechamento do Sistema de Candidaturas (CAND) pelo Tribunal Superior Eleitoral e pelo Tribunal Regional Eleitoral (Resolução nº 23.751/2026/TSE, art. 94, caput, I, IV e V, e § 1º).",
+    categorias: ["ADM", "REG"],
+    perfis: [],
+    ambito: "TRE-PB",
+    marcos: null,
+    turno: "1T",
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.751/2026/TSE",
+        dispositivo: "art. 94, caput, I, IV e V, e § 1º",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-751-de-26-de-fevereiro-de-2026",
+      },
+    ],
+    documentoOrigem: {
+      titulo:
+        "Despacho nº 2497253/2026 — Processo 0007829-57.2026.6.15.8000",
+      unidade: "TRE-PB/STIC/AGGTIC",
+      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=procedimento_controlar&acao_retorno=procedimento_controlar&id_procedimento=2571853&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=d001df209a8aae7b90d46db75cf33094b9c44d6ed6d45450b95f0823574d0330",
+      restrito: true,
+    },
+    observacoes:
+      "SJI — Secretaria Judiciária da Informação. O fechamento do CAND é a fotografia das candidaturas que vai para a urna — por isso ocorre depois de 14/09, data em que todos os pedidos de registro devem estar julgados pelas instâncias ordinárias e em que se encerra o prazo geral de substituição de candidaturas. Etapa do encadeamento técnico que antecede a preparação das urnas na Paraíba: oficialização do SISTOT (14/09) → fechamento do CAND (15/09) → conferência do relatório \"Ambiente de Votação\" (16/09) → geração de mídias (17 e 18/09) → cerimônias de preparação de urnas nos polos (a partir de 21/09).",
+  },
+
+  {
+    id: "2026-09-16-trepb-1",
+    data: "2026-09-16",
+    diaSemana: "quarta-feira",
+    titulo:
+      "Emissão e certidão de conferência do relatório \"Ambiente de Votação\" pela SJI (TRE-PB)",
+    descricao:
+      "Emissão e certidão de conferência do relatório ambiente de votação pela SJI.\n\n" +
+      "Antes da geração das mídias, a pessoa responsável pelo fechamento do Sistema de Candidaturas (CAND) do Tribunal Regional Eleitoral emitirá o relatório \"Ambiente de Votação\", pelo Sistema de Gerenciamento da Totalização (SISTOT), para a conferência dos dados a serem utilizados na preparação das urnas e na totalização de resultados, assinado pela(o) Presidente do Tribunal ou por autoridade por ela/ele designada. O relatório deverá ser anexado à Ata Geral da Eleição (Resolução nº 23.751/2026/TSE, art. 92, caput e § 2º).",
+    categorias: ["ADM"],
+    perfis: [],
+    ambito: "TRE-PB",
+    marcos: null,
+    turno: "1T",
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.751/2026/TSE",
+        dispositivo: "art. 92, caput e § 2º",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-751-de-26-de-fevereiro-de-2026",
+      },
+    ],
+    documentoOrigem: {
+      titulo:
+        "Despacho nº 2497253/2026 — Processo 0007829-57.2026.6.15.8000",
+      unidade: "TRE-PB/STIC/AGGTIC",
+      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=procedimento_controlar&acao_retorno=procedimento_controlar&id_procedimento=2571853&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=d001df209a8aae7b90d46db75cf33094b9c44d6ed6d45450b95f0823574d0330",
+      restrito: true,
+    },
+    observacoes:
+      "SJI — Secretaria Judiciária da Informação. Etapa do encadeamento técnico que antecede a preparação das urnas na Paraíba: oficialização do SISTOT (14/09) → fechamento do CAND (15/09) → conferência do relatório \"Ambiente de Votação\" (16/09) → geração de mídias (17 e 18/09) → cerimônias de preparação de urnas nos polos (a partir de 21/09).",
+  },
+
+  {
+    id: "2026-09-16-trepb-2",
+    data: "2026-09-16",
+    diaSemana: "quarta-feira",
+    titulo:
+      "Emissão e certidão de conferência do relatório \"Ambiente de Votação\" pela Zona Eleitoral (TRE-PB)",
+    descricao:
+      "Emissão e certidão de conferência do relatório ambiente de votação pela Zona Eleitoral.\n\n" +
+      "Concluídos os procedimentos do caput do art. 92, a Juíza ou o Juiz Eleitoral determinará a emissão do relatório \"Ambiente de Votação\" pelo Sistema de Gerenciamento da Totalização (SISTOT) para conferência dos dados relativos ao eleitorado apto e às seções a serem instaladas em cada município de sua circunscrição, do qual constará, em anexo, a listagem de candidatas e candidatos concorrentes. Conferidos os dados relativos ao eleitorado apto e às seções eleitorais, o relatório \"Ambiente de Votação\" será assinado pela Juíza ou pelo Juiz Eleitoral, devendo constar da Ata da Junta Eleitoral (Resolução nº 23.751/2026/TSE, art. 93, caput e parágrafo único).",
+    categorias: ["ADM"],
+    perfis: [],
+    ambito: "TRE-PB",
+    marcos: null,
+    turno: "1T",
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.751/2026/TSE",
+        dispositivo: "art. 93, caput e parágrafo único",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-751-de-26-de-fevereiro-de-2026",
+      },
+    ],
+    documentoOrigem: {
+      titulo:
+        "Despacho nº 2497253/2026 — Processo 0007829-57.2026.6.15.8000",
+      unidade: "TRE-PB/STIC/AGGTIC",
+      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=procedimento_controlar&acao_retorno=procedimento_controlar&id_procedimento=2571853&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=d001df209a8aae7b90d46db75cf33094b9c44d6ed6d45450b95f0823574d0330",
+      restrito: true,
+    },
+    observacoes:
+      "Etapa do encadeamento técnico que antecede a preparação das urnas na Paraíba: oficialização do SISTOT (14/09) → fechamento do CAND (15/09) → conferência do relatório \"Ambiente de Votação\" (16/09) → geração de mídias (17 e 18/09) → cerimônias de preparação de urnas nos polos (a partir de 21/09).",
+  },
+
+  {
+    id: "2026-09-17-trepb-1",
+    data: "2026-09-17",
+    diaSemana: "quinta-feira",
+    titulo:
+      "Geração de mídias pela STIC — 1º de 2 dias (TRE-PB)",
+    descricao:
+      "Geração de mídias pela STIC, em 17 e 18 de setembro de 2026.\n\n" +
+      "Os Tribunais Regionais Eleitorais, de acordo com o planejamento estabelecido, determinarão a geração das mídias a partir dos dados das tabelas de partidos políticos, federações e coligações concorrentes; de eleitoras e eleitores; de seções com as respectivas agregações; e de candidatas e candidatos aptos e inaptos. As mídias são os dispositivos utilizados para carga da urna, votação, ativação de aplicativos de urna e gravação de resultado. A geração de mídias será feita em cerimônia pública presidida pela Juíza ou pelo Juiz Eleitoral ou por autoridade designada pelo Tribunal Regional Eleitoral, para a qual deverá ser publicado edital, com antecedência mínima de 2 (dois) dias, convocando os partidos políticos, as federações, as coligações, o Ministério Público e a Ordem dos Advogados do Brasil para acompanhamento (Resolução nº 23.751/2026/TSE, arts. 94 e 95).",
+    categorias: ["ADM"],
+    perfis: [],
+    ambito: "TRE-PB",
+    marcos: null,
+    turno: "1T",
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.751/2026/TSE",
+        dispositivo: "arts. 94 e 95",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-751-de-26-de-fevereiro-de-2026",
+      },
+    ],
+    documentoOrigem: {
+      titulo:
+        "Despacho nº 2497253/2026 — Processo 0007829-57.2026.6.15.8000",
+      unidade: "TRE-PB/STIC/AGGTIC",
+      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=procedimento_controlar&acao_retorno=procedimento_controlar&id_procedimento=2571853&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=d001df209a8aae7b90d46db75cf33094b9c44d6ed6d45450b95f0823574d0330",
+      restrito: true,
+    },
+    observacoes:
+      "Após o início da geração das mídias, os dados não são alterados nas urnas, salvo determinação da Presidência ou de autoridade designada, ouvida a área de tecnologia da informação (art. 94, § 3º). Etapa do encadeamento técnico que antecede a preparação das urnas na Paraíba: oficialização do SISTOT (14/09) → fechamento do CAND (15/09) → conferência do relatório \"Ambiente de Votação\" (16/09) → geração de mídias (17 e 18/09) → cerimônias de preparação de urnas nos polos (a partir de 21/09).",
+  },
+
+  {
+    id: "2026-09-18-trepb-1",
+    data: "2026-09-18",
+    diaSemana: "sexta-feira",
+    titulo:
+      "Geração de mídias pela STIC — 2º de 2 dias (TRE-PB)",
+    descricao:
+      "Geração de mídias pela STIC, em 17 e 18 de setembro de 2026.\n\n" +
+      "Os Tribunais Regionais Eleitorais, de acordo com o planejamento estabelecido, determinarão a geração das mídias a partir dos dados das tabelas de partidos políticos, federações e coligações concorrentes; de eleitoras e eleitores; de seções com as respectivas agregações; e de candidatas e candidatos aptos e inaptos. As mídias são os dispositivos utilizados para carga da urna, votação, ativação de aplicativos de urna e gravação de resultado. A geração de mídias será feita em cerimônia pública presidida pela Juíza ou pelo Juiz Eleitoral ou por autoridade designada pelo Tribunal Regional Eleitoral, para a qual deverá ser publicado edital, com antecedência mínima de 2 (dois) dias, convocando os partidos políticos, as federações, as coligações, o Ministério Público e a Ordem dos Advogados do Brasil para acompanhamento (Resolução nº 23.751/2026/TSE, arts. 94 e 95).",
+    categorias: ["ADM"],
+    perfis: [],
+    ambito: "TRE-PB",
+    marcos: null,
+    turno: "1T",
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.751/2026/TSE",
+        dispositivo: "arts. 94 e 95",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-751-de-26-de-fevereiro-de-2026",
+      },
+    ],
+    documentoOrigem: {
+      titulo:
+        "Despacho nº 2497253/2026 — Processo 0007829-57.2026.6.15.8000",
+      unidade: "TRE-PB/STIC/AGGTIC",
+      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=procedimento_controlar&acao_retorno=procedimento_controlar&id_procedimento=2571853&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=d001df209a8aae7b90d46db75cf33094b9c44d6ed6d45450b95f0823574d0330",
+      restrito: true,
+    },
+    observacoes:
+      "Após o início da geração das mídias, os dados não são alterados nas urnas, salvo determinação da Presidência ou de autoridade designada, ouvida a área de tecnologia da informação (art. 94, § 3º). Etapa do encadeamento técnico que antecede a preparação das urnas na Paraíba: oficialização do SISTOT (14/09) → fechamento do CAND (15/09) → conferência do relatório \"Ambiente de Votação\" (16/09) → geração de mídias (17 e 18/09) → cerimônias de preparação de urnas nos polos (a partir de 21/09).",
+  },
+  {
     id: "2026-09-21-trepb-1",
     data: "2026-09-21",
     diaSemana: "segunda-feira",
@@ -65,7 +267,7 @@ export const eventosTrePb: EventoCalendario[] = [
           { ze: "01ª", sede: "João Pessoa", horario: "08h–18h" },
           { ze: "06ª", sede: "Itabaiana", horario: "08h–18h" },
           { ze: "55ª", sede: "Rio Tinto", horario: "08h–18h" },
-          { ze: "75ª", sede: "Gurinhém", horario: "08h–18h" },
+          { ze: "75ª", sede: "Itabaiana", horario: "08h–18h" },
         ],
       },
       {
@@ -210,7 +412,7 @@ export const eventosTrePb: EventoCalendario[] = [
         zonas: [
           { ze: "18ª", sede: "Umbuzeiro", horario: "14h–18h" },
           { ze: "22ª", sede: "São João do Cariri", horario: "14h–18h" },
-          { ze: "49ª", sede: "Aroeiras", horario: "14h–18h" },
+          { ze: "49ª", sede: "Queimadas", horario: "14h–18h" },
           { ze: "56ª", sede: "Juazeirinho", horario: "14h–18h" },
           { ze: "72ª", sede: "Campina Grande", horario: "08h–12h" },
         ],
@@ -393,7 +595,7 @@ export const eventosTrePb: EventoCalendario[] = [
           { ze: "01ª", sede: "João Pessoa", horario: "08h–18h" },
           { ze: "06ª", sede: "Itabaiana", horario: "08h–18h" },
           { ze: "55ª", sede: "Rio Tinto", horario: "08h–18h" },
-          { ze: "75ª", sede: "Gurinhém", horario: "08h–18h" },
+          { ze: "75ª", sede: "Itabaiana", horario: "08h–18h" },
         ],
       },
       {
@@ -544,7 +746,7 @@ export const eventosTrePb: EventoCalendario[] = [
         zonas: [
           { ze: "18ª", sede: "Umbuzeiro", horario: "14h–18h" },
           { ze: "22ª", sede: "São João do Cariri", horario: "14h–18h" },
-          { ze: "49ª", sede: "Aroeiras", horario: "14h–18h" },
+          { ze: "49ª", sede: "Queimadas", horario: "14h–18h" },
           { ze: "56ª", sede: "Juazeirinho", horario: "14h–18h" },
           { ze: "72ª", sede: "Campina Grande", horario: "08h–12h" },
         ],

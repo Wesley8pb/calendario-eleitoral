@@ -1,6 +1,6 @@
 import { MapPin } from "lucide-react";
 import type { PoloPreparacao } from "../../types";
-import { nviMap, ORDEM_NVIS } from "../../data/nvis";
+import { NVI_EXPANSAO, nviMap, ORDEM_NVIS } from "../../data/nvis";
 
 interface PreparacaoUrnasBlocoProps {
   polos: PoloPreparacao[];
@@ -34,6 +34,15 @@ export function PreparacaoUrnasBloco({ polos }: PreparacaoUrnasBlocoProps) {
           {plural(totalZonas, "zona eleitoral", "zonas eleitorais")}
         </p>
       </div>
+
+      {/*
+        A sigla NVI não é expandida no cronograma oficial. A legenda aparece uma
+        vez por card, e não em cada polo, para não repetir cinco vezes a mesma
+        informação — e como texto, não como tooltip, que no celular não abre.
+      */}
+      <p className="text-xs leading-snug text-neutral-500">
+        NVI — {NVI_EXPANSAO}
+      </p>
 
       <div className="space-y-2">
         {ordenados.map((polo) => {

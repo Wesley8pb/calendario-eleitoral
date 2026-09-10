@@ -181,7 +181,11 @@ Eventos de âmbito regional vivem em `src/data/eventosTrePb.ts`, separados de `e
 
 Os 10 eventos de preparação de urnas (21–25/09 e 12–16/10/2026) carregam a escala no campo estruturado `preparacaoUrnas: PoloPreparacao[]`, e **não** na `descricao`. Motivo: numa mesma data há preparação simultânea em até 5 polos e 21 zonas eleitorais; como texto corrido isso vira parede, e a busca não conseguiria distinguir município de zona.
 
-- `src/data/nvis.ts` — fonte única da cidade e da cor de cada polo (`nviMap`, `ORDEM_NVIS`). Nenhum componente repete o hexadecimal; há teste que trava isso. A sigla "NVI" não é expandida em lugar nenhum porque o cronograma oficial não a expande.
+Os 6 eventos do Despacho nº 2497253/2026 — AGGTIC (14 a 18/09/2026: oficialização do SISTOT, fechamento do CAND, relatório "Ambiente de Votação" e geração de mídias) são a exceção à regra de que evento regional não tem `fundamentacao`. Eles são regionais na **data**, que o TRE-PB fixa, mas nacionais no **dever**, que vem da Resolução nº 23.751/2026/TSE (Atos Gerais do Processo Eleitoral) — daí `documentoOrigem` no despacho do SEI *e* `fundamentacao` na Resolução. A URL da norma está catalogada em `linksReferencia.ts`.
+
+A geração de mídias de 17 e 18/09 é um bloco único no despacho, mas rende dois cards, um por dia: card de data única é a unidade da timeline, e sem o segundo o dia 18 sumiria da linha do tempo.
+
+- `src/data/nvis.ts` — fonte única da cidade, da cor e da expansão da sigla de cada polo (`nviMap`, `ORDEM_NVIS`, `NVI_EXPANSAO` = "Núcleo de Voto Informatizado"). Nenhum componente repete o hexadecimal; há teste que trava isso. O cronograma oficial não expande "NVI": a expansão veio do Tribunal e aparece uma vez por card, como legenda, e não repetida em cada polo.
 - `src/components/timeline/PreparacaoUrnasBloco.tsx` — renderiza a escala agrupada por polo, uma coluna no celular e duas a partir de `sm`. Município nunca é truncado: é o dado que a pessoa procura.
 - `camposBuscaveis()` em `src/lib/search.ts` — função pura que monta o texto indexado do evento, incluindo sigla do polo, cidade do polo, número da zona e município-sede. É o que faz "Cabedelo", "57" ou "Pombal" acharem o card do dia certo. `useFilteredEvents` consome essa função; não replique a lógica no hook.
 

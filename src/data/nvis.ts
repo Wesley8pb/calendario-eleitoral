@@ -8,9 +8,13 @@ import type { NviID } from "../types";
 // aparece no cronograma oficial; a cidade é a sede do polo, deduzida do próprio
 // sufixo do código e confirmada pelas zonas atendidas.
 //
-// O cronograma do TRE-PB não expande a sigla "NVI" — por isso ela não é
-// desdobrada em lugar nenhum da interface.
+// O cronograma do TRE-PB não expande a sigla "NVI"; a expansão abaixo foi
+// confirmada pelo Tribunal e é exibida uma vez por card, como legenda, em
+// vez de repetida em cada polo.
 // ─────────────────────────────────────────────────────────────────────────────
+
+/** Expansão da sigla que nomeia os polos, exibida como legenda do bloco. */
+export const NVI_EXPANSAO = "Núcleo de Voto Informatizado";
 
 export interface NviInfo {
   id: NviID;

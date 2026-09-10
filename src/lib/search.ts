@@ -1,5 +1,5 @@
 import type { EventoCalendario } from "../types";
-import { nviMap } from "../data/nvis";
+import { NVI_EXPANSAO, nviMap } from "../data/nvis";
 
 /**
  * Normaliza texto para busca: remove acentos, caracteres de controle, lowercase, trim.
@@ -39,7 +39,7 @@ export function camposBuscaveis(evento: EventoCalendario): string {
     evento.observacoes ?? "",
     ...(evento.preparacaoUrnas ?? []).map(
       (polo) =>
-        `${polo.nvi} ${nviMap[polo.nvi].cidade} ` +
+        `${polo.nvi} ${NVI_EXPANSAO} ${nviMap[polo.nvi].cidade} ` +
         polo.zonas.map((z) => `${z.ze} ${z.sede}`).join(" "),
     ),
   ].join(" ");

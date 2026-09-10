@@ -43,7 +43,7 @@ const idsCatalogo = new Set(links.map((link) => link.id));
 
 const contagensEsperadas: Record<string, number> = {
   "leis-codigos": 5,
-  "resolucoes-normas": 13,
+  "resolucoes-normas": 14,
   "formularios-tte": 4,
   "manuais-orientacoes": 6,
   "portais-consultas": 1,
@@ -68,7 +68,11 @@ const urlsInformativasEventos = [...new Set([...urlsMarkdown, ...urlsFundamentac
 console.log("=== TESTES DA CENTRAL DE LINKS DE REFERÊNCIA ===\n");
 
 test("Módulo do catálogo existe", modulo !== null);
-test("Catálogo contém 29 referências", links.length === 29);
+test("Catálogo contém 30 referências", links.length === 30);
+test(
+  "Resolução TSE nº 23.751/2026 (Atos Gerais) está catalogada",
+  links.some((link) => link.id === "res-tse-23751-2026"),
+);
 test("IDs do catálogo são únicos", idsCatalogo.size === links.length);
 test("URLs do catálogo são únicas", urlsCatalogo.size === links.length);
 test("Todos os links usam HTTPS", links.every((link) => link.url.startsWith("https://")));

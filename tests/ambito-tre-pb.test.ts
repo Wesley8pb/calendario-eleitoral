@@ -8,7 +8,7 @@ import { readFileSync } from "node:fs";
 import type { EventoCalendario } from "../src/types";
 import { eventosTrePb } from "../src/data/eventosTrePb";
 import { AMBITO_TRE_PB, ambitoMap } from "../src/data/ambitos";
-import { nviMap, ORDEM_NVIS } from "../src/data/nvis";
+import { NVI_EXPANSAO, nviMap, ORDEM_NVIS } from "../src/data/nvis";
 import { camposBuscaveis, matchesSearch } from "../src/lib/search";
 
 let passed = 0;
@@ -43,8 +43,8 @@ test(
   !eventosSource.includes("sei.tre-pb.jus.br"),
 );
 test(
-  "eventosTrePb contém 11 eventos (1 memorando + 10 de preparação de urnas)",
-  eventosTrePb.length === 11,
+  "eventosTrePb contém 17 eventos (1 memorando + 6 do despacho AGGTIC + 10 de preparação de urnas)",
+  eventosTrePb.length === 17,
 );
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -145,6 +145,34 @@ test(
 
 // A busca precisa alcançar polo, número de zona e município — é como se procura.
 const dia23 = preparacao.find((ev) => ev.data === "2026-09-23")!;
+// Sedes retificadas por conferência do cadastro das zonas eleitorais: divergem
+// de propósito da grafia do PDF e não podem regredir numa regeração da tabela.
+const sedePorZona = new Map(
+  preparacao.flatMap((ev) =>
+    ev.preparacaoUrnas!.flatMap((polo) =>
+      polo.zonas.map((z) => [`${ev.turno} ${z.ze}`, z.sede] as const),
+    ),
+  ),
+);
+for (const [ze, sede] of [
+  ["49ª", "Queimadas"],
+  ["75ª", "Itabaiana"],
+  ["74ª", "Água Branca"],
+] as const) {
+  test(
+    `${ze} zona tem ${sede} como município-sede nos dois turnos`,
+    sedePorZona.get(`1T ${ze}`) === sede && sedePorZona.get(`2T ${ze}`) === sede,
+  );
+}
+test(
+  "36ª e 38ª zonas, ambas de Catolé do Rocha, preparam juntas em 14/10 (conforme o cronograma)",
+  preparacao
+    .find((ev) => ev.data === "2026-10-14")!
+    .preparacaoUrnas!.find((polo) => polo.nvi === "NVIPBL")!
+    .zonas.filter((z) => z.ze === "36ª" || z.ze === "38ª")
+    .every((z) => z.sede === "Catolé do Rocha" && z.horario === "07h–17h"),
+);
+
 test(
   'Busca por município encontra o card ("Cabedelo" → 23/09)',
   matchesSearch(camposBuscaveis(dia23), "cabedelo"),
@@ -195,7 +223,34 @@ test(
   icsDia23.includes(PDF_CRONOGRAMA),
 );
 
+const blocoSourcePreview = readFileSync(
+  "src/components/timeline/PreparacaoUrnasBloco.tsx",
+  "utf8",
+);
+
 // As cores dos polos são únicas e vivem só em nvis.ts.
+test(
+  "A sigla NVI tem expansão oficial",
+  NVI_EXPANSAO === "Núcleo de Voto Informatizado",
+);
+test(
+  "A legenda do NVI aparece uma vez por card, e não em cada polo",
+  blocoSourcePreview.includes("NVI — {NVI_EXPANSAO}") &&
+    blocoSourcePreview.split("NVI_EXPANSAO").length - 1 === 2,
+);
+test(
+  "A busca alcança a expansão da sigla",
+  matchesSearch(camposBuscaveis(dia23), "nucleo de voto informatizado"),
+);
+test(
+  "A SJI é expandida nos dois eventos que a citam",
+  eventosTrePb
+    .filter((ev) => ev.titulo.includes("SJI"))
+    .every((ev) =>
+      ev.observacoes?.includes("SJI — Secretaria Judiciária da Informação"),
+    ) && eventosTrePb.filter((ev) => ev.titulo.includes("SJI")).length === 2,
+);
+
 test(
   "Cada polo tem cor distinta",
   new Set(ORDEM_NVIS.map((n) => nviMap[n].cor)).size === ORDEM_NVIS.length,
@@ -243,6 +298,158 @@ test(
 test(
   "IDs de eventosTrePb carregam o infixo trepb",
   eventosTrePb.every((ev) => ev.id.includes("-trepb-")),
+);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Despacho nº 2497253/2026 — AGGTIC (Processo 0007829-57.2026.6.15.8000)
+// ─────────────────────────────────────────────────────────────────────────────
+console.log("\n=== DESPACHO AGGTIC — PREPARATIVOS DE 14 A 18/09 ===\n");
+
+const URL_RES_23751 =
+  "https://www.tse.jus.br/legislacao/compilada/res/2026/" +
+  "resolucao-no-23-751-de-26-de-fevereiro-de-2026";
+
+const despacho = eventosTrePb.filter((ev) =>
+  ev.documentoOrigem?.titulo.includes("2497253/2026"),
+);
+
+test("Há 6 eventos oriundos do despacho AGGTIC", despacho.length === 6);
+test(
+  "Cobrem as datas de 14 a 18/09, com 16/09 em dobro (SJI e Zona Eleitoral)",
+  JSON.stringify(despacho.map((ev) => ev.data)) ===
+    JSON.stringify([
+      "2026-09-14",
+      "2026-09-15",
+      "2026-09-16",
+      "2026-09-16",
+      "2026-09-17",
+      "2026-09-18",
+    ]),
+);
+test(
+  "IDs seguem o padrão do arquivo",
+  JSON.stringify(despacho.map((ev) => ev.id)) ===
+    JSON.stringify([
+      "2026-09-14-trepb-1",
+      "2026-09-15-trepb-1",
+      "2026-09-16-trepb-1",
+      "2026-09-16-trepb-2",
+      "2026-09-17-trepb-1",
+      "2026-09-18-trepb-1",
+    ]),
+);
+test(
+  "Dias da semana conferem com o calendário de 2026",
+  JSON.stringify(despacho.map((ev) => ev.diaSemana)) ===
+    JSON.stringify([
+      "segunda-feira",
+      "terça-feira",
+      "quarta-feira",
+      "quarta-feira",
+      "quinta-feira",
+      "sexta-feira",
+    ]),
+);
+test("Todos os títulos cabem em 120 caracteres", despacho.every((ev) => ev.titulo.length <= 120));
+test("Todos são do 1º turno", despacho.every((ev) => ev.turno === "1T"));
+test("perfis é vazio em todos (relevante para todos)", despacho.every((ev) => ev.perfis.length === 0));
+test("Todos são categorizados como ADM", despacho.every((ev) => ev.categorias.includes("ADM")));
+test(
+  "O fechamento do CAND também é categorizado como REG",
+  despacho
+    .find((ev) => ev.id === "2026-09-15-trepb-1")
+    ?.categorias.join(",") === "ADM,REG",
+);
+test(
+  "Todos apontam para o mesmo despacho no SEI, marcado como restrito",
+  despacho.every(
+    (ev) =>
+      ev.documentoOrigem?.url.startsWith("https://sei.tre-pb.jus.br/") === true &&
+      ev.documentoOrigem?.url.includes("id_procedimento=2571853") &&
+      ev.documentoOrigem?.url.includes("infra_hash=") &&
+      ev.documentoOrigem?.unidade === "TRE-PB/STIC/AGGTIC" &&
+      ev.documentoOrigem?.restrito === true,
+  ),
+);
+test(
+  "O documento de origem nomeia o processo administrativo",
+  despacho.every((ev) =>
+    ev.documentoOrigem?.titulo.includes("0007829-57.2026.6.15.8000"),
+  ),
+);
+
+// --- Fundamentação na Resolução de Atos Gerais ---
+test(
+  "Todos fundamentam-se na Resolução nº 23.751/2026/TSE",
+  despacho.every(
+    (ev) =>
+      ev.fundamentacao.length > 0 &&
+      ev.fundamentacao.every(
+        (f) => f.norma === "Resolução nº 23.751/2026/TSE" && f.url === URL_RES_23751,
+      ),
+  ),
+);
+test(
+  "Cada etapa aponta o dispositivo que a sustenta",
+  JSON.stringify(despacho.map((ev) => ev.fundamentacao[0]?.dispositivo)) ===
+    JSON.stringify([
+      "art. 5º, caput e §§ 1º e 2º",
+      "art. 94, caput, I, IV e V, e § 1º",
+      "art. 92, caput e § 2º",
+      "art. 93, caput e parágrafo único",
+      "arts. 94 e 95",
+      "arts. 94 e 95",
+    ]),
+);
+test(
+  "A URL da Resolução nº 23.751/2026 está catalogada em linksReferencia",
+  readFileSync("src/data/linksReferencia.ts", "utf8").includes(URL_RES_23751),
+);
+
+// --- Transcrição e encadeamento ---
+test(
+  "A oficialização do SISTOT transcreve o art. 5º",
+  despacho[0]?.descricao.includes(
+    "somente admite o tráfego de arquivos assinados por outros sistemas já oficializados",
+  ) === true,
+);
+test(
+  'As duas emissões de 16/09 nomeiam o relatório "Ambiente de Votação"',
+  despacho[2]?.descricao.includes('"Ambiente de Votação"') === true &&
+    despacho[3]?.descricao.includes('"Ambiente de Votação"') === true,
+);
+test(
+  "Em 16/09 vem primeiro a emissão pela SJI (art. 92) e depois a da Zona Eleitoral (art. 93)",
+  despacho[2]?.titulo.includes("SJI") === true &&
+    despacho[3]?.titulo.includes("Zona Eleitoral") === true,
+);
+test(
+  "A geração de mídias registra que ocorre em 17 e 18 de setembro",
+  despacho[4]?.descricao.includes("17 e 18 de setembro de 2026") === true &&
+    despacho[5]?.descricao.includes("17 e 18 de setembro de 2026") === true,
+);
+test(
+  "Os dois dias de geração de mídias se distinguem no título",
+  despacho[4]?.titulo.includes("1º de 2 dias") === true &&
+    despacho[5]?.titulo.includes("2º de 2 dias") === true,
+);
+test(
+  "Todos registram o encadeamento até a preparação de urnas de 21/09",
+  despacho.every((ev) =>
+    ev.observacoes?.includes("preparação de urnas nos polos (a partir de 21/09)"),
+  ),
+);
+test(
+  "O fechamento do CAND explica a dependência do julgamento dos registros em 14/09",
+  despacho[1]?.observacoes?.includes(
+    "todos os pedidos de registro devem estar julgados",
+  ) === true,
+);
+test(
+  "A busca encontra os eventos do despacho pelos sistemas citados",
+  matchesSearch(camposBuscaveis(despacho[0] as EventoCalendario), "SISTOT") &&
+    matchesSearch(camposBuscaveis(despacho[1] as EventoCalendario), "CAND") &&
+    matchesSearch(camposBuscaveis(despacho[4] as EventoCalendario), "mídias"),
 );
 
 // --- O evento de 11/09/2026 ---

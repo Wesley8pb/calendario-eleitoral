@@ -1,5 +1,11 @@
 # Changelog
 
+## [2026-09-14] Observações removidas dos eventos de preparação de urnas
+
+A pedido, os 5 eventos de preparação de urnas (21 a 25/09) deixam de ter `observacoes`. Saem com isso a data de assinatura do edital, o código verificador (2503394) e o CRC (B735BF5C) e a nota de que as audiências são públicas. A fonte continua acessível pelo bloco "Documento de origem", que aponta para o edital no SEI com o aviso de acesso restrito.
+
+**Arquivos modificados:** `src/data/eventosTrePb.ts`; `tests/ambito-tre-pb.test.ts` (a asserção dos códigos foi substituída pela de que os eventos de urnas não têm observações); `CLAUDE.md`, `AGENTS.md`.
+
 ## [2026-09-14] Edital nº 14/2026 substitui a minuta como fonte do cronograma de urnas
 
 Publicado o **Edital nº 14/2026 TRE-PB/PTRE/ASPRE** (doc. SEI 2503394, CRC B735BF5C, processo 0007828-72.2026.6.15.8000), assinado pelo Presidente do Tribunal em 14/09/2026. Antes de trocar a fonte, o edital foi conferido contra o que os cards já traziam da minuta — com a tabela do Anexo I **transcrita de novo, do zero**, para que a conferência não se limitasse a reconfirmar a leitura anterior:

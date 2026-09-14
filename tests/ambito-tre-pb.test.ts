@@ -97,11 +97,8 @@ test(
   ),
 );
 test(
-  "Quem está fora do SEI recebe o código verificador e o CRC do edital",
-  preparacao.every(
-    (ev) =>
-      ev.observacoes?.includes("2503394") && ev.observacoes.includes("B735BF5C"),
-  ),
+  "Os eventos de urnas não têm observações",
+  preparacao.every((ev) => ev.observacoes === undefined),
 );
 // Os três elos da cadeia de fontes não podem voltar: PDF v2, minuta e o aviso.
 const dadosTrePb = readFileSync("src/data/eventosTrePb.ts", "utf8");

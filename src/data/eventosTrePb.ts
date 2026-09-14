@@ -17,8 +17,7 @@ import type { EventoCalendario } from "../types";
 // processo 0007828-72.2026.6.15.8000), assinado pelo Presidente em 14/09/2026.
 // Substitui a minuta (doc. SEI 2502510), da qual não diverge em nada do que o
 // calendário usa — escala das 68 zonas, preâmbulo e endereços conferidos. O
-// link do SEI é restrito; os códigos de autenticidade vão em observacoes para
-// quem está fora do Tribunal.
+// link do SEI é restrito. Os eventos de urnas não têm observacoes.
 //
 // SÓ O 1º TURNO. Os 5 eventos de 12 a 16/10 foram removidos em 13/09/2026:
 // o edital cobre apenas o 1º turno, e manter o 2º com os dados da v2 deixaria
@@ -319,8 +318,6 @@ export const eventosTrePb: EventoCalendario[] = [
       url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=acompanhamento_listar&acao_retorno=acompanhamento_listar&id_procedimento=2571729&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=833a5cf2d0f4abe904a12c2e30ac931c8b00a4fc5db630d3ecf7ca87aae34874",
       restrito: true,
     },
-    observacoes:
-      "Edital assinado pelo Presidente do Tribunal em 14/09/2026. Quem não tem acesso ao SEI pode conferir a autenticidade do documento no módulo de conferência do SEI/TRE-PB, com o código verificador 2503394 e o código CRC B735BF5C. As audiências são públicas e ocorrem nos endereços indicados em cada polo.",
   },
 
   {
@@ -397,8 +394,6 @@ export const eventosTrePb: EventoCalendario[] = [
       url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=acompanhamento_listar&acao_retorno=acompanhamento_listar&id_procedimento=2571729&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=833a5cf2d0f4abe904a12c2e30ac931c8b00a4fc5db630d3ecf7ca87aae34874",
       restrito: true,
     },
-    observacoes:
-      "Edital assinado pelo Presidente do Tribunal em 14/09/2026. Quem não tem acesso ao SEI pode conferir a autenticidade do documento no módulo de conferência do SEI/TRE-PB, com o código verificador 2503394 e o código CRC B735BF5C. As audiências são públicas e ocorrem nos endereços indicados em cada polo.",
   },
 
   {
@@ -471,8 +466,6 @@ export const eventosTrePb: EventoCalendario[] = [
       url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=acompanhamento_listar&acao_retorno=acompanhamento_listar&id_procedimento=2571729&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=833a5cf2d0f4abe904a12c2e30ac931c8b00a4fc5db630d3ecf7ca87aae34874",
       restrito: true,
     },
-    observacoes:
-      "Edital assinado pelo Presidente do Tribunal em 14/09/2026. Quem não tem acesso ao SEI pode conferir a autenticidade do documento no módulo de conferência do SEI/TRE-PB, com o código verificador 2503394 e o código CRC B735BF5C. As audiências são públicas e ocorrem nos endereços indicados em cada polo.",
   },
 
   {
@@ -545,8 +538,6 @@ export const eventosTrePb: EventoCalendario[] = [
       url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=acompanhamento_listar&acao_retorno=acompanhamento_listar&id_procedimento=2571729&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=833a5cf2d0f4abe904a12c2e30ac931c8b00a4fc5db630d3ecf7ca87aae34874",
       restrito: true,
     },
-    observacoes:
-      "Edital assinado pelo Presidente do Tribunal em 14/09/2026. Quem não tem acesso ao SEI pode conferir a autenticidade do documento no módulo de conferência do SEI/TRE-PB, com o código verificador 2503394 e o código CRC B735BF5C. As audiências são públicas e ocorrem nos endereços indicados em cada polo.",
   },
 
   {
@@ -613,7 +604,5 @@ export const eventosTrePb: EventoCalendario[] = [
       url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=acompanhamento_listar&acao_retorno=acompanhamento_listar&id_procedimento=2571729&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=833a5cf2d0f4abe904a12c2e30ac931c8b00a4fc5db630d3ecf7ca87aae34874",
       restrito: true,
     },
-    observacoes:
-      "Edital assinado pelo Presidente do Tribunal em 14/09/2026. Quem não tem acesso ao SEI pode conferir a autenticidade do documento no módulo de conferência do SEI/TRE-PB, com o código verificador 2503394 e o código CRC B735BF5C. As audiências são públicas e ocorrem nos endereços indicados em cada polo.",
   },
 ];

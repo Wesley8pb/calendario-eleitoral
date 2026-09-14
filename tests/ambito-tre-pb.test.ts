@@ -43,8 +43,8 @@ test(
   !eventosSource.includes("sei.tre-pb.jus.br"),
 );
 test(
-  "eventosTrePb contém 17 eventos (1 memorando + 6 do despacho AGGTIC + 10 de preparação de urnas)",
-  eventosTrePb.length === 17,
+  "eventosTrePb contém 12 eventos (1 memorando + 6 do despacho AGGTIC + 5 de preparação de urnas)",
+  eventosTrePb.length === 12,
 );
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -52,22 +52,26 @@ test(
 // ─────────────────────────────────────────────────────────────────────────────
 console.log("\n=== CRONOGRAMA DE PREPARAÇÃO DE URNAS ===\n");
 
-const PDF_CRONOGRAMA =
-  "https://www.tre-pb.jus.br/eleicoes/e/arquivos/" +
-  "cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_geral-v2/" +
-  "@@display-file/file/" +
-  "cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_geral-v2.pdf";
+// A fonte é o Edital nº 14/2026, que substituiu a minuta, que substituiu o PDF v2.
+const EDITAL_URL =
+  "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar" +
+  "&acao_origem=acompanhamento_listar&acao_retorno=acompanhamento_listar" +
+  "&id_procedimento=2571729&infra_sistema=100000100&infra_unidade_atual=193" +
+  "&infra_hash=833a5cf2d0f4abe904a12c2e30ac931c8b00a4fc5db630d3ecf7ca87aae34874";
 
 const preparacao = eventosTrePb.filter((ev) => ev.preparacaoUrnas?.length);
 
-test("Há 10 eventos de preparação de urnas", preparacao.length === 10);
+test("Há 5 eventos de preparação de urnas", preparacao.length === 5);
 test(
-  "5 datas no 1º turno (21 a 25/09) e 5 no 2º (12 a 16/10)",
+  "Só o 1º turno, de 21 a 25/09 — o 2º turno foi removido com o PDF v2",
   JSON.stringify(preparacao.map((ev) => ev.data)) ===
     JSON.stringify([
       "2026-09-21", "2026-09-22", "2026-09-23", "2026-09-24", "2026-09-25",
-      "2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-16",
-    ]),
+    ]) && preparacao.every((ev) => ev.turno === "1T"),
+);
+test(
+  "Nenhum evento de outubro sobrou em eventosTrePb",
+  !eventosTrePb.some((ev) => ev.data.startsWith("2026-10")),
 );
 test(
   "Todos são de âmbito TRE-PB e categoria ADM",
@@ -76,21 +80,61 @@ test(
   ),
 );
 test(
-  "Todos apontam para o PDF público do cronograma, sem marca de acesso restrito",
+  "Todos apontam para o Edital nº 14/2026 no SEI, marcado como restrito",
   preparacao.every(
     (ev) =>
-      ev.documentoOrigem?.url === PDF_CRONOGRAMA &&
-      ev.documentoOrigem?.unidade === "TRE-PB/STIC" &&
-      ev.documentoOrigem?.restrito !== true,
+      ev.documentoOrigem?.url === EDITAL_URL &&
+      ev.documentoOrigem?.unidade === "TRE-PB/PTRE/ASPRE" &&
+      ev.documentoOrigem?.restrito === true,
   ),
 );
 test(
-  "A URL do cronograma usa HTTPS no domínio tre-pb.jus.br",
-  PDF_CRONOGRAMA.startsWith("https://www.tre-pb.jus.br/"),
+  "O documento de origem nomeia o edital e o processo",
+  preparacao.every(
+    (ev) =>
+      ev.documentoOrigem?.titulo.startsWith("Edital nº 14/2026") &&
+      ev.documentoOrigem?.titulo.includes("0007828-72.2026.6.15.8000"),
+  ),
+);
+test(
+  "Quem está fora do SEI recebe o código verificador e o CRC do edital",
+  preparacao.every(
+    (ev) =>
+      ev.observacoes?.includes("2503394") && ev.observacoes.includes("B735BF5C"),
+  ),
+);
+// Os três elos da cadeia de fontes não podem voltar: PDF v2, minuta e o aviso.
+const dadosTrePb = readFileSync("src/data/eventosTrePb.ts", "utf8");
+test(
+  "Nenhum resíduo do PDF v2 sobrou no arquivo de dados",
+  !dadosTrePb.includes("cronograma_preparacao_urnas"),
+);
+test(
+  "Nenhum card aponta mais para a minuta",
+  !dadosTrePb.includes("cv=2502510") &&
+    preparacao.every((ev) => !ev.documentoOrigem?.titulo.includes("Minuta")),
+);
+test(
+  "O aviso de minuta saiu de todos os cards",
+  preparacao.every((ev) => !ev.observacoes?.includes("MINUTA")),
+);
+test(
+  "Todos se fundamentam no art. 100 da Resolução nº 23.751/2026/TSE",
+  preparacao.every(
+    (ev) =>
+      ev.fundamentacao.length === 1 &&
+      ev.fundamentacao[0].norma === "Resolução nº 23.751/2026/TSE" &&
+      ev.fundamentacao[0].dispositivo === "art. 100, caput e § 2º",
+  ),
+);
+test(
+  "A URL do edital usa HTTPS no SEI do TRE-PB e preserva o hash de acesso",
+  EDITAL_URL.startsWith("https://sei.tre-pb.jus.br/") &&
+    EDITAL_URL.includes("infra_hash="),
 );
 
-// Cada turno escala as 68 zonas eleitorais, uma única vez.
-for (const [rotulo, turno] of [["1º turno", "1T"], ["2º turno", "2T"]] as const) {
+// O turno escala as 68 zonas eleitorais, uma única vez.
+for (const [rotulo, turno] of [["1º turno", "1T"]] as const) {
   const zonas = preparacao
     .filter((ev) => ev.turno === turno)
     .flatMap((ev) => ev.preparacaoUrnas!.flatMap((p) => p.zonas));
@@ -160,17 +204,34 @@ for (const [ze, sede] of [
   ["74ª", "Água Branca"],
 ] as const) {
   test(
-    `${ze} zona tem ${sede} como município-sede nos dois turnos`,
-    sedePorZona.get(`1T ${ze}`) === sede && sedePorZona.get(`2T ${ze}`) === sede,
+    `${ze} zona tem ${sede} como município-sede`,
+    sedePorZona.get(`1T ${ze}`) === sede,
   );
 }
+
+// O que o edital mudou em relação ao PDF v2 — nenhuma dessas linhas pode
+// regredir numa regeração a partir da tabela antiga.
+const escalaPorZona = new Map(
+  preparacao.flatMap((ev) =>
+    ev.preparacaoUrnas!.flatMap((polo) =>
+      polo.zonas.map((z) => [z.ze, { data: ev.data, horario: z.horario }] as const),
+    ),
+  ),
+);
 test(
-  "36ª e 38ª zonas, ambas de Catolé do Rocha, preparam juntas em 14/10 (conforme o cronograma)",
-  preparacao
-    .find((ev) => ev.data === "2026-10-14")!
-    .preparacaoUrnas!.find((polo) => polo.nvi === "NVIPBL")!
-    .zonas.filter((z) => z.ze === "36ª" || z.ze === "38ª")
-    .every((z) => z.sede === "Catolé do Rocha" && z.horario === "07h–17h"),
+  "52ª zona (Coremas) passou de 21/09 para 25/09, das 08h às 18h",
+  escalaPorZona.get("52ª")?.data === "2026-09-25" &&
+    escalaPorZona.get("52ª")?.horario === "08h–18h",
+);
+test(
+  "Nenhuma zona começa mais às 07h — o turno estendido de Pombal acabou",
+  [...escalaPorZona.values()].every((e) => !e.horario.startsWith("07h")),
+);
+test(
+  "As sete zonas que passaram a começar às 09h",
+  ["06ª", "10ª", "32ª", "47ª", "60ª", "66ª", "75ª"].every(
+    (ze) => escalaPorZona.get(ze)?.horario === "09h–18h",
+  ),
 );
 
 test(
@@ -211,16 +272,18 @@ test(
   icsDia23.includes("Escala de preparacao de urnas:"),
 );
 test(
-  "Descrição do .ics nomeia o polo com a cidade",
-  icsDia23.includes("NVIPBL - Pombal:"),
+  "Descrição do .ics nomeia o polo com a cidade e o endereço da cerimônia",
+  icsDia23.includes(
+    "NVIPBL - Pombal (Rua Profª. Maria Claudete Bandeira de Sousa, s/nº, Petrópolis, Pombal – PB):",
+  ),
 );
 test(
   "Descrição do .ics traz zona, município e horário",
   icsDia23.includes("57ª Cabedelo 08h–18h"),
 );
 test(
-  "Descrição do .ics traz o link público do cronograma",
-  icsDia23.includes(PDF_CRONOGRAMA),
+  "Descrição do .ics traz o link do edital",
+  icsDia23.includes(EDITAL_URL),
 );
 
 const blocoSourcePreview = readFileSync(
@@ -229,6 +292,24 @@ const blocoSourcePreview = readFileSync(
 );
 
 // As cores dos polos são únicas e vivem só em nvis.ts.
+test(
+  "Todo polo tem endereço preenchido, em fonte única",
+  ORDEM_NVIS.every((n) => nviMap[n].endereco.trim().length > 0) &&
+    new Set(ORDEM_NVIS.map((n) => nviMap[n].endereco)).size === ORDEM_NVIS.length,
+);
+test(
+  "O endereço de cada polo nomeia a própria cidade",
+  ORDEM_NVIS.every((n) => nviMap[n].endereco.includes(nviMap[n].cidade)),
+);
+test(
+  "Nenhum componente repete um endereço — todos vêm de nvis.ts",
+  !blocoSourcePreview.includes("Hilton Souto Maior") &&
+    blocoSourcePreview.includes("info.endereco"),
+);
+test(
+  "A busca alcança o endereço da cerimônia",
+  matchesSearch(camposBuscaveis(dia23), "maria claudete bandeira"),
+);
 test(
   "A sigla NVI tem expansão oficial",
   NVI_EXPANSAO === "Núcleo de Voto Informatizado",

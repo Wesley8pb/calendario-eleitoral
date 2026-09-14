@@ -73,6 +73,16 @@ export function PreparacaoUrnasBloco({ polos }: PreparacaoUrnasBlocoProps) {
                 <span className="ml-auto flex-shrink-0 rounded-full bg-neutral-200/70 px-2 py-0.5 text-[11px] font-medium tabular-nums text-neutral-600">
                   {plural(polo.zonas.length, "zona", "zonas")}
                 </span>
+                {/*
+                  Endereço da cerimônia. Ocupa a linha inteira (w-full) logo
+                  abaixo do nome do polo, e não ao lado, porque é o texto mais
+                  longo do cabeçalho e quebraria o alinhamento no celular.
+                  Está aqui porque o art. 100, § 2º, IV, da Res. 23.751/2026
+                  exige o local dos trabalhos no calendário do Tribunal.
+                */}
+                <span className="w-full text-xs leading-snug text-neutral-500">
+                  {info.endereco}
+                </span>
               </div>
 
               <div className="relative">

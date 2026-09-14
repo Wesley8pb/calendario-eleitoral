@@ -93,7 +93,12 @@ export function buildEventDescription(evento: EventoCalendario): string {
         const zonas = polo.zonas
           .map((z) => `${z.ze} ${z.sede} ${z.horario}`)
           .join("; ");
-        return `${polo.nvi} - ${nviMap[polo.nvi].cidade}: ${zonas}`;
+        // O endereço vai junto: quem leva o prazo para o próprio calendário
+        // precisa saber para onde ir, não só em que cidade.
+        return (
+          `${polo.nvi} - ${nviMap[polo.nvi].cidade} (${nviMap[polo.nvi].endereco}): ` +
+          zonas
+        );
       })
       .join("\n");
 

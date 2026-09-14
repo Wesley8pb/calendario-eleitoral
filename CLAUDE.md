@@ -179,13 +179,17 @@ O campo `fundamentacao[].url` fica `""` por padrão — não há coleta sistemá
 
 Eventos de âmbito regional vivem em `src/data/eventosTrePb.ts`, separados de `eventos.ts` porque nascem de atos administrativos, não de legislação — e porque `tests/links-referencia.test.ts` exige que toda URL de `eventos.ts` esteja catalogada em `linksReferencia.ts`.
 
-Os 10 eventos de preparação de urnas (21–25/09 e 12–16/10/2026) carregam a escala no campo estruturado `preparacaoUrnas: PoloPreparacao[]`, e **não** na `descricao`. Motivo: numa mesma data há preparação simultânea em até 5 polos e 21 zonas eleitorais; como texto corrido isso vira parede, e a busca não conseguiria distinguir município de zona.
+Os 5 eventos de preparação de urnas (21–25/09/2026) carregam a escala no campo estruturado `preparacaoUrnas: PoloPreparacao[]`, e **não** na `descricao`. Motivo: numa mesma data há preparação simultânea em até 5 polos e 18 zonas eleitorais; como texto corrido isso vira parede, e a busca não conseguiria distinguir município de zona.
+
+**A fonte é o Edital nº 14/2026 TRE-PB/PTRE/ASPRE** (doc. SEI 2503394, processo 0007828-72.2026.6.15.8000), assinado pelo Presidente em 14/09/2026. A cadeia foi PDF v2 → minuta (doc. SEI 2502510) → edital; a minuta e o edital são idênticos no que o calendário usa. O link do SEI é restrito, por isso as `observacoes` levam o código verificador e o CRC para quem está fora do Tribunal. Há teste impedindo que qualquer dos elos anteriores volte.
+
+**Só existe o 1º turno.** Os 5 eventos de 12 a 16/10 foram removidos: o edital cobre apenas o 1º turno, e manter o 2º com os dados da v2 deixaria os dois turnos em critérios diferentes.
 
 Os 6 eventos do Despacho nº 2497253/2026 — AGGTIC (14 a 18/09/2026: oficialização do SISTOT, fechamento do CAND, relatório "Ambiente de Votação" e geração de mídias) são a exceção à regra de que evento regional não tem `fundamentacao`. Eles são regionais na **data**, que o TRE-PB fixa, mas nacionais no **dever**, que vem da Resolução nº 23.751/2026/TSE (Atos Gerais do Processo Eleitoral) — daí `documentoOrigem` no despacho do SEI *e* `fundamentacao` na Resolução. A URL da norma está catalogada em `linksReferencia.ts`.
 
 A geração de mídias de 17 e 18/09 é um bloco único no despacho, mas rende dois cards, um por dia: card de data única é a unidade da timeline, e sem o segundo o dia 18 sumiria da linha do tempo.
 
-- `src/data/nvis.ts` — fonte única da cidade, da cor e da expansão da sigla de cada polo (`nviMap`, `ORDEM_NVIS`, `NVI_EXPANSAO` = "Núcleo de Voto Informatizado"). Nenhum componente repete o hexadecimal; há teste que trava isso. O cronograma oficial não expande "NVI": a expansão veio do Tribunal e aparece uma vez por card, como legenda, e não repetida em cada polo.
+- `src/data/nvis.ts` — fonte única da cidade, do **endereço**, da cor e da expansão da sigla de cada polo (`nviMap`, `ORDEM_NVIS`, `NVI_EXPANSAO` = "Núcleo de Voto Informatizado"). Nenhum componente repete o hexadecimal nem um endereço; há teste que trava isso. O cronograma oficial não expande "NVI": a expansão veio do Tribunal e aparece uma vez por card, como legenda, e não repetida em cada polo. O endereço não é enfeite — o art. 100, § 2º, IV, da Resolução nº 23.751/2026/TSE exige que o calendário divulgado pelo Tribunal informe o local dos trabalhos.
 - `src/components/timeline/PreparacaoUrnasBloco.tsx` — renderiza a escala agrupada por polo, uma coluna no celular e duas a partir de `sm`. Município nunca é truncado: é o dado que a pessoa procura.
 - `camposBuscaveis()` em `src/lib/search.ts` — função pura que monta o texto indexado do evento, incluindo sigla do polo, cidade do polo, número da zona e município-sede. É o que faz "Cabedelo", "57" ou "Pombal" acharem o card do dia certo. `useFilteredEvents` consome essa função; não replique a lógica no hook.
 

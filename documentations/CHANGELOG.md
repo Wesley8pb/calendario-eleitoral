@@ -1,5 +1,59 @@
 # Changelog
 
+## [2026-09-14] Edital nº 14/2026 substitui a minuta como fonte do cronograma de urnas
+
+Publicado o **Edital nº 14/2026 TRE-PB/PTRE/ASPRE** (doc. SEI 2503394, CRC B735BF5C, processo 0007828-72.2026.6.15.8000), assinado pelo Presidente do Tribunal em 14/09/2026. Antes de trocar a fonte, o edital foi conferido contra o que os cards já traziam da minuta — com a tabela do Anexo I **transcrita de novo, do zero**, para que a conferência não se limitasse a reconfirmar a leitura anterior:
+
+- **Escala (Anexo I):** 68 zonas no edital, 68 nos cards, **0 divergências** de polo, data ou horário.
+- **Preâmbulo:** idêntico ao da minuta, palavra por palavra — as quatro finalidades e a convocação transcritas na `descricao` seguem valendo.
+- **Endereços (Anexos II a VI):** os cinco conferem com `nvis.ts`.
+- **Fundamento e processo:** art. 100 da Res. 23.751/2026 e o mesmo processo.
+
+As listas de técnicos dos anexos não foram auditadas, por não integrarem o calendário.
+
+**O que mudou foi só a fonte.** `documentoOrigem` passa ao edital: título "Edital nº 14/2026", unidade `TRE-PB/PTRE/ASPRE` e o link do processo no SEI — que exige login, e por isso volta a levar `restrito: true`, ao contrário do link de conferência da minuta, que era público. Para não deixar sem caminho quem está fora do Tribunal, as `observacoes` passam a trazer o código verificador (2503394) e o CRC (B735BF5C) do edital.
+
+**O aviso de minuta saiu.** Os cinco cards deixam de abrir com "MINUTA —". Há teste para os três elos da cadeia de fontes — PDF v2, minuta e aviso —, para que nenhum volte numa regeração.
+
+**Arquivos modificados:**
+- `src/data/eventosTrePb.ts` — `documentoOrigem` e `observacoes` dos 5 eventos; cabeçalho registrando a cadeia PDF v2 → minuta → edital.
+- `src/data/nvis.ts` — a origem dos endereços passa a citar o edital.
+- `tests/ambito-tre-pb.test.ts` — 129 → 131 asserções.
+- `CLAUDE.md`, `AGENTS.md` — fonte atualizada.
+
+**Verificação:** `npx tsc --noEmit` limpo; as cinco suítes passaram (131, 12, 25, 24 e 20 asserções).
+
+## [2026-09-13] Cronograma de urnas do 1º turno pela minuta de edital; 2º turno removido
+
+A minuta de edital da STIC (doc. SEI 2502510, CRC 6D64C59F, processo 0007828-72.2026.6.15.8000, assinada em 12/09/2026) traz uma nova versão do cronograma de preparação de urnas do 1º turno. Comparada zona a zona com o que estava publicado: **56 das 68 zonas idênticas, 12 divergências.**
+
+**Uma mudança de data:** a 52ª zona (Coremas, NVIPBL) sai de 21/09 para 25/09. Com isso 21/09 cai de 15 para 14 zonas e 25/09 sobe de 7 para 8.
+
+**Onze mudanças de horário.** As cinco zonas do NVIPBL (31ª, 69ª, 36ª, 38ª e 52ª) deixam o turno estendido de 07h–17h e passam a 08h–18h — nenhuma zona começa mais às 07h. E sete zonas passam a começar às 09h, com 9h de duração: 06ª e 75ª (21/09), 10ª e 60ª (22/09), 47ª e 66ª (23/09) e 32ª (24/09). Há teste para cada um desses três fatos, porque os eventos são **gerados** a partir de uma tabela: sem isso, uma regeração a partir da v2 desfaria tudo em silêncio.
+
+**A 28ª zona não tinha sumido.** O print do sistema que motivou a conferência estava cortado exatamente na última linha do NVI Patos; a minuta traz `028ª | 25 de set | 08:00 | 18:00`. As 68 zonas continuam cobertas.
+
+**Os 5 eventos do 2º turno (12 a 16/10) foram removidos.** A minuta cobre só o 1º turno; mantê-los com os dados da v2 — inclusive os 07h–17h de Pombal, que acabaram de deixar de existir — poria os dois turnos em critérios diferentes no mesmo site. Voltam quando houver cronograma do 2º turno.
+
+**A fonte deixou de ser o PDF v2.** `documentoOrigem` passa a apontar para a conferência de autenticidade do SEI, que é página **pública** — daí não levar a marca de acesso restrito, ao contrário dos documentos internos. O título nomeia o doc., o CRC e o processo, e há teste garantindo que nenhum resíduo da URL do PDF v2 sobrou no arquivo de dados.
+
+**Por ser minuta, o card avisa.** Todo evento abre `observacoes` com "MINUTA —" e diz que os horários podem mudar até a publicação no Diário da Justiça Eletrônico. Publicar dado de minuta foi decisão do Tribunal; o que não se pode é publicá-lo como se fosse definitivo.
+
+**Fundamentação e descrição vieram do edital.** Os cinco eventos passam a ter `fundamentacao` no art. 100, caput e § 2º, da Resolução nº 23.751/2026/TSE, e a `descricao` transcreve as quatro finalidades da cerimônia (preparação/teste/lacração, embalagem, acondicionamento de mídias e lacração das urnas de lona) e a convocação de partidos, federações, coligações, Ministério Público e OAB.
+
+**Endereços dos NVIs.** `NviInfo` ganhou o campo `endereco`, preenchido a partir dos anexos II a VI da minuta. Não é adorno: o art. 100, § 2º, IV, exige que o calendário divulgado pelo Tribunal informe o **local dos trabalhos**, e era o único dos cinco itens do § 2º que o site não entregava. Aparece no cabeçalho de cada polo, em linha própria (`w-full`), porque é o texto mais longo do bloco e ao lado do nome quebraria o alinhamento no celular. Entra também na busca e na descrição do `.ics` — quem exporta o prazo precisa saber para onde ir, não só em que cidade.
+
+**Arquivos modificados:**
+- `src/data/eventosTrePb.ts` — 17 → 12 eventos; os 5 do 1º turno regerados a partir da minuta, os 5 de outubro removidos, cabeçalho reescrito com a fonte atual e o que não pode regredir.
+- `src/data/nvis.ts` — campo `endereco` nos cinco polos.
+- `src/components/timeline/PreparacaoUrnasBloco.tsx` — endereço no cabeçalho do polo.
+- `src/lib/search.ts`, `src/lib/ics.ts` — endereço indexado e exportado.
+- `tests/ambito-tre-pb.test.ts` — 120 → 129 asserções.
+
+**Verificação:** `npx tsc --noEmit` limpo; `npm run build` concluído; as cinco suítes passaram (129, 12, 25, 24 e 20 asserções). Conferência em navegador a 1280px e 375px: os 5 endereços aparecem inteiros, **zero elementos truncados e zero overflow horizontal** — o endereço de Pombal tem 74 caracteres e era o risco real de repetir o "Campina Gra…" de 04/09.
+
+**Pendências:** o 2º turno não tem cronograma novo; e o edital, quando publicado, precisa substituir a minuta em `documentoOrigem` — feito em 14/09/2026.
+
 ## [2026-09-10] Siglas NVI e SJI passam a ser expandidas
 
 Duas siglas apareciam cruas na interface porque os documentos de origem não as expandem. O TRE-PB informou as expansões:

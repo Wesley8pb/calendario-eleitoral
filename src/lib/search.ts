@@ -40,6 +40,7 @@ export function camposBuscaveis(evento: EventoCalendario): string {
     ...(evento.preparacaoUrnas ?? []).map(
       (polo) =>
         `${polo.nvi} ${NVI_EXPANSAO} ${nviMap[polo.nvi].cidade} ` +
+        `${nviMap[polo.nvi].endereco} ` +
         polo.zonas.map((z) => `${z.ze} ${z.sede}`).join(" "),
     ),
   ].join(" ");

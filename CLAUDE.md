@@ -181,7 +181,7 @@ Eventos de âmbito regional vivem em `src/data/eventosTrePb.ts`, separados de `e
 
 Os 5 eventos de preparação de urnas (21–25/09/2026) carregam a escala no campo estruturado `preparacaoUrnas: PoloPreparacao[]`, e **não** na `descricao`. Motivo: numa mesma data há preparação simultânea em até 5 polos e 18 zonas eleitorais; como texto corrido isso vira parede, e a busca não conseguiria distinguir município de zona.
 
-**A fonte é o Edital nº 14/2026 TRE-PB/PTRE/ASPRE** (doc. SEI 2503394, processo 0007828-72.2026.6.15.8000), assinado pelo Presidente em 14/09/2026. A cadeia foi PDF v2 → minuta (doc. SEI 2502510) → edital; a minuta e o edital são idênticos no que o calendário usa. O link do SEI é restrito. Há teste impedindo que qualquer dos elos anteriores volte.
+**A fonte é o Edital nº 15/2026 TRE-PB/PTRE/ASPRE** (doc. SEI 2504317, processo 0007828-72.2026.6.15.8000), assinado pelo Presidente em 14/09/2026. A cadeia foi PDF v2 → minuta (doc. SEI 2502510) → Edital 14 (doc. SEI 2503394) → Edital 15; do 14 para o 15 mudou só a troca de datas da 33ª e da 34ª zonas. A cada nova versão, confira a tabela inteira antes de aplicar — as mudanças têm vindo em uma ou duas linhas. O link do SEI é restrito. Há teste impedindo que qualquer dos elos anteriores volte.
 
 **Só existe o 1º turno.** Os 5 eventos de 12 a 16/10 foram removidos: o edital cobre apenas o 1º turno, e manter o 2º com os dados da v2 deixaria os dois turnos em critérios diferentes.
 

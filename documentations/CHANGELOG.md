@@ -1,5 +1,15 @@
 # Changelog
 
+## [2026-09-14] Edital nº 15/2026 substitui o Edital nº 14/2026
+
+O Tribunal publicou o **Edital nº 15/2026 TRE-PB/PTRE/ASPRE** (doc. SEI 2504317, CRC C4518163), assinado pelo Presidente em 14/09/2026 às 15h18, no mesmo processo 0007828-72.2026.6.15.8000, substituindo o Edital nº 14/2026 do mesmo dia.
+
+Conferido contra os cards com o Anexo I transcrito de novo: das 68 zonas, **2 divergências** — a 33ª zona (Itaporanga) passa de 23/09 para 22/09 e a 34ª (Princesa Isabel) de 22/09 para 23/09, ambas no NVI Patos, das 08h às 18h. Como uma entra no lugar da outra, nenhum dia muda de total de zonas nem de polos. Preâmbulo e endereços dos NVIs permanecem iguais.
+
+`documentoOrigem` dos 5 eventos passa ao Edital nº 15, com o novo link do SEI. Há teste para a troca das duas zonas e para que o link do Edital nº 14 não volte.
+
+**Arquivos modificados:** `src/data/eventosTrePb.ts`, `src/data/nvis.ts` (origem dos endereços), `tests/ambito-tre-pb.test.ts` (131 → 133 asserções), `CLAUDE.md`, `AGENTS.md`.
+
 ## [2026-09-14] Observações removidas dos eventos de preparação de urnas
 
 A pedido, os 5 eventos de preparação de urnas (21 a 25/09) deixam de ter `observacoes`. Saem com isso a data de assinatura do edital, o código verificador (2503394) e o CRC (B735BF5C) e a nota de que as audiências são públicas. A fonte continua acessível pelo bloco "Documento de origem", que aponta para o edital no SEI com o aviso de acesso restrito.

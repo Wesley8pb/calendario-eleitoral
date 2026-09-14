@@ -13,11 +13,13 @@ import type { EventoCalendario } from "../types";
 // TRE-PB; a escala por polo vive no campo estruturado preparacaoUrnas, e não
 // na descrição, para poder ser renderizada agrupada e indexada na busca.
 //
-// FONTE: Edital nº 14/2026 TRE-PB/PTRE/ASPRE (doc. SEI 2503394, CRC B735BF5C,
-// processo 0007828-72.2026.6.15.8000), assinado pelo Presidente em 14/09/2026.
-// Substitui a minuta (doc. SEI 2502510), da qual não diverge em nada do que o
-// calendário usa — escala das 68 zonas, preâmbulo e endereços conferidos. O
-// link do SEI é restrito. Os eventos de urnas não têm observacoes.
+// FONTE: Edital nº 15/2026 TRE-PB/PTRE/ASPRE (doc. SEI 2504317, CRC C4518163,
+// processo 0007828-72.2026.6.15.8000), assinado pelo Presidente em 14/09/2026,
+// às 15h18. Substitui o Edital nº 14/2026 (doc. SEI 2503394), do mesmo dia, do
+// qual difere só na troca de datas da 33ª (Itaporanga, agora 22/09) e da 34ª
+// (Princesa Isabel, agora 23/09) no NVI Patos. Cadeia de fontes: PDF v2 →
+// minuta (doc. SEI 2502510) → Edital 14 → Edital 15. O link do SEI é restrito.
+// Os eventos de urnas não têm observacoes.
 //
 // SÓ O 1º TURNO. Os 5 eventos de 12 a 16/10 foram removidos em 13/09/2026:
 // o edital cobre apenas o 1º turno, e manter o 2º com os dados da v2 deixaria
@@ -313,9 +315,9 @@ export const eventosTrePb: EventoCalendario[] = [
     ],
     documentoOrigem: {
       titulo:
-        "Edital nº 14/2026 — Cronograma de preparação das urnas eletrônicas do 1º turno (Processo 0007828-72.2026.6.15.8000)",
+        "Edital nº 15/2026 — Cronograma de preparação das urnas eletrônicas do 1º turno (Processo 0007828-72.2026.6.15.8000)",
       unidade: "TRE-PB/PTRE/ASPRE",
-      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=acompanhamento_listar&acao_retorno=acompanhamento_listar&id_procedimento=2571729&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=833a5cf2d0f4abe904a12c2e30ac931c8b00a4fc5db630d3ecf7ca87aae34874",
+      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=protocolo_pesquisa_rapida&id_protocolo=2579040&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=3286de59587dbc5d6afd9897ccbe0844763c7ec99bc49f5078d2addf7cfda56e",
       restrito: true,
     },
   },
@@ -368,7 +370,7 @@ export const eventosTrePb: EventoCalendario[] = [
       {
         nvi: "NVIPAT",
         zonas: [
-          { ze: "34ª", sede: "Princesa Isabel", horario: "08h–18h" },
+          { ze: "33ª", sede: "Itaporanga", horario: "08h–18h" },
           { ze: "42ª", sede: "Itaporanga", horario: "08h–18h" },
           { ze: "65ª", sede: "Patos", horario: "08h–18h" },
         ],
@@ -389,9 +391,9 @@ export const eventosTrePb: EventoCalendario[] = [
     ],
     documentoOrigem: {
       titulo:
-        "Edital nº 14/2026 — Cronograma de preparação das urnas eletrônicas do 1º turno (Processo 0007828-72.2026.6.15.8000)",
+        "Edital nº 15/2026 — Cronograma de preparação das urnas eletrônicas do 1º turno (Processo 0007828-72.2026.6.15.8000)",
       unidade: "TRE-PB/PTRE/ASPRE",
-      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=acompanhamento_listar&acao_retorno=acompanhamento_listar&id_procedimento=2571729&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=833a5cf2d0f4abe904a12c2e30ac931c8b00a4fc5db630d3ecf7ca87aae34874",
+      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=protocolo_pesquisa_rapida&id_protocolo=2579040&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=3286de59587dbc5d6afd9897ccbe0844763c7ec99bc49f5078d2addf7cfda56e",
       restrito: true,
     },
   },
@@ -442,7 +444,7 @@ export const eventosTrePb: EventoCalendario[] = [
         nvi: "NVIPAT",
         zonas: [
           { ze: "29ª", sede: "Monteiro", horario: "08h–18h" },
-          { ze: "33ª", sede: "Itaporanga", horario: "08h–18h" },
+          { ze: "34ª", sede: "Princesa Isabel", horario: "08h–18h" },
           { ze: "66ª", sede: "Piancó", horario: "09h–18h" },
         ],
       },
@@ -461,9 +463,9 @@ export const eventosTrePb: EventoCalendario[] = [
     ],
     documentoOrigem: {
       titulo:
-        "Edital nº 14/2026 — Cronograma de preparação das urnas eletrônicas do 1º turno (Processo 0007828-72.2026.6.15.8000)",
+        "Edital nº 15/2026 — Cronograma de preparação das urnas eletrônicas do 1º turno (Processo 0007828-72.2026.6.15.8000)",
       unidade: "TRE-PB/PTRE/ASPRE",
-      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=acompanhamento_listar&acao_retorno=acompanhamento_listar&id_procedimento=2571729&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=833a5cf2d0f4abe904a12c2e30ac931c8b00a4fc5db630d3ecf7ca87aae34874",
+      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=protocolo_pesquisa_rapida&id_protocolo=2579040&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=3286de59587dbc5d6afd9897ccbe0844763c7ec99bc49f5078d2addf7cfda56e",
       restrito: true,
     },
   },
@@ -533,9 +535,9 @@ export const eventosTrePb: EventoCalendario[] = [
     ],
     documentoOrigem: {
       titulo:
-        "Edital nº 14/2026 — Cronograma de preparação das urnas eletrônicas do 1º turno (Processo 0007828-72.2026.6.15.8000)",
+        "Edital nº 15/2026 — Cronograma de preparação das urnas eletrônicas do 1º turno (Processo 0007828-72.2026.6.15.8000)",
       unidade: "TRE-PB/PTRE/ASPRE",
-      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=acompanhamento_listar&acao_retorno=acompanhamento_listar&id_procedimento=2571729&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=833a5cf2d0f4abe904a12c2e30ac931c8b00a4fc5db630d3ecf7ca87aae34874",
+      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=protocolo_pesquisa_rapida&id_protocolo=2579040&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=3286de59587dbc5d6afd9897ccbe0844763c7ec99bc49f5078d2addf7cfda56e",
       restrito: true,
     },
   },
@@ -599,9 +601,9 @@ export const eventosTrePb: EventoCalendario[] = [
     ],
     documentoOrigem: {
       titulo:
-        "Edital nº 14/2026 — Cronograma de preparação das urnas eletrônicas do 1º turno (Processo 0007828-72.2026.6.15.8000)",
+        "Edital nº 15/2026 — Cronograma de preparação das urnas eletrônicas do 1º turno (Processo 0007828-72.2026.6.15.8000)",
       unidade: "TRE-PB/PTRE/ASPRE",
-      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=acompanhamento_listar&acao_retorno=acompanhamento_listar&id_procedimento=2571729&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=833a5cf2d0f4abe904a12c2e30ac931c8b00a4fc5db630d3ecf7ca87aae34874",
+      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=protocolo_pesquisa_rapida&id_protocolo=2579040&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=3286de59587dbc5d6afd9897ccbe0844763c7ec99bc49f5078d2addf7cfda56e",
       restrito: true,
     },
   },

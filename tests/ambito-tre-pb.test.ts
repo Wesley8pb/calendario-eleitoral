@@ -52,12 +52,12 @@ test(
 // ─────────────────────────────────────────────────────────────────────────────
 console.log("\n=== CRONOGRAMA DE PREPARAÇÃO DE URNAS ===\n");
 
-// A fonte é o Edital nº 14/2026, que substituiu a minuta, que substituiu o PDF v2.
+// A fonte é o Edital nº 15/2026. Cadeia: PDF v2 → minuta → Edital 14 → Edital 15.
 const EDITAL_URL =
   "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar" +
-  "&acao_origem=acompanhamento_listar&acao_retorno=acompanhamento_listar" +
-  "&id_procedimento=2571729&infra_sistema=100000100&infra_unidade_atual=193" +
-  "&infra_hash=833a5cf2d0f4abe904a12c2e30ac931c8b00a4fc5db630d3ecf7ca87aae34874";
+  "&acao_origem=protocolo_pesquisa_rapida&id_protocolo=2579040" +
+  "&infra_sistema=100000100&infra_unidade_atual=193" +
+  "&infra_hash=3286de59587dbc5d6afd9897ccbe0844763c7ec99bc49f5078d2addf7cfda56e";
 
 const preparacao = eventosTrePb.filter((ev) => ev.preparacaoUrnas?.length);
 
@@ -80,7 +80,7 @@ test(
   ),
 );
 test(
-  "Todos apontam para o Edital nº 14/2026 no SEI, marcado como restrito",
+  "Todos apontam para o Edital nº 15/2026 no SEI, marcado como restrito",
   preparacao.every(
     (ev) =>
       ev.documentoOrigem?.url === EDITAL_URL &&
@@ -92,7 +92,7 @@ test(
   "O documento de origem nomeia o edital e o processo",
   preparacao.every(
     (ev) =>
-      ev.documentoOrigem?.titulo.startsWith("Edital nº 14/2026") &&
+      ev.documentoOrigem?.titulo.startsWith("Edital nº 15/2026") &&
       ev.documentoOrigem?.titulo.includes("0007828-72.2026.6.15.8000"),
   ),
 );
@@ -105,6 +105,11 @@ const dadosTrePb = readFileSync("src/data/eventosTrePb.ts", "utf8");
 test(
   "Nenhum resíduo do PDF v2 sobrou no arquivo de dados",
   !dadosTrePb.includes("cronograma_preparacao_urnas"),
+);
+test(
+  "Nenhum card aponta mais para o Edital nº 14/2026",
+  !dadosTrePb.includes("id_procedimento=2571729") &&
+    preparacao.every((ev) => !ev.documentoOrigem?.titulo.includes("nº 14/2026")),
 );
 test(
   "Nenhum card aponta mais para a minuta",
@@ -219,6 +224,11 @@ test(
   "52ª zona (Coremas) passou de 21/09 para 25/09, das 08h às 18h",
   escalaPorZona.get("52ª")?.data === "2026-09-25" &&
     escalaPorZona.get("52ª")?.horario === "08h–18h",
+);
+test(
+  "Edital 15: a 33ª (Itaporanga) passou para 22/09 e a 34ª (Princesa Isabel) para 23/09",
+  escalaPorZona.get("33ª")?.data === "2026-09-22" &&
+    escalaPorZona.get("34ª")?.data === "2026-09-23",
 );
 test(
   "Nenhuma zona começa mais às 07h — o turno estendido de Pombal acabou",

@@ -5,7 +5,7 @@ import type { NviID } from "../types";
 //
 // Fonte única da cidade, do endereço e da cor de cada polo: nenhum componente
 // repete o hexadecimal, à semelhança de ambitos.ts. Os endereços vêm dos anexos
-// II a VI do Edital nº 14/2026 TRE-PB/PTRE/ASPRE e existem porque o art. 100,
+// II a VI do Edital nº 15/2026 TRE-PB/PTRE/ASPRE e existem porque o art. 100,
 // § 2º, IV, da Resolução nº 23.751/2026/TSE exige que o calendário divulgado
 // pelo Tribunal informe o local dos trabalhos. O código (ex.: "NVIJPA") é o que
 // aparece no cronograma oficial; a cidade é a sede do polo, deduzida do próprio

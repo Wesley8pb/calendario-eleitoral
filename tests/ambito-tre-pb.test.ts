@@ -223,6 +223,7 @@ const sedePorZona = new Map(
   ),
 );
 for (const [ze, sede] of [
+  ["47ª", "Guarabira"],
   ["49ª", "Queimadas"],
   ["75ª", "Itabaiana"],
   ["74ª", "Água Branca"],
@@ -292,6 +293,10 @@ test(
   ),
 );
 
+test(
+  "Pirpirituba, grafia do cronograma para a 47ª, não aparece em nenhum card",
+  !readFileSync("src/data/eventosTrePb.ts", "utf8").includes('sede: "Pirpirituba"'),
+);
 test(
   'Busca por município encontra o card ("Cabedelo" → 23/09)',
   matchesSearch(camposBuscaveis(dia23), "cabedelo"),

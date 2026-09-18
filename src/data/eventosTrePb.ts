@@ -28,12 +28,16 @@ import type { EventoCalendario } from "../types";
 // "seg"); as datas estão certas e batem com o Edital 15 — diaSemana aqui é
 // calculado da data, não copiado do PDF.
 //
-// TRÊS MUNICÍPIOS-SEDE DIVERGEM DO CRONOGRAMA — não "corrija" de volta sem
+// QUATRO MUNICÍPIOS-SEDE DIVERGEM DO CRONOGRAMA — não "corrija" de volta sem
 // falar com o TRE-PB. Foram retificados por conferência do cadastro das zonas:
 //
+//   47ª — o cronograma grafa "PIRPIRITUBA";  a sede é Guarabira.
 //   49ª — o cronograma grafa "AROEIRAS";     a sede é Queimadas.
 //   75ª — o cronograma grafa "GURINHÉM";     a sede é Itabaiana.
 //   74ª — o cronograma grafa "ÀGUA BRANCA";  o município é Água Branca.
+//
+// Ao regerar a partir de um cronograma novo, as sedes vêm deste arquivo, nunca
+// do PDF — é o que impede a grafia da fonte de voltar em silêncio.
 //
 // A grafia do PDF de 18/09 continua a antiga; as sedes acima vêm do cadastro.
 // ─────────────────────────────────────────────────────────────────────────────
@@ -426,7 +430,7 @@ export const eventosTrePb: EventoCalendario[] = [
         nvi: "NVIJPA",
         zonas: [
           { ze: "03ª", sede: "Santa Rita", horario: "08h–18h" },
-          { ze: "47ª", sede: "Pirpirituba", horario: "09h–18h" },
+          { ze: "47ª", sede: "Guarabira", horario: "09h–18h" },
           { ze: "57ª", sede: "Cabedelo", horario: "08h–18h" },
           { ze: "70ª", sede: "João Pessoa", horario: "08h–18h" },
         ],
@@ -783,7 +787,7 @@ export const eventosTrePb: EventoCalendario[] = [
         nvi: "NVIJPA",
         zonas: [
           { ze: "03ª", sede: "Santa Rita", horario: "08h–18h" },
-          { ze: "47ª", sede: "Pirpirituba", horario: "08h–18h" },
+          { ze: "47ª", sede: "Guarabira", horario: "08h–18h" },
           { ze: "57ª", sede: "Cabedelo", horario: "08h–18h" },
           { ze: "70ª", sede: "João Pessoa", horario: "08h–18h" },
         ],

@@ -1,5 +1,13 @@
 # Changelog
 
+## [2026-09-18] 47ª zona eleitoral passa a constar com sede em Guarabira
+
+O cronograma da STIC grafa a 47ª zona como "PIRPIRITUBA"; a pedido do TRE-PB, por conferência do cadastro das zonas, o município-sede passa a constar como **Guarabira**, nos dois turnos (23/09 e 14/10, NVIJPA). A 47ª passa a dividir sede com a 10ª, como já ocorre em Patos, João Pessoa, Queimadas e Itabaiana.
+
+É a quarta sede que diverge de propósito da fonte (com a 49ª, a 75ª e a 74ª). O cabeçalho de `src/data/eventosTrePb.ts` lista as quatro, e há teste para cada uma nos dois turnos — numa regeração, as sedes vêm do arquivo de dados, nunca do PDF.
+
+**Arquivos modificados:** `src/data/eventosTrePb.ts`; `tests/ambito-tre-pb.test.ts` (141 → 143 asserções).
+
 ## [2026-09-18] Cronograma de 18/09 como fonte dos dois turnos; 2º turno recriado
 
 A STIC publicou na página Eleições 2026 do TRE-PB o **Cronograma de Preparação de Urnas — Eleições 2026 (1º e 2º turnos)**, datado de 18/09/2026, em PDF público. Ele passa a ser a fonte clicável (`documentoOrigem`) dos 10 eventos de preparação de urnas — substituindo, no 1º turno, o link restrito do Edital nº 15/2026 no SEI, e trazendo de volta o 2º turno, removido em 13/09.

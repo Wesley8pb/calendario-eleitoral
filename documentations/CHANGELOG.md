@@ -1,5 +1,26 @@
 # Changelog
 
+## [2026-09-18] Cronograma de 18/09 como fonte dos dois turnos; 2º turno recriado
+
+A STIC publicou na página Eleições 2026 do TRE-PB o **Cronograma de Preparação de Urnas — Eleições 2026 (1º e 2º turnos)**, datado de 18/09/2026, em PDF público. Ele passa a ser a fonte clicável (`documentoOrigem`) dos 10 eventos de preparação de urnas — substituindo, no 1º turno, o link restrito do Edital nº 15/2026 no SEI, e trazendo de volta o 2º turno, removido em 13/09.
+
+**Revisão antes de aplicar**, com a tabela extraída do próprio PDF:
+- **1º turno × Edital 15 (o que estava no ar): 0 divergências** nas 68 zonas. Trocar a fonte não muda nenhum dado do 1º turno.
+- **2º turno × v2 apagada: 4 mudanças**, todas em Pombal, de 07h–17h para 08h–18h (31ª, 38ª, 52ª e 69ª). A **36ª Catolé do Rocha ficou 07h–17h em 14/10** — único 07h–17h do PDF inteiro, no mesmo dia e polo da 38ª (08h–18h). Foi mantido como está no documento e travado por teste, para que a divergência não passe despercebida.
+- **O PDF erra o dia da semana em três linhas:** 33ª 22/09 "qua" (é terça), 34ª 23/09 "ter" (é quarta), 52ª 25/09 "seg" (é sexta). As datas batem com o Edital 15; só a coluna "DIA" está errada. O gerador calcula `diaSemana` da data e há teste para isso.
+- **Sedes:** o PDF segue com "AROEIRAS", "GURINHÉM" e "ÀGUA BRANCA"; as retificações do cadastro (Queimadas, Itabaiana, Água Branca) foram preservadas nos dois turnos.
+
+**Edital citado, não linkado.** A `descricao` do 1º turno passa a dizer "convocada pelo Edital nº 15/2026 TRE-PB/PTRE/ASPRE", em texto, sem hyperlink — a fonte que se clica é o cronograma. O 2º turno não cita edital, porque ainda não há um. Os 10 eventos fundamentam-se no art. 100, caput e § 2º, da Res. 23.751/2026.
+
+**Arquivos modificados:**
+- `src/data/eventosTrePb.ts` — 12 → 17 eventos; os 10 de urnas regerados a partir do PDF de 18/09, com o cabeçalho registrando a cadeia de fontes e os erros de dia da semana do PDF.
+- `tests/ambito-tre-pb.test.ts` — 133 → 141 asserções: 2º turno de volta (68 zonas, sem repetição, sedes nos dois turnos), fonte pública sem marca de restrito, edital citado só no 1º turno, Pombal a 08h–18h no 2º turno, 36ª única em 07h–17h, `diaSemana` coerente com a data.
+- `CLAUDE.md`, `AGENTS.md` — fonte e turnos atualizados.
+
+**Verificação:** `npx tsc --noEmit` limpo; `npm run build` concluído; as cinco suítes passaram (141, 20, 24, 12 e 25 asserções).
+
+**Pendência:** edital do 2º turno, quando publicado, para ser citado na descrição dos eventos de outubro.
+
 ## [2026-09-14] Edital nº 15/2026 substitui o Edital nº 14/2026
 
 O Tribunal publicou o **Edital nº 15/2026 TRE-PB/PTRE/ASPRE** (doc. SEI 2504317, CRC C4518163), assinado pelo Presidente em 14/09/2026 às 15h18, no mesmo processo 0007828-72.2026.6.15.8000, substituindo o Edital nº 14/2026 do mesmo dia.

@@ -13,17 +13,20 @@ import type { EventoCalendario } from "../types";
 // TRE-PB; a escala por polo vive no campo estruturado preparacaoUrnas, e não
 // na descrição, para poder ser renderizada agrupada e indexada na busca.
 //
-// FONTE: Edital nº 15/2026 TRE-PB/PTRE/ASPRE (doc. SEI 2504317, CRC C4518163,
-// processo 0007828-72.2026.6.15.8000), assinado pelo Presidente em 14/09/2026,
-// às 15h18. Substitui o Edital nº 14/2026 (doc. SEI 2503394), do mesmo dia, do
-// qual difere só na troca de datas da 33ª (Itaporanga, agora 22/09) e da 34ª
-// (Princesa Isabel, agora 23/09) no NVI Patos. Cadeia de fontes: PDF v2 →
-// minuta (doc. SEI 2502510) → Edital 14 → Edital 15. O link do SEI é restrito.
-// Os eventos de urnas não têm observacoes.
+// FONTE: Cronograma de Preparação de Urnas — Eleições 2026 (1º e 2º turnos),
+// publicado pela STIC em 18/09/2026 na página Eleições 2026 do TRE-PB (PDF
+// público, sem marca de acesso restrito). Cobre os dois turnos: 5 eventos de
+// 21 a 25/09 e 5 de 12 a 16/10.
 //
-// SÓ O 1º TURNO. Os 5 eventos de 12 a 16/10 foram removidos em 13/09/2026:
-// o edital cobre apenas o 1º turno, e manter o 2º com os dados da v2 deixaria
-// os dois turnos em critérios diferentes.
+// O 1º turno desse cronograma é idêntico ao Anexo I do Edital nº 15/2026
+// TRE-PB/PTRE/ASPRE (doc. SEI 2504317), conferido zona a zona; por isso a
+// descricao do 1º turno cita o edital, sem hyperlink. O 2º turno ainda não
+// tem edital. Cadeia de fontes: PDF v2 → minuta → Edital 14 → Edital 15 →
+// cronograma de 18/09. Os eventos de urnas não têm observacoes.
+//
+// O PDF erra o dia da semana em três linhas (33ª "qua", 34ª "ter", 52ª
+// "seg"); as datas estão certas e batem com o Edital 15 — diaSemana aqui é
+// calculado da data, não copiado do PDF.
 //
 // TRÊS MUNICÍPIOS-SEDE DIVERGEM DO CRONOGRAMA — não "corrija" de volta sem
 // falar com o TRE-PB. Foram retificados por conferência do cadastro das zonas:
@@ -32,7 +35,7 @@ import type { EventoCalendario } from "../types";
 //   75ª — o cronograma grafa "GURINHÉM";     a sede é Itabaiana.
 //   74ª — o cronograma grafa "ÀGUA BRANCA";  o município é Água Branca.
 //
-// O edital não traz coluna de município: as sedes acima vêm do cadastro.
+// A grafia do PDF de 18/09 continua a antiga; as sedes acima vêm do cadastro.
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const eventosTrePb: EventoCalendario[] = [
@@ -262,7 +265,7 @@ export const eventosTrePb: EventoCalendario[] = [
     titulo:
       "Preparação de urnas do 1º turno — 14 zonas eleitorais em 4 polos (TRE-PB)",
     descricao:
-      "Audiência pública para a cerimônia de preparação das urnas para o 1º turno das Eleições 2026, nos Núcleos de Voto Informatizado (NVI), com as seguintes finalidades: 1) preparação, teste e lacração das urnas de votação e urnas de contingência; 2) embalagem das urnas, identificando-se a zona eleitoral, o Município e o fim a que se destinam; 3) acondicionamento das mídias de carga e de votação para contingência, individualmente, em envelopes lacrados; 4) lacração das urnas de lona, a serem utilizadas no caso de votação por cédula, depois de verificado se estão vazias.\n\n" +
+      "Audiência pública para a cerimônia de preparação das urnas para o 1º turno das Eleições 2026, convocada pelo Edital nº 15/2026 TRE-PB/PTRE/ASPRE, nos Núcleos de Voto Informatizado (NVI), com as seguintes finalidades: 1) preparação, teste e lacração das urnas de votação e urnas de contingência; 2) embalagem das urnas, identificando-se a zona eleitoral, o Município e o fim a que se destinam; 3) acondicionamento das mídias de carga e de votação para contingência, individualmente, em envelopes lacrados; 4) lacração das urnas de lona, a serem utilizadas no caso de votação por cédula, depois de verificado se estão vazias.\n\n" +
       "Ficam convocados os representantes e fiscais dos partidos políticos e coligações, federações, do Ministério Público, da Ordem dos Advogados do Brasil e das demais entidades fiscalizadoras para, querendo, fazerem-se presentes neste ato solene.\n\n" +
       "Nesta data, a preparação ocorre simultaneamente em 4 polos, abrangendo 14 zonas eleitorais. A escala abaixo indica, para cada zona, o polo e o horário previstos no cronograma.",
     categorias: ["ADM"],
@@ -315,10 +318,9 @@ export const eventosTrePb: EventoCalendario[] = [
     ],
     documentoOrigem: {
       titulo:
-        "Edital nº 15/2026 — Cronograma de preparação das urnas eletrônicas do 1º turno (Processo 0007828-72.2026.6.15.8000)",
-      unidade: "TRE-PB/PTRE/ASPRE",
-      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=protocolo_pesquisa_rapida&id_protocolo=2579040&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=3286de59587dbc5d6afd9897ccbe0844763c7ec99bc49f5078d2addf7cfda56e",
-      restrito: true,
+        "Cronograma de Preparação de Urnas — Eleições 2026 (1º e 2º turnos), de 18/09/2026",
+      unidade: "TRE-PB/STIC",
+      url: "https://www.tre-pb.jus.br/eleicoes/e/arquivos/cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_geral-v2/@@display-file/file/tre-pb-cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_18-9-2026.pdf",
     },
   },
 
@@ -329,7 +331,7 @@ export const eventosTrePb: EventoCalendario[] = [
     titulo:
       "Preparação de urnas do 1º turno — 18 zonas eleitorais em 5 polos (TRE-PB)",
     descricao:
-      "Audiência pública para a cerimônia de preparação das urnas para o 1º turno das Eleições 2026, nos Núcleos de Voto Informatizado (NVI), com as seguintes finalidades: 1) preparação, teste e lacração das urnas de votação e urnas de contingência; 2) embalagem das urnas, identificando-se a zona eleitoral, o Município e o fim a que se destinam; 3) acondicionamento das mídias de carga e de votação para contingência, individualmente, em envelopes lacrados; 4) lacração das urnas de lona, a serem utilizadas no caso de votação por cédula, depois de verificado se estão vazias.\n\n" +
+      "Audiência pública para a cerimônia de preparação das urnas para o 1º turno das Eleições 2026, convocada pelo Edital nº 15/2026 TRE-PB/PTRE/ASPRE, nos Núcleos de Voto Informatizado (NVI), com as seguintes finalidades: 1) preparação, teste e lacração das urnas de votação e urnas de contingência; 2) embalagem das urnas, identificando-se a zona eleitoral, o Município e o fim a que se destinam; 3) acondicionamento das mídias de carga e de votação para contingência, individualmente, em envelopes lacrados; 4) lacração das urnas de lona, a serem utilizadas no caso de votação por cédula, depois de verificado se estão vazias.\n\n" +
       "Ficam convocados os representantes e fiscais dos partidos políticos e coligações, federações, do Ministério Público, da Ordem dos Advogados do Brasil e das demais entidades fiscalizadoras para, querendo, fazerem-se presentes neste ato solene.\n\n" +
       "Nesta data, a preparação ocorre simultaneamente em 5 polos, abrangendo 18 zonas eleitorais. A escala abaixo indica, para cada zona, o polo e o horário previstos no cronograma.",
     categorias: ["ADM"],
@@ -391,10 +393,9 @@ export const eventosTrePb: EventoCalendario[] = [
     ],
     documentoOrigem: {
       titulo:
-        "Edital nº 15/2026 — Cronograma de preparação das urnas eletrônicas do 1º turno (Processo 0007828-72.2026.6.15.8000)",
-      unidade: "TRE-PB/PTRE/ASPRE",
-      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=protocolo_pesquisa_rapida&id_protocolo=2579040&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=3286de59587dbc5d6afd9897ccbe0844763c7ec99bc49f5078d2addf7cfda56e",
-      restrito: true,
+        "Cronograma de Preparação de Urnas — Eleições 2026 (1º e 2º turnos), de 18/09/2026",
+      unidade: "TRE-PB/STIC",
+      url: "https://www.tre-pb.jus.br/eleicoes/e/arquivos/cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_geral-v2/@@display-file/file/tre-pb-cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_18-9-2026.pdf",
     },
   },
 
@@ -405,7 +406,7 @@ export const eventosTrePb: EventoCalendario[] = [
     titulo:
       "Preparação de urnas do 1º turno — 14 zonas eleitorais em 5 polos (TRE-PB)",
     descricao:
-      "Audiência pública para a cerimônia de preparação das urnas para o 1º turno das Eleições 2026, nos Núcleos de Voto Informatizado (NVI), com as seguintes finalidades: 1) preparação, teste e lacração das urnas de votação e urnas de contingência; 2) embalagem das urnas, identificando-se a zona eleitoral, o Município e o fim a que se destinam; 3) acondicionamento das mídias de carga e de votação para contingência, individualmente, em envelopes lacrados; 4) lacração das urnas de lona, a serem utilizadas no caso de votação por cédula, depois de verificado se estão vazias.\n\n" +
+      "Audiência pública para a cerimônia de preparação das urnas para o 1º turno das Eleições 2026, convocada pelo Edital nº 15/2026 TRE-PB/PTRE/ASPRE, nos Núcleos de Voto Informatizado (NVI), com as seguintes finalidades: 1) preparação, teste e lacração das urnas de votação e urnas de contingência; 2) embalagem das urnas, identificando-se a zona eleitoral, o Município e o fim a que se destinam; 3) acondicionamento das mídias de carga e de votação para contingência, individualmente, em envelopes lacrados; 4) lacração das urnas de lona, a serem utilizadas no caso de votação por cédula, depois de verificado se estão vazias.\n\n" +
       "Ficam convocados os representantes e fiscais dos partidos políticos e coligações, federações, do Ministério Público, da Ordem dos Advogados do Brasil e das demais entidades fiscalizadoras para, querendo, fazerem-se presentes neste ato solene.\n\n" +
       "Nesta data, a preparação ocorre simultaneamente em 5 polos, abrangendo 14 zonas eleitorais. A escala abaixo indica, para cada zona, o polo e o horário previstos no cronograma.",
     categorias: ["ADM"],
@@ -463,10 +464,9 @@ export const eventosTrePb: EventoCalendario[] = [
     ],
     documentoOrigem: {
       titulo:
-        "Edital nº 15/2026 — Cronograma de preparação das urnas eletrônicas do 1º turno (Processo 0007828-72.2026.6.15.8000)",
-      unidade: "TRE-PB/PTRE/ASPRE",
-      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=protocolo_pesquisa_rapida&id_protocolo=2579040&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=3286de59587dbc5d6afd9897ccbe0844763c7ec99bc49f5078d2addf7cfda56e",
-      restrito: true,
+        "Cronograma de Preparação de Urnas — Eleições 2026 (1º e 2º turnos), de 18/09/2026",
+      unidade: "TRE-PB/STIC",
+      url: "https://www.tre-pb.jus.br/eleicoes/e/arquivos/cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_geral-v2/@@display-file/file/tre-pb-cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_18-9-2026.pdf",
     },
   },
 
@@ -477,7 +477,7 @@ export const eventosTrePb: EventoCalendario[] = [
     titulo:
       "Preparação de urnas do 1º turno — 14 zonas eleitorais em 5 polos (TRE-PB)",
     descricao:
-      "Audiência pública para a cerimônia de preparação das urnas para o 1º turno das Eleições 2026, nos Núcleos de Voto Informatizado (NVI), com as seguintes finalidades: 1) preparação, teste e lacração das urnas de votação e urnas de contingência; 2) embalagem das urnas, identificando-se a zona eleitoral, o Município e o fim a que se destinam; 3) acondicionamento das mídias de carga e de votação para contingência, individualmente, em envelopes lacrados; 4) lacração das urnas de lona, a serem utilizadas no caso de votação por cédula, depois de verificado se estão vazias.\n\n" +
+      "Audiência pública para a cerimônia de preparação das urnas para o 1º turno das Eleições 2026, convocada pelo Edital nº 15/2026 TRE-PB/PTRE/ASPRE, nos Núcleos de Voto Informatizado (NVI), com as seguintes finalidades: 1) preparação, teste e lacração das urnas de votação e urnas de contingência; 2) embalagem das urnas, identificando-se a zona eleitoral, o Município e o fim a que se destinam; 3) acondicionamento das mídias de carga e de votação para contingência, individualmente, em envelopes lacrados; 4) lacração das urnas de lona, a serem utilizadas no caso de votação por cédula, depois de verificado se estão vazias.\n\n" +
       "Ficam convocados os representantes e fiscais dos partidos políticos e coligações, federações, do Ministério Público, da Ordem dos Advogados do Brasil e das demais entidades fiscalizadoras para, querendo, fazerem-se presentes neste ato solene.\n\n" +
       "Nesta data, a preparação ocorre simultaneamente em 5 polos, abrangendo 14 zonas eleitorais. A escala abaixo indica, para cada zona, o polo e o horário previstos no cronograma.",
     categorias: ["ADM"],
@@ -535,10 +535,9 @@ export const eventosTrePb: EventoCalendario[] = [
     ],
     documentoOrigem: {
       titulo:
-        "Edital nº 15/2026 — Cronograma de preparação das urnas eletrônicas do 1º turno (Processo 0007828-72.2026.6.15.8000)",
-      unidade: "TRE-PB/PTRE/ASPRE",
-      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=protocolo_pesquisa_rapida&id_protocolo=2579040&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=3286de59587dbc5d6afd9897ccbe0844763c7ec99bc49f5078d2addf7cfda56e",
-      restrito: true,
+        "Cronograma de Preparação de Urnas — Eleições 2026 (1º e 2º turnos), de 18/09/2026",
+      unidade: "TRE-PB/STIC",
+      url: "https://www.tre-pb.jus.br/eleicoes/e/arquivos/cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_geral-v2/@@display-file/file/tre-pb-cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_18-9-2026.pdf",
     },
   },
 
@@ -549,7 +548,7 @@ export const eventosTrePb: EventoCalendario[] = [
     titulo:
       "Preparação de urnas do 1º turno — 8 zonas eleitorais em 5 polos (TRE-PB)",
     descricao:
-      "Audiência pública para a cerimônia de preparação das urnas para o 1º turno das Eleições 2026, nos Núcleos de Voto Informatizado (NVI), com as seguintes finalidades: 1) preparação, teste e lacração das urnas de votação e urnas de contingência; 2) embalagem das urnas, identificando-se a zona eleitoral, o Município e o fim a que se destinam; 3) acondicionamento das mídias de carga e de votação para contingência, individualmente, em envelopes lacrados; 4) lacração das urnas de lona, a serem utilizadas no caso de votação por cédula, depois de verificado se estão vazias.\n\n" +
+      "Audiência pública para a cerimônia de preparação das urnas para o 1º turno das Eleições 2026, convocada pelo Edital nº 15/2026 TRE-PB/PTRE/ASPRE, nos Núcleos de Voto Informatizado (NVI), com as seguintes finalidades: 1) preparação, teste e lacração das urnas de votação e urnas de contingência; 2) embalagem das urnas, identificando-se a zona eleitoral, o Município e o fim a que se destinam; 3) acondicionamento das mídias de carga e de votação para contingência, individualmente, em envelopes lacrados; 4) lacração das urnas de lona, a serem utilizadas no caso de votação por cédula, depois de verificado se estão vazias.\n\n" +
       "Ficam convocados os representantes e fiscais dos partidos políticos e coligações, federações, do Ministério Público, da Ordem dos Advogados do Brasil e das demais entidades fiscalizadoras para, querendo, fazerem-se presentes neste ato solene.\n\n" +
       "Nesta data, a preparação ocorre simultaneamente em 5 polos, abrangendo 8 zonas eleitorais. A escala abaixo indica, para cada zona, o polo e o horário previstos no cronograma.",
     categorias: ["ADM"],
@@ -601,10 +600,332 @@ export const eventosTrePb: EventoCalendario[] = [
     ],
     documentoOrigem: {
       titulo:
-        "Edital nº 15/2026 — Cronograma de preparação das urnas eletrônicas do 1º turno (Processo 0007828-72.2026.6.15.8000)",
-      unidade: "TRE-PB/PTRE/ASPRE",
-      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=protocolo_pesquisa_rapida&id_protocolo=2579040&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=3286de59587dbc5d6afd9897ccbe0844763c7ec99bc49f5078d2addf7cfda56e",
-      restrito: true,
+        "Cronograma de Preparação de Urnas — Eleições 2026 (1º e 2º turnos), de 18/09/2026",
+      unidade: "TRE-PB/STIC",
+      url: "https://www.tre-pb.jus.br/eleicoes/e/arquivos/cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_geral-v2/@@display-file/file/tre-pb-cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_18-9-2026.pdf",
+    },
+  },
+
+  {
+    id: "2026-10-12-trepb-1",
+    data: "2026-10-12",
+    diaSemana: "segunda-feira",
+    titulo:
+      "Preparação de urnas do 2º turno — 18 zonas eleitorais em 5 polos (TRE-PB)",
+    descricao:
+      "Cerimônia de preparação das urnas para o 2º turno das Eleições 2026, nos Núcleos de Voto Informatizado (NVI), conforme o Cronograma de Preparação de Urnas elaborado pela Secretaria de Tecnologia da Informação e Comunicação do Tribunal Regional Eleitoral da Paraíba.\n\n" +
+      "Nesta data, a preparação ocorre simultaneamente em 5 polos, abrangendo 18 zonas eleitorais. A escala abaixo indica, para cada zona, o polo e o horário previstos no cronograma.",
+    categorias: ["ADM"],
+    perfis: [],
+    ambito: "TRE-PB",
+    marcos: null,
+    turno: "2T",
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.751/2026/TSE",
+        dispositivo: "art. 100, caput e § 2º",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-751-de-26-de-fevereiro-de-2026",
+      },
+    ],
+    preparacaoUrnas: [
+      {
+        nvi: "NVIJPA",
+        zonas: [
+          { ze: "01ª", sede: "João Pessoa", horario: "08h–18h" },
+          { ze: "06ª", sede: "Itabaiana", horario: "08h–18h" },
+          { ze: "55ª", sede: "Rio Tinto", horario: "08h–18h" },
+          { ze: "75ª", sede: "Itabaiana", horario: "08h–18h" },
+        ],
+      },
+      {
+        nvi: "NVICGE",
+        zonas: [
+          { ze: "11ª", sede: "Areia", horario: "08h–18h" },
+          { ze: "14ª", sede: "Bananeiras", horario: "08h–18h" },
+          { ze: "50ª", sede: "Pocinhos", horario: "08h–12h" },
+          { ze: "58ª", sede: "Serra Branca", horario: "14h–18h" },
+          { ze: "59ª", sede: "Queimadas", horario: "08h–18h" },
+        ],
+      },
+      {
+        nvi: "NVIPAT",
+        zonas: [
+          { ze: "26ª", sede: "Santa Luzia", horario: "14h–18h" },
+          { ze: "27ª", sede: "Taperoá", horario: "08h–12h" },
+          { ze: "30ª", sede: "Teixeira", horario: "14h–18h" },
+          { ze: "32ª", sede: "Piancó", horario: "14h–18h" },
+          { ze: "51ª", sede: "Patos", horario: "08h–12h" },
+          { ze: "65ª", sede: "Patos", horario: "08h–12h" },
+        ],
+      },
+      {
+        nvi: "NVIPBL",
+        zonas: [
+          { ze: "69ª", sede: "São Bento", horario: "08h–18h" },
+        ],
+      },
+      {
+        nvi: "NVICJZ",
+        zonas: [
+          { ze: "37ª", sede: "São João do Rio do Peixe", horario: "14h–18h" },
+          { ze: "63ª", sede: "Sousa", horario: "08h–12h" },
+        ],
+      },
+    ],
+    documentoOrigem: {
+      titulo:
+        "Cronograma de Preparação de Urnas — Eleições 2026 (1º e 2º turnos), de 18/09/2026",
+      unidade: "TRE-PB/STIC",
+      url: "https://www.tre-pb.jus.br/eleicoes/e/arquivos/cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_geral-v2/@@display-file/file/tre-pb-cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_18-9-2026.pdf",
+    },
+  },
+
+  {
+    id: "2026-10-13-trepb-1",
+    data: "2026-10-13",
+    diaSemana: "terça-feira",
+    titulo:
+      "Preparação de urnas do 2º turno — 21 zonas eleitorais em 5 polos (TRE-PB)",
+    descricao:
+      "Cerimônia de preparação das urnas para o 2º turno das Eleições 2026, nos Núcleos de Voto Informatizado (NVI), conforme o Cronograma de Preparação de Urnas elaborado pela Secretaria de Tecnologia da Informação e Comunicação do Tribunal Regional Eleitoral da Paraíba.\n\n" +
+      "Nesta data, a preparação ocorre simultaneamente em 5 polos, abrangendo 21 zonas eleitorais. A escala abaixo indica, para cada zona, o polo e o horário previstos no cronograma.",
+    categorias: ["ADM"],
+    perfis: [],
+    ambito: "TRE-PB",
+    marcos: null,
+    turno: "2T",
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.751/2026/TSE",
+        dispositivo: "art. 100, caput e § 2º",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-751-de-26-de-fevereiro-de-2026",
+      },
+    ],
+    preparacaoUrnas: [
+      {
+        nvi: "NVIJPA",
+        zonas: [
+          { ze: "10ª", sede: "Guarabira", horario: "08h–18h" },
+          { ze: "60ª", sede: "Jacaraú", horario: "08h–18h" },
+          { ze: "61ª", sede: "Bayeux", horario: "08h–18h" },
+          { ze: "64ª", sede: "João Pessoa", horario: "08h–18h" },
+        ],
+      },
+      {
+        nvi: "NVICGE",
+        zonas: [
+          { ze: "09ª", sede: "Alagoa Grande", horario: "08h–12h" },
+          { ze: "13ª", sede: "Alagoa Nova", horario: "08h–12h" },
+          { ze: "19ª", sede: "Esperança", horario: "08h–12h" },
+          { ze: "20ª", sede: "Araruna", horario: "14h–18h" },
+          { ze: "23ª", sede: "Soledade", horario: "14h–18h" },
+          { ze: "24ª", sede: "Cuité", horario: "14h–18h" },
+          { ze: "25ª", sede: "Picuí", horario: "14h–18h" },
+          { ze: "48ª", sede: "Solânea", horario: "08h–12h" },
+        ],
+      },
+      {
+        nvi: "NVIPAT",
+        zonas: [
+          { ze: "29ª", sede: "Monteiro", horario: "14h–18h" },
+          { ze: "33ª", sede: "Itaporanga", horario: "08h–12h" },
+          { ze: "34ª", sede: "Princesa Isabel", horario: "14h–18h" },
+          { ze: "42ª", sede: "Itaporanga", horario: "08h–12h" },
+          { ze: "66ª", sede: "Piancó", horario: "08h–12h" },
+        ],
+      },
+      {
+        nvi: "NVIPBL",
+        zonas: [
+          { ze: "31ª", sede: "Pombal", horario: "08h–18h" },
+          { ze: "52ª", sede: "Coremas", horario: "08h–18h" },
+        ],
+      },
+      {
+        nvi: "NVICJZ",
+        zonas: [
+          { ze: "40ª", sede: "São José de Piranhas", horario: "14h–18h" },
+          { ze: "41ª", sede: "Conceição", horario: "08h–12h" },
+        ],
+      },
+    ],
+    documentoOrigem: {
+      titulo:
+        "Cronograma de Preparação de Urnas — Eleições 2026 (1º e 2º turnos), de 18/09/2026",
+      unidade: "TRE-PB/STIC",
+      url: "https://www.tre-pb.jus.br/eleicoes/e/arquivos/cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_geral-v2/@@display-file/file/tre-pb-cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_18-9-2026.pdf",
+    },
+  },
+
+  {
+    id: "2026-10-14-trepb-1",
+    data: "2026-10-14",
+    diaSemana: "quarta-feira",
+    titulo:
+      "Preparação de urnas do 2º turno — 15 zonas eleitorais em 5 polos (TRE-PB)",
+    descricao:
+      "Cerimônia de preparação das urnas para o 2º turno das Eleições 2026, nos Núcleos de Voto Informatizado (NVI), conforme o Cronograma de Preparação de Urnas elaborado pela Secretaria de Tecnologia da Informação e Comunicação do Tribunal Regional Eleitoral da Paraíba.\n\n" +
+      "Nesta data, a preparação ocorre simultaneamente em 5 polos, abrangendo 15 zonas eleitorais. A escala abaixo indica, para cada zona, o polo e o horário previstos no cronograma.",
+    categorias: ["ADM"],
+    perfis: [],
+    ambito: "TRE-PB",
+    marcos: null,
+    turno: "2T",
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.751/2026/TSE",
+        dispositivo: "art. 100, caput e § 2º",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-751-de-26-de-fevereiro-de-2026",
+      },
+    ],
+    preparacaoUrnas: [
+      {
+        nvi: "NVIJPA",
+        zonas: [
+          { ze: "03ª", sede: "Santa Rita", horario: "08h–18h" },
+          { ze: "47ª", sede: "Pirpirituba", horario: "08h–18h" },
+          { ze: "57ª", sede: "Cabedelo", horario: "08h–18h" },
+          { ze: "70ª", sede: "João Pessoa", horario: "08h–18h" },
+        ],
+      },
+      {
+        nvi: "NVICGE",
+        zonas: [
+          { ze: "18ª", sede: "Umbuzeiro", horario: "14h–18h" },
+          { ze: "22ª", sede: "São João do Cariri", horario: "14h–18h" },
+          { ze: "49ª", sede: "Queimadas", horario: "14h–18h" },
+          { ze: "56ª", sede: "Juazeirinho", horario: "14h–18h" },
+          { ze: "72ª", sede: "Campina Grande", horario: "08h–12h" },
+        ],
+      },
+      {
+        nvi: "NVIPAT",
+        zonas: [
+          { ze: "28ª", sede: "Patos", horario: "08h–18h" },
+          { ze: "74ª", sede: "Água Branca", horario: "08h–12h" },
+        ],
+      },
+      {
+        nvi: "NVIPBL",
+        zonas: [
+          { ze: "36ª", sede: "Catolé do Rocha", horario: "07h–17h" },
+          { ze: "38ª", sede: "Catolé do Rocha", horario: "08h–18h" },
+        ],
+      },
+      {
+        nvi: "NVICJZ",
+        zonas: [
+          { ze: "35ª", sede: "Sousa", horario: "08h–12h" },
+          { ze: "53ª", sede: "São João do Rio do Peixe", horario: "14h–18h" },
+        ],
+      },
+    ],
+    documentoOrigem: {
+      titulo:
+        "Cronograma de Preparação de Urnas — Eleições 2026 (1º e 2º turnos), de 18/09/2026",
+      unidade: "TRE-PB/STIC",
+      url: "https://www.tre-pb.jus.br/eleicoes/e/arquivos/cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_geral-v2/@@display-file/file/tre-pb-cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_18-9-2026.pdf",
+    },
+  },
+
+  {
+    id: "2026-10-15-trepb-1",
+    data: "2026-10-15",
+    diaSemana: "quinta-feira",
+    titulo:
+      "Preparação de urnas do 2º turno — 10 zonas eleitorais em 3 polos (TRE-PB)",
+    descricao:
+      "Cerimônia de preparação das urnas para o 2º turno das Eleições 2026, nos Núcleos de Voto Informatizado (NVI), conforme o Cronograma de Preparação de Urnas elaborado pela Secretaria de Tecnologia da Informação e Comunicação do Tribunal Regional Eleitoral da Paraíba.\n\n" +
+      "Nesta data, a preparação ocorre simultaneamente em 3 polos, abrangendo 10 zonas eleitorais. A escala abaixo indica, para cada zona, o polo e o horário previstos no cronograma.",
+    categorias: ["ADM"],
+    perfis: [],
+    ambito: "TRE-PB",
+    marcos: null,
+    turno: "2T",
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.751/2026/TSE",
+        dispositivo: "art. 100, caput e § 2º",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-751-de-26-de-fevereiro-de-2026",
+      },
+    ],
+    preparacaoUrnas: [
+      {
+        nvi: "NVIJPA",
+        zonas: [
+          { ze: "02ª", sede: "Santa Rita", horario: "08h–18h" },
+          { ze: "44ª", sede: "Pedras de Fogo", horario: "08h–18h" },
+          { ze: "73ª", sede: "Alhandra", horario: "08h–18h" },
+          { ze: "76ª", sede: "João Pessoa", horario: "08h–18h" },
+        ],
+      },
+      {
+        nvi: "NVICGE",
+        zonas: [
+          { ze: "08ª", sede: "Ingá", horario: "14h–18h" },
+          { ze: "16ª", sede: "Campina Grande", horario: "08h–12h" },
+          { ze: "43ª", sede: "Sumé", horario: "14h–18h" },
+          { ze: "62ª", sede: "Boqueirão", horario: "14h–18h" },
+          { ze: "67ª", sede: "Remígio", horario: "14h–18h" },
+        ],
+      },
+      {
+        nvi: "NVICJZ",
+        zonas: [
+          { ze: "68ª", sede: "Cajazeiras", horario: "08h–18h" },
+        ],
+      },
+    ],
+    documentoOrigem: {
+      titulo:
+        "Cronograma de Preparação de Urnas — Eleições 2026 (1º e 2º turnos), de 18/09/2026",
+      unidade: "TRE-PB/STIC",
+      url: "https://www.tre-pb.jus.br/eleicoes/e/arquivos/cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_geral-v2/@@display-file/file/tre-pb-cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_18-9-2026.pdf",
+    },
+  },
+
+  {
+    id: "2026-10-16-trepb-1",
+    data: "2026-10-16",
+    diaSemana: "sexta-feira",
+    titulo:
+      "Preparação de urnas do 2º turno — 4 zonas eleitorais em 2 polos (TRE-PB)",
+    descricao:
+      "Cerimônia de preparação das urnas para o 2º turno das Eleições 2026, nos Núcleos de Voto Informatizado (NVI), conforme o Cronograma de Preparação de Urnas elaborado pela Secretaria de Tecnologia da Informação e Comunicação do Tribunal Regional Eleitoral da Paraíba.\n\n" +
+      "Nesta data, a preparação ocorre simultaneamente em 2 polos, abrangendo 4 zonas eleitorais. A escala abaixo indica, para cada zona, o polo e o horário previstos no cronograma.",
+    categorias: ["ADM"],
+    perfis: [],
+    ambito: "TRE-PB",
+    marcos: null,
+    turno: "2T",
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.751/2026/TSE",
+        dispositivo: "art. 100, caput e § 2º",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-751-de-26-de-fevereiro-de-2026",
+      },
+    ],
+    preparacaoUrnas: [
+      {
+        nvi: "NVIJPA",
+        zonas: [
+          { ze: "04ª", sede: "Sapé", horario: "08h–18h" },
+          { ze: "07ª", sede: "Mamanguape", horario: "08h–18h" },
+          { ze: "77ª", sede: "João Pessoa", horario: "08h–18h" },
+        ],
+      },
+      {
+        nvi: "NVICGE",
+        zonas: [
+          { ze: "17ª", sede: "Campina Grande", horario: "08h–18h" },
+        ],
+      },
+    ],
+    documentoOrigem: {
+      titulo:
+        "Cronograma de Preparação de Urnas — Eleições 2026 (1º e 2º turnos), de 18/09/2026",
+      unidade: "TRE-PB/STIC",
+      url: "https://www.tre-pb.jus.br/eleicoes/e/arquivos/cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_geral-v2/@@display-file/file/tre-pb-cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_18-9-2026.pdf",
     },
   },
 ];

@@ -43,8 +43,8 @@ test(
   !eventosSource.includes("sei.tre-pb.jus.br"),
 );
 test(
-  "eventosTrePb contém 12 eventos (1 memorando + 6 do despacho AGGTIC + 5 de preparação de urnas)",
-  eventosTrePb.length === 12,
+  "eventosTrePb contém 17 eventos (1 memorando + 6 do despacho AGGTIC + 10 de preparação de urnas)",
+  eventosTrePb.length === 17,
 );
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -52,26 +52,30 @@ test(
 // ─────────────────────────────────────────────────────────────────────────────
 console.log("\n=== CRONOGRAMA DE PREPARAÇÃO DE URNAS ===\n");
 
-// A fonte é o Edital nº 15/2026. Cadeia: PDF v2 → minuta → Edital 14 → Edital 15.
-const EDITAL_URL =
-  "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar" +
-  "&acao_origem=protocolo_pesquisa_rapida&id_protocolo=2579040" +
-  "&infra_sistema=100000100&infra_unidade_atual=193" +
-  "&infra_hash=3286de59587dbc5d6afd9897ccbe0844763c7ec99bc49f5078d2addf7cfda56e";
+// A fonte clicável é o cronograma público de 18/09/2026 (1º e 2º turnos).
+// Cadeia: PDF v2 → minuta → Edital 14 → Edital 15 → cronograma de 18/09.
+const CRONOGRAMA_URL =
+  "https://www.tre-pb.jus.br/eleicoes/e/arquivos/" +
+  "cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_geral-v2/" +
+  "@@display-file/file/" +
+  "tre-pb-cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_18-9-2026.pdf";
 
 const preparacao = eventosTrePb.filter((ev) => ev.preparacaoUrnas?.length);
 
-test("Há 5 eventos de preparação de urnas", preparacao.length === 5);
+test("Há 10 eventos de preparação de urnas", preparacao.length === 10);
 test(
-  "Só o 1º turno, de 21 a 25/09 — o 2º turno foi removido com o PDF v2",
+  "5 datas no 1º turno (21 a 25/09) e 5 no 2º (12 a 16/10)",
   JSON.stringify(preparacao.map((ev) => ev.data)) ===
     JSON.stringify([
       "2026-09-21", "2026-09-22", "2026-09-23", "2026-09-24", "2026-09-25",
-    ]) && preparacao.every((ev) => ev.turno === "1T"),
+      "2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-16",
+    ]),
 );
 test(
-  "Nenhum evento de outubro sobrou em eventosTrePb",
-  !eventosTrePb.some((ev) => ev.data.startsWith("2026-10")),
+  "Os cinco de setembro são 1T e os cinco de outubro são 2T",
+  preparacao.every(
+    (ev) => ev.turno === (ev.data.startsWith("2026-09") ? "1T" : "2T"),
+  ),
 );
 test(
   "Todos são de âmbito TRE-PB e categoria ADM",
@@ -80,21 +84,39 @@ test(
   ),
 );
 test(
-  "Todos apontam para o Edital nº 15/2026 no SEI, marcado como restrito",
+  "Todos apontam para o PDF público do cronograma de 18/09, sem marca de acesso restrito",
   preparacao.every(
     (ev) =>
-      ev.documentoOrigem?.url === EDITAL_URL &&
-      ev.documentoOrigem?.unidade === "TRE-PB/PTRE/ASPRE" &&
-      ev.documentoOrigem?.restrito === true,
+      ev.documentoOrigem?.url === CRONOGRAMA_URL &&
+      ev.documentoOrigem?.unidade === "TRE-PB/STIC" &&
+      ev.documentoOrigem?.restrito !== true,
   ),
 );
 test(
-  "O documento de origem nomeia o edital e o processo",
+  "O documento de origem nomeia o cronograma e a data de publicação",
   preparacao.every(
     (ev) =>
-      ev.documentoOrigem?.titulo.startsWith("Edital nº 15/2026") &&
-      ev.documentoOrigem?.titulo.includes("0007828-72.2026.6.15.8000"),
+      ev.documentoOrigem?.titulo.includes("Cronograma de Preparação de Urnas") &&
+      ev.documentoOrigem?.titulo.includes("18/09/2026"),
   ),
+);
+// O edital só aparece no texto do 1º turno, sem hyperlink — a fonte clicável
+// é o cronograma. O 2º turno ainda não tem edital e não pode citar um.
+test(
+  "A descrição do 1º turno cita o Edital nº 15/2026",
+  preparacao
+    .filter((ev) => ev.turno === "1T")
+    .every((ev) => ev.descricao.includes("Edital nº 15/2026 TRE-PB/PTRE/ASPRE")),
+);
+test(
+  "A descrição do 2º turno não cita edital nenhum",
+  preparacao
+    .filter((ev) => ev.turno === "2T")
+    .every((ev) => !/edital/i.test(ev.descricao)),
+);
+test(
+  "Nenhum card de urnas aponta para o SEI",
+  preparacao.every((ev) => !ev.documentoOrigem?.url.includes("sei.tre-pb")),
 );
 test(
   "Os eventos de urnas não têm observações",
@@ -104,12 +126,13 @@ test(
 const dadosTrePb = readFileSync("src/data/eventosTrePb.ts", "utf8");
 test(
   "Nenhum resíduo do PDF v2 sobrou no arquivo de dados",
-  !dadosTrePb.includes("cronograma_preparacao_urnas"),
+  !dadosTrePb.includes("turno_geral-v2.pdf"),
 );
 test(
-  "Nenhum card aponta mais para o Edital nº 14/2026",
+  "Nenhum card aponta mais para os Editais nº 14 ou 15 no SEI",
   !dadosTrePb.includes("id_procedimento=2571729") &&
-    preparacao.every((ev) => !ev.documentoOrigem?.titulo.includes("nº 14/2026")),
+    !dadosTrePb.includes("id_protocolo=2579040") &&
+    preparacao.every((ev) => !ev.documentoOrigem?.titulo.includes("Edital")),
 );
 test(
   "Nenhum card aponta mais para a minuta",
@@ -130,13 +153,12 @@ test(
   ),
 );
 test(
-  "A URL do edital usa HTTPS no SEI do TRE-PB e preserva o hash de acesso",
-  EDITAL_URL.startsWith("https://sei.tre-pb.jus.br/") &&
-    EDITAL_URL.includes("infra_hash="),
+  "A URL do cronograma usa HTTPS no domínio tre-pb.jus.br",
+  CRONOGRAMA_URL.startsWith("https://www.tre-pb.jus.br/"),
 );
 
-// O turno escala as 68 zonas eleitorais, uma única vez.
-for (const [rotulo, turno] of [["1º turno", "1T"]] as const) {
+// Cada turno escala as 68 zonas eleitorais, uma única vez.
+for (const [rotulo, turno] of [["1º turno", "1T"], ["2º turno", "2T"]] as const) {
   const zonas = preparacao
     .filter((ev) => ev.turno === turno)
     .flatMap((ev) => ev.preparacaoUrnas!.flatMap((p) => p.zonas));
@@ -206,15 +228,15 @@ for (const [ze, sede] of [
   ["74ª", "Água Branca"],
 ] as const) {
   test(
-    `${ze} zona tem ${sede} como município-sede`,
-    sedePorZona.get(`1T ${ze}`) === sede,
+    `${ze} zona tem ${sede} como município-sede nos dois turnos`,
+    sedePorZona.get(`1T ${ze}`) === sede && sedePorZona.get(`2T ${ze}`) === sede,
   );
 }
 
 // O que o edital mudou em relação ao PDF v2 — nenhuma dessas linhas pode
 // regredir numa regeração a partir da tabela antiga.
 const escalaPorZona = new Map(
-  preparacao.flatMap((ev) =>
+  preparacao.filter((ev) => ev.turno === "1T").flatMap((ev) =>
     ev.preparacaoUrnas!.flatMap((polo) =>
       polo.zonas.map((z) => [z.ze, { data: ev.data, horario: z.horario }] as const),
     ),
@@ -231,8 +253,37 @@ test(
     escalaPorZona.get("34ª")?.data === "2026-09-23",
 );
 test(
-  "Nenhuma zona começa mais às 07h — o turno estendido de Pombal acabou",
+  "1º turno: nenhuma zona começa mais às 07h — o turno estendido de Pombal acabou",
   [...escalaPorZona.values()].every((e) => !e.horario.startsWith("07h")),
+);
+// 2º turno pelo cronograma de 18/09: Pombal também foi a 08h–18h, exceto a
+// 36ª, que o PDF manteve em 07h–17h no mesmo dia e polo da 38ª. Fica como
+// está no documento; o teste trava o dado para que a divergência seja notada.
+const escala2T = new Map(
+  preparacao.filter((ev) => ev.turno === "2T").flatMap((ev) =>
+    ev.preparacaoUrnas!.flatMap((polo) =>
+      polo.zonas.map((z) => [z.ze, { data: ev.data, horario: z.horario }] as const),
+    ),
+  ),
+);
+test(
+  "2º turno: 31ª, 38ª, 52ª e 69ª (Pombal) passaram a 08h–18h",
+  ["31ª", "38ª", "52ª", "69ª"].every((ze) => escala2T.get(ze)?.horario === "08h–18h"),
+);
+test(
+  "2º turno: a 36ª é a única zona em 07h–17h (14/10, conforme o cronograma)",
+  escala2T.get("36ª")?.horario === "07h–17h" &&
+    escala2T.get("36ª")?.data === "2026-10-14" &&
+    [...escala2T.entries()].filter(([, e]) => e.horario.startsWith("07h")).length === 1,
+);
+test(
+  "diaSemana é calculado da data, não copiado do PDF (que erra 33ª, 34ª e 52ª)",
+  preparacao.every((ev) => {
+    const d = new Date(ev.data + "T12:00:00");
+    const nomes = ["domingo", "segunda-feira", "terça-feira", "quarta-feira",
+      "quinta-feira", "sexta-feira", "sábado"];
+    return nomes[d.getDay()] === ev.diaSemana;
+  }),
 );
 test(
   "As sete zonas que passaram a começar às 09h",
@@ -289,8 +340,8 @@ test(
   icsDia23.includes("57ª Cabedelo 08h–18h"),
 );
 test(
-  "Descrição do .ics traz o link do edital",
-  icsDia23.includes(EDITAL_URL),
+  "Descrição do .ics traz o link público do cronograma",
+  icsDia23.includes(CRONOGRAMA_URL),
 );
 
 const blocoSourcePreview = readFileSync(

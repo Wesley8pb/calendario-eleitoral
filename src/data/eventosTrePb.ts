@@ -932,4 +932,84 @@ export const eventosTrePb: EventoCalendario[] = [
       url: "https://www.tre-pb.jus.br/eleicoes/e/arquivos/cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_geral-v2/@@display-file/file/tre-pb-cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_18-9-2026.pdf",
     },
   },
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // Restrições de rede e sistemas no período eleitoral — medidas internas do
+  // TRE-PB. Sem fundamentacao (não são norma) e sem documentoOrigem: o aviso
+  // foi recebido sem identificação do ato que o originou.
+  // ───────────────────────────────────────────────────────────────────────────
+  {
+    id: "2026-09-28-trepb-1",
+    data: "2026-09-28",
+    diaSemana: "segunda-feira",
+    titulo:
+      "1º turno: computadores devem permanecer desligados quando não estiverem em uso (TRE-PB)",
+    descricao:
+      "A partir de 28/09 (segunda-feira): computadores devem permanecer desligados quando não estiverem em uso na rotina diária.",
+    categorias: ["ADM"],
+    perfis: [],
+    ambito: "TRE-PB",
+    marcos: null,
+    turno: "1T",
+    fundamentacao: [],
+    observacoes:
+      "Medida interna do TRE-PB, sem correspondente no calendário nacional. Vigora até o restabelecimento de 05/10, às 14h.",
+  },
+
+  {
+    id: "2026-10-02-trepb-1",
+    data: "2026-10-02",
+    diaSemana: "sexta-feira",
+    titulo:
+      "1º turno: sistemas fora do ar, acesso remoto bloqueado e rede interna sem internet, às 14h (TRE-PB)",
+    descricao:
+      "02/10 (sexta), às 14h:\n\n" +
+      "Sistemas do Tribunal saem do ar na internet, exceto os indispensáveis ao pleito.\n\n" +
+      "Acesso remoto por VPN (rede privada virtual) e PRA bloqueado, exceto JEConect.\n\n" +
+      "Computadores da rede interna ficam sem acesso à internet. As redes Wi-Fi de Servidores e de Visitantes funcionam normalmente.",
+    categorias: ["ADM"],
+    perfis: [],
+    ambito: "TRE-PB",
+    marcos: null,
+    turno: "1T",
+    fundamentacao: [],
+    observacoes:
+      "Medida interna do TRE-PB, sem correspondente no calendário nacional. Restabelecimento em 05/10 (segunda-feira), às 14h.",
+  },
+
+  {
+    id: "2026-10-23-trepb-2",
+    data: "2026-10-23",
+    diaSemana: "sexta-feira",
+    titulo:
+      "2º turno (se houver): computadores devem permanecer desligados quando não estiverem em uso, até 26/10 (TRE-PB)",
+    descricao:
+      "05/10 a 26/10: computadores devem permanecer desligados quando não estiverem em uso na rotina diária.",
+    categorias: ["ADM"],
+    perfis: [],
+    ambito: "TRE-PB",
+    marcos: null,
+    turno: "2T",
+    fundamentacao: [],
+    observacoes:
+      "Medida interna do TRE-PB, sem correspondente no calendário nacional. Aplica-se apenas se houver 2º turno.",
+  },
+
+  {
+    id: "2026-10-23-trepb-1",
+    data: "2026-10-23",
+    diaSemana: "sexta-feira",
+    titulo:
+      "2º turno (se houver): sistemas fora do ar, acesso remoto bloqueado e rede interna sem internet, às 14h (TRE-PB)",
+    descricao:
+      "23/10 (sexta-feira), às 14h: sistemas saem do ar na internet, acesso remoto é bloqueado e computadores da rede interna ficam sem internet, nas mesmas condições do 1º turno.",
+    categorias: ["ADM"],
+    perfis: [],
+    ambito: "TRE-PB",
+    marcos: null,
+    turno: "2T",
+    fundamentacao: [],
+    observacoes:
+      "Medida interna do TRE-PB, sem correspondente no calendário nacional. Aplica-se apenas se houver 2º turno. Restabelecimento em 26/10 (segunda-feira), às 14h.",
+  },
 ];

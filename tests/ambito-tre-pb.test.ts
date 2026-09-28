@@ -43,8 +43,53 @@ test(
   !eventosSource.includes("sei.tre-pb.jus.br"),
 );
 test(
-  "eventosTrePb contém 17 eventos (1 memorando + 6 do despacho AGGTIC + 10 de preparação de urnas)",
-  eventosTrePb.length === 17,
+  "eventosTrePb contém 21 eventos (1 memorando + 6 do despacho AGGTIC + 10 de preparação de urnas + 4 de restrições de rede)",
+  eventosTrePb.length === 21,
+);
+
+// --- Restrições de rede e sistemas no período eleitoral ---
+const DIAS_SEMANA = ["domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado"];
+const restricoesRede = eventosTrePb.filter((ev) =>
+  ["2026-09-28-trepb-1", "2026-10-02-trepb-1",
+   "2026-10-23-trepb-2", "2026-10-23-trepb-1"].includes(ev.id),
+);
+test("Há 4 eventos de restrições de rede", restricoesRede.length === 4);
+test(
+  "O restabelecimento do 1º turno não tem card próprio (consta do card de bloqueio)",
+  !eventosTrePb.some((ev) => ev.id === "2026-10-05-trepb-1") &&
+    eventosTrePb.find((ev) => ev.id === "2026-10-02-trepb-1")?.observacoes?.includes("05/10") === true,
+);
+test(
+  "O restabelecimento do 2º turno não tem card próprio (consta do card de bloqueio)",
+  !eventosTrePb.some((ev) => ev.id === "2026-10-26-trepb-1") &&
+    eventosTrePb.find((ev) => ev.id === "2026-10-23-trepb-1")?.observacoes?.includes("26/10") === true,
+);
+test(
+  "Restrições de rede: 2 no 1º turno e 2 no 2º turno",
+  restricoesRede.filter((ev) => ev.turno === "1T").length === 2 &&
+    restricoesRede.filter((ev) => ev.turno === "2T").length === 2,
+);
+test(
+  "Restrições de rede: ADM, âmbito TRE-PB, sem fundamentação e sem documento de origem",
+  restricoesRede.every(
+    (ev) =>
+      ev.ambito === "TRE-PB" &&
+      ev.categorias.join() === "ADM" &&
+      ev.fundamentacao.length === 0 &&
+      ev.documentoOrigem === undefined &&
+      ev.perfis.length === 0,
+  ),
+);
+test(
+  "Restrições de rede: diaSemana coerente com a data",
+  restricoesRede.every(
+    (ev) => DIAS_SEMANA[new Date(`${ev.data}T12:00:00`).getDay()] === ev.diaSemana,
+  ),
+);
+test("Restrições de rede: títulos cabem em 120 caracteres", restricoesRede.every((ev) => ev.titulo.length <= 120));
+test(
+  "Restrições de rede do 2º turno avisam que dependem de haver 2º turno",
+  restricoesRede.filter((ev) => ev.turno === "2T").every((ev) => ev.titulo.includes("se houver")),
 );
 
 // ─────────────────────────────────────────────────────────────────────────────

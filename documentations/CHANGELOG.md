@@ -1,5 +1,20 @@
 # Changelog
 
+## [2026-09-28] Restrições de rede e sistemas do TRE-PB no período eleitoral
+
+Seis eventos internos do TRE-PB (âmbito regional, categoria ADM), a partir do quadro de medidas de rede para os dois turnos:
+
+- **1º turno:** 28/09 — computadores desligados quando não estiverem em uso; 02/10, 14h — sistemas fora do ar na internet (exceto os indispensáveis ao pleito), VPN e PRA bloqueados (exceto JEConect), rede interna sem internet (Wi-Fi de Servidores e Visitantes normais); 05/10, 14h — restabelecimento.
+- **2º turno (se houver):** 05/10 a 26/10 — computadores desligados quando não estiverem em uso; 23/10, 14h — mesmas restrições do 1º turno; 26/10, 14h — restabelecimento de portais, sistemas, acesso remoto e internet.
+
+Sem `fundamentacao` (não são norma) e sem `documentoOrigem`: o aviso chegou sem identificação do ato de origem. A seção "Medida posterior às eleições" do quadro não foi incluída (estava cortada na imagem recebida).
+
+**Ajuste a pedido do usuário:** o card "2º turno (se houver): computadores desligados… até 26/10" foi movido de 05/10 para **23/10** (id `2026-10-23-trepb-2`); a descrição mantém o período literal do quadro (05/10 a 26/10).
+
+**Cards removidos a pedido do usuário:** os restabelecimentos do 1º turno (05/10, 14h) e do 2º turno (26/10, 14h) saíram da timeline — a data de retorno já consta das observações dos cards de bloqueio de 02/10 e 23/10.
+
+**Arquivos modificados:** `src/data/eventosTrePb.ts` (17 → 21 eventos); `tests/ambito-tre-pb.test.ts` (143 → 151 asserções).
+
 ## [2026-09-18] 47ª zona eleitoral passa a constar com sede em Guarabira
 
 O cronograma da STIC grafa a 47ª zona como "PIRPIRITUBA"; a pedido do TRE-PB, por conferência do cadastro das zonas, o município-sede passa a constar como **Guarabira**, nos dois turnos (23/09 e 14/10, NVIJPA). A 47ª passa a dividir sede com a 10ª, como já ocorre em Patos, João Pessoa, Queimadas e Itabaiana.

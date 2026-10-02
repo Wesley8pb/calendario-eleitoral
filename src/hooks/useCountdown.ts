@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
-import { PRIMEIRO_TURNO, SEGUNDO_TURNO } from "../data/constants";
+import {
+  PRIMEIRO_TURNO,
+  RETOMADA_CONTADOR_2T,
+  SEGUNDO_TURNO,
+} from "../data/constants";
 
 export interface CountdownResult {
   dias: number;
@@ -9,8 +13,12 @@ export interface CountdownResult {
   label: string;
 }
 
-function calcDiff(target: Date): Omit<CountdownResult, "label"> {
-  const now = new Date();
+export type CountdownState =
+  | { fase: "contagem"; contagem: CountdownResult }
+  | { fase: "votacao-1t" }
+  | { fase: "encerrado" };
+
+function calcDiff(target: Date, now: Date): Omit<CountdownResult, "label"> {
   const diff = Math.max(0, target.getTime() - now.getTime());
   return {
     dias: Math.floor(diff / (1000 * 60 * 60 * 24)),
@@ -21,38 +29,45 @@ function calcDiff(target: Date): Omit<CountdownResult, "label"> {
 }
 
 /**
- * Hook de contagem regressiva:
+ * Fase do contador em um dado instante:
  * - Antes do 1T → conta para o 1T
- * - Entre 1T e 2T → conta para o 2T
- * - Após 2T → retorna null
+ * - Da abertura do 1T até a meia-noite seguinte → oculto (votação/apuração)
+ * - Daí até o 2T → conta para o 2T
+ * - Após o 2T → encerrado
  */
-export function useCountdown(): CountdownResult | null {
-  const [result, setResult] = useState<CountdownResult | null>(() => {
-    const now = new Date();
-    if (now < PRIMEIRO_TURNO) {
-      return { ...calcDiff(PRIMEIRO_TURNO), label: "até o 1º Turno" };
-    }
-    if (now < SEGUNDO_TURNO) {
-      return { ...calcDiff(SEGUNDO_TURNO), label: "até o 2º Turno" };
-    }
-    return null;
-  });
+export function getCountdownState(now: Date): CountdownState {
+  if (now < PRIMEIRO_TURNO) {
+    return {
+      fase: "contagem",
+      contagem: { ...calcDiff(PRIMEIRO_TURNO, now), label: "até o 1º Turno" },
+    };
+  }
+  if (now < RETOMADA_CONTADOR_2T) {
+    return { fase: "votacao-1t" };
+  }
+  if (now < SEGUNDO_TURNO) {
+    return {
+      fase: "contagem",
+      contagem: { ...calcDiff(SEGUNDO_TURNO, now), label: "até o 2º Turno" },
+    };
+  }
+  return { fase: "encerrado" };
+}
+
+export function useCountdown(): CountdownState {
+  const [state, setState] = useState<CountdownState>(() =>
+    getCountdownState(new Date()),
+  );
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const now = new Date();
-      if (now < PRIMEIRO_TURNO) {
-        setResult({ ...calcDiff(PRIMEIRO_TURNO), label: "até o 1º Turno" });
-      } else if (now < SEGUNDO_TURNO) {
-        setResult({ ...calcDiff(SEGUNDO_TURNO), label: "até o 2º Turno" });
-      } else {
-        setResult(null);
-        clearInterval(interval);
-      }
+      const next = getCountdownState(new Date());
+      setState(next);
+      if (next.fase === "encerrado") clearInterval(interval);
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
 
-  return result;
+  return state;
 }

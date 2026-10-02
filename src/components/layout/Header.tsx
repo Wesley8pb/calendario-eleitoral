@@ -74,7 +74,7 @@ export function Header() {
         </div>
 
         {/* Countdown */}
-        <div className="mt-8">
+        <div className="mt-8 empty:hidden">
           <Countdown />
         </div>
 

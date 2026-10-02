@@ -17,9 +17,11 @@ function CountdownBlock({ value, label }: { value: number; label: string }) {
 }
 
 export function Countdown() {
-  const countdown = useCountdown();
+  const estado = useCountdown();
 
-  if (!countdown) {
+  if (estado.fase === "votacao-1t") return null;
+
+  if (estado.fase === "encerrado") {
     return (
       <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/15">
         <CheckCircle size={20} className="text-green-300" />
@@ -29,6 +31,8 @@ export function Countdown() {
       </div>
     );
   }
+
+  const countdown = estado.contagem;
 
   return (
     <div className="text-center animate-countdown-in">

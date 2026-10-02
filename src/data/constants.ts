@@ -4,6 +4,9 @@ import { getLinkReferencia } from "./linksReferencia";
 // Abertura da votação às 08:00 (horário de Brasília, UTC-3)
 export const PRIMEIRO_TURNO = new Date("2026-10-04T08:00:00-03:00");
 export const SEGUNDO_TURNO = new Date("2026-10-25T08:00:00-03:00");
+// O contador some na abertura da votação do 1º turno e só volta, já
+// contando para o 2º turno, à meia-noite do dia seguinte (Brasília).
+export const RETOMADA_CONTADOR_2T = new Date("2026-10-05T00:00:00-03:00");
 export const DIPLOMACAO = new Date("2026-12-18T00:00:00");
 
 // Referência normativa

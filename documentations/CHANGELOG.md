@@ -1,5 +1,13 @@
 # Changelog
 
+## [2026-10-02] Contador oculto durante o dia do 1º turno
+
+O contador do cabeçalho passa a sumir na abertura da votação do 1º turno (04/10/2026, 08h, horário de Brasília) e só reaparece à meia-noite do dia seguinte (05/10/2026, 00h), já contando para o 2º turno. Antes, ao bater 08h, ele passava imediatamente a contar para o 2º turno, em pleno dia de votação.
+
+A lógica de fases foi extraída para a função pura `getCountdownState(now)` (contagem → votação do 1º turno → contagem → encerrado), que o hook consome a cada segundo. Os instantes são fixados com offset `-03:00`, então a janela vale para o horário de Brasília independentemente do fuso do navegador. No cabeçalho, o contêiner do contador recebe `empty:hidden` para não deixar espaço vazio enquanto ele está oculto.
+
+**Arquivos modificados:** `src/data/constants.ts` (nova constante `RETOMADA_CONTADOR_2T`); `src/hooks/useCountdown.ts`; `src/components/countdown/Countdown.tsx`; `src/components/layout/Header.tsx`; `tests/countdown.test.ts` (novo, 7 asserções).
+
 ## [2026-09-28] Restrições de rede e sistemas do TRE-PB no período eleitoral
 
 Seis eventos internos do TRE-PB (âmbito regional, categoria ADM), a partir do quadro de medidas de rede para os dois turnos:

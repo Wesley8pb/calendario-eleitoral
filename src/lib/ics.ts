@@ -112,7 +112,8 @@ export function buildEventDescription(evento: EventoCalendario): string {
   if (evento.documentoOrigem) {
     const { titulo, unidade, url, restrito } = evento.documentoOrigem;
     const aviso = restrito ? " (acesso restrito a servidores)" : "";
-    sections.push(`Documento de origem:\n${titulo} - ${unidade}${aviso}\n${url}`);
+    const link = url ? `\n${url}` : "";
+    sections.push(`Documento de origem:\n${titulo} - ${unidade}${aviso}${link}`);
   }
 
   if (evento.fundamentacao.length > 0) {

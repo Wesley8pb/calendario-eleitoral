@@ -1,5 +1,28 @@
 # Changelog
 
+## [2026-10-07] Cronograma do 2º turno substituído pela versão 2 revisada
+
+A preparação de urnas do 2º turno passa a seguir o **Cronograma de preparação de urnas - 2º Turno, versão 2 revisada** (`documentations/cronograma_2026_2T_v2_revisado.xlsx`), no lugar da escala do PDF de 18/09. Os eventos foram regerados da planilha, não digitados.
+
+**Conferência zona a zona antes de aplicar:**
+- As 68 zonas continuam escaladas uma única vez, cada uma no mesmo polo de antes.
+- **56 zonas mudaram de data e/ou horário.** A escala passa de 12–16/10 para **13–16/10**: o card de 12/10 saiu (21, 21, 15 e 11 zonas em 13, 14, 15 e 16/10).
+- A **36ª (Catolé do Rocha)** deixou o 07h–17h e passou a 08h–18h; nenhuma zona do 2º turno começa mais às 07h.
+- As sedes da planilha batem com as retificadas (47ª Guarabira, 49ª Queimadas, 75ª Itabaiana, 74ª Água Branca); nenhuma divergência com o arquivo de dados.
+- A coluna "Sala" da planilha não é transcrita (não há campo para ela no card).
+
+**Documento de origem citado, sem link.** Não há PDF público da v2 revisada; a única fonte é o **doc. SEI 2533109** do processo 0007828-72.2026.6.15.8000 — o mesmo processo dos Editais 14 e 15. O `documentoOrigem` dos 4 cards cita o documento e o processo no título, **sem o link do SEI** (`url: ""`), e mantém `restrito: true` (aviso de acesso restrito a servidores). `EventDetail` passa a renderizar o bloco sem link quando a URL é vazia (antes viraria `href=""`, apontando para a própria página) e `ics.ts` omite a linha da URL. O 1º turno segue com o PDF de 18/09.
+
+**Arquivos modificados:**
+- `src/data/eventosTrePb.ts` — 21 → 20 eventos; 2º turno regerado (4 cards, 13 a 16/10); cabeçalho registra a nova fonte.
+- `src/components/timeline/EventDetail.tsx`, `src/lib/ics.ts` — documento de origem sem URL.
+- `tests/ambito-tre-pb.test.ts` — 151 → 160 asserções: 9 cards de urnas, 12/10 sem preparação, origem do 2º turno no doc. SEI 2533109, sem link e com aviso de restrito, 36ª a 08h–18h, amostra de seis linhas da v2 revisada, `.ics` do 2º turno com o documento SEI e o aviso de restrito, sem link.
+- `CLAUDE.md`, `AGENTS.md` — fonte e datas do 2º turno.
+
+**Verificação:** `npx tsc --noEmit` limpo; `npm run build` concluído; as seis suítes passaram (160, 7, 20, 25, 12 e 26 asserções).
+
+**Pendência:** PDF público da v2 revisada, quando o TRE-PB publicar, para preencher `documentoOrigem.url` (e tirar o aviso de restrito) nos 4 cards.
+
 ## [2026-10-02] Contador oculto durante o dia do 1º turno
 
 O contador do cabeçalho passa a sumir na abertura da votação do 1º turno (04/10/2026, 08h, horário de Brasília) e só reaparece à meia-noite do dia seguinte (05/10/2026, 00h), já contando para o 2º turno. Antes, ao bater 08h, ele passava imediatamente a contar para o 2º turno, em pleno dia de votação.

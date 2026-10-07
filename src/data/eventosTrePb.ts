@@ -15,8 +15,18 @@ import type { EventoCalendario } from "../types";
 //
 // FONTE: Cronograma de Preparação de Urnas — Eleições 2026 (1º e 2º turnos),
 // publicado pela STIC em 18/09/2026 na página Eleições 2026 do TRE-PB (PDF
-// público, sem marca de acesso restrito). Cobre os dois turnos: 5 eventos de
-// 21 a 25/09 e 5 de 12 a 16/10.
+// público, sem marca de acesso restrito). É a fonte do 1º turno: 5 eventos de
+// 21 a 25/09.
+//
+// O 2º turno vem do "Cronograma de preparação de urnas - 2º Turno", versão 2
+// revisada (planilha documentations/cronograma_2026_2T_v2_revisado.xlsx,
+// recebida em 07/10/2026): 4 eventos de 13 a 16/10. Substituiu a escala de 12
+// a 16/10 do PDF de 18/09 — 56 das 68 zonas mudaram de data ou horário e o
+// dia 12/10 deixou de ter preparação. Sem PDF público ainda, o documentoOrigem
+// do 2º turno é o doc. SEI 2533109 do processo 0007828-72.2026.6.15.8000 (o
+// mesmo processo dos Editais 14 e 15), citado só em texto, sem link do SEI,
+// e com aviso de acesso restrito. A coluna
+// "Sala" da planilha não é transcrita.
 //
 // O 1º turno desse cronograma é idêntico ao Anexo I do Edital nº 15/2026
 // TRE-PB/PTRE/ASPRE (doc. SEI 2504317), conferido zona a zona; por isso a
@@ -611,80 +621,6 @@ export const eventosTrePb: EventoCalendario[] = [
   },
 
   {
-    id: "2026-10-12-trepb-1",
-    data: "2026-10-12",
-    diaSemana: "segunda-feira",
-    titulo:
-      "Preparação de urnas do 2º turno — 18 zonas eleitorais em 5 polos (TRE-PB)",
-    descricao:
-      "Cerimônia de preparação das urnas para o 2º turno das Eleições 2026, nos Núcleos de Voto Informatizado (NVI), conforme o Cronograma de Preparação de Urnas elaborado pela Secretaria de Tecnologia da Informação e Comunicação do Tribunal Regional Eleitoral da Paraíba.\n\n" +
-      "Nesta data, a preparação ocorre simultaneamente em 5 polos, abrangendo 18 zonas eleitorais. A escala abaixo indica, para cada zona, o polo e o horário previstos no cronograma.",
-    categorias: ["ADM"],
-    perfis: [],
-    ambito: "TRE-PB",
-    marcos: null,
-    turno: "2T",
-    fundamentacao: [
-      {
-        norma: "Resolução nº 23.751/2026/TSE",
-        dispositivo: "art. 100, caput e § 2º",
-        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-751-de-26-de-fevereiro-de-2026",
-      },
-    ],
-    preparacaoUrnas: [
-      {
-        nvi: "NVIJPA",
-        zonas: [
-          { ze: "01ª", sede: "João Pessoa", horario: "08h–18h" },
-          { ze: "06ª", sede: "Itabaiana", horario: "08h–18h" },
-          { ze: "55ª", sede: "Rio Tinto", horario: "08h–18h" },
-          { ze: "75ª", sede: "Itabaiana", horario: "08h–18h" },
-        ],
-      },
-      {
-        nvi: "NVICGE",
-        zonas: [
-          { ze: "11ª", sede: "Areia", horario: "08h–18h" },
-          { ze: "14ª", sede: "Bananeiras", horario: "08h–18h" },
-          { ze: "50ª", sede: "Pocinhos", horario: "08h–12h" },
-          { ze: "58ª", sede: "Serra Branca", horario: "14h–18h" },
-          { ze: "59ª", sede: "Queimadas", horario: "08h–18h" },
-        ],
-      },
-      {
-        nvi: "NVIPAT",
-        zonas: [
-          { ze: "26ª", sede: "Santa Luzia", horario: "14h–18h" },
-          { ze: "27ª", sede: "Taperoá", horario: "08h–12h" },
-          { ze: "30ª", sede: "Teixeira", horario: "14h–18h" },
-          { ze: "32ª", sede: "Piancó", horario: "14h–18h" },
-          { ze: "51ª", sede: "Patos", horario: "08h–12h" },
-          { ze: "65ª", sede: "Patos", horario: "08h–12h" },
-        ],
-      },
-      {
-        nvi: "NVIPBL",
-        zonas: [
-          { ze: "69ª", sede: "São Bento", horario: "08h–18h" },
-        ],
-      },
-      {
-        nvi: "NVICJZ",
-        zonas: [
-          { ze: "37ª", sede: "São João do Rio do Peixe", horario: "14h–18h" },
-          { ze: "63ª", sede: "Sousa", horario: "08h–12h" },
-        ],
-      },
-    ],
-    documentoOrigem: {
-      titulo:
-        "Cronograma de Preparação de Urnas — Eleições 2026 (1º e 2º turnos), de 18/09/2026",
-      unidade: "TRE-PB/STIC",
-      url: "https://www.tre-pb.jus.br/eleicoes/e/arquivos/cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_geral-v2/@@display-file/file/tre-pb-cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_18-9-2026.pdf",
-    },
-  },
-
-  {
     id: "2026-10-13-trepb-1",
     data: "2026-10-13",
     diaSemana: "terça-feira",
@@ -709,23 +645,101 @@ export const eventosTrePb: EventoCalendario[] = [
       {
         nvi: "NVIJPA",
         zonas: [
-          { ze: "10ª", sede: "Guarabira", horario: "08h–18h" },
-          { ze: "60ª", sede: "Jacaraú", horario: "08h–18h" },
-          { ze: "61ª", sede: "Bayeux", horario: "08h–18h" },
-          { ze: "64ª", sede: "João Pessoa", horario: "08h–18h" },
+          { ze: "55ª", sede: "Rio Tinto", horario: "14h–18h" },
+          { ze: "57ª", sede: "Cabedelo", horario: "08h–18h" },
+          { ze: "60ª", sede: "Jacaraú", horario: "08h–12h" },
+          { ze: "73ª", sede: "Alhandra", horario: "08h–18h" },
+          { ze: "76ª", sede: "João Pessoa", horario: "08h–18h" },
         ],
       },
       {
         nvi: "NVICGE",
         zonas: [
-          { ze: "09ª", sede: "Alagoa Grande", horario: "08h–12h" },
+          { ze: "11ª", sede: "Areia", horario: "14h–18h" },
           { ze: "13ª", sede: "Alagoa Nova", horario: "08h–12h" },
+          { ze: "16ª", sede: "Campina Grande", horario: "08h–12h" },
           { ze: "19ª", sede: "Esperança", horario: "08h–12h" },
           { ze: "20ª", sede: "Araruna", horario: "14h–18h" },
-          { ze: "23ª", sede: "Soledade", horario: "14h–18h" },
-          { ze: "24ª", sede: "Cuité", horario: "14h–18h" },
-          { ze: "25ª", sede: "Picuí", horario: "14h–18h" },
+          { ze: "49ª", sede: "Queimadas", horario: "14h–18h" },
+        ],
+      },
+      {
+        nvi: "NVIPAT",
+        zonas: [
+          { ze: "26ª", sede: "Santa Luzia", horario: "14h–18h" },
+          { ze: "27ª", sede: "Taperoá", horario: "08h–12h" },
+          { ze: "30ª", sede: "Teixeira", horario: "14h–18h" },
+          { ze: "32ª", sede: "Piancó", horario: "14h–18h" },
+          { ze: "51ª", sede: "Patos", horario: "08h–12h" },
+          { ze: "65ª", sede: "Patos", horario: "08h–12h" },
+        ],
+      },
+      {
+        nvi: "NVIPBL",
+        zonas: [
+          { ze: "52ª", sede: "Coremas", horario: "08h–18h" },
+          { ze: "69ª", sede: "São Bento", horario: "08h–18h" },
+        ],
+      },
+      {
+        nvi: "NVICJZ",
+        zonas: [
+          { ze: "40ª", sede: "São José de Piranhas", horario: "14h–18h" },
+          { ze: "41ª", sede: "Conceição", horario: "08h–12h" },
+        ],
+      },
+    ],
+    documentoOrigem: {
+      titulo:
+        "Cronograma de Preparação de Urnas — 2º turno, versão 2 revisada (doc. SEI 2533109) — Processo 0007828-72.2026.6.15.8000",
+      unidade: "TRE-PB/STIC",
+      url: "",
+      restrito: true,
+    },
+  },
+
+  {
+    id: "2026-10-14-trepb-1",
+    data: "2026-10-14",
+    diaSemana: "quarta-feira",
+    titulo:
+      "Preparação de urnas do 2º turno — 21 zonas eleitorais em 5 polos (TRE-PB)",
+    descricao:
+      "Cerimônia de preparação das urnas para o 2º turno das Eleições 2026, nos Núcleos de Voto Informatizado (NVI), conforme o Cronograma de Preparação de Urnas elaborado pela Secretaria de Tecnologia da Informação e Comunicação do Tribunal Regional Eleitoral da Paraíba.\n\n" +
+      "Nesta data, a preparação ocorre simultaneamente em 5 polos, abrangendo 21 zonas eleitorais. A escala abaixo indica, para cada zona, o polo e o horário previstos no cronograma.",
+    categorias: ["ADM"],
+    perfis: [],
+    ambito: "TRE-PB",
+    marcos: null,
+    turno: "2T",
+    fundamentacao: [
+      {
+        norma: "Resolução nº 23.751/2026/TSE",
+        dispositivo: "art. 100, caput e § 2º",
+        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-751-de-26-de-fevereiro-de-2026",
+      },
+    ],
+    preparacaoUrnas: [
+      {
+        nvi: "NVIJPA",
+        zonas: [
+          { ze: "02ª", sede: "Santa Rita", horario: "08h–18h" },
+          { ze: "10ª", sede: "Guarabira", horario: "08h–12h" },
+          { ze: "44ª", sede: "Pedras de Fogo", horario: "14h–18h" },
+          { ze: "47ª", sede: "Guarabira", horario: "08h–12h" },
+          { ze: "64ª", sede: "João Pessoa", horario: "08h–18h" },
+          { ze: "75ª", sede: "Itabaiana", horario: "14h–18h" },
+        ],
+      },
+      {
+        nvi: "NVICGE",
+        zonas: [
+          { ze: "09ª", sede: "Alagoa Grande", horario: "14h–18h" },
+          { ze: "17ª", sede: "Campina Grande", horario: "08h–18h" },
           { ze: "48ª", sede: "Solânea", horario: "08h–12h" },
+          { ze: "50ª", sede: "Pocinhos", horario: "14h–18h" },
+          { ze: "62ª", sede: "Boqueirão", horario: "08h–12h" },
+          { ze: "67ª", sede: "Remígio", horario: "14h–18h" },
         ],
       },
       {
@@ -741,30 +755,31 @@ export const eventosTrePb: EventoCalendario[] = [
       {
         nvi: "NVIPBL",
         zonas: [
-          { ze: "31ª", sede: "Pombal", horario: "08h–18h" },
-          { ze: "52ª", sede: "Coremas", horario: "08h–18h" },
+          { ze: "36ª", sede: "Catolé do Rocha", horario: "08h–18h" },
+          { ze: "38ª", sede: "Catolé do Rocha", horario: "08h–18h" },
         ],
       },
       {
         nvi: "NVICJZ",
         zonas: [
-          { ze: "40ª", sede: "São José de Piranhas", horario: "14h–18h" },
-          { ze: "41ª", sede: "Conceição", horario: "08h–12h" },
+          { ze: "35ª", sede: "Sousa", horario: "08h–12h" },
+          { ze: "53ª", sede: "São João do Rio do Peixe", horario: "14h–18h" },
         ],
       },
     ],
     documentoOrigem: {
       titulo:
-        "Cronograma de Preparação de Urnas — Eleições 2026 (1º e 2º turnos), de 18/09/2026",
+        "Cronograma de Preparação de Urnas — 2º turno, versão 2 revisada (doc. SEI 2533109) — Processo 0007828-72.2026.6.15.8000",
       unidade: "TRE-PB/STIC",
-      url: "https://www.tre-pb.jus.br/eleicoes/e/arquivos/cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_geral-v2/@@display-file/file/tre-pb-cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_18-9-2026.pdf",
+      url: "",
+      restrito: true,
     },
   },
 
   {
-    id: "2026-10-14-trepb-1",
-    data: "2026-10-14",
-    diaSemana: "quarta-feira",
+    id: "2026-10-15-trepb-1",
+    data: "2026-10-15",
+    diaSemana: "quinta-feira",
     titulo:
       "Preparação de urnas do 2º turno — 15 zonas eleitorais em 5 polos (TRE-PB)",
     descricao:
@@ -787,104 +802,49 @@ export const eventosTrePb: EventoCalendario[] = [
         nvi: "NVIJPA",
         zonas: [
           { ze: "03ª", sede: "Santa Rita", horario: "08h–18h" },
-          { ze: "47ª", sede: "Guarabira", horario: "08h–18h" },
-          { ze: "57ª", sede: "Cabedelo", horario: "08h–18h" },
+          { ze: "04ª", sede: "Sapé", horario: "08h–18h" },
+          { ze: "61ª", sede: "Bayeux", horario: "08h–18h" },
           { ze: "70ª", sede: "João Pessoa", horario: "08h–18h" },
         ],
       },
       {
         nvi: "NVICGE",
         zonas: [
-          { ze: "18ª", sede: "Umbuzeiro", horario: "14h–18h" },
+          { ze: "08ª", sede: "Ingá", horario: "14h–18h" },
+          { ze: "18ª", sede: "Umbuzeiro", horario: "08h–12h" },
           { ze: "22ª", sede: "São João do Cariri", horario: "14h–18h" },
-          { ze: "49ª", sede: "Queimadas", horario: "14h–18h" },
+          { ze: "24ª", sede: "Cuité", horario: "08h–12h" },
           { ze: "56ª", sede: "Juazeirinho", horario: "14h–18h" },
-          { ze: "72ª", sede: "Campina Grande", horario: "08h–12h" },
+          { ze: "72ª", sede: "Campina Grande", horario: "08h–18h" },
         ],
       },
       {
         nvi: "NVIPAT",
         zonas: [
-          { ze: "28ª", sede: "Patos", horario: "08h–18h" },
+          { ze: "28ª", sede: "Patos", horario: "08h–12h" },
           { ze: "74ª", sede: "Água Branca", horario: "08h–12h" },
         ],
       },
       {
         nvi: "NVIPBL",
         zonas: [
-          { ze: "36ª", sede: "Catolé do Rocha", horario: "07h–17h" },
-          { ze: "38ª", sede: "Catolé do Rocha", horario: "08h–18h" },
+          { ze: "31ª", sede: "Pombal", horario: "08h–18h" },
         ],
       },
       {
         nvi: "NVICJZ",
         zonas: [
-          { ze: "35ª", sede: "Sousa", horario: "08h–12h" },
-          { ze: "53ª", sede: "São João do Rio do Peixe", horario: "14h–18h" },
+          { ze: "37ª", sede: "São João do Rio do Peixe", horario: "14h–18h" },
+          { ze: "63ª", sede: "Sousa", horario: "08h–12h" },
         ],
       },
     ],
     documentoOrigem: {
       titulo:
-        "Cronograma de Preparação de Urnas — Eleições 2026 (1º e 2º turnos), de 18/09/2026",
+        "Cronograma de Preparação de Urnas — 2º turno, versão 2 revisada (doc. SEI 2533109) — Processo 0007828-72.2026.6.15.8000",
       unidade: "TRE-PB/STIC",
-      url: "https://www.tre-pb.jus.br/eleicoes/e/arquivos/cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_geral-v2/@@display-file/file/tre-pb-cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_18-9-2026.pdf",
-    },
-  },
-
-  {
-    id: "2026-10-15-trepb-1",
-    data: "2026-10-15",
-    diaSemana: "quinta-feira",
-    titulo:
-      "Preparação de urnas do 2º turno — 10 zonas eleitorais em 3 polos (TRE-PB)",
-    descricao:
-      "Cerimônia de preparação das urnas para o 2º turno das Eleições 2026, nos Núcleos de Voto Informatizado (NVI), conforme o Cronograma de Preparação de Urnas elaborado pela Secretaria de Tecnologia da Informação e Comunicação do Tribunal Regional Eleitoral da Paraíba.\n\n" +
-      "Nesta data, a preparação ocorre simultaneamente em 3 polos, abrangendo 10 zonas eleitorais. A escala abaixo indica, para cada zona, o polo e o horário previstos no cronograma.",
-    categorias: ["ADM"],
-    perfis: [],
-    ambito: "TRE-PB",
-    marcos: null,
-    turno: "2T",
-    fundamentacao: [
-      {
-        norma: "Resolução nº 23.751/2026/TSE",
-        dispositivo: "art. 100, caput e § 2º",
-        url: "https://www.tse.jus.br/legislacao/compilada/res/2026/resolucao-no-23-751-de-26-de-fevereiro-de-2026",
-      },
-    ],
-    preparacaoUrnas: [
-      {
-        nvi: "NVIJPA",
-        zonas: [
-          { ze: "02ª", sede: "Santa Rita", horario: "08h–18h" },
-          { ze: "44ª", sede: "Pedras de Fogo", horario: "08h–18h" },
-          { ze: "73ª", sede: "Alhandra", horario: "08h–18h" },
-          { ze: "76ª", sede: "João Pessoa", horario: "08h–18h" },
-        ],
-      },
-      {
-        nvi: "NVICGE",
-        zonas: [
-          { ze: "08ª", sede: "Ingá", horario: "14h–18h" },
-          { ze: "16ª", sede: "Campina Grande", horario: "08h–12h" },
-          { ze: "43ª", sede: "Sumé", horario: "14h–18h" },
-          { ze: "62ª", sede: "Boqueirão", horario: "14h–18h" },
-          { ze: "67ª", sede: "Remígio", horario: "14h–18h" },
-        ],
-      },
-      {
-        nvi: "NVICJZ",
-        zonas: [
-          { ze: "68ª", sede: "Cajazeiras", horario: "08h–18h" },
-        ],
-      },
-    ],
-    documentoOrigem: {
-      titulo:
-        "Cronograma de Preparação de Urnas — Eleições 2026 (1º e 2º turnos), de 18/09/2026",
-      unidade: "TRE-PB/STIC",
-      url: "https://www.tre-pb.jus.br/eleicoes/e/arquivos/cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_geral-v2/@@display-file/file/tre-pb-cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_18-9-2026.pdf",
+      url: "",
+      restrito: true,
     },
   },
 
@@ -893,10 +853,10 @@ export const eventosTrePb: EventoCalendario[] = [
     data: "2026-10-16",
     diaSemana: "sexta-feira",
     titulo:
-      "Preparação de urnas do 2º turno — 4 zonas eleitorais em 2 polos (TRE-PB)",
+      "Preparação de urnas do 2º turno — 11 zonas eleitorais em 3 polos (TRE-PB)",
     descricao:
       "Cerimônia de preparação das urnas para o 2º turno das Eleições 2026, nos Núcleos de Voto Informatizado (NVI), conforme o Cronograma de Preparação de Urnas elaborado pela Secretaria de Tecnologia da Informação e Comunicação do Tribunal Regional Eleitoral da Paraíba.\n\n" +
-      "Nesta data, a preparação ocorre simultaneamente em 2 polos, abrangendo 4 zonas eleitorais. A escala abaixo indica, para cada zona, o polo e o horário previstos no cronograma.",
+      "Nesta data, a preparação ocorre simultaneamente em 3 polos, abrangendo 11 zonas eleitorais. A escala abaixo indica, para cada zona, o polo e o horário previstos no cronograma.",
     categorias: ["ADM"],
     perfis: [],
     ambito: "TRE-PB",
@@ -913,7 +873,8 @@ export const eventosTrePb: EventoCalendario[] = [
       {
         nvi: "NVIJPA",
         zonas: [
-          { ze: "04ª", sede: "Sapé", horario: "08h–18h" },
+          { ze: "01ª", sede: "João Pessoa", horario: "08h–18h" },
+          { ze: "06ª", sede: "Itabaiana", horario: "08h–18h" },
           { ze: "07ª", sede: "Mamanguape", horario: "08h–18h" },
           { ze: "77ª", sede: "João Pessoa", horario: "08h–18h" },
         ],
@@ -921,15 +882,27 @@ export const eventosTrePb: EventoCalendario[] = [
       {
         nvi: "NVICGE",
         zonas: [
-          { ze: "17ª", sede: "Campina Grande", horario: "08h–18h" },
+          { ze: "14ª", sede: "Bananeiras", horario: "08h–12h" },
+          { ze: "23ª", sede: "Soledade", horario: "08h–12h" },
+          { ze: "25ª", sede: "Picuí", horario: "08h–12h" },
+          { ze: "43ª", sede: "Sumé", horario: "14h–18h" },
+          { ze: "58ª", sede: "Serra Branca", horario: "14h–18h" },
+          { ze: "59ª", sede: "Queimadas", horario: "08h–12h" },
+        ],
+      },
+      {
+        nvi: "NVICJZ",
+        zonas: [
+          { ze: "68ª", sede: "Cajazeiras", horario: "08h–12h" },
         ],
       },
     ],
     documentoOrigem: {
       titulo:
-        "Cronograma de Preparação de Urnas — Eleições 2026 (1º e 2º turnos), de 18/09/2026",
+        "Cronograma de Preparação de Urnas — 2º turno, versão 2 revisada (doc. SEI 2533109) — Processo 0007828-72.2026.6.15.8000",
       unidade: "TRE-PB/STIC",
-      url: "https://www.tre-pb.jus.br/eleicoes/e/arquivos/cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_geral-v2/@@display-file/file/tre-pb-cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_18-9-2026.pdf",
+      url: "",
+      restrito: true,
     },
   },
 

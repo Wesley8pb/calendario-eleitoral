@@ -65,28 +65,42 @@ function FundamentacaoChip({
 }
 
 function DocumentoOrigemBloco({ doc }: { doc: DocumentoOrigem }) {
+  const conteudo = (
+    <>
+      <FileText size={16} className="mt-0.5 flex-shrink-0 text-teal-700" />
+      <span className="min-w-0">
+        <span className="block text-sm font-semibold text-teal-900 break-words">
+          {doc.titulo}
+          {doc.url && <ExternalLink size={12} className="ml-1 inline opacity-60" />}
+        </span>
+        <span className="block text-xs text-teal-700 break-words">
+          {doc.unidade}
+        </span>
+      </span>
+    </>
+  );
+
   return (
     <div className="space-y-1.5">
       <p className="text-xs font-semibold text-neutral-500 uppercase tracking-wide">
         Documento de origem
       </p>
-      <a
-        href={doc.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-start gap-2 rounded-lg border border-teal-200 bg-teal-50 px-3 py-2 text-left transition-colors hover:bg-teal-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
-      >
-        <FileText size={16} className="mt-0.5 flex-shrink-0 text-teal-700" />
-        <span className="min-w-0">
-          <span className="block text-sm font-semibold text-teal-900 break-words">
-            {doc.titulo}
-            <ExternalLink size={12} className="ml-1 inline opacity-60" />
-          </span>
-          <span className="block text-xs text-teal-700 break-words">
-            {doc.unidade}
-          </span>
-        </span>
-      </a>
+      {/* Sem URL (documento ainda não publicado), o bloco não vira link:
+          href="" apontaria para a própria página. */}
+      {doc.url ? (
+        <a
+          href={doc.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-start gap-2 rounded-lg border border-teal-200 bg-teal-50 px-3 py-2 text-left transition-colors hover:bg-teal-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
+        >
+          {conteudo}
+        </a>
+      ) : (
+        <div className="inline-flex items-start gap-2 rounded-lg border border-teal-200 bg-teal-50 px-3 py-2 text-left">
+          {conteudo}
+        </div>
+      )}
       {doc.restrito && (
         <p className="flex items-center gap-1.5 text-xs text-neutral-500">
           <Lock size={11} className="flex-shrink-0" />

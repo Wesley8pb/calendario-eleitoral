@@ -22,11 +22,15 @@ import type { EventoCalendario } from "../types";
 // revisada (planilha documentations/cronograma_2026_2T_v2_revisado.xlsx,
 // recebida em 07/10/2026): 4 eventos de 13 a 16/10. Substituiu a escala de 12
 // a 16/10 do PDF de 18/09 — 56 das 68 zonas mudaram de data ou horário e o
-// dia 12/10 deixou de ter preparação. Sem PDF público ainda, o documentoOrigem
-// do 2º turno é o doc. SEI 2533109 do processo 0007828-72.2026.6.15.8000 (o
-// mesmo processo dos Editais 14 e 15), citado só em texto, sem link do SEI,
-// e com aviso de acesso restrito. A coluna
-// "Sala" da planilha não é transcrita.
+// dia 12/10 deixou de ter preparação. A coluna "Sala" da planilha não é
+// transcrita.
+//
+// O Edital nº 19/2026 TRE-PB/PTRE/ASPRE (doc. SEI 2534003, assinado em
+// 07/10/2026, CRC 03D65BD8, processo 0007828-72.2026.6.15.8000) deu
+// publicidade a esse cronograma: o Anexo I bate com a planilha nas 68 zonas.
+// A descricao do 2º turno cita o edital, como a do 1º cita o Edital 15, e o
+// documentoOrigem é o edital, com link para o processo no SEI e aviso de
+// acesso restrito (o link só abre para servidores logados no SEI).
 //
 // O 1º turno desse cronograma é idêntico ao Anexo I do Edital nº 15/2026
 // TRE-PB/PTRE/ASPRE (doc. SEI 2504317), conferido zona a zona; por isso a
@@ -627,7 +631,8 @@ export const eventosTrePb: EventoCalendario[] = [
     titulo:
       "Preparação de urnas do 2º turno — 21 zonas eleitorais em 5 polos (TRE-PB)",
     descricao:
-      "Cerimônia de preparação das urnas para o 2º turno das Eleições 2026, nos Núcleos de Voto Informatizado (NVI), conforme o Cronograma de Preparação de Urnas elaborado pela Secretaria de Tecnologia da Informação e Comunicação do Tribunal Regional Eleitoral da Paraíba.\n\n" +
+      "Audiência pública para a cerimônia de preparação das urnas para o 2º turno das Eleições 2026, convocada pelo Edital nº 19/2026 TRE-PB/PTRE/ASPRE, nos Núcleos de Voto Informatizado (NVI), com as seguintes finalidades: 1) preparação, teste e lacração das urnas de votação e urnas de contingência; 2) embalagem das urnas, identificando-se a zona eleitoral, o Município e o fim a que se destinam; 3) acondicionamento das mídias de carga e de votação para contingência, individualmente, em envelopes lacrados; 4) lacração das urnas de lona, a serem utilizadas no caso de votação por cédula, depois de verificado se estão vazias.\n\n" +
+      "Ficam convocados os representantes e fiscais dos partidos políticos e coligações, federações, do Ministério Público, da Ordem dos Advogados do Brasil e das demais entidades fiscalizadoras para, querendo, fazerem-se presentes neste ato solene.\n\n" +
       "Nesta data, a preparação ocorre simultaneamente em 5 polos, abrangendo 21 zonas eleitorais. A escala abaixo indica, para cada zona, o polo e o horário previstos no cronograma.",
     categorias: ["ADM"],
     perfis: [],
@@ -691,9 +696,9 @@ export const eventosTrePb: EventoCalendario[] = [
     ],
     documentoOrigem: {
       titulo:
-        "Cronograma de Preparação de Urnas — 2º turno, versão 2 revisada (doc. SEI 2533109) — Processo 0007828-72.2026.6.15.8000",
-      unidade: "TRE-PB/STIC",
-      url: "",
+        "Edital nº 19/2026 TRE-PB/PTRE/ASPRE (doc. SEI 2534003) — Processo 0007828-72.2026.6.15.8000",
+      unidade: "TRE-PB/PTRE/ASPRE",
+      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=acompanhamento_listar&acao_retorno=acompanhamento_listar&id_procedimento=2571729&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=7cd0b6d2406ebb2ca00683205b77149d0616c0a205805dca994b49e7fcc90a97",
       restrito: true,
     },
   },
@@ -705,7 +710,8 @@ export const eventosTrePb: EventoCalendario[] = [
     titulo:
       "Preparação de urnas do 2º turno — 21 zonas eleitorais em 5 polos (TRE-PB)",
     descricao:
-      "Cerimônia de preparação das urnas para o 2º turno das Eleições 2026, nos Núcleos de Voto Informatizado (NVI), conforme o Cronograma de Preparação de Urnas elaborado pela Secretaria de Tecnologia da Informação e Comunicação do Tribunal Regional Eleitoral da Paraíba.\n\n" +
+      "Audiência pública para a cerimônia de preparação das urnas para o 2º turno das Eleições 2026, convocada pelo Edital nº 19/2026 TRE-PB/PTRE/ASPRE, nos Núcleos de Voto Informatizado (NVI), com as seguintes finalidades: 1) preparação, teste e lacração das urnas de votação e urnas de contingência; 2) embalagem das urnas, identificando-se a zona eleitoral, o Município e o fim a que se destinam; 3) acondicionamento das mídias de carga e de votação para contingência, individualmente, em envelopes lacrados; 4) lacração das urnas de lona, a serem utilizadas no caso de votação por cédula, depois de verificado se estão vazias.\n\n" +
+      "Ficam convocados os representantes e fiscais dos partidos políticos e coligações, federações, do Ministério Público, da Ordem dos Advogados do Brasil e das demais entidades fiscalizadoras para, querendo, fazerem-se presentes neste ato solene.\n\n" +
       "Nesta data, a preparação ocorre simultaneamente em 5 polos, abrangendo 21 zonas eleitorais. A escala abaixo indica, para cada zona, o polo e o horário previstos no cronograma.",
     categorias: ["ADM"],
     perfis: [],
@@ -769,9 +775,9 @@ export const eventosTrePb: EventoCalendario[] = [
     ],
     documentoOrigem: {
       titulo:
-        "Cronograma de Preparação de Urnas — 2º turno, versão 2 revisada (doc. SEI 2533109) — Processo 0007828-72.2026.6.15.8000",
-      unidade: "TRE-PB/STIC",
-      url: "",
+        "Edital nº 19/2026 TRE-PB/PTRE/ASPRE (doc. SEI 2534003) — Processo 0007828-72.2026.6.15.8000",
+      unidade: "TRE-PB/PTRE/ASPRE",
+      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=acompanhamento_listar&acao_retorno=acompanhamento_listar&id_procedimento=2571729&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=7cd0b6d2406ebb2ca00683205b77149d0616c0a205805dca994b49e7fcc90a97",
       restrito: true,
     },
   },
@@ -783,7 +789,8 @@ export const eventosTrePb: EventoCalendario[] = [
     titulo:
       "Preparação de urnas do 2º turno — 15 zonas eleitorais em 5 polos (TRE-PB)",
     descricao:
-      "Cerimônia de preparação das urnas para o 2º turno das Eleições 2026, nos Núcleos de Voto Informatizado (NVI), conforme o Cronograma de Preparação de Urnas elaborado pela Secretaria de Tecnologia da Informação e Comunicação do Tribunal Regional Eleitoral da Paraíba.\n\n" +
+      "Audiência pública para a cerimônia de preparação das urnas para o 2º turno das Eleições 2026, convocada pelo Edital nº 19/2026 TRE-PB/PTRE/ASPRE, nos Núcleos de Voto Informatizado (NVI), com as seguintes finalidades: 1) preparação, teste e lacração das urnas de votação e urnas de contingência; 2) embalagem das urnas, identificando-se a zona eleitoral, o Município e o fim a que se destinam; 3) acondicionamento das mídias de carga e de votação para contingência, individualmente, em envelopes lacrados; 4) lacração das urnas de lona, a serem utilizadas no caso de votação por cédula, depois de verificado se estão vazias.\n\n" +
+      "Ficam convocados os representantes e fiscais dos partidos políticos e coligações, federações, do Ministério Público, da Ordem dos Advogados do Brasil e das demais entidades fiscalizadoras para, querendo, fazerem-se presentes neste ato solene.\n\n" +
       "Nesta data, a preparação ocorre simultaneamente em 5 polos, abrangendo 15 zonas eleitorais. A escala abaixo indica, para cada zona, o polo e o horário previstos no cronograma.",
     categorias: ["ADM"],
     perfis: [],
@@ -841,9 +848,9 @@ export const eventosTrePb: EventoCalendario[] = [
     ],
     documentoOrigem: {
       titulo:
-        "Cronograma de Preparação de Urnas — 2º turno, versão 2 revisada (doc. SEI 2533109) — Processo 0007828-72.2026.6.15.8000",
-      unidade: "TRE-PB/STIC",
-      url: "",
+        "Edital nº 19/2026 TRE-PB/PTRE/ASPRE (doc. SEI 2534003) — Processo 0007828-72.2026.6.15.8000",
+      unidade: "TRE-PB/PTRE/ASPRE",
+      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=acompanhamento_listar&acao_retorno=acompanhamento_listar&id_procedimento=2571729&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=7cd0b6d2406ebb2ca00683205b77149d0616c0a205805dca994b49e7fcc90a97",
       restrito: true,
     },
   },
@@ -855,7 +862,8 @@ export const eventosTrePb: EventoCalendario[] = [
     titulo:
       "Preparação de urnas do 2º turno — 11 zonas eleitorais em 3 polos (TRE-PB)",
     descricao:
-      "Cerimônia de preparação das urnas para o 2º turno das Eleições 2026, nos Núcleos de Voto Informatizado (NVI), conforme o Cronograma de Preparação de Urnas elaborado pela Secretaria de Tecnologia da Informação e Comunicação do Tribunal Regional Eleitoral da Paraíba.\n\n" +
+      "Audiência pública para a cerimônia de preparação das urnas para o 2º turno das Eleições 2026, convocada pelo Edital nº 19/2026 TRE-PB/PTRE/ASPRE, nos Núcleos de Voto Informatizado (NVI), com as seguintes finalidades: 1) preparação, teste e lacração das urnas de votação e urnas de contingência; 2) embalagem das urnas, identificando-se a zona eleitoral, o Município e o fim a que se destinam; 3) acondicionamento das mídias de carga e de votação para contingência, individualmente, em envelopes lacrados; 4) lacração das urnas de lona, a serem utilizadas no caso de votação por cédula, depois de verificado se estão vazias.\n\n" +
+      "Ficam convocados os representantes e fiscais dos partidos políticos e coligações, federações, do Ministério Público, da Ordem dos Advogados do Brasil e das demais entidades fiscalizadoras para, querendo, fazerem-se presentes neste ato solene.\n\n" +
       "Nesta data, a preparação ocorre simultaneamente em 3 polos, abrangendo 11 zonas eleitorais. A escala abaixo indica, para cada zona, o polo e o horário previstos no cronograma.",
     categorias: ["ADM"],
     perfis: [],
@@ -899,9 +907,9 @@ export const eventosTrePb: EventoCalendario[] = [
     ],
     documentoOrigem: {
       titulo:
-        "Cronograma de Preparação de Urnas — 2º turno, versão 2 revisada (doc. SEI 2533109) — Processo 0007828-72.2026.6.15.8000",
-      unidade: "TRE-PB/STIC",
-      url: "",
+        "Edital nº 19/2026 TRE-PB/PTRE/ASPRE (doc. SEI 2534003) — Processo 0007828-72.2026.6.15.8000",
+      unidade: "TRE-PB/PTRE/ASPRE",
+      url: "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar&acao_origem=acompanhamento_listar&acao_retorno=acompanhamento_listar&id_procedimento=2571729&infra_sistema=100000100&infra_unidade_atual=193&infra_hash=7cd0b6d2406ebb2ca00683205b77149d0616c0a205805dca994b49e7fcc90a97",
       restrito: true,
     },
   },

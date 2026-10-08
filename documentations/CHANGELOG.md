@@ -1,5 +1,22 @@
 # Changelog
 
+## [2026-10-08] Edital nº 19/2026 como fonte do 2º turno
+
+O **Edital nº 19/2026 TRE-PB/PTRE/ASPRE** (doc. SEI 2534003, CRC 03D65BD8), assinado pelo Presidente em 07/10/2026 às 14h23 no processo 0007828-72.2026.6.15.8000, convocou as audiências públicas de preparação das urnas do 2º turno, de 13 a 16/10, e publicou o cronograma no Anexo I.
+
+**Conferência antes de aplicar:** o Anexo I foi transcrito por NVI e comparado com os 4 cards no ar (gerados da planilha v2 revisada em 07/10): **68 zonas, 0 divergências** de data, polo ou horário. Nenhum dado da escala mudou.
+
+**O que mudou:**
+- `descricao` dos 4 cards do 2º turno passa a seguir o modelo do 1º turno: "Audiência pública para a cerimônia de preparação das urnas para o 2º turno das Eleições 2026, convocada pelo Edital nº 19/2026 TRE-PB/PTRE/ASPRE", as quatro finalidades do edital e a convocação dos fiscais.
+- `documentoOrigem` passa a ser o edital: "Edital nº 19/2026 TRE-PB/PTRE/ASPRE (doc. SEI 2534003) — Processo 0007828-72.2026.6.15.8000", unidade TRE-PB/PTRE/ASPRE, com **link para o processo no SEI** e aviso de acesso restrito (o link só abre para servidores logados no SEI).
+- Testes: o 2º turno deixa de ser "sem edital" e passa a exigir o Edital 19 na descrição e na origem, com o link do SEI também no `.ics`; Edital 14/15 continuam proibidos e o 1º turno não pode apontar para o SEI.
+
+O Anexo II (servidores e eleitores convocados como ALPU) não foi transcrito: são nomes de pessoas, fora do escopo do calendário.
+
+**Arquivos modificados:** `src/data/eventosTrePb.ts`; `tests/ambito-tre-pb.test.ts` (160 → 161 asserções); `CLAUDE.md`; `AGENTS.md`.
+
+**Verificação:** `npx tsc --noEmit` limpo; `npm run build` concluído; as seis suítes passaram (161, 7, 20, 24, 12 e 25 asserções).
+
 ## [2026-10-07] Cronograma do 2º turno substituído pela versão 2 revisada
 
 A preparação de urnas do 2º turno passa a seguir o **Cronograma de preparação de urnas - 2º Turno, versão 2 revisada** (`documentations/cronograma_2026_2T_v2_revisado.xlsx`), no lugar da escala do PDF de 18/09. Os eventos foram regerados da planilha, não digitados.

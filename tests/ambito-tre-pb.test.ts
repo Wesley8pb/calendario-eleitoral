@@ -99,8 +99,13 @@ console.log("\n=== CRONOGRAMA DE PREPARAÇÃO DE URNAS ===\n");
 
 // 1º turno: a fonte clicável é o cronograma público de 18/09/2026.
 // Cadeia: PDF v2 → minuta → Edital 14 → Edital 15 → cronograma de 18/09.
-// 2º turno: cronograma v2 revisado (planilha de 07/10/2026), ainda sem PDF
-// público — fonte é o doc. SEI 2533109, citado em texto, sem link do SEI.
+// 2º turno: cronograma v2 revisado (planilha de 07/10/2026), publicado pelo
+// Edital nº 19/2026 (doc. SEI 2534003) — link para o processo no SEI, restrito.
+const EDITAL19_URL =
+  "https://sei.tre-pb.jus.br/sei/controlador.php?acao=procedimento_trabalhar" +
+  "&acao_origem=acompanhamento_listar&acao_retorno=acompanhamento_listar" +
+  "&id_procedimento=2571729&infra_sistema=100000100&infra_unidade_atual=193" +
+  "&infra_hash=7cd0b6d2406ebb2ca00683205b77149d0616c0a205805dca994b49e7fcc90a97";
 const CRONOGRAMA_URL =
   "https://www.tre-pb.jus.br/eleicoes/e/arquivos/" +
   "cronograma_preparacao_urnas__eleicoes_2026_1_2_turno_geral-v2/" +
@@ -155,18 +160,18 @@ test(
   ),
 );
 test(
-  "2º turno: origem é o doc. SEI 2533109 (v2 revisada), sem link e com aviso de acesso restrito",
+  "2º turno: origem é o Edital nº 19/2026 (doc. SEI 2534003), com link do SEI e aviso de acesso restrito",
   preparacao2T.every(
     (ev) =>
       ev.documentoOrigem?.titulo ===
-        "Cronograma de Preparação de Urnas — 2º turno, versão 2 revisada (doc. SEI 2533109) — Processo 0007828-72.2026.6.15.8000" &&
-      ev.documentoOrigem?.unidade === "TRE-PB/STIC" &&
-      ev.documentoOrigem?.url === "" &&
+        "Edital nº 19/2026 TRE-PB/PTRE/ASPRE (doc. SEI 2534003) — Processo 0007828-72.2026.6.15.8000" &&
+      ev.documentoOrigem?.unidade === "TRE-PB/PTRE/ASPRE" &&
+      ev.documentoOrigem?.url === EDITAL19_URL &&
       ev.documentoOrigem?.restrito === true,
   ),
 );
-// O edital só aparece no texto do 1º turno, sem hyperlink — a fonte clicável
-// é o cronograma. O 2º turno ainda não tem edital e não pode citar um.
+// Cada turno cita o seu edital no texto: o 1º o Edital 15 (a fonte clicável
+// é o PDF de 18/09) e o 2º o Edital 19, que publicou o cronograma v2 revisado.
 test(
   "A descrição do 1º turno cita o Edital nº 15/2026",
   preparacao
@@ -174,14 +179,24 @@ test(
     .every((ev) => ev.descricao.includes("Edital nº 15/2026 TRE-PB/PTRE/ASPRE")),
 );
 test(
-  "A descrição do 2º turno não cita edital nenhum",
-  preparacao
-    .filter((ev) => ev.turno === "2T")
-    .every((ev) => !/edital/i.test(ev.descricao)),
+  "A descrição do 2º turno cita o Edital nº 19/2026, e só ele",
+  preparacao2T.every(
+    (ev) =>
+      ev.descricao.includes("convocada pelo Edital nº 19/2026 TRE-PB/PTRE/ASPRE") &&
+      !/Edital nº 1[45]\//.test(ev.descricao),
+  ),
 );
 test(
-  "Nenhum card de urnas aponta para o SEI",
-  preparacao.every((ev) => !ev.documentoOrigem?.url.includes("sei.tre-pb")),
+  "A descrição do 2º turno traz as quatro finalidades e a convocação dos fiscais",
+  preparacao2T.every(
+    (ev) =>
+      ev.descricao.includes("4) lacração das urnas de lona") &&
+      ev.descricao.includes("Ficam convocados os representantes e fiscais"),
+  ),
+);
+test(
+  "Nenhum card de urnas do 1º turno aponta para o SEI",
+  preparacao1T.every((ev) => !ev.documentoOrigem?.url.includes("sei.tre-pb")),
 );
 test(
   "Os eventos de urnas não têm observações",
@@ -195,9 +210,10 @@ test(
 );
 test(
   "Nenhum card aponta mais para os Editais nº 14 ou 15 no SEI",
-  !dadosTrePb.includes("id_procedimento=2571729") &&
+  preparacao1T.every((ev) => !ev.documentoOrigem?.url.includes("id_procedimento=2571729")) &&
     !dadosTrePb.includes("id_protocolo=2579040") &&
-    preparacao.every((ev) => !ev.documentoOrigem?.titulo.includes("Edital")),
+    preparacao1T.every((ev) => !ev.documentoOrigem?.titulo.includes("Edital")) &&
+    preparacao2T.every((ev) => !/Edital nº 1[45]\//.test(ev.documentoOrigem?.titulo ?? "")),
 );
 test(
   "Nenhum card aponta mais para a minuta",
@@ -429,10 +445,10 @@ test(
 );
 const icsDia15Out = descreverIcs(preparacao2T.find((ev) => ev.data === "2026-10-15")!);
 test(
-  "Descrição do .ics do 2º turno traz o doc. SEI 2533109 e o aviso de restrito, sem link",
-  icsDia15Out.includes("(doc. SEI 2533109)") &&
+  "Descrição do .ics do 2º turno traz o Edital 19 (doc. SEI 2534003), o aviso de restrito e o link",
+  icsDia15Out.includes("Edital nº 19/2026 TRE-PB/PTRE/ASPRE (doc. SEI 2534003)") &&
     icsDia15Out.includes("(acesso restrito a servidores)") &&
-    !icsDia15Out.includes("sei.tre-pb") &&
+    icsDia15Out.includes(EDITAL19_URL) &&
     !icsDia15Out.includes(CRONOGRAMA_URL),
 );
 
